@@ -28,11 +28,11 @@ feat/another-thing   ──┼──▶  development  ──▶  main
 chore/third-thing    ──┘     (integration)     (release)
 ```
 
-| Branch                        | Purpose                                    | Merge method  |
-| ----------------------------- | ------------------------------------------ | ------------- |
-| `main`                        | Release. What production serves.            | Merge commit  |
-| `development`                 | Integration. Everything lands here first.   | Squash        |
-| `feat/*` `fix/*` `chore/*`    | One change each.                            | —             |
+| Branch                     | Purpose                                   | Merge method |
+| -------------------------- | ----------------------------------------- | ------------ |
+| `main`                     | Release. What production serves.          | Merge commit |
+| `development`              | Integration. Everything lands here first. | Squash       |
+| `feat/*` `fix/*` `chore/*` | One change each.                          | —            |
 
 Branch from `development`, never from `main`. Branching from `main` means
 building on top of work that has already been integrated, and the merge will
@@ -71,8 +71,8 @@ is how a 900-line diff arrives on the last day of a sprint.
 
 Six things, in the order that fails cheapest first.
 
-| Check           | Catches                                                                |
-| --------------- | ---------------------------------------------------------------------- |
+| Check           | Catches                                                                 |
+| --------------- | ----------------------------------------------------------------------- |
 | Secrets         | a credential in a tracked file; reports the line, never the value       |
 | Boundaries      | `lib/` importing a component; `next/link`; `process.env` outside config |
 | Design tokens   | a hex colour in markup; `pl-`/`pr-` classes that break Arabic           |

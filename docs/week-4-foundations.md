@@ -87,13 +87,13 @@ project will ever have is invisible in French and obvious in Arabic.
 Two pairs at a time, rotating daily. Over the week every person works with all
 three of the others, and on two different tracks.
 
-| Day       | Pair      | Track                   | Pair      | Track                    |
-| --------- | --------- | ----------------------- | --------- | ------------------------ |
-| Monday    | **A + B** | 1 · Design tokens       | **C + D** | 2 · Layout shell         |
-| Tuesday   | **A + D** | 1 · Design tokens       | **C + B** | 2 · Layout shell         |
-| Wednesday | **A + C** | 3 · Authentication      | **B + D** | 4 · i18n and RTL         |
-| Thursday  | **A + C** | 3 · Authentication      | **B + D** | 4 · i18n and RTL         |
-| Friday    | all four  | integration, demo, retro                                        |
+| Day       | Pair      | Track                | Pair      | Track            |
+| --------- | --------- | -------------------- | --------- | ---------------- |
+| Monday    | **A + B** | 1 · Design tokens    | **C + D** | 2 · Layout shell |
+| Tuesday   | **A + D** | 1 · Design tokens    | **C + B** | 2 · Layout shell |
+| Wednesday | **A + C** | 3 · Authentication   | **B + D** | 4 · i18n and RTL |
+| Thursday  | **A + C** | 3 · Authentication   | **B + D** | 4 · i18n and RTL |
+| Friday    | all four  | Integration and demo | all four  | Retrospective    |
 
 Three rules make it work:
 
