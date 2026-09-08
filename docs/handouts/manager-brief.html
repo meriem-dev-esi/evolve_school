@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Evolve Academy Platform — Delivery Brief</title>
+<link rel="stylesheet" href="print.css">
+</head>
+<body>
+
+<div class="cover">
+  <p class="eyebrow">Evolve Academy · Platform</p>
+  <h1>Delivery Brief</h1>
+  <p class="subtitle">Where the software stands, what we will ship in ten weeks,
+  and the four decisions we need from you.</p>
+  <p class="meta">Prepared for the academy manager · September 2026</p>
+</div>
+
+<p class="lede">Short version: the staff dashboard is in good shape and is
+further along than anyone outside the team assumes. The website is not, and it
+needs rebuilding rather than repairing. We have a team and a plan for that. Four
+decisions are yours, and two of them block work that starts next week.</p>
+
+<h2>1 · What exists today</h2>
+
+<table class="zebra">
+  <thead><tr><th style="width:24%">Piece</th><th>State</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Academy dashboard</strong><br>Staff tooling</td>
+      <td><strong>Solid.</strong> Admins and teachers can manage courses, modules, lessons, categories, video, approvals, comments and accounts. It has automated tests, enforced quality checks, and a properly designed permission model. <strong>It owns the database</strong> — it is the system of record.</td>
+    </tr>
+    <tr>
+      <td><strong>Website</strong><br>Public site and student platform</td>
+      <td><strong>Not usable as a base.</strong> It has pages, but it reads a <em>different</em> content system from the one the dashboard writes to. Content published in the dashboard does not appear on the website. It also has no automated tests and duplicates the dashboard's staff tools in a second, weaker implementation.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout note">
+  <span class="label">The core problem, in one sentence</span>
+  <p>The website reads a content system that the dashboard no longer writes to.
+  Somebody began moving it across — correctly, and proved the approach on one
+  page — and then stopped. Everything else was left pointing at the old system.</p>
+</div>
+
+<p>This is why the rebuild is a rebuild and not a redesign. We are not choosing
+to start over for the pleasure of it; the existing site is wired to the wrong
+source of truth in roughly sixty-five files, and it carries a duplicate staff
+back-office we do not want and will not maintain.</p>
+
+<h2>2 · Three findings that need you</h2>
+
+<h3>2.1 · A licensing problem — please get a legal answer</h3>
+
+<p>The current website was built on a paid tutorial template. That template is
+published under a licence that <strong>explicitly forbids commercial use</strong>,
+and names "using in a commercial SaaS product" as an example of what is not
+allowed. We sell access to this platform in packs.</p>
+
+<p>I am not qualified to give a legal opinion and this needs one. Two things
+worth knowing while you get it:</p>
+
+<ul>
+  <li>The risk is attached to the <em>website</em> codebase only. The dashboard
+  is our own work and is unaffected.</li>
+  <li>The rebuild resolves it either way, provided it genuinely starts clean and
+  inherits no files. <strong>That is how we have built it.</strong> The new
+  repository shares no code with the template.</li>
+</ul>
+
+<h3>2.2 · Three headline features have no database behind them</h3>
+
+<p>From your description of the vision, these are core. None of them exists in
+the schema today:</p>
+
+<table class="zebra">
+  <thead><tr><th style="width:34%">Feature</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Students showcase their project work</td><td>Exists only in the old content system. It will not survive the migration unless we rebuild it.</td></tr>
+    <tr><td>Students see the work of others <em>in their group</em></td><td>There is no concept of a group anywhere in the system.</td></tr>
+    <tr><td>Students message their teachers directly</td><td>No messaging exists. Course discussion does, which is a different thing.</td></tr>
+    <tr><td>Offline versus online sessions</td><td>Nothing represents a scheduled session, a cohort, a room or attendance. <strong>Our two delivery modes are currently invisible to the software.</strong></td></tr>
+  </tbody>
+</table>
+
+<p>This is the critical path, and it is not work the new team can do — it lives
+in the dashboard. <strong>We need to start it in parallel, now.</strong> If we
+wait, the team reaches week six with nothing to build against.</p>
+
+<p>The last row is the one I would like your input on first, because it is the
+least defined: <em>what should the platform actually do about an offline
+session?</em> Show a schedule? Take attendance? Group students into a cohort?
+The answer changes the design significantly and I would rather ask than guess.</p>
+
+<h3>2.3 · Business-to-business is currently hardcoded</h3>
+
+<p>The two corporate clients on the site today each have their own copied set of
+pages. That works for two and breaks on the third. The question underneath it is
+a product question rather than a technical one:</p>
+
+<p><strong>Is a corporate client a separate branded space, or simply a private
+collection of courses?</strong> The second is a few weeks of work. The first is a
+much larger commitment and should only be made if a client is actually asking
+and paying for it.</p>
+
+<div class="page-break"></div>
+
+<h2>3 · The team and why it is shaped this way</h2>
+
+<p>Four interns build the website, coordinated and reviewed by a senior engineer.
+Two people could deliver it faster. Four is deliberate: the objective is a
+working platform <em>and</em> four engineers who have learned to work as a team —
+version control, code review, sprint accountability, and being answerable to a
+stakeholder rather than to a marker.</p>
+
+<p>They do not touch the dashboard. It is a different language, it holds the
+permission model, and it is where the money-critical logic lives.</p>
+
+<p>Some safeguards worth knowing about, because they are what makes handing real
+work to juniors reasonable:</p>
+
+<ul>
+  <li>Nothing reaches the live branches without passing automated checks — <em>including</em> for the senior engineer. There is no override.</li>
+  <li>Every change is reviewed by a peer and then by the senior engineer before it merges.</li>
+  <li>The database enforces its own permission rules, so a frontend mistake cannot expose data a student should not see.</li>
+</ul>
+
+<h2>4 · The plan</h2>
+
+<table class="zebra">
+  <thead><tr><th style="width:16%">Weeks</th><th style="width:32%">Phase</th><th>What you see at the end</th></tr></thead>
+  <tbody>
+    <tr><td><strong>0</strong></td><td>Decisions and setup</td><td>Your four answers. The new repository, ready to build in.</td></tr>
+    <tr><td><strong>1</strong></td><td>Scope</td><td>A one-page product brief you sign off on.</td></tr>
+    <tr><td><strong>2</strong></td><td>Requirements</td><td>Written requirements per area, with testable acceptance criteria.</td></tr>
+    <tr><td><strong>3</strong></td><td>Modelling and design</td><td>Wireframes for the main screens, and a model of the data we hold.</td></tr>
+    <tr><td><strong>4</strong></td><td>Foundations</td><td><strong>First demo.</strong> A running site in French, Arabic and English, showing real content from the dashboard.</td></tr>
+    <tr><td><strong>5–6</strong></td><td>Sprint 1</td><td>Public site and sign-in. A visitor can browse; a student can log in.</td></tr>
+    <tr><td><strong>7–8</strong></td><td>Sprint 2</td><td>The learning experience: course pages, lesson player, progress tracking.</td></tr>
+    <tr><td><strong>9–10</strong></td><td>Sprint 3</td><td>Student projects and discussion. Whatever the new schema supports.</td></tr>
+  </tbody>
+</table>
+
+<p><strong>You are invited to the demo at the end of every sprint</strong> — the
+running site, not slides. That is the main thing I would ask you to protect in
+your calendar. Being answerable to you every two weeks does more for this team
+than any amount of process.</p>
+
+<h3>What ships by week ten</h3>
+
+<p>A public site (home, disciplines, packs, contact) and a student area (my
+courses, course pages, lesson player with progress, project submission,
+discussion), in French, Arabic and English, showing live content published from
+the dashboard.</p>
+
+<h3>What does not, and why</h3>
+
+<table class="zebra">
+  <thead><tr><th style="width:34%">Not in the ten weeks</th><th>Reason</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Taking payment</strong></td><td>We will build what each pack <em>unlocks</em>, so packs work end to end. Actually collecting money needs a local payment provider — the usual international one does not operate in Algeria — and that is a separate procurement decision, not an engineering task.</td></tr>
+    <tr><td><strong>Direct messaging</strong></td><td>Blocked on new schema. Realistic once that lands, but not something I will promise inside ten weeks.</td></tr>
+    <tr><td><strong>Teachers uploading from the website</strong></td><td>The dashboard already does this well. Building a second, weaker version is how we got into the current situation.</td></tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>5 · The four decisions we need</h2>
+
+<table class="zebra">
+  <thead><tr><th style="width:5%">#</th><th style="width:30%">Decision</th><th style="width:37%">Our recommendation</th><th>Blocks</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>1</strong></td>
+      <td>Do we get a legal answer on the template licence?</td>
+      <td><strong>Yes, this week.</strong> The rebuild resolves it regardless, but you should know the exposure on what is live today.</td>
+      <td>Nothing technically. Everything commercially.</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td>What should the platform do about offline sessions?</td>
+      <td>We need your answer before we can design it. Schedules? Attendance? Cohorts?</td>
+      <td><strong>Weeks 5+.</strong> Needs new schema first.</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td>Are packs the three tiers we already have, or something per-discipline?</td>
+      <td>Keep the three tiers for now. Per-discipline pricing is a bigger change than it looks and can come later.</td>
+      <td><strong>Week 2.</strong> Requirements depend on it.</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td>Is a corporate client a branded space or a private course collection?</td>
+      <td>A private collection, unless a client is actually asking and paying for their own branded space.</td>
+      <td><strong>Weeks 5+.</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>6 · Risks, stated plainly</h2>
+
+<table class="zebra">
+  <thead><tr><th style="width:30%">Risk</th><th style="width:14%">Likelihood</th><th>What we are doing</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>The new schema arrives late</strong>, and the last sprint has nothing to build</td>
+      <td>Moderate</td>
+      <td>Starting it in parallel from week zero rather than when the team needs it. This is the one I am watching most closely.</td>
+    </tr>
+    <tr>
+      <td><strong>The catalogue is the wrong catalogue.</strong> The live categories are the old technology subjects — Cloud, Cybersecurity, Web Development — not creative disciplines</td>
+      <td>Certain</td>
+      <td>Not an engineering task. Somebody needs to author the real creative disciplines and their course content in the dashboard. Worth starting early — an empty catalogue makes every demo look worse than the software is.</td>
+    </tr>
+    <tr>
+      <td><strong>Junior velocity is unpredictable</strong> in the first three weeks</td>
+      <td>High</td>
+      <td>Expected and planned for. The foundations week is deliberately over-supported, and scope is cut from the last sprint rather than from quality.</td>
+    </tr>
+    <tr>
+      <td><strong>Scope grows during requirements</strong></td>
+      <td>High</td>
+      <td>The "not in the ten weeks" list above is the control. If something needs to come in, something else goes out, and I will bring that to you rather than absorb it quietly.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>7 · What we need from you</h2>
+
+<ol class="numbered">
+  <li><strong>The four decisions above</strong>, with 2 and 3 first — they block work that starts next week.</li>
+  <li><strong>One hour every two weeks</strong> for the sprint demo. This is the highest-value hour you can give this project.</li>
+  <li><strong>Someone to author real content</strong> in the dashboard — the actual creative disciplines and their courses. The software will be ready before the content is unless that starts now.</li>
+</ol>
+
+<div class="callout">
+  <span class="label">Where the software already is</span>
+  <p>The new website repository exists, its quality checks pass, and its first
+  page already reads live content out of the same database the dashboard writes
+  to — in French, Arabic and English, with Arabic correctly laid out
+  right-to-left. The connection the old site never finished making is made and
+  proven. The team is building outward from there.</p>
+</div>
+
+<div class="footer-note">
+  Evolve Academy · Platform delivery brief, September 2026. Prepared by the
+  engineering team. Happy to walk through any section in more detail — the
+  technical findings in section 2 in particular are summarised heavily here.
+</div>
+
+</body>
+</html>

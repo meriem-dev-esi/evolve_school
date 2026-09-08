@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Evolve Web — Team Handbook</title>
+<link rel="stylesheet" href="print.css">
+</head>
+<body>
+
+<div class="cover">
+  <p class="eyebrow">Evolve Academy · Website rebuild</p>
+  <h1>Team Handbook</h1>
+  <p class="subtitle">How we work, what you own, and what "done" means.</p>
+  <p class="meta">For the engineering team · Version 1 · September 2026</p>
+</div>
+
+<p class="lede">You are four people building one website. Two of you could
+probably build it faster alone — and that is exactly why there are four. The
+product is the visible output; the thing you are actually here to learn is how
+to work inside a team that reviews, integrates and ships together.</p>
+
+<p>Everything in this document is a rule we will actually hold you to. Nothing in
+it is decoration.</p>
+
+<h2>1 · Where the project stands</h2>
+
+<p>Evolve Academy runs creative-discipline training in Algeria, in person and
+online, for two audiences: companies (digital marketing and creativity) and
+high-achieving students (creative skills and internships). Access is sold in
+packs.</p>
+
+<p>Two pieces of software serve it:</p>
+
+<table class="zebra">
+  <thead><tr><th style="width:30%">Piece</th><th>What it does</th><th style="width:20%">Who builds it</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Academy dashboard</strong><br><span class="mono">evolve_academy_dashboard</span></td>
+        <td>Flutter Web. Staff tooling: admins and teachers manage courses, modules, lessons, video and approvals. <strong>It owns the database.</strong></td>
+        <td>Existing team</td></tr>
+    <tr><td><strong>Website</strong><br><span class="mono">evolve-web</span></td>
+        <td>Next.js. The public site, and the student platform: courses, lessons, progress, projects, discussion.</td>
+        <td><strong>You</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout note">
+  <span class="label">The most important fact in this document</span>
+  <p>The database is not ours. The schema and its row-level security policies
+  live in the dashboard repository. Our app reads that database <em>as the
+  signed-in user</em>, and holds no service-role key. Postgres decides who may
+  see what; we do not restate those rules in the frontend.</p>
+  <p><strong>Do not write migrations in our repository.</strong> If you need a
+  column, a table or a policy change, raise it — it goes through the dashboard
+  repo. Working around a missing column in the frontend is the one shortcut that
+  gets a pull request closed rather than reviewed.</p>
+</div>
+
+<h2>2 · The phases</h2>
+
+<ol class="numbered">
+  <li><strong>Brainstorming and scope.</strong> Understand what the academy is
+  actually for. Ends in a one-page product brief — not a wishlist.</li>
+  <li><strong>Requirements.</strong> Split four ways, and each of you reviews
+  someone else's section. Acceptance criteria written as testable statements.</li>
+  <li><strong>Diagrams and design.</strong> A domain model reverse-engineered
+  from the real database, sequence diagrams for the three flows that have real
+  complexity, and lo-fi wireframes.</li>
+  <li><strong>Implementation.</strong> One foundations week in pairs, then
+  two-week sprints with owned areas.</li>
+</ol>
+
+<p>A maintainer coordinates all four, reviews everything before it merges, and
+is the route to anything that needs the dashboard team.</p>
+
+<h2>3 · The foundations week</h2>
+
+<p>Before you split into areas, all four of you build the skeleton together, in
+pairs, rotating daily. Four tracks, two days each.</p>
+
+<table class="zebra">
+  <thead><tr><th style="width:18%">Track</th><th>What it delivers</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Design tokens</strong></td><td>The real brand palette replacing the provisional greyscale, plus <span class="mono">Button</span>, <span class="mono">Card</span>, <span class="mono">Container</span>. Done when a rebrand is a one-file diff.</td></tr>
+    <tr><td><strong>Layout shell</strong></td><td>Header, navigation, footer, language switcher, error chrome. Done when switching language on a deep path stays on that path.</td></tr>
+    <tr><td><strong>Authentication</strong></td><td>Sign in, sign up, OAuth callback, sign out, reading the caller's profile on the server. Done when a refresh keeps you signed in.</td></tr>
+    <tr><td><strong>i18n and RTL</strong></td><td>Message structure that scales, correct Arabic plural rules, and an RTL audit of every screen. Done when <span class="mono">/ar</span> is mirrored, not merely translated.</td></tr>
+  </tbody>
+</table>
+
+<h3>The rotation</h3>
+
+<table class="zebra">
+  <thead><tr><th style="width:16%">Day</th><th style="width:14%">Pair</th><th>Track</th><th style="width:14%">Pair</th><th>Track</th></tr></thead>
+  <tbody>
+    <tr><td>Monday</td><td><strong>A + B</strong></td><td>Design tokens</td><td><strong>C + D</strong></td><td>Layout shell</td></tr>
+    <tr><td>Tuesday</td><td><strong>A + D</strong></td><td>Design tokens</td><td><strong>C + B</strong></td><td>Layout shell</td></tr>
+    <tr><td>Wednesday</td><td><strong>A + C</strong></td><td>Authentication</td><td><strong>B + D</strong></td><td>i18n and RTL</td></tr>
+    <tr><td>Thursday</td><td><strong>A + C</strong></td><td>Authentication</td><td><strong>B + D</strong></td><td>i18n and RTL</td></tr>
+    <tr><td>Friday</td><td colspan="4">All four — integration, demo to the academy manager, retrospective</td></tr>
+  </tbody>
+</table>
+
+<p>Over the week every one of you works with all three of the others, on two
+different tracks.</p>
+
+<div class="callout">
+  <span class="label">Three rules that make pairing work</span>
+  <p><strong>One person stays, one rotates.</strong> The person who stays carries
+  the context, so a rotation costs a briefing rather than a restart. Rotating
+  both people means starting over — which is why "we tried pair rotation and it
+  was slow" is usually this mistake.</p>
+  <p><strong>Driver and navigator, swapping every 25 minutes.</strong> Set a
+  timer. The navigator does not touch the keyboard — that is the entire
+  discipline. A navigator who reaches over becomes a second driver, and the pair
+  becomes one person working while another watches.</p>
+  <p><strong>The handover is written.</strong> Whoever rotates off leaves a
+  comment on the draft pull request: what is done, what is half-done, what they
+  would do next. Five minutes, and for most people it is the first time they
+  write for a colleague rather than for a marker.</p>
+</div>
+
+<div class="page-break"></div>
+
+<h2>4 · Your areas, after the foundations week</h2>
+
+<p>You each own directories. This is deliberate: four people editing one file is
+how a sprint ends in merge conflicts instead of a demo.</p>
+
+<table class="zebra">
+  <thead><tr><th style="width:30%">Area</th><th>Scope</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Design system &amp; public pages</strong></td><td>Tokens, primitives, home, disciplines, packs, contact. You are a dependency the other three rely on.</td></tr>
+    <tr><td><strong>Auth, profile &amp; pack gating</strong></td><td>Sign-in, onboarding, profile, and what each pack unlocks. Security-adjacent: be careful, be reviewed.</td></tr>
+    <tr><td><strong>Catalogue &amp; player</strong></td><td>Disciplines → courses → lesson player → progress. The deepest data work in the project.</td></tr>
+    <tr><td><strong>Community</strong></td><td>Student projects, group visibility, comments. You will be blocked on schema that does not exist yet — managing that is part of the job.</td></tr>
+  </tbody>
+</table>
+
+<p><strong>A change to someone else's area goes in as a pull request to them.</strong>
+That friction is intentional. Negotiating an interface with a colleague is the
+skill; silently editing their file is the habit we are training out.</p>
+
+<p>One of you each week is the <strong>integrator</strong>: you own the health of
+<span class="mono">development</span>, triage anything red, and write the week's
+release note. Everyone does it at least twice.</p>
+
+<h2>5 · The loop</h2>
+
+<pre><code>git checkout development
+git pull
+git checkout -b feat/discipline-cards
+# ... work, committing as you go ...
+make ci-local                 # everything CI runs, locally, in ~1 min
+git push -u origin HEAD
+gh pr create                  # bases on development automatically</code></pre>
+
+<p>Branch from <span class="mono">development</span>, never from
+<span class="mono">main</span>. Run <span class="mono">make ci-local</span>
+before every push — a red pull request costs four minutes to learn what one
+minute would have told you.</p>
+
+<p><strong>Open the pull request as a draft when you start, not when you
+finish.</strong> Work nobody can see is work nobody can help with, and "I'll
+open it when it's ready" is how a 900-line diff arrives on the last day of a
+sprint.</p>
+
+<div class="callout note">
+  <span class="label">You cannot break this repository</span>
+  <p>You cannot push to <span class="mono">development</span> or
+  <span class="mono">main</span>, force-push them, delete them, or merge a red
+  pull request. That is enforced by organisation rulesets and applies to
+  everyone, including the person who set them up.</p>
+  <p>This is meant to be freeing rather than restrictive. Push early, push
+  unfinished work, experiment. The worst outcome available to you is a red
+  check.</p>
+</div>
+
+<h2>6 · What the machine checks</h2>
+
+<p>Six guards, ordered so the cheapest fails first. Each exists because breaking
+it caused a real problem; the reason is written at the top of each script in
+<span class="mono">scripts/</span>.</p>
+
+<table class="zebra">
+  <thead><tr><th style="width:26%">Check</th><th>Catches</th></tr></thead>
+  <tbody>
+    <tr><td>Secrets</td><td>A credential in a tracked file. Reports the line, never the value.</td></tr>
+    <tr><td>Boundaries</td><td><span class="mono">lib/</span> importing a component; <span class="mono">next/link</span>; <span class="mono">process.env</span> outside the config module.</td></tr>
+    <tr><td>Design tokens</td><td>A hex colour in markup; <span class="mono">pl-</span>/<span class="mono">pr-</span> classes that break Arabic.</td></tr>
+    <tr><td>Component size</td><td>A <span class="mono">.tsx</span> file over 300 lines.</td></tr>
+    <tr><td>Format and lint</td><td>Biome.</td></tr>
+    <tr><td>Typecheck</td><td>Everything else.</td></tr>
+  </tbody>
+</table>
+
+<p>These are executable rules, not conventions. <strong>If a guard blocks you and
+the rule is wrong, change the rule in the same pull request and say why.</strong>
+Do not add a quiet exemption — an exemption list nobody reviews is a guard that
+has stopped working.</p>
+
+<h2>7 · Definition of Done</h2>
+
+<p>A change is done when all eight are true. Not seven.</p>
+
+<ol class="numbered">
+  <li>Branch named <span class="mono">feat/</span> <span class="mono">fix/</span> or <span class="mono">chore/</span>, based on and targeting <span class="mono">development</span></li>
+  <li><span class="mono">make ci-local</span> green locally, CI green on the pull request</li>
+  <li>Template filled in — including how it was verified</li>
+  <li>Approved by one peer, <em>then</em> by a maintainer</li>
+  <li>Checked on the preview deployment, not only on localhost</li>
+  <li>UI changes: screenshots at mobile and desktop width, <strong>and in Arabic</strong></li>
+  <li>No new <span class="mono">any</span>, no new lint suppressions</li>
+  <li>Docs updated if behaviour changed</li>
+</ol>
+
+<div class="page-break"></div>
+
+<h2>8 · Writing the pull request</h2>
+
+<p>The template asks four questions. The third is the one that matters.</p>
+
+<p><strong>"How was this verified"</strong> is not for "tests pass" — that is
+what CI already says. It is for what CI <em>cannot</em> check: which screen you
+exercised and at what width, whether you loaded the Arabic page and the layout
+survived, what you checked against real data rather than assumed, and what is
+still unverified.</p>
+
+<div class="callout">
+  <span class="label">The sentence to remember</span>
+  <p>A declared shortcut is a decision. A discovered one is a defect.</p>
+  <p>Nobody here has ever been in trouble for writing "I wasn't sure this was the
+  right place for it" in a pull request. People do get pushed back on for hiding
+  it.</p>
+</div>
+
+<p>Keep pull requests under about 400 changed lines. Over that a reviewer skims
+instead of reading, and skimmed code is unreviewed code.</p>
+
+<h2>9 · Reviewing each other</h2>
+
+<p>Every pull request needs <strong>one peer review before a maintainer looks at
+it</strong>. Reviewing is not a formality on the way to a merge — it is half of
+the job you are here to learn. Read the diff, run the branch, comment.</p>
+
+<p>Prefix your comments so the author knows what is blocking:</p>
+
+<table class="zebra">
+  <thead><tr><th style="width:22%">Prefix</th><th>Means</th></tr></thead>
+  <tbody>
+    <tr><td><span class="mono">blocking:</span></td><td>Must change before merge.</td></tr>
+    <tr><td><span class="mono">suggestion:</span></td><td>Worth considering. The author decides.</td></tr>
+    <tr><td><span class="mono">nit:</span></td><td>Style or taste. Never blocking.</td></tr>
+    <tr><td><span class="mono">question:</span></td><td>You want to understand, not to change.</td></tr>
+  </tbody>
+</table>
+
+<p>Without prefixes, everyone treats every comment as fatal and a one-word note
+stalls a branch for a day.</p>
+
+<h2>10 · The sprint rhythm</h2>
+
+<table class="zebra">
+  <thead><tr><th style="width:24%">Ceremony</th><th>When</th><th>Shape</th></tr></thead>
+  <tbody>
+    <tr><td>Standup</td><td>Daily, 15 min</td><td>Written three days a week, live two. Writing it is practice at describing work legibly.</td></tr>
+    <tr><td>Planning</td><td>Start of sprint</td><td>A maintainer facilitates; <em>you</em> estimate, in points relative to one reference story.</td></tr>
+    <tr><td>Review</td><td>End of sprint</td><td>A live demo on the preview deployment, with the academy manager present.</td></tr>
+    <tr><td>Retrospective</td><td>End of sprint, 30 min</td><td>Exactly one action item, tracked and revisited. Four action items means zero.</td></tr>
+  </tbody>
+</table>
+
+<p>Estimates are a planning tool, never a performance measure. The moment they
+become one you get inflated numbers and silence, and we lose the only signal we
+had.</p>
+
+<h2>11 · The habits that actually cost us</h2>
+
+<ul>
+  <li><strong>Silent blocking.</strong> Blocked for 45 minutes means you say so
+  in the channel. Not an hour, not "after lunch". This is the single most
+  expensive habit on a team this size — people routinely burn two days rather
+  than look slow.</li>
+  <li><strong>The big-bang pull request.</strong> Draft from day one, under 400
+  lines, or it does not get reviewed properly.</li>
+  <li><strong>Editing someone else's area quietly.</strong> Open a pull request
+  to them and talk about it.</li>
+  <li><strong>Skipping the Arabic check.</strong> Every RTL bug this project
+  will have is invisible in French and obvious the moment you load
+  <span class="mono">/ar</span>.</li>
+</ul>
+
+<h2>12 · Out of scope, and it will stay that way</h2>
+
+<p>So that sprint planning is honest about what we are not doing:</p>
+
+<ul>
+  <li><strong>Payments.</strong> You build pack <em>gating</em> — what a pack
+  unlocks. Taking money is a separate problem with a separate provider.</li>
+  <li><strong>Real-time direct messaging.</strong> Needs schema that does not
+  exist yet.</li>
+  <li><strong>Video upload from the website.</strong> The dashboard does this,
+  and it works.</li>
+  <li><strong>The dashboard itself.</strong> Different repository, different
+  language, not yours.</li>
+</ul>
+
+<div class="footer-note">
+  Evolve Academy · Website rebuild · Team Handbook v1. The living version of
+  everything here is <span class="mono">CONTRIBUTING.md</span> and
+  <span class="mono">docs/week-4-foundations.md</span> in the
+  <span class="mono">evolve-web</span> repository. Where this document and the
+  repository disagree, the repository is right — correct this one.
+</div>
+
+</body>
+</html>
