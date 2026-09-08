@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens — the only place in this repository where a raw colour, radius
+   or font stack is written down.
+
+   `scripts/design_token_guard.sh` fails the build on a hex colour or an
+   arbitrary-value class anywhere else. The rule is not aesthetic bookkeeping:
+   the previous site had the brand lime written as a literal in eleven files,
+   and changing it meant finding all eleven.
+
+   OWNER: the design-system track (see docs/week-4-foundations.md).
+   The values below are PROVISIONAL — a working greyscale so the tracer page
+   renders. Replacing them with the real brand palette is the design-system
+   pair's first task, and it should be a one-file diff. If it isn't, the guard
+   has a hole and the guard should be fixed in the same pull request.
+   ========================================================================== */
+
+@theme {
+  /* Surfaces */
+  --color-canvas: #ffffff;
+  --color-surface: #f6f6f7;
+  --color-surface-raised: #ffffff;
+  --color-border: #e3e3e6;
+
+  /* Ink */
+  --color-ink: #101012;
+  --color-ink-muted: #61616b;
+  --color-ink-inverted: #ffffff;
+
+  /* Brand — PROVISIONAL, see the note above */
+  --color-brand: #101012;
+  --color-brand-contrast: #ffffff;
+  --color-accent: #4f46e5;
+
+  /* Radii */
+  --radius-card: 0.75rem;
+  --radius-pill: 9999px;
+
+  /* Type. Bundled, not fetched: a webfont from a third-party CDN is a request
+     the content-security policy has to allow and a flash of fallback text on
+     every cold load. The dashboard bundles Inter for the same reason. */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-canvas: #0b0b0d;
+    --color-surface: #141417;
+    --color-surface-raised: #1b1b1f;
+    --color-border: #2a2a30;
+    --color-ink: #f4f4f5;
+    --color-ink-muted: #9a9aa4;
+    --color-ink-inverted: #101012;
+    --color-brand: #f4f4f5;
+    --color-brand-contrast: #101012;
+  }
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Arabic renders right-to-left. Tailwind's logical properties (`ps-*`, `pe-*`,
+   `ms-*`, `me-*`) handle the layout; this only fixes the things logical
+   properties do not cover. Use `ps-4`, never `pl-4`. */
+[dir="rtl"] {
+  text-align: right;
+}

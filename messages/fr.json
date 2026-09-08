@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "disciplines": "Disciplines",
+    "packs": "Formules",
+    "signIn": "Se connecter"
+  },
+  "home": {
+    "title": "Evolve Academy",
+    "tagline": "Formations créatives, en présentiel et en ligne.",
+    "browseDisciplines": "Découvrir les disciplines"
+  },
+  "disciplines": {
+    "title": "Disciplines créatives",
+    "intro": "Chaque discipline regroupe les cours publiés par nos formateurs.",
+    "empty": "Aucune discipline n'a encore été publiée.",
+    "countLabel": "{count, plural, =0 {aucune discipline} one {# discipline} other {# disciplines}}"
+  },
+  "footer": {
+    "rights": "Tous droits réservés."
+  }
+}

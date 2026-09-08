@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Home",
+    "disciplines": "Disciplines",
+    "packs": "Packs",
+    "signIn": "Sign in"
+  },
+  "home": {
+    "title": "Evolve Academy",
+    "tagline": "Creative training, in person and online.",
+    "browseDisciplines": "Browse the disciplines"
+  },
+  "disciplines": {
+    "title": "Creative disciplines",
+    "intro": "Each discipline gathers the courses our teachers have published.",
+    "empty": "No disciplines have been published yet.",
+    "countLabel": "{count, plural, =0 {no disciplines} one {# discipline} other {# disciplines}}"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

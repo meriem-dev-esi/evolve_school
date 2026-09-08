@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+build/
+next-env.d.ts
+
+# Environment — every variant, deliberately. `.env.local` is the one people
+# actually create, but `.env.production.local` is the one that leaks.
+.env
+.env.*
+!.env.example
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+
+# Vercel
+.vercel/
+
+# Rendered documents. The markdown in docs/ is the source; render a copy when
+# you need to carry one to a meeting.
+*.pdf

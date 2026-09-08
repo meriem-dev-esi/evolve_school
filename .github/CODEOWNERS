@@ -1,0 +1,16 @@
+# Every pull request automatically requests review from the owners listed here.
+#
+# Ownership is flat while the team is small: a maintainer reviews everything,
+# after a peer has already reviewed it. The peer review is the one that is not
+# automated — pick a teammate, or let the team rota decide.
+#
+# Once the area owners from docs/week-4-foundations.md are settled and people
+# have built up knowledge in them, split this file by directory so a reviewer is
+# picked by knowledge rather than by availability. The commented lines below are
+# the intended shape, not yet in force.
+
+* @PiusSunday
+
+# app/[locale]/(marketing)/  @design-system-owner
+# lib/data/                  @catalogue-owner
+# i18n/ messages/            @i18n-owner

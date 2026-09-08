@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [development, main]
+  pull_request:
+    branches: [development, main]
+
+# Deliberately no `paths:` filter. A required status check must run on every
+# pull request or it can never report, and a pull request waiting forever on a
+# check that was skipped looks identical to one waiting on a slow runner.
+# See guides/branch-protection.md in GROUPREV/docs, "Pitfalls".
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The secret guard walks tracked files; a shallow clone is enough for
+          # that, but git grep on a depth-1 checkout misses nothing we scan.
+          fetch-depth: 0
+
+      # pnpm must be set up before setup-node, so the store path is resolvable
+      # when setup-node initialises its cache.
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # The same script contributors run locally. If this and `make ci-local`
+      # ever diverge, the local one stops being trusted and everyone waits on
+      # CI instead.
+      - name: Guards, lint and typecheck
+        run: bash scripts/local_ci.sh
+
+      # Only CI runs this. It catches what typecheck cannot: a Server Component
+      # importing something that only exists in the browser, a bad dynamic
+      # import, a route that fails to prerender.
+      - name: Build
+        run: pnpm build
+        env:
+          # Build-time placeholders. lib/env.ts throws on a missing variable,
+          # which would fail the build for the wrong reason. These are not
+          # credentials — nothing in the build reaches the network — and the
+          # real values are set in the Vercel project.
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key-for-build-only
+
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # The gitleaks *action* needs a paid organisation licence; the standalone
+      # binary is free for any use. This scans full history, where the repo's
+      # own guard scans the working tree — different jobs, both wanted.
+      - name: Install gitleaks
+        run: |
+          curl -sSfL -o /tmp/gitleaks.tar.gz \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.28.0/gitleaks_8.28.0_linux_x64.tar.gz
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          sudo mv /tmp/gitleaks /usr/local/bin/
+
+      - name: Scan history
+        run: gitleaks detect --redact --no-banner --exit-code 1
