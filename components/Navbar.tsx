@@ -79,12 +79,12 @@ export default function Navbar() {
             Accueil
           </Link>
 
-<Link 
-  href={`/${locale}/formations`} 
-  className="text-sm font-medium text-white transition-colors hover:text-brand" 
-> 
-  Formation 
-</Link>
+          <Link
+            href={`/${locale}/formations`}
+            className="text-sm font-medium text-white transition-colors hover:text-brand"
+          >
+            Formation
+          </Link>
 
           <Link
             href={`/${locale}/dashboard`}
@@ -101,7 +101,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href={`/${locale}`}
+            href={`/${locale}/ateliers`}
             className="text-sm font-medium text-white transition-colors hover:text-brand"
           >
             Atelier
@@ -172,4 +172,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
