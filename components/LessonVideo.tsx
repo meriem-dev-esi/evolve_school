@@ -140,7 +140,7 @@ export default function LessonVideo({
                 ),
               );
 
-              const completed = percentage >= 90;
+              const completed = percentage >= 95;
 
               const { error } = await supabase
                 .from("lesson_progress")

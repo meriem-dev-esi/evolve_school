@@ -14,34 +14,58 @@ type Course = {
   duration: string | null;
   level: string | null;
   type: string | null;
-  hero_category: "new" | "upcoming" | "discover" | "trending" | null;
+  hero_category:
+    | "new"
+    | "upcoming"
+    | "discover"
+    | "trending"
+    | null;
 };
-
-
 
 export default function Hero() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [active, setActive] = useState(0);
-const locale = useLocale();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const locale = useLocale();
+
   useEffect(() => {
     async function loadCourses() {
-      const supabase = createClient();
+      try {
+        setLoading(true);
+        setError(null);
 
-      const { data, error } = await supabase
-        .from("courses")
-        .select(
-  "id, title, description, image_url, price, duration, level, type, hero_category",
-)
-        .eq("is_published", true)
-        .limit(4);
+        const supabase = createClient();
 
-      if (error) {
-        console.error("Error loading courses:", error);
-        return;
+        const { data, error } = await supabase
+          .from("courses")
+          .select(
+            "id, title, description, image_url, price, duration, level, type, hero_category",
+          )
+          .eq("is_published", true)
+          .limit(4);
+
+        if (error) {
+          console.error("Error loading courses:", error);
+          setError(error.message);
+          return;
+        }
+
+        console.log("COURSES FROM SUPABASE:", data);
+
+        setCourses((data ?? []) as Course[]);
+      } catch (err) {
+        console.error("Unexpected error loading courses:", err);
+
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Failed to load courses.",
+        );
+      } finally {
+        setLoading(false);
       }
-
-      console.log("COURSES FROM SUPABASE:", data);
-      setCourses(data ?? []);
     }
 
     loadCourses();
@@ -57,41 +81,117 @@ const locale = useLocale();
     return () => clearInterval(interval);
   }, [courses.length]);
 
-  if (courses.length === 0) {
+  /*
+   * =====================================================
+   * LOADING STATE
+   * =====================================================
+   */
+
+  if (loading) {
     return (
-      <section className="flex min-h-dvh items-center justify-center bg-canvas text-white">
-        <p className="text-white/60">No formations available yet.</p>
+      <section className="flex min-h-dvh items-center justify-center bg-black text-white">
+        <div className="flex flex-col items-center gap-5">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-white/10 border-t-lime-400" />
+
+          <p className="text-sm text-white/50">
+            Loading courses...
+          </p>
+        </div>
       </section>
     );
   }
 
+  /*
+   * =====================================================
+   * ERROR STATE
+   * =====================================================
+   */
+
+  if (error) {
+    return (
+      <section className="flex min-h-dvh items-center justify-center bg-black px-6 text-white">
+        <div className="max-w-md text-center">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red-500/10 text-red-400">
+            !
+          </div>
+
+          <h2 className="mt-5 text-xl font-semibold">
+            Unable to load courses
+          </h2>
+
+          <p className="mt-3 text-sm leading-6 text-white/50">
+            Something went wrong while loading the
+            courses. Please try again later.
+          </p>
+
+          {process.env.NODE_ENV === "development" && (
+            <p className="mt-4 break-words rounded-xl bg-white/5 p-4 text-left text-xs text-red-300">
+              {error}
+            </p>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  /*
+   * =====================================================
+   * EMPTY STATE
+   * =====================================================
+   */
+
+  if (courses.length === 0) {
+    return (
+      <section className="flex min-h-dvh items-center justify-center bg-black text-white">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold">
+            No courses available yet.
+          </h2>
+
+          <p className="mt-2 text-sm text-white/50">
+            Check back soon for new learning content.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  /*
+   * =====================================================
+   * HERO
+   * =====================================================
+   */
+
   return (
     <section className="relative min-h-dvh overflow-hidden">
       {courses.map((course, index) => {
- const heroColor =
-  course.hero_category === "new"
-    ? "#000000"
-    : course.hero_category === "upcoming"
-      ? "#51C9EC"
-      : course.hero_category === "discover"
-        ? "#FACD12"
-        : course.hero_category === "trending"
-          ? "#EA356E"
-          : "#000000";
+        const heroColor =
+          course.hero_category === "new"
+            ? "#000000"
+            : course.hero_category === "upcoming"
+              ? "#51C9EC"
+              : course.hero_category === "discover"
+                ? "#FACD12"
+                : course.hero_category === "trending"
+                  ? "#EA356E"
+                  : "#000000";
+
         return (
           <div
             key={course.id}
             className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-                
               index === active
                 ? "translate-x-0"
                 : index < active
                   ? "-translate-x-full"
                   : "translate-x-full"
             }`}
-            style={{ backgroundColor: heroColor }}
+            style={{
+              backgroundColor: heroColor,
+            }}
           >
             <div className="mx-auto grid min-h-dvh w-full max-w-7xl grid-cols-1 items-center gap-10 px-6 pt-24 lg:grid-cols-2 lg:px-10">
+              {/* TEXT */}
               <div className="text-white">
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em]">
                   {course.type ?? "FORMATION"}
@@ -107,6 +207,7 @@ const locale = useLocale();
                   </p>
                 )}
 
+                {/* COURSE INFO */}
                 <div className="mt-6 flex flex-wrap gap-3 text-sm">
                   {course.level && (
                     <span className="rounded-pill bg-white/15 px-4 py-2">
@@ -125,13 +226,14 @@ const locale = useLocale();
                   </span>
                 </div>
 
+                {/* ACTIONS */}
                 <div className="mt-8 flex gap-4">
-                 <Link
-  href={`/${locale}/courses/${course.id}`}
-  className="rounded-pill bg-white px-7 py-3.5 font-semibold text-black transition-transform hover:scale-105"
->
-  Commencer
-</Link>
+                  <Link
+                    href={`/${locale}/courses/${course.id}`}
+                    className="rounded-pill bg-white px-7 py-3.5 font-semibold text-black transition-transform hover:scale-105"
+                  >
+                    Commencer
+                  </Link>
 
                   <button
                     type="button"
@@ -142,6 +244,7 @@ const locale = useLocale();
                 </div>
               </div>
 
+              {/* IMAGE */}
               {course.image_url ? (
                 <div className="flex justify-center lg:justify-end">
                   <img
@@ -158,6 +261,7 @@ const locale = useLocale();
         );
       })}
 
+      {/* SLIDER INDICATORS */}
       <div className="absolute bottom-8 left-1/2 z-50 flex -translate-x-1/2 gap-2">
         {courses.map((course, index) => (
           <button

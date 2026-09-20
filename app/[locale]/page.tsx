@@ -7,6 +7,7 @@ import HorizontalCourseSection from "@/components/HorizontalCourseSection";
 import SeriesCard from "@/components/SeriesCard";
 
 import { createClient } from "@/lib/supabase/server";
+import { getRecommendedCourses } from "@/lib/data/recommendations";
 
 type Course = {
   id: string;
@@ -17,6 +18,7 @@ type Course = {
   level: string | null;
   domain: string | null;
   practice_percentage: number | null;
+  reasons?: string[];
 };
 
 type EnrollmentSeries = {
@@ -54,9 +56,7 @@ export default async function HomePage({
      PUBLIC COURSES
   ========================================================= */
 
-  const {
-    data: beginnerCourses,
-  } = await supabase
+  const { data: beginnerCourses } = await supabase
     .from("courses")
     .select(
       "id, title, description, image_url, price, level, domain, practice_percentage",
@@ -65,9 +65,7 @@ export default async function HomePage({
     .eq("is_beginner", true)
     .order("created_at", { ascending: false });
 
-  const {
-    data: partnerCourses,
-  } = await supabase
+  const { data: partnerCourses } = await supabase
     .from("courses")
     .select(
       "id, title, description, image_url, price, level, domain, practice_percentage",
@@ -77,9 +75,7 @@ export default async function HomePage({
     .order("created_at", { ascending: false })
     .limit(10);
 
-  const {
-    data: exclusiveCourses,
-  } = await supabase
+  const { data: exclusiveCourses } = await supabase
     .from("courses")
     .select(
       "id, title, description, image_url, price, level, domain, practice_percentage",
@@ -89,9 +85,7 @@ export default async function HomePage({
     .order("created_at", { ascending: false })
     .limit(10);
 
-  const {
-    data: trendingCourses,
-  } = await supabase
+  const { data: trendingCourses } = await supabase
     .from("courses")
     .select(
       "id, title, description, image_url, price, level, domain, practice_percentage",
@@ -101,9 +95,7 @@ export default async function HomePage({
     .order("created_at", { ascending: false })
     .limit(10);
 
-  const {
-    data: comingSoonCourses,
-  } = await supabase
+  const { data: comingSoonCourses } = await supabase
     .from("courses")
     .select(
       "id, title, description, image_url, price, level, domain, practice_percentage",
@@ -137,9 +129,7 @@ export default async function HomePage({
 
   let enrollmentPaths: EnrollmentSeries[] = [];
 
-  let continueLearning:
-    | ContinueLearning
-    | null = null;
+  let continueLearning: ContinueLearning | null = null;
 
   /* =========================================================
      LOGGED-IN USER
@@ -150,9 +140,7 @@ export default async function HomePage({
        ENROLLMENTS
     ======================================================= */
 
-    const {
-      data: enrollments,
-    } = await supabase
+    const { data: enrollments } = await supabase
       .from("enrollments")
       .select("course_id")
       .eq("user_id", user.id)
@@ -166,92 +154,41 @@ export default async function HomePage({
 
     /* =======================================================
        RECOMMENDED FOR YOU
+       
+       Uses the real recommendation engine:
+       - Learning preferences
+       - Interests
+       - Skills
+       - Level
+       - Difficulty
+       - Goal
+       - Format
+       - Learning time
+       - Learning history
+       - Course properties
     ======================================================= */
 
-    const {
-      data: activities,
-    } = await supabase
-      .from("user_activity")
-      .select("course_id")
-      .eq("user_id", user.id)
-      .not("course_id", "is", null)
-      .order("created_at", { ascending: false })
-      .limit(20);
-
-    const activityIds = [
-      ...new Set(
-        (activities ?? [])
-          .map((item) => item.course_id)
-          .filter(
-            (id): id is string => Boolean(id),
-          ),
-      ),
-    ];
-
-    const {
-      data: candidates,
-    } = await supabase
-      .from("courses")
-      .select(
-        "id, title, description, image_url, price, level, domain, practice_percentage",
-      )
-      .eq("is_published", true)
-      .order("created_at", { ascending: false })
-      .limit(50);
-
-    const availableCourses = (
-      candidates ?? []
-    ).filter(
-      (course) => !enrolledIds.has(course.id),
-    );
-
-    const activityIndex = new Map(
-      activityIds.map(
-        (courseId, index) => [
-          courseId,
-          index,
-        ],
-      ),
-    );
-
-    availableCourses.sort((a, b) => {
-      const aIndex = activityIndex.get(a.id);
-      const bIndex = activityIndex.get(b.id);
-
-      if (
-        aIndex !== undefined &&
-        bIndex === undefined
-      ) {
-        return -1;
-      }
-
-      if (
-        aIndex === undefined &&
-        bIndex !== undefined
-      ) {
-        return 1;
-      }
-
-      if (
-        aIndex !== undefined &&
-        bIndex !== undefined
-      ) {
-        return aIndex - bIndex;
-      }
-
-      return 0;
-    });
+    const recommendations =
+      await getRecommendedCourses(10);
 
     recommendedCourses =
-      availableCourses.slice(0, 10);
+      recommendations.map((course) => ({
+        id: course.id,
+        title: course.title,
+        description: course.description,
+        image_url: course.image_url,
+        price: null,
+        level: course.level,
+        domain: course.domain,
+        practice_percentage: null,
+        reasons: course.reasons,
+      }));
 
     /* =======================================================
        WATCHLIST
     ======================================================= */
 
-    const {
-      data: watchlist,
-    } = await supabase
+    const { data: watchlist } = await supabase
       .from("course_watchlist")
       .select("course_id")
       .eq("user_id", user.id)
@@ -260,15 +197,12 @@ export default async function HomePage({
       })
       .limit(10);
 
-    const watchlistIds =
-      (watchlist ?? [])
-        .map((item) => item.course_id)
-        .filter(Boolean);
+    const watchlistIds = (watchlist ?? [])
+      .map((item) => item.course_id)
+      .filter(Boolean);
 
     if (watchlistIds.length > 0) {
-      const {
-        data: courses,
-      } = await supabase
+      const { data: courses } = await supabase
         .from("courses")
         .select(
           "id, title, description, image_url, price, level, domain, practice_percentage",
@@ -277,23 +211,20 @@ export default async function HomePage({
         .eq("is_published", true);
 
       const courseMap = new Map(
-        (courses ?? []).map(
-          (course) => [
-            course.id,
-            course,
-          ],
-        ),
+        (courses ?? []).map((course) => [
+          course.id,
+          course,
+        ]),
       );
 
-      watchlistCourses =
-        watchlistIds
-          .map((courseId) =>
-            courseMap.get(courseId),
-          )
-          .filter(
-            (course): course is Course =>
-              Boolean(course),
-          );
+      watchlistCourses = watchlistIds
+        .map((courseId) =>
+          courseMap.get(courseId),
+        )
+        .filter(
+          (course): course is Course =>
+            Boolean(course),
+        );
     }
 
     /* =======================================================
@@ -301,9 +232,7 @@ export default async function HomePage({
     ======================================================= */
 
     if (enrolledIds.size > 0) {
-      const {
-        data: lessons,
-      } = await supabase
+      const { data: lessons } = await supabase
         .from("lessons")
         .select("id, course_id")
         .in(
@@ -311,33 +240,36 @@ export default async function HomePage({
           [...enrolledIds],
         );
 
-      const lessonIds =
-        (lessons ?? []).map(
-          (lesson) => lesson.id,
-        );
+      const lessonIds = (lessons ?? []).map(
+        (lesson) => lesson.id,
+      );
 
       if (lessonIds.length > 0) {
-        const {
-          data: progressRows,
-        } = await supabase
-          .from("lesson_progress")
-          .select(
-            "lesson_id, completed",
-          )
-          .eq("user_id", user.id)
-          .in("lesson_id", lessonIds);
-
-        const completedLessonIds = new Set(
-          (progressRows ?? [])
-            .filter(
-              (row) => row.completed,
+        const { data: progressRows } =
+          await supabase
+            .from("lesson_progress")
+            .select(
+              "lesson_id, completed",
             )
-            .map(
-              (row) => row.lesson_id,
-            ),
-        );
+            .eq("user_id", user.id)
+            .in(
+              "lesson_id",
+              lessonIds,
+            );
 
-        const completedCourseIds = new Set<string>();
+        const completedLessonIds =
+          new Set(
+            (progressRows ?? [])
+              .filter(
+                (row) => row.completed,
+              )
+              .map(
+                (row) => row.lesson_id,
+              ),
+          );
+
+        const completedCourseIds =
+          new Set<string>();
 
         for (const courseId of enrolledIds) {
           const courseLessons =
@@ -363,17 +295,16 @@ export default async function HomePage({
         }
 
         if (completedCourseIds.size > 0) {
-          const {
-            data: completed,
-          } = await supabase
-            .from("courses")
-            .select(
-              "id, title, description, image_url, price, level, domain, practice_percentage",
-            )
-            .in(
-              "id",
-              [...completedCourseIds],
-            );
+          const { data: completed } =
+            await supabase
+              .from("courses")
+              .select(
+                "id, title, description, image_url, price, level, domain, practice_percentage",
+              )
+              .in(
+                "id",
+                [...completedCourseIds],
+              );
 
           becauseYouCompleted =
             completed ?? [];
@@ -385,8 +316,9 @@ export default async function HomePage({
        YOUR ENROLLMENT PATH
     ======================================================= */
 
-    const enrolledCourseIds =
-      [...enrolledIds];
+    const enrolledCourseIds = [
+      ...enrolledIds,
+    ];
 
     if (enrolledCourseIds.length > 0) {
       const {
@@ -408,25 +340,25 @@ export default async function HomePage({
         ...new Set(
           (seriesCourses ?? [])
             .map(
-              (item) => item.series_id,
+              (item) =>
+                item.series_id,
             )
             .filter(Boolean),
         ),
       ];
 
       if (seriesIds.length > 0) {
-        const {
-          data: series,
-        } = await supabase
-          .from("course_series")
-          .select(
-            "id, title, description, image_url, level, domain",
-          )
-          .in("id", seriesIds)
-          .eq(
-            "is_published",
-            true,
-          );
+        const { data: series } =
+          await supabase
+            .from("course_series")
+            .select(
+              "id, title, description, image_url, level, domain",
+            )
+            .in("id", seriesIds)
+            .eq(
+              "is_published",
+              true,
+            );
 
         const {
           data: progressRows,
@@ -435,19 +367,21 @@ export default async function HomePage({
           .select(
             "lesson_id, completed",
           )
-          .eq("user_id", user.id);
-
-        const {
-          data: lessons,
-        } = await supabase
-          .from("lessons")
-          .select(
-            "id, course_id",
-          )
-          .in(
-            "course_id",
-            enrolledCourseIds,
+          .eq(
+            "user_id",
+            user.id,
           );
+
+        const { data: lessons } =
+          await supabase
+            .from("lessons")
+            .select(
+              "id, course_id",
+            )
+            .in(
+              "course_id",
+              enrolledCourseIds,
+            );
 
         enrollmentPaths =
           (series ?? []).map(
@@ -473,7 +407,9 @@ export default async function HomePage({
                 coursesInSeries.filter(
                   (courseId) => {
                     const courseLessons =
-                      (lessons ?? []).filter(
+                      (
+                        lessons ?? []
+                      ).filter(
                         (lesson) =>
                           lesson.course_id ===
                           courseId,
@@ -540,60 +476,81 @@ export default async function HomePage({
       })
       .limit(1)
       .maybeSingle();
-      console.log("[Evolve] Latest Progress:", latestProgress);
 
-    if (latestProgress) {
-  const {
-    data: lesson,
-    error: lessonError,
-  } = await supabase
-    .from("lessons")
-    .select("id, title, course_id")
-    .eq("id", latestProgress.lesson_id)
-    .maybeSingle();
-
-  console.log("[Evolve] Continue Lesson:", lesson);
-  console.log(
-    "[Evolve] Continue Lesson Error:",
-    lessonError,
-  );
-
-  if (lesson) {
-    const {
-      data: course,
-      error: courseError,
-    } = await supabase
-      .from("courses")
-      .select("id, title")
-      .eq("id", lesson.course_id)
-      .maybeSingle();
-
-    console.log("[Evolve] Continue Course:", course);
     console.log(
-      "[Evolve] Continue Course Error:",
-      courseError,
+      "[Evolve] Latest Progress:",
+      latestProgress,
     );
 
-    if (course) {
-      continueLearning = {
-        courseId: course.id,
-        courseTitle: course.title,
-        lessonId: lesson.id,
-        lessonTitle: lesson.title,
-        progress:
-          latestProgress.progress_percentage ?? 0,
-      };
+    if (latestProgress) {
+      const {
+        data: lesson,
+        error: lessonError,
+      } = await supabase
+        .from("lessons")
+        .select(
+          "id, title, course_id",
+        )
+        .eq(
+          "id",
+          latestProgress.lesson_id,
+        )
+        .maybeSingle();
+
+      console.log(
+        "[Evolve] Continue Lesson:",
+        lesson,
+      );
+
+      console.log(
+        "[Evolve] Continue Lesson Error:",
+        lessonError,
+      );
+
+      if (lesson) {
+        const {
+          data: course,
+          error: courseError,
+        } = await supabase
+          .from("courses")
+          .select(
+            "id, title",
+          )
+          .eq(
+            "id",
+            lesson.course_id,
+          )
+          .maybeSingle();
+
+        console.log(
+          "[Evolve] Continue Course:",
+          course,
+        );
+
+        console.log(
+          "[Evolve] Continue Course Error:",
+          courseError,
+        );
+
+        if (course) {
+          continueLearning = {
+            courseId: course.id,
+            courseTitle:
+              course.title,
+            lessonId: lesson.id,
+            lessonTitle:
+              lesson.title,
+            progress:
+              latestProgress.progress_percentage ??
+              0,
+          };
+        }
+      }
     }
-  }
-}
   }
 
   /* =========================================================
      MOST SEARCHED THIS WEEK
-
-     Only query this if the table exists.
-     If it does not exist, the section remains
-     locked for logged-out users and empty for logged-in users.
   ========================================================= */
 
   if (user) {
@@ -602,7 +559,11 @@ export default async function HomePage({
     } = await supabase
       .from("search_analytics")
       .select("course_id")
-      .not("course_id", "is", null)
+      .not(
+        "course_id",
+        "is",
+        null,
+      )
       .limit(100);
 
     if (searchData) {
@@ -612,7 +573,9 @@ export default async function HomePage({
       >();
 
       for (const item of searchData) {
-        if (!item.course_id) continue;
+        if (!item.course_id) {
+          continue;
+        }
 
         counts.set(
           item.course_id,
@@ -625,7 +588,8 @@ export default async function HomePage({
       const sortedIds =
         [...counts.entries()]
           .sort(
-            (a, b) => b[1] - a[1],
+            (a, b) =>
+              b[1] - a[1],
           )
           .map(
             ([courseId]) =>
@@ -649,14 +613,16 @@ export default async function HomePage({
             true,
           );
 
-        const courseMap = new Map(
-          (searchedCourses ?? []).map(
-            (course) => [
-              course.id,
-              course,
-            ],
-          ),
-        );
+        const courseMap =
+          new Map(
+            (searchedCourses ?? [])
+              .map(
+                (course) => [
+                  course.id,
+                  course,
+                ],
+              ),
+          );
 
         mostSearchedCourses =
           sortedIds

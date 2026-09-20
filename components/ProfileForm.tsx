@@ -1,7 +1,6 @@
-
 "use client";
-
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type ProfileFormProps = {
@@ -12,183 +11,300 @@ type ProfileFormProps = {
 };
 
 export default function ProfileForm({
+  userId,
   email,
   initialName,
   initialAvatar,
 }: ProfileFormProps) {
+   const router = useRouter();
   const [fullName, setFullName] = useState(initialName);
   const [avatarUrl, setAvatarUrl] = useState(initialAvatar);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] =
+    useState<File | null>(null);
+
+  const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [messageType, setMessageType] = useState<
+    "success" | "error"
+  >("success");
+
+  useEffect(() => {
+    setFullName(initialName);
+    setAvatarUrl(initialAvatar);
+  }, [initialName, initialAvatar]);
 
   async function handleSave() {
-    setLoading(true);
+    setSaving(true);
     setMessage("");
 
-    const supabase = createClient();
+    try {
+      const supabase = createClient();
 
-    // Check current authenticated user
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+      // Check authentication
+      const {
+        data: { user },
+        error: authError,
+      } = await supabase.auth.getUser();
 
-    console.log("CURRENT USER:", user);
-
-    if (!user) {
-      setMessage("Error: You are not signed in.");
-      setLoading(false);
-      return;
-    }
-
-    let finalAvatarUrl = avatarUrl;
-
-    // Upload avatar
-    if (selectedFile) {
-      const fileExtension =
-        selectedFile.name.split(".").pop()?.toLowerCase() || "jpg";
-
-      const filePath = `${user.id}/avatar.${fileExtension}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from("avatars")
-        .upload(filePath, selectedFile, {
-          upsert: true,
-          contentType: selectedFile.type,
-        });
-
-      if (uploadError) {
-        console.error("AVATAR UPLOAD ERROR:", uploadError);
-
-        setMessage("Error: " + uploadError.message);
-        setLoading(false);
-        return;
+      if (authError) {
+        throw new Error(authError.message);
       }
 
-      const {
-        data: { publicUrl },
-      } = supabase.storage
-        .from("avatars")
-        .getPublicUrl(filePath);
+      if (!user) {
+        throw new Error("You are not signed in.");
+      }
 
-      finalAvatarUrl = publicUrl;
-      setAvatarUrl(publicUrl);
+      // Make sure this is the correct profile
+      if (user.id !== userId) {
+        throw new Error(
+          "Your session does not match this profile.",
+        );
+      }
+
+      const cleanName = fullName.trim();
+
+      if (!cleanName) {
+        throw new Error(
+          "Please enter your full name.",
+        );
+      }
+
+      let finalAvatarUrl = avatarUrl;
+
+      // Upload new avatar
+      if (selectedFile) {
+        if (selectedFile.size > 5 * 1024 * 1024) {
+          throw new Error(
+            "Profile picture must be smaller than 5 MB.",
+          );
+        }
+
+        const allowedTypes = [
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+        ];
+
+        if (!allowedTypes.includes(selectedFile.type)) {
+          throw new Error(
+            "Only JPG, PNG, and WebP images are allowed.",
+          );
+        }
+
+        const extension =
+          selectedFile.name
+            .split(".")
+            .pop()
+            ?.toLowerCase() || "jpg";
+
+        const filePath =
+          `${user.id}/avatar.${extension}`;
+
+        const { error: uploadError } =
+          await supabase.storage
+            .from("avatars")
+            .upload(filePath, selectedFile, {
+              upsert: true,
+              contentType: selectedFile.type,
+            });
+
+        if (uploadError) {
+          throw new Error(
+            `Avatar upload failed: ${uploadError.message}`,
+          );
+        }
+
+        const {
+          data: { publicUrl },
+        } = supabase.storage
+          .from("avatars")
+          .getPublicUrl(filePath);
+
+        finalAvatarUrl = publicUrl;
+      }
+
+      // Update profile and immediately return
+      // the updated row.
+      const { data: savedProfile, error: updateError } =
+        await supabase
+          .from("profiles")
+          .update({
+            full_name: cleanName,
+            avatar_url: finalAvatarUrl || null,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", user.id)
+          .select("id, full_name, avatar_url")
+          .single();
+
+      if (updateError) {
+        throw new Error(
+          `Profile update failed: ${updateError.message}`,
+        );
+      }
+
+      if (!savedProfile) {
+        throw new Error(
+          "No profile was updated.",
+        );
+      }
+
+      // Update local UI using the actual database result.
+      setFullName(savedProfile.full_name ?? "");
+      setAvatarUrl(
+        savedProfile.avatar_url ?? "",
+      );
+      setSelectedFile(null);
+
+      setMessageType("success");
+      setMessage(
+        "Your profile has been updated successfully.",
+      );
+    } catch (error) {
+      console.error(
+        "[Evolve] Profile save error:",
+        error,
+      );
+
+      setMessageType("error");
+
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong while saving.",
+      );
+    } finally {
+      setSaving(false);
     }
-
-    // Update profile
-    const { error } = await supabase
-      .from("profiles")
-      .upsert({
-        id: user.id,
-        full_name: fullName.trim(),
-        avatar_url: finalAvatarUrl,
-        updated_at: new Date().toISOString(),
-      });
-
-    if (error) {
-      console.error("PROFILE UPDATE ERROR:", error);
-
-      setMessage("Error: " + error.message);
-      setLoading(false);
-      return;
-    }
-
-    setSelectedFile(null);
-    setMessage("Profile updated successfully.");
-    setLoading(false);
   }
 
   return (
-    <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-8">
-      <div className="space-y-6">
-        <div>
-          <label className="mb-2 block text-sm text-white/50">
-            Email
-          </label>
+    <section>
+      <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+        <div className="grid gap-8 md:grid-cols-[180px_1fr]">
 
-          <input
-            type="email"
-            value={email}
-            disabled
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-white/40"
-          />
-        </div>
+          {/* Avatar */}
+          <div className="flex flex-col items-center">
+            {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt="Profile avatar"
+                className="h-32 w-32 rounded-full border border-white/10 object-cover"
+              />
+            ) : (
+              <div className="flex h-32 w-32 items-center justify-center rounded-full bg-brand text-4xl font-bold text-black">
+                {fullName
+                  .trim()
+                  .charAt(0)
+                  .toUpperCase() || "U"}
+              </div>
+            )}
 
-        <div>
-          <label className="mb-2 block text-sm text-white/50">
-            Full Name
-          </label>
+            <label
+              className={`mt-5 cursor-pointer rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium transition ${
+                saving
+                  ? "cursor-not-allowed opacity-50"
+                  : "hover:border-brand hover:text-brand"
+              }`}
+            >
+              Change photo
 
-          <input
-            type="text"
-            value={fullName}
-            onChange={(event) => setFullName(event.target.value)}
-            disabled={loading}
-            placeholder="Your full name"
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-white outline-none focus:border-brand"
-          />
-        </div>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                disabled={saving}
+                className="hidden"
+                onChange={(event) => {
+                  const file =
+                    event.target.files?.[0] ?? null;
 
-        <div>
-          <label className="mb-2 block text-sm text-white/50">
-            Profile Picture
-          </label>
+                  setSelectedFile(file);
+                  setMessage("");
+                }}
+              />
+            </label>
 
-          <input
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
-            disabled={loading}
-            onChange={(event) => {
-              setSelectedFile(event.target.files?.[0] ?? null);
-            }}
-            className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-white/70 file:mr-4 file:rounded-full file:border-0 file:bg-brand file:px-4 file:py-2 file:font-semibold file:text-black"
-          />
+            {selectedFile && (
+              <p className="mt-3 max-w-[160px] truncate text-center text-xs text-white/40">
+                {selectedFile.name}
+              </p>
+            )}
 
-          {selectedFile && (
-            <p className="mt-2 text-sm text-white/40">
-              Selected: {selectedFile.name}
+            <p className="mt-2 text-center text-xs text-white/25">
+              JPG, PNG or WebP
+              <br />
+              Maximum 5 MB
             </p>
-          )}
-        </div>
-
-        {avatarUrl && (
-          <div>
-            <p className="mb-2 text-sm text-white/50">
-              Current Avatar
-            </p>
-
-            <img
-              src={avatarUrl}
-              alt="Profile avatar"
-              className="h-24 w-24 rounded-full object-cover"
-            />
           </div>
-        )}
 
-        <button
-          type="button"
-          onClick={() => {
-            void handleSave();
-          }}
-          disabled={loading}
-          className="rounded-full bg-brand px-6 py-3 font-semibold text-black disabled:opacity-50"
-        >
-          {loading ? "Saving..." : "Save Changes"}
-        </button>
+          {/* Fields */}
+          <div className="space-y-6">
 
-        {message && (
-          <p
-            className={
-              message.startsWith("Error")
-                ? "text-sm text-red-400"
-                : "text-sm text-brand"
-            }
-          >
-            {message}
-          </p>
-        )}
+            {/* Email */}
+            <div>
+              <label className="mb-2 block text-sm font-medium text-white/70">
+                Email address
+              </label>
+
+              <input
+                type="email"
+                value={email}
+                disabled
+                className="w-full rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-3 text-white/40 outline-none"
+              />
+
+              <p className="mt-2 text-xs text-white/25">
+                Your email is managed by your Evolve account.
+              </p>
+            </div>
+
+            {/* Full name */}
+            <div>
+              <label className="mb-2 block text-sm font-medium text-white/70">
+                Full name
+              </label>
+
+              <input
+                type="text"
+                value={fullName}
+                disabled={saving}
+                onChange={(event) =>
+                  setFullName(event.target.value)
+                }
+                placeholder="Enter your full name"
+                className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none placeholder:text-white/25 transition focus:border-brand/60 focus:ring-1 focus:ring-brand/30 disabled:opacity-50"
+              />
+            </div>
+
+            {/* Save */}
+            <button
+              type="button"
+              onClick={() => {
+                void handleSave();
+              }}
+              disabled={saving}
+              className="w-full rounded-2xl bg-brand px-6 py-3.5 font-semibold text-black transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+            >
+              {saving
+                ? "Saving..."
+                : "Save changes"}
+            </button>
+
+            {/* Message */}
+            {message && (
+              <div
+                className={`rounded-2xl border px-4 py-3 text-sm ${
+                  messageType === "success"
+                    ? "border-brand/20 bg-brand/10 text-brand"
+                    : "border-red-500/20 bg-red-500/10 text-red-400"
+                }`}
+              >
+                {message}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
-

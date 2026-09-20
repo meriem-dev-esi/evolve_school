@@ -11,6 +11,9 @@ type Course = {
   level: string | null;
   domain: string | null;
   practice_percentage: number | null;
+
+  // Recommendation reasons
+  reasons?: string[];
 };
 
 type Props = {
@@ -41,7 +44,7 @@ export default function HorizontalCourseSection({
           {href && (
             <Link
               href={href}
-              className="text-sm font-semibold text-white/60 hover:text-white"
+              className="text-sm font-semibold text-white/60 transition hover:text-white"
             >
               View all →
             </Link>
@@ -60,11 +63,32 @@ export default function HorizontalCourseSection({
             </>
           ) : (
             courses.map((course) => (
-              <CourseCard
+              <div
                 key={course.id}
-                course={course}
-                locale={locale}
-              />
+                className="min-w-[280px] shrink-0"
+              >
+                <CourseCard
+                  course={course}
+                  locale={locale}
+                />
+
+                {/* WHY THIS COURSE */}
+                {course.reasons &&
+                  course.reasons.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {course.reasons
+                        .slice(0, 2)
+                        .map((reason) => (
+                          <span
+                            key={reason}
+                            className="rounded-full border border-brand/20 bg-brand/10 px-3 py-1 text-xs text-brand"
+                          >
+                            ✓ {reason}
+                          </span>
+                        ))}
+                    </div>
+                  )}
+              </div>
             ))
           )}
 

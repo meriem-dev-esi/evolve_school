@@ -8,7 +8,7 @@ type Props = {
   locale: string;
 };
 
-export default function SubmitProjectForm({ locale }: Props) {
+export default function SubmitProjectForm({}: Props) {
   const supabase = createClient();
 
   const [title, setTitle] = useState("");

@@ -39,7 +39,7 @@ export default function EditProjectForm({
   const [githubUrl, setGithubUrl] = useState(initialGithubUrl);
   const [demoUrl, setDemoUrl] = useState(initialDemoUrl);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState(initialImageUrl);
+const [imageUrl] = useState(initialImageUrl);
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
