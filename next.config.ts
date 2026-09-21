@@ -7,11 +7,19 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  // Type and lint errors fail the build. Next's defaults already do this; it is
-  // written down because the usual "unblock the deploy" fix is to set these to
-  // true, and a reviewer should see that happen in a diff.
   typescript: { ignoreBuildErrors: false },
   eslint: { ignoreDuringBuilds: false },
+  // File compression (Gzip / Brotli)
+  compress: true,
+  // Optimized image domains
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

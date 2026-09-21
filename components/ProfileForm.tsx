@@ -160,6 +160,7 @@ export default function ProfileForm({
       setMessage(
         "Your profile has been updated successfully.",
       );
+      router.refresh();
     } catch (error) {
       console.error(
         "[Evolve] Profile save error:",

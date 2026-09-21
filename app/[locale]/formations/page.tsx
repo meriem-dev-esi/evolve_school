@@ -1,6 +1,9 @@
 import Link from "next/link";
 import FormationsBrowser from "./FormationsBrowser";
 import { createClient } from "@/lib/supabase/server";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 
 type Props = {
 params: Promise<{
@@ -354,149 +357,125 @@ completedFormationParam,
 // 10. RENDER
 // =====================================================
 
-return ( <main className="min-h-screen bg-[#0f0f0f] text-white">
+return (
+  <div className="min-h-dvh bg-canvas text-ink flex flex-col">
+    <Navbar />
 
+    <main className="flex-1 pt-24">
+      {/* ================================================= */}
+      {/* HERO HEADER */}
+      {/* ================================================= */}
+      <section className="relative overflow-hidden border-b border-white/10 px-6 py-16 lg:px-10">
+        {/* Ambient Top Glow */}
+        <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-80 w-[600px] rounded-full bg-brand/10 blur-[120px]" />
+        <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-30" />
 
-  {/* ================================================= */}
-  {/* HEADER */}
-  {/* ================================================= */}
-
-  <section className="border-b border-white/10 px-6 py-14 lg:px-10">
-    <div className="mx-auto max-w-7xl">
-
-      <p className="mb-3 text-sm font-medium tracking-[0.2em] text-lime-400">
-        EVOLVE LEARNING
-      </p>
-
-      <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-        Formations
-      </h1>
-
-      <p className="mt-4 max-w-2xl text-base leading-7 text-white/55">
-        Follow structured learning paths and
-        build your skills step by step.
-      </p>
-
-      {/* Global progress */}
-
-      {user &&
-        totalFormationCourses > 0 && (
-          <div className="mt-8 max-w-xl">
-
-            <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="text-white/60">
-                Your learning progress
-              </span>
-
-              <span className="font-semibold text-lime-400">
-                {globalProgress}%
-              </span>
-            </div>
-
-            <div className="h-2 overflow-hidden rounded-full bg-white/10">
-              <div
-                className="h-full rounded-full bg-lime-400 transition-all"
-                style={{
-                  width: `${globalProgress}%`,
-                }}
-              />
-            </div>
-
-            <p className="mt-2 text-xs text-white/35">
-              {completedFormationCourses} of{" "}
-              {totalFormationCourses} courses
-              completed
-            </p>
-
+        <div className="relative mx-auto max-w-7xl">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-brand/30 bg-brand/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand">
+              <Sparkles className="h-3.5 w-3.5" />
+              Parcours Certifiants
+            </span>
           </div>
-        )}
 
-    </div>
-  </section>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+            Catalogue des <span className="text-gradient-brand">Formations</span>
+          </h1>
 
-  {/* ================================================= */}
-  {/* COMPLETION MESSAGE */}
-  {/* ================================================= */}
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
+            Des parcours d'apprentissage complets, structurés étape par étape avec des projets pratiques et un mentorat continu.
+          </p>
 
-  {formationWasCompleted && (
-    <section className="px-6 pt-8 lg:px-10">
-      <div className="mx-auto max-w-7xl">
+          {/* User Learning Progress Card */}
+          {user && totalFormationCourses > 0 && (
+            <div className="glass-panel mt-8 max-w-xl rounded-2xl p-5 shadow-xl">
+              <div className="mb-2 flex items-center justify-between text-sm">
+                <span className="text-white/70 font-medium">Votre progression globale</span>
+                <span className="font-extrabold text-brand">{globalProgress}%</span>
+              </div>
 
-        <div className="rounded-3xl border border-lime-400/20 bg-lime-400/10 p-6">
+              <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-brand to-emerald-400 shadow-[0_0_10px_rgba(95,236,107,0.5)] transition-all duration-700"
+                  style={{ width: `${globalProgress}%` }}
+                />
+              </div>
 
-          <div className="flex items-start gap-4">
-
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-lime-400 text-xl text-black">
-              ✓
-            </div>
-
-            <div>
-              <h2 className="text-xl font-bold">
-                Formation completed 🎓
-              </h2>
-
-              <p className="mt-2 text-sm leading-6 text-white/60">
-                Congratulations! You completed{" "}
-                {completedFormation?.title
-                  ? `"${completedFormation.title}"`
-                  : "all the courses in this learning path"}
-                .
+              <p className="mt-2 text-xs text-white/40">
+                {completedFormationCourses} sur {totalFormationCourses} cours complétés
               </p>
             </div>
-
-          </div>
-
+          )}
         </div>
+      </section>
 
-      </div>
-    </section>
-  )}
+      {/* ================================================= */}
+      {/* COMPLETION MESSAGE */}
+      {/* ================================================= */}
+      {formationWasCompleted && (
+        <section className="px-6 pt-8 lg:px-10">
+          <div className="mx-auto max-w-7xl">
+            <div className="rounded-3xl border border-brand/30 bg-brand/10 p-6 backdrop-blur-md shadow-[0_0_30px_rgba(95,236,107,0.15)]">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand text-xl font-bold text-black">
+                  <CheckCircle2 className="h-6 w-6" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-white">Formation terminée avec succès 🎓</h2>
+                  <p className="mt-1 text-sm leading-6 text-white/70">
+                    Félicitations ! Vous avez validé tous les modules de{" "}
+                    {completedFormation?.title
+                      ? `"${completedFormation.title}"`
+                      : "ce parcours d'apprentissage"}
+                    . Votre certificat est prêt dans votre profil.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
-  {/* ================================================= */}
-  {/* SEARCH + CATEGORIES + FORMATIONS */}
-  {/* ================================================= */}
+      {/* ================================================= */}
+      {/* BROWSER (SEARCH + FILTERS + CARDS) */}
+      {/* ================================================= */}
+      <FormationsBrowser
+        formations={formationData}
+        locale={locale}
+        completedFormationIds={completedFormationIds}
+      />
 
-  <FormationsBrowser
-    formations={formationData}
-    locale={locale}
-    completedFormationIds={
-      completedFormationIds
-    }
-  />
+      {/* ================================================= */}
+      {/* COMMUNITY CTA */}
+      {/* ================================================= */}
+      <section className="border-t border-white/10 px-6 py-20 lg:px-10 relative overflow-hidden">
+        <div className="pointer-events-none absolute -bottom-10 right-10 h-72 w-72 rounded-full bg-brand/5 blur-[90px]" />
 
-  {/* ================================================= */}
-  {/* COMMUNITY */}
-  {/* ================================================= */}
+        <div className="relative mx-auto max-w-7xl">
+          <span className="text-xs font-bold uppercase tracking-widest text-brand">
+            Communauté Evolve
+          </span>
 
-  <section className="border-t border-white/10 px-6 py-20 lg:px-10">
-    <div className="mx-auto max-w-7xl">
+          <h2 className="mt-3 text-3xl font-extrabold text-white md:text-4xl">
+            Découvrez les projets de notre communauté
+          </h2>
 
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-lime-400">
-        Community
-      </p>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60">
+            Inspirez-vous des travaux réalisés par nos étudiants, participez aux revues de code et présentez vos propres réalisations.
+          </p>
 
-      <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-        Découvrir les travaux de notre communauté
-      </h2>
+          <Link
+            href={`/${locale}/community`}
+            className="group mt-7 inline-flex items-center gap-2.5 rounded-full bg-brand px-6 py-3.5 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(95,236,107,0.5)]"
+          >
+            <span>Explorer la communauté</span>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </section>
+    </main>
 
-      <p className="mt-4 max-w-2xl text-white/50">
-        Explore projects created by learners
-        and discover what you can build with
-        the skills you learn on Evolve.
-      </p>
-
-      <Link
-        href={`/${locale}/community`}
-        className="mt-7 inline-flex items-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/80"
-      >
-        Découvrir la communauté →
-      </Link>
-
-    </div>
-  </section>
-
-</main>
-
-
+    <Footer locale={locale} />
+  </div>
 );
 }

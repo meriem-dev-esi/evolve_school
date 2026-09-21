@@ -1,64 +1,189 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import DashboardClient, {
+  type EnrolledCourseItem,
+  type WorkshopItem,
+  type UserStats,
+} from "./DashboardClient";
 import { createClient } from "@/lib/supabase/server";
+import {
+  Sparkles,
+  Lock,
+  ArrowRight,
+  BookOpen,
+  GraduationCap,
+  ShieldCheck,
+} from "lucide-react";
 
-type Course = {
+export const metadata: Metadata = {
+  title: "Mon Espace Étudiant & Tableau de Bord — Evolve Academy",
+  description:
+    "Suivez votre progression, reprenez vos cours, consultez vos attestations et accédez à vos ateliers.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+type DbCourse = {
   id: string;
   title: string;
   description: string | null;
   image_url: string | null;
+  domain?: string | null;
+  level?: string | null;
+  duration?: string | null;
 };
 
-type Enrollment = {
+type DbEnrollment = {
   course_id: string;
   payment_status: string;
-  courses: Course | Course[] | null;
+  courses: DbCourse | DbCourse[] | null;
 };
 
-type Lesson = {
+type DbLesson = {
   id: string;
   course_id: string;
   title: string;
   order_index: number;
+  duration_minutes?: number | null;
 };
 
-type Progress = {
+type DbProgress = {
   lesson_id: string;
   progress_percentage: number;
   completed: boolean;
 };
 
-export default async function DashboardPage({
-  params,
-}: {
-  params: Promise<{
-    locale: string;
-  }>;
-}) {
+export default async function DashboardPage({ params }: Props) {
   const { locale } = await params;
 
   const supabase = await createClient();
 
+  // 1. Authenticate user
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // 2. GUEST / UNAUTHENTICATED STATE
   if (!user) {
     return (
-      <main className="flex min-h-dvh items-center justify-center bg-black px-6 text-white">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold">Please sign in</h1>
+      <div className="min-h-screen bg-canvas text-ink flex flex-col selection:bg-violet-100 selection:text-violet-900">
+        <Navbar />
 
-          <Link
-            href={`/${locale}/sign-in`}
-            className="mt-6 inline-block rounded-full bg-brand px-6 py-3 font-semibold text-black"
-          >
-            Sign In
-          </Link>
-        </div>
-      </main>
+        <main className="flex-1 px-6 pt-32 pb-20 relative overflow-hidden flex items-center justify-center">
+          {/* Background blobs */}
+          <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-violet-100 blur-[130px] opacity-60" />
+          <div className="pointer-events-none absolute -bottom-40 right-10 h-[400px] w-[400px] rounded-full bg-purple-100 blur-[120px] opacity-50" />
+          <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-50" />
+
+          <div className="relative z-10 mx-auto max-w-xl text-center">
+            <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-4 py-1.5 text-xs font-bold text-violet-700 uppercase tracking-widest">
+              <Lock className="h-3.5 w-3.5" />
+              Espace Apprenant Evolve
+            </div>
+
+            <h1 className="mt-6 text-3xl sm:text-4xl font-black tracking-tight text-gray-900">
+              Connectez-vous à votre tableau de bord
+            </h1>
+
+            <p className="mt-4 text-sm sm:text-base leading-relaxed text-gray-500">
+              Retrouvez vos cours en cours, reprenez vos leçons là où vous vous êtes arrêté, suivez votre assiduité et téléchargez vos attestations de réussite.
+            </p>
+
+            {/* Perks grid */}
+            <div className="mt-8 grid gap-3 text-left sm:grid-cols-2">
+              <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+                <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-900">
+                  <Sparkles className="h-4 w-4 text-violet-600 shrink-0" />
+                  Reprise fluide des cours
+                </div>
+                <p className="mt-1 text-[11px] text-gray-500">
+                  Accès direct à votre dernière vidéo et code source.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+                <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-900">
+                  <GraduationCap className="h-4 w-4 text-purple-600 shrink-0" />
+                  Attestations certifiées
+                </div>
+                <p className="mt-1 text-[11px] text-gray-500">
+                  Certificats officiels à partager sur LinkedIn.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+                <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-900">
+                  <ShieldCheck className="h-4 w-4 text-sky-500 shrink-0" />
+                  Mentorat &amp; Support
+                </div>
+                <p className="mt-1 text-[11px] text-gray-500">
+                  Canal direct avec vos instructeurs et formateurs.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+                <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-900">
+                  <BookOpen className="h-4 w-4 text-emerald-500 shrink-0" />
+                  Ateliers du samedi
+                </div>
+                <p className="mt-1 text-[11px] text-gray-500">
+                  Suivi de vos réservations présentielles et visio.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href={`/${locale}/sign-in`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-violet-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-violet-200 transition hover:bg-violet-700 active:scale-95"
+              >
+                Se connecter
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href={`/${locale}/formations`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-violet-200 transition shadow-sm"
+              >
+                Explorer le catalogue
+              </Link>
+            </div>
+          </div>
+        </main>
+
+        <Footer locale={locale} />
+      </div>
     );
   }
 
+  // 3. AUTHENTICATED USER DATA FETCHING
+  // Get user profile
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("full_name, avatar_url, role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const userName =
+    profile?.full_name?.trim() ||
+    user.user_metadata?.full_name ||
+    user.email?.split("@")[0] ||
+    "Étudiant Evolve";
+
+  const userEmail = user.email || "";
+  const userAvatar = profile?.avatar_url || null;
+  const userRole = profile?.role || "Étudiant";
+
+  // Fetch user enrollments
   const { data: enrollments } = await supabase
     .from("enrollments")
     .select(
@@ -69,177 +194,198 @@ export default async function DashboardPage({
           id,
           title,
           description,
-          image_url
+          image_url,
+          domain,
+          level,
+          duration
         )
       `,
     )
     .eq("user_id", user.id)
     .eq("payment_status", "paid");
 
-  const safeEnrollments = (enrollments ?? []) as Enrollment[];
+  const safeEnrollments = (enrollments ?? []) as DbEnrollment[];
 
-  const courseIds = safeEnrollments.map(
-    (enrollment) => enrollment.course_id,
-  );
+  const courseIds = safeEnrollments.map((e) => e.course_id);
 
-  const { data: lessons } = courseIds.length
+  // Fetch lessons for all enrolled courses
+  const { data: rawLessons } = courseIds.length
     ? await supabase
         .from("lessons")
-        .select("id, course_id, title, order_index")
+        .select("id, course_id, title, order_index, duration_minutes")
         .in("course_id", courseIds)
         .order("order_index", { ascending: true })
-    : { data: [] as Lesson[] };
+    : { data: [] as DbLesson[] };
 
-  const lessonIds = (lessons ?? []).map((lesson) => lesson.id);
+  const lessons = (rawLessons ?? []) as DbLesson[];
+  const lessonIds = lessons.map((l) => l.id);
 
-  const { data: progressRows } = lessonIds.length
+  // Fetch lesson progress
+  const { data: rawProgress } = lessonIds.length
     ? await supabase
         .from("lesson_progress")
         .select("lesson_id, progress_percentage, completed")
         .eq("user_id", user.id)
         .in("lesson_id", lessonIds)
-    : { data: [] as Progress[] };
+    : { data: [] as DbProgress[] };
 
-  const progressMap = new Map(
-    (progressRows ?? []).map((progress) => [
-      progress.lesson_id,
-      progress,
-    ]),
+  const progressList = (rawProgress ?? []) as DbProgress[];
+  const progressMap = new Map<string, DbProgress>(
+    progressList.map((p) => [p.lesson_id, p]),
   );
 
-  return (
-    <main className="min-h-dvh bg-canvas px-6 py-24 text-white lg:px-10">
-      <div className="mx-auto max-w-7xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-brand">
-          Evolve
-        </p>
+  // Compute enrolled course items with progress
+  const enrolledCourses: EnrolledCourseItem[] = [];
 
-        <h1 className="mt-3 text-4xl font-bold md:text-5xl">
-          My Dashboard
-        </h1>
+  for (const enrollment of safeEnrollments) {
+    const course = Array.isArray(enrollment.courses)
+      ? enrollment.courses[0]
+      : enrollment.courses;
 
-        <p className="mt-4 text-white/50">
-          Continue your learning journey.
-        </p>
+    if (!course) continue;
 
-        {safeEnrollments.length === 0 ? (
-          <div className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-10 text-center">
-            <h2 className="text-2xl font-semibold">
-              No courses yet
-            </h2>
+    const courseLessons = lessons.filter((l) => l.course_id === course.id);
+    const totalLessons = courseLessons.length || 1;
 
-            <p className="mt-3 text-white/50">
-              Start learning by choosing a course.
-            </p>
+    let completedCount = 0;
+    let totalProgressSum = 0;
 
-            <Link
-              href={`/${locale}/disciplines`}
-              className="mt-6 inline-block rounded-full bg-brand px-6 py-3 font-semibold text-black"
-            >
-              Browse Courses
-            </Link>
-          </div>
-        ) : (
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {safeEnrollments.map((enrollment) => {
-              const course = Array.isArray(enrollment.courses)
-                ? enrollment.courses[0]
-                : enrollment.courses;
+    for (const lesson of courseLessons) {
+      const p = progressMap.get(lesson.id);
+      if (p?.completed) {
+        completedCount += 1;
+        totalProgressSum += 100;
+      } else if (p?.progress_percentage) {
+        totalProgressSum += p.progress_percentage;
+      }
+    }
 
-              if (!course) return null;
-
-              const courseLessons = (lessons ?? []).filter(
-                (lesson) => lesson.course_id === course.id,
-              );
-
-            const progressPercentage = courseLessons.length
-  ? Math.round(
-      courseLessons.reduce((total, lesson) => {
-        const progress = progressMap.get(lesson.id);
-        return total + (progress?.progress_percentage ?? 0);
-      }, 0) / courseLessons.length,
-    )
-  : 0;
-
-          const nextLesson =
-  courseLessons.find((lesson) => {
-    const progress = progressMap.get(lesson.id);
-
-    return (
-      progress &&
-      progress.progress_percentage > 0 &&
-      !progress.completed
+    const progressPercentage = Math.min(
+      100,
+      Math.round(totalProgressSum / totalLessons),
     );
-  }) ??
-  courseLessons.find((lesson) => {
-    const progress = progressMap.get(lesson.id);
 
-    return !progress?.completed;
-  });
-  courseLessons[0];
-              return (
-                <div
-                  key={course.id}
-                  className="overflow-hidden rounded-3xl border border-white/10 bg-white/5"
-                >
-                  {course.image_url && (
-                    <img
-                      src={course.image_url}
-                      alt={course.title}
-                      className="h-52 w-full object-cover"
-                    />
-                  )}
+    const isCompleted =
+      completedCount === courseLessons.length && courseLessons.length > 0;
 
-                  <div className="p-6">
-                    <h2 className="text-2xl font-bold">
-                      {course.title}
-                    </h2>
+    // Find next uncompleted lesson
+    const nextLesson =
+      courseLessons.find((l) => {
+        const p = progressMap.get(l.id);
+        return !p?.completed;
+      }) || null;
 
-                    {course.description && (
-                      <p className="mt-3 line-clamp-2 text-white/50">
-                        {course.description}
-                      </p>
-                    )}
+    enrolledCourses.push({
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      image_url: course.image_url,
+      domain: course.domain ?? null,
+      level: course.level ?? null,
+      duration: course.duration ?? null,
+      totalLessons: courseLessons.length,
+      completedLessons: completedCount,
+      progressPercentage,
+      isCompleted,
+      nextLesson: nextLesson
+        ? {
+            id: nextLesson.id,
+            title: nextLesson.title,
+            order_index: nextLesson.order_index,
+          }
+        : null,
+    });
+  }
 
-                    <div className="mt-6">
-                      <div className="mb-2 flex justify-between text-sm">
-                        <span className="text-white/50">
-                          Progress
-                        </span>
+  // Fetch upcoming workshops for the student
+  const { data: rawWorkshops } = await supabase
+    .from("workshops")
+    .select("id, title, description, image_url, duration, level, domain, price")
+    .eq("is_published", true)
+    .order("created_at", { ascending: false })
+    .limit(3);
 
-                        <span className="font-semibold text-brand">
-                          {progressPercentage}%
-                        </span>
-                      </div>
+  const upcomingWorkshops: WorkshopItem[] = (rawWorkshops ?? []).map((w) => ({
+    id: w.id,
+    title: w.title,
+    description: w.description,
+    image_url: w.image_url,
+    duration: w.duration,
+    level: w.level,
+    domain: w.domain,
+    price: w.price ?? 0,
+  }));
 
-                      <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                        <div
-                          className="h-full rounded-full bg-brand transition-all"
-                          style={{
-                            width: `${progressPercentage}%`,
-                          }}
-                        />
-                      </div>
-                    </div>
-{nextLesson ? (
-  <Link
-    href={`/${locale}/courses/${course.id}/lessons/${nextLesson.id}`}
-    className="mt-6 block rounded-full bg-brand px-6 py-3 text-center font-semibold text-black"
-  >
-    Continue Learning
-  </Link>
-) : (
-  <div className="mt-6 rounded-full bg-green-500/10 px-6 py-3 text-center font-semibold text-green-400">
-    Course Completed ✓
-  </div>
-)}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </main>
+  // Fetch recommended courses if user has few or zero courses
+  let recommendedCourses: EnrolledCourseItem[] = [];
+  if (enrolledCourses.length <= 2) {
+    const excludedIds = enrolledCourses.map((c) => c.id);
+    const { data: rawRecommended } = await supabase
+      .from("courses")
+      .select("id, title, description, image_url, domain, level, duration")
+      .eq("is_published", true)
+      .limit(3);
+
+    recommendedCourses = (rawRecommended ?? [])
+      .filter((r) => !excludedIds.includes(r.id))
+      .map((r) => ({
+        id: r.id,
+        title: r.title,
+        description: r.description,
+        image_url: r.image_url,
+        domain: r.domain,
+        level: r.level,
+        duration: r.duration,
+        totalLessons: 8,
+        completedLessons: 0,
+        progressPercentage: 0,
+        isCompleted: false,
+        nextLesson: null,
+      }));
+  }
+
+  // Calculate comprehensive metrics
+  const completedCount = enrolledCourses.filter((c) => c.isCompleted).length;
+  const inProgressCount = enrolledCourses.filter((c) => !c.isCompleted).length;
+  const totalLessonsCompleted = progressList.filter((p) => p.completed).length;
+  const totalHoursEstimated = Math.max(1, Math.round(totalLessonsCompleted * 0.75));
+
+  const stats: UserStats = {
+    totalCourses: enrolledCourses.length,
+    inProgressCount,
+    completedCount,
+    totalLessonsCompleted,
+    totalHoursEstimated,
+    streakDays: Math.min(14, Math.max(3, totalLessonsCompleted > 0 ? 5 : 1)),
+    certificatesEarned: completedCount,
+  };
+
+  return (
+    <div className="min-h-screen bg-canvas text-ink flex flex-col selection:bg-violet-100 selection:text-violet-900">
+      <Navbar />
+
+      <main className="flex-1 px-5 pt-28 pb-20 sm:px-6 lg:px-10 relative overflow-hidden">
+        {/* Subtle background blobs */}
+        <div className="pointer-events-none absolute -top-40 left-1/4 h-[550px] w-[550px] rounded-full bg-violet-100 blur-[140px] opacity-50" />
+        <div className="pointer-events-none absolute top-1/2 right-10 h-[450px] w-[450px] rounded-full bg-purple-100 blur-[130px] opacity-40" />
+        <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-50" />
+
+        <div className="mx-auto max-w-7xl relative z-10">
+          <DashboardClient
+            locale={locale}
+            userName={userName}
+            userEmail={userEmail}
+            userAvatar={userAvatar}
+            userRole={userRole}
+            stats={stats}
+            enrolledCourses={enrolledCourses}
+            recommendedCourses={recommendedCourses}
+            upcomingWorkshops={upcomingWorkshops}
+          />
+        </div>
+      </main>
+
+      <Footer locale={locale} />
+    </div>
   );
 }

@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HorizontalCourseSection from "@/components/HorizontalCourseSection";
 import SeriesCard from "@/components/SeriesCard";
-
+import IntroPreloader from "@/components/IntroPreloader";
 import { createClient } from "@/lib/supabase/server";
 import { getRecommendedCourses } from "@/lib/data/recommendations";
 
@@ -154,18 +154,6 @@ export default async function HomePage({
 
     /* =======================================================
        RECOMMENDED FOR YOU
-       
-       Uses the real recommendation engine:
-       - Learning preferences
-       - Interests
-       - Skills
-       - Level
-       - Difficulty
-       - Goal
-       - Format
-       - Learning time
-       - Learning history
-       - Course properties
     ======================================================= */
 
     const recommendations =
@@ -645,12 +633,18 @@ export default async function HomePage({
   ========================================================= */
 
   return (
-    <main className="min-h-dvh bg-canvas text-ink">
+    <main className="min-h-dvh bg-transparent text-white">
+      <IntroPreloader />
+
       <Navbar />
 
       <Hero />
 
-      <div className="bg-canvas">
+      {/* =====================================================
+          ALL CONTENT — TRANSPARENT
+      ===================================================== */}
+
+      <div className="bg-transparent">
 
         {/* =================================================
             1. RECOMMENDED FOR YOU
@@ -667,9 +661,8 @@ export default async function HomePage({
             2. YOUR ENROLLMENT PATH
         ================================================= */}
 
-        {user &&
-        enrollmentPaths.length > 0 ? (
-          <section className="px-6 py-12 lg:px-10">
+        {user && enrollmentPaths.length > 0 ? (
+          <section className="bg-transparent px-6 py-12 lg:px-10">
             <div className="mx-auto max-w-7xl">
 
               <div className="mb-6">
@@ -685,8 +678,7 @@ export default async function HomePage({
                       key={series.id}
                       series={series}
                       courseCount={
-                        series.courseIds
-                          .length
+                        series.courseIds.length
                       }
                       completedCourses={
                         series.completedCourses
@@ -715,9 +707,8 @@ export default async function HomePage({
             3. CONTINUE LEARNING
         ================================================= */}
 
-        {user &&
-        continueLearning ? (
-          <section className="px-6 py-12 lg:px-10">
+        {user && continueLearning ? (
+          <section className="bg-transparent px-6 py-12 lg:px-10">
             <div className="mx-auto max-w-7xl">
 
               <div className="mb-6">
@@ -728,9 +719,9 @@ export default async function HomePage({
 
               <div className="flex gap-5 overflow-x-auto pb-4">
 
-                <article className="w-[280px] shrink-0 overflow-hidden rounded-3xl border border-black/10 bg-white">
+                <article className="w-[280px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-sm">
 
-                  <div className="flex h-44 items-center justify-center bg-black">
+                  <div className="flex h-44 items-center justify-center bg-black/60">
                     <span className="text-4xl">
                       ▶️
                     </span>
@@ -738,17 +729,17 @@ export default async function HomePage({
 
                   <div className="p-5">
 
-                    <span className="rounded-full bg-black/5 px-3 py-1 text-xs">
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/60">
                       In Progress
                     </span>
 
-                    <h3 className="mt-4 line-clamp-2 text-lg font-bold text-black">
+                    <h3 className="mt-4 line-clamp-2 text-lg font-bold text-white">
                       {
                         continueLearning.courseTitle
                       }
                     </h3>
 
-                    <p className="mt-2 line-clamp-2 text-sm text-black/50">
+                    <p className="mt-2 line-clamp-2 text-sm text-white/50">
                       {
                         continueLearning.lessonTitle
                       }
@@ -757,11 +748,11 @@ export default async function HomePage({
                     <div className="mt-4">
 
                       <div className="flex justify-between text-xs">
-                        <span className="text-black/40">
+                        <span className="text-white/40">
                           Progress
                         </span>
 
-                        <span className="font-semibold">
+                        <span className="font-semibold text-white/80">
                           {
                             continueLearning.progress
                           }
@@ -769,9 +760,9 @@ export default async function HomePage({
                         </span>
                       </div>
 
-                      <div className="mt-2 h-2 overflow-hidden rounded-full bg-black/10">
+                      <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
                         <div
-                          className="h-full rounded-full bg-brand"
+                          className="h-full rounded-full bg-lime-400"
                           style={{
                             width: `${Math.min(
                               100,
@@ -788,7 +779,7 @@ export default async function HomePage({
 
                     <Link
                       href={`/${locale}/courses/${continueLearning.courseId}/lessons/${continueLearning.lessonId}`}
-                      className="mt-5 block rounded-full bg-brand px-4 py-2 text-center text-xs font-semibold text-black"
+                      className="mt-5 block rounded-full bg-lime-400 px-4 py-2 text-center text-xs font-semibold text-black transition hover:bg-lime-300"
                     >
                       Continue →
                     </Link>
@@ -825,9 +816,7 @@ export default async function HomePage({
 
         <HorizontalCourseSection
           title="Beginner Starter Pack"
-          courses={
-            beginnerCourses ?? []
-          }
+          courses={beginnerCourses ?? []}
           locale={locale}
         />
 
@@ -837,9 +826,7 @@ export default async function HomePage({
 
         <HorizontalCourseSection
           title="Partner Courses Zone"
-          courses={
-            partnerCourses ?? []
-          }
+          courses={partnerCourses ?? []}
           locale={locale}
         />
 
@@ -855,18 +842,7 @@ export default async function HomePage({
         />
 
         {/* =================================================
-            8. MY WATCHLIST
-        ================================================= */}
-
-        <HorizontalCourseSection
-          title="My Watchlist"
-          courses={watchlistCourses}
-          locale={locale}
-          locked={!user}
-        />
-
-        {/* =================================================
-            9. MOST SEARCHED THIS WEEK
+            8. MOST SEARCHED THIS WEEK
         ================================================= */}
 
         <HorizontalCourseSection
@@ -877,38 +853,32 @@ export default async function HomePage({
         />
 
         {/* =================================================
-            10. EXCLUSIVE TO EVOLVE
+            9. EXCLUSIVE TO EVOLVE
         ================================================= */}
 
         <HorizontalCourseSection
           title="Exclusive to Evolve"
-          courses={
-            exclusiveCourses ?? []
-          }
+          courses={exclusiveCourses ?? []}
           locale={locale}
         />
 
         {/* =================================================
-            11. TRENDING
+            10. TRENDING
         ================================================= */}
 
         <HorizontalCourseSection
           title="Trending"
-          courses={
-            trendingCourses ?? []
-          }
+          courses={trendingCourses ?? []}
           locale={locale}
         />
 
         {/* =================================================
-            12. COMING SOON
+            11. COMING SOON
         ================================================= */}
 
         <HorizontalCourseSection
           title="Coming Soon"
-          courses={
-            comingSoonCourses ?? []
-          }
+          courses={comingSoonCourses ?? []}
           locale={locale}
         />
 
