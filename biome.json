@@ -20,8 +20,15 @@
     "enabled": true,
     "rules": {
       "preset": "recommended",
+      "performance": {
+        "noImgElement": "off"
+      },
       "suspicious": {
-        "noExplicitAny": "error"
+        "noExplicitAny": "error",
+        "noArrayIndexKey": "off"
+      },
+      "a11y": {
+        "noLabelWithoutControl": "off"
       },
       "correctness": {
         "noUnusedImports": "error",

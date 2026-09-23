@@ -1,22 +1,132 @@
 {
   "nav": {
     "home": "Home",
+    "formations": "Courses",
+    "ateliers": "Workshops",
+    "community": "Community",
+    "messages": "Messages",
+    "dashboard": "Dashboard",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "profile": "Profile",
+    "signOut": "Sign out",
+    "changeLanguage": "Change language",
     "disciplines": "Disciplines",
-    "packs": "Packs",
-    "signIn": "Sign in"
+    "packs": "Packs"
+  },
+  "footer": {
+    "tagline": "The leading creative & technology learning academy in Algeria.",
+    "navigation": "Navigation",
+    "home": "Home",
+    "formations": "Courses",
+    "workshops": "Workshops",
+    "community": "Community",
+    "messages": "Messages",
+    "dashboard": "Dashboard",
+    "contact": "Contact",
+    "statusOperational": "Platform Operational 24/7",
+    "location": "Algiers, Algeria · contact@evolve-academy.dz",
+    "rights": "All rights reserved. Evolve Academy © 2026"
+  },
+  "hero": {
+    "certifiedBadge": "✦ CERTIFIED TRACK",
+    "defaultDescription": "Learn directly from industry experts with real-world projects, live mentoring, and a recognized certification.",
+    "startNow": "Start now",
+    "viewCatalog": "Browse catalog",
+    "learnersCount": "+5,000 Learners",
+    "rating": "4.9 / 5",
+    "reviewsCount": "(1,200+ verified reviews)",
+    "practicalNotice": "100% Practical & Workshops",
+    "free": "Free"
   },
   "home": {
     "title": "Evolve Academy",
     "tagline": "Creative training, in person and online.",
-    "browseDisciplines": "Browse the disciplines"
+    "browseDisciplines": "Browse the disciplines",
+    "recommendedForYou": "Recommended For You",
+    "yourEnrollmentPath": "Your Enrollment Path",
+    "continueLearning": "Continue Learning",
+    "becauseYouCompleted": "Because You Completed",
+    "beginnerStarterPack": "Beginner Starter Pack",
+    "partnerCoursesZone": "Partner Courses Zone",
+    "watchlist": "Watchlist",
+    "mostSearchedThisWeek": "Most Searched This Week",
+    "exclusiveToEvolve": "Exclusive to Evolve",
+    "trending": "Trending",
+    "comingSoon": "Coming Soon",
+    "inProgress": "In Progress",
+    "progress": "Progress",
+    "continueButton": "Continue →"
+  },
+  "common": {
+    "viewAll": "View all",
+    "emptySection": "No courses available at the moment in this section.",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "free": "Free"
+  },
+  "courseCard": {
+    "priceLabel": "Price",
+    "free": "Free",
+    "practice": "Practical"
+  },
+  "seriesCard": {
+    "learningPath": "Learning Path",
+    "guidedPath": "Guided Path",
+    "coursesCount": "{count, plural, =0 {0 courses} one {1 course} other {# courses}}",
+    "viewSteps": "View steps",
+    "continue": "Continue"
+  },
+  "lockedCourseCard": {
+    "memberSpace": "Member Space",
+    "personalizedContent": "Personalized Content",
+    "description": "Sign in to access your recommendations, progress, and saved courses.",
+    "exclusiveAccess": "Exclusive access",
+    "signIn": "Sign in"
+  },
+  "auth": {
+    "badge": "Evolve Academy Auth",
+    "welcomeBack": "Welcome back",
+    "joinAcademy": "Join the academy",
+    "signInSubtitle": "Access your courses, certificates, and projects in real time.",
+    "signUpSubtitle": "Create your learner account connected to your platform.",
+    "tabSignIn": "Sign in",
+    "tabSignUp": "Create account",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "e.g. Sarah Benali",
+    "emailLabel": "Work or personal email",
+    "emailPlaceholder": "first.last@gmail.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "submitSignIn": "Sign in to my account",
+    "submitSignUp": "Create my learner account",
+    "errorEmptyName": "Please enter your full name.",
+    "errorEmptyPassword": "Password must be at least 6 characters.",
+    "successSignIn": "Sign-in successful! Redirecting...",
+    "successSignUp": "Account created successfully! Welcome.",
+    "errorSignInPrefix": "Sign-in error: ",
+    "errorSignUpPrefix": "Sign-up error: "
+  },
+  "formations": {
+    "badge": "Certified Tracks",
+    "title": "Catalog of",
+    "titleGradient": "Courses",
+    "subtitle": "Comprehensive learning paths, structured step-by-step with practical projects and continuous mentorship.",
+    "globalProgress": "Your overall progress",
+    "completedCoursesCount": "{completed} of {total} courses completed",
+    "completedTitle": "Track completed successfully 🎓",
+    "completedDesc": "Congratulations! You completed all modules in this learning path. Your certificate is ready in your profile.",
+    "searchPlaceholder": "Search for a course, skill, keyword...",
+    "clearSearch": "Clear search",
+    "resultsFor": "Results for",
+    "specialties": "Specialties",
+    "allFormations": "All Courses",
+    "emptySearchResults": "No courses found matching your criteria."
   },
   "disciplines": {
     "title": "Creative disciplines",
     "intro": "Each discipline gathers the courses our teachers have published.",
     "empty": "No disciplines have been published yet.",
     "countLabel": "{count, plural, =0 {no disciplines} one {# discipline} other {# disciplines}}"
-  },
-  "footer": {
-    "rights": "All rights reserved."
   }
 }

@@ -33,15 +33,14 @@ export default function CheckoutButton({
       if (!response.ok) {
         console.log("CHECKOUT API RESPONSE:", data);
 
-throw new Error(
-  data.details
-    ? JSON.stringify(data.details)
-    : data.error || "Payment initialization failed",
-);
+        throw new Error(
+          data.details
+            ? JSON.stringify(data.details)
+            : data.error || "Payment initialization failed",
+        );
       }
 
-      const checkoutUrl =
-        data.checkout?.checkout_url || data.checkout?.url;
+      const checkoutUrl = data.checkout?.checkout_url || data.checkout?.url;
 
       if (!checkoutUrl) {
         throw new Error("Payment URL was not returned");
@@ -50,11 +49,7 @@ throw new Error(
       window.location.href = checkoutUrl;
     } catch (err) {
       console.error(err);
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong",
-      );
+      setError(err instanceof Error ? err.message : "Something went wrong");
       setLoading(false);
     }
   }
@@ -70,11 +65,7 @@ throw new Error(
         {loading ? "Processing..." : "Pay with Edahabia"}
       </button>
 
-      {error && (
-        <p className="mt-4 text-sm text-red-600">
-          {error}
-        </p>
-      )}
+      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
     </div>
   );
 }

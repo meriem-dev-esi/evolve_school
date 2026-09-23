@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -95,7 +95,7 @@ export default function EditCoursePage({
     }
 
     void loadCourse();
-  }, [locale, router]);
+  }, [locale, router, params]);
 
   async function handleSave() {
     if (!courseId) return;
@@ -126,7 +126,7 @@ export default function EditCoursePage({
       .eq("id", courseId);
 
     if (error) {
-      setMessage("Error: " + error.message);
+      setMessage(`Error: ${error.message}`);
       setSaving(false);
       return;
     }
@@ -151,9 +151,7 @@ export default function EditCoursePage({
             Teacher Dashboard
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold">
-            Edit Course
-          </h1>
+          <h1 className="mt-4 text-4xl font-bold">Edit Course</h1>
 
           <p className="mt-3 text-white/50">
             Update your course information and platform placement.
@@ -163,9 +161,7 @@ export default function EditCoursePage({
         <div className="space-y-8">
           {/* Basic information */}
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8">
-            <h2 className="text-2xl font-bold">
-              Basic Information
-            </h2>
+            <h2 className="text-2xl font-bold">Basic Information</h2>
 
             <div className="mt-6 space-y-5">
               <input
@@ -221,9 +217,7 @@ export default function EditCoursePage({
           {/* Practice */}
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">
-                Practice Percentage
-              </h2>
+              <h2 className="text-2xl font-bold">Practice Percentage</h2>
 
               <span className="text-2xl font-bold text-brand">
                 {practicePercentage}%
@@ -235,18 +229,14 @@ export default function EditCoursePage({
               min="0"
               max="100"
               value={practicePercentage}
-              onChange={(e) =>
-                setPracticePercentage(Number(e.target.value))
-              }
+              onChange={(e) => setPracticePercentage(Number(e.target.value))}
               className="mt-6 w-full accent-brand"
             />
           </section>
 
           {/* Placement */}
           <section className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8">
-            <h2 className="text-2xl font-bold">
-              Platform Placement
-            </h2>
+            <h2 className="text-2xl font-bold">Platform Placement</h2>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               <label className="flex items-center gap-3 rounded-2xl bg-black p-4">

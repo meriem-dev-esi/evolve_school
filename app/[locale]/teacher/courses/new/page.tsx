@@ -1,8 +1,7 @@
-
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function NewCoursePage() {
@@ -70,7 +69,7 @@ export default function NewCoursePage() {
     });
 
     if (error) {
-      setMessage("Error: " + error.message);
+      setMessage(`Error: ${error.message}`);
       setLoading(false);
       return;
     }
@@ -91,9 +90,7 @@ export default function NewCoursePage() {
           Teacher Dashboard
         </p>
 
-        <h1 className="mt-4 text-4xl font-bold">
-          Create Course Ticket
-        </h1>
+        <h1 className="mt-4 text-4xl font-bold">Create Course Ticket</h1>
 
         <p className="mt-3 text-white/50">
           Create a new course and define how it appears on Evolve.
@@ -147,9 +144,7 @@ export default function NewCoursePage() {
 
           <div>
             <div className="flex justify-between">
-              <label className="font-medium">
-                Practice percentage
-              </label>
+              <label className="font-medium">Practice percentage</label>
 
               <span className="font-semibold text-brand">
                 {practicePercentage}%
@@ -161,9 +156,7 @@ export default function NewCoursePage() {
               min="0"
               max="100"
               value={practicePercentage}
-              onChange={(e) =>
-                setPracticePercentage(Number(e.target.value))
-              }
+              onChange={(e) => setPracticePercentage(Number(e.target.value))}
               className="mt-4 w-full accent-brand"
             />
           </div>
@@ -229,9 +222,7 @@ export default function NewCoursePage() {
           {message && (
             <p
               className={
-                message.startsWith("Error")
-                  ? "text-red-400"
-                  : "text-brand"
+                message.startsWith("Error") ? "text-red-400" : "text-brand"
               }
             >
               {message}
@@ -242,4 +233,3 @@ export default function NewCoursePage() {
     </main>
   );
 }
-

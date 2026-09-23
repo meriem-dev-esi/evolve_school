@@ -37,9 +37,9 @@ export default function LearningPreferencesForm() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState<
-    "success" | "error"
-  >("success");
+  const [messageType, setMessageType] = useState<"success" | "error">(
+    "success",
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -63,10 +63,7 @@ export default function LearningPreferencesForm() {
         .maybeSingle();
 
       if (error) {
-        console.error(
-          "[Evolve] Error loading preferences:",
-          error,
-        );
+        console.error("[Evolve] Error loading preferences:", error);
 
         if (!cancelled) {
           setMessage(error.message);
@@ -83,17 +80,9 @@ export default function LearningPreferencesForm() {
         setLanguage(data.preferred_language ?? "");
         setLearningTime(data.learning_time ?? "");
 
-        setInterests(
-          Array.isArray(data.interests)
-            ? data.interests
-            : [],
-        );
+        setInterests(Array.isArray(data.interests) ? data.interests : []);
 
-        setSkills(
-          Array.isArray(data.skills)
-            ? data.skills
-            : [],
-        );
+        setSkills(Array.isArray(data.skills) ? data.skills : []);
       }
 
       if (!cancelled) {
@@ -111,9 +100,7 @@ export default function LearningPreferencesForm() {
   const toggleInterest = (interest: string) => {
     setInterests((current) => {
       if (current.includes(interest)) {
-        return current.filter(
-          (item) => item !== interest,
-        );
+        return current.filter((item) => item !== interest);
       }
 
       return [...current, interest];
@@ -174,14 +161,9 @@ export default function LearningPreferencesForm() {
         .single();
 
       if (error) {
-        console.error(
-          "[Evolve] Error saving preferences:",
-          error,
-        );
+        console.error("[Evolve] Error saving preferences:", error);
 
-        setMessage(
-          `Could not save preferences: ${error.message}`,
-        );
+        setMessage(`Could not save preferences: ${error.message}`);
         setMessageType("error");
         return;
       }
@@ -198,14 +180,9 @@ export default function LearningPreferencesForm() {
       setMessage("Preferences saved successfully.");
       setMessageType("success");
     } catch (error) {
-      console.error(
-        "[Evolve] Unexpected preferences error:",
-        error,
-      );
+      console.error("[Evolve] Unexpected preferences error:", error);
 
-      setMessage(
-        "Something went wrong while saving your preferences.",
-      );
+      setMessage("Something went wrong while saving your preferences.");
       setMessageType("error");
     } finally {
       setSaving(false);
@@ -227,7 +204,6 @@ export default function LearningPreferencesForm() {
   return (
     <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
       <div className="space-y-8">
-
         {/* Learning goal */}
         <div>
           <label className="mb-2 block text-sm font-medium text-white/80">
@@ -246,7 +222,6 @@ export default function LearningPreferencesForm() {
 
         {/* Level + category */}
         <div className="grid gap-6 md:grid-cols-2">
-
           <div>
             <label className="mb-2 block text-sm font-medium text-white/80">
               Current level
@@ -258,9 +233,7 @@ export default function LearningPreferencesForm() {
               disabled={saving}
               className="w-full rounded-2xl border border-white/10 bg-[#111] px-4 py-3 text-white outline-none focus:border-brand/60 disabled:opacity-50"
             >
-              <option value="">
-                Select your level
-              </option>
+              <option value="">Select your level</option>
 
               {levels.map((item) => (
                 <option key={item} value={item}>
@@ -281,9 +254,7 @@ export default function LearningPreferencesForm() {
               disabled={saving}
               className="w-full rounded-2xl border border-white/10 bg-[#111] px-4 py-3 text-white outline-none focus:border-brand/60 disabled:opacity-50"
             >
-              <option value="">
-                Select a category
-              </option>
+              <option value="">Select a category</option>
 
               {categories.map((item) => (
                 <option key={item} value={item}>
@@ -314,18 +285,14 @@ export default function LearningPreferencesForm() {
 
           <div className="interest-scrollbar max-h-60 overflow-y-auto rounded-2xl border border-white/10 bg-white/[0.02] p-3">
             <div className="grid gap-2 sm:grid-cols-2">
-
               {categories.map((item) => {
-                const selected =
-                  interests.includes(item);
+                const selected = interests.includes(item);
 
                 return (
                   <button
                     key={item}
                     type="button"
-                    onClick={() =>
-                      toggleInterest(item)
-                    }
+                    onClick={() => toggleInterest(item)}
                     disabled={saving}
                     aria-pressed={selected}
                     className={`flex min-h-12 items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition ${
@@ -348,7 +315,6 @@ export default function LearningPreferencesForm() {
                   </button>
                 );
               })}
-
             </div>
           </div>
         </div>
@@ -382,7 +348,6 @@ export default function LearningPreferencesForm() {
 
         {/* Difficulty + format */}
         <div className="grid gap-6 md:grid-cols-2">
-
           <div>
             <label className="mb-2 block text-sm font-medium text-white/80">
               Preferred difficulty
@@ -390,15 +355,11 @@ export default function LearningPreferencesForm() {
 
             <select
               value={difficulty}
-              onChange={(e) =>
-                setDifficulty(e.target.value)
-              }
+              onChange={(e) => setDifficulty(e.target.value)}
               disabled={saving}
               className="w-full rounded-2xl border border-white/10 bg-[#111] px-4 py-3 text-white outline-none focus:border-brand/60 disabled:opacity-50"
             >
-              <option value="">
-                Select difficulty
-              </option>
+              <option value="">Select difficulty</option>
 
               {difficulties.map((item) => (
                 <option key={item} value={item}>
@@ -415,15 +376,11 @@ export default function LearningPreferencesForm() {
 
             <select
               value={format}
-              onChange={(e) =>
-                setFormat(e.target.value)
-              }
+              onChange={(e) => setFormat(e.target.value)}
               disabled={saving}
               className="w-full rounded-2xl border border-white/10 bg-[#111] px-4 py-3 text-white outline-none focus:border-brand/60 disabled:opacity-50"
             >
-              <option value="">
-                Select format
-              </option>
+              <option value="">Select format</option>
 
               {formats.map((item) => (
                 <option key={item} value={item}>
@@ -436,7 +393,6 @@ export default function LearningPreferencesForm() {
 
         {/* Learning time + language */}
         <div className="grid gap-6 md:grid-cols-2">
-
           <div>
             <label className="mb-2 block text-sm font-medium text-white/80">
               Available learning time
@@ -445,9 +401,7 @@ export default function LearningPreferencesForm() {
             <input
               type="text"
               value={learningTime}
-              onChange={(e) =>
-                setLearningTime(e.target.value)
-              }
+              onChange={(e) => setLearningTime(e.target.value)}
               disabled={saving}
               placeholder="Example: 1 hour per day"
               className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none placeholder:text-white/25 transition focus:border-brand/60 focus:ring-1 focus:ring-brand/30 disabled:opacity-50"
@@ -461,15 +415,11 @@ export default function LearningPreferencesForm() {
 
             <select
               value={language}
-              onChange={(e) =>
-                setLanguage(e.target.value)
-              }
+              onChange={(e) => setLanguage(e.target.value)}
               disabled={saving}
               className="w-full rounded-2xl border border-white/10 bg-[#111] px-4 py-3 text-white outline-none focus:border-brand/60 disabled:opacity-50"
             >
-              <option value="">
-                Select language
-              </option>
+              <option value="">Select language</option>
 
               {languages.map((item) => (
                 <option key={item} value={item}>
@@ -490,9 +440,7 @@ export default function LearningPreferencesForm() {
             disabled={saving}
             className="w-full rounded-2xl bg-brand px-6 py-3.5 font-semibold text-black transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {saving
-              ? "Saving preferences..."
-              : "Save preferences"}
+            {saving ? "Saving preferences..." : "Save preferences"}
           </button>
 
           {message && (

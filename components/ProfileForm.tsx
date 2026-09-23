@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 type ProfileFormProps = {
@@ -16,6 +17,7 @@ export default function ProfileForm({
   initialName,
   initialAvatar,
 }: ProfileFormProps) {
+  const router = useRouter();
   const [fullName, setFullName] = useState(initialName);
   const [avatarUrl, setAvatarUrl] = useState(initialAvatar);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -71,11 +73,7 @@ export default function ProfileForm({
           throw new Error("Profile picture must be smaller than 5 MB.");
         }
 
-        const allowedTypes = [
-          "image/jpeg",
-          "image/png",
-          "image/webp",
-        ];
+        const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
 
         if (!allowedTypes.includes(selectedFile.type)) {
           throw new Error("Only JPG, PNG, and WebP images are allowed.");
@@ -131,6 +129,7 @@ export default function ProfileForm({
 
       setMessageType("success");
       setMessage("Your profile has been updated successfully.");
+      router.refresh();
     } catch (error) {
       console.error("[Evolve] Profile save error:", error);
 
