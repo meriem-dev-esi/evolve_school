@@ -24,7 +24,7 @@ DO $$ BEGIN
   ) THEN
     CREATE POLICY "Users can read their messages"
       ON public.direct_messages FOR SELECT
-      USING (true);
+      USING (auth.uid() = sender_id OR auth.uid() = receiver_id);
   END IF;
   
   IF NOT EXISTS (
@@ -32,7 +32,7 @@ DO $$ BEGIN
   ) THEN
     CREATE POLICY "Users can send messages"
       ON public.direct_messages FOR INSERT
-      WITH CHECK (true);
+      WITH CHECK (auth.uid() = sender_id);
   END IF;
 END $$;
 
