@@ -6,7 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 import ZoomGridBackground from "@/components/ZoomGridBackground";
 import { directionOf, routing } from "@/i18n/routing";
-// Ensure path is correct relative to this layout file
+import { env } from "@/lib/env";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -18,8 +18,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://evolve-academy.dz";
+  const baseUrl = env.siteUrl;
 
   const isArabic = locale === "ar";
   const isEnglish = locale === "en";
