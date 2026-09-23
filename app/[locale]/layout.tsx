@@ -1,11 +1,12 @@
+import "../globals.css";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
-import { directionOf, routing } from "@/i18n/routing";
 import ZoomGridBackground from "@/components/ZoomGridBackground";
-import "../globals.css"; // Ensure path is correct relative to this layout file
+import { directionOf, routing } from "@/i18n/routing";
+// Ensure path is correct relative to this layout file
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -17,7 +18,8 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://evolve-academy.dz";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://evolve-academy.dz";
 
   const isArabic = locale === "ar";
   const isEnglish = locale === "en";
@@ -25,14 +27,14 @@ export async function generateMetadata({
   const title = isArabic
     ? "أكاديمية إيفولف — منصة التكوين والورشات الإبداعية في الجزائر"
     : isEnglish
-    ? "Evolve Academy — Creative & Tech Courses & Workshops in Algeria"
-    : "Evolve Academy — Formations & Ateliers Créatifs en Algérie";
+      ? "Evolve Academy — Creative & Tech Courses & Workshops in Algeria"
+      : "Evolve Academy — Formations & Ateliers Créatifs en Algérie";
 
   const description = isArabic
     ? "اكتشف دورات احترافية، ورشات عمل حضورية، ومجتمع نشط من المصممين والمطورين في الجزائر. طور مهاراتك مع أفضل الخبراء."
     : isEnglish
-    ? "Discover professional courses, hands-on workshops, and an active community of creators and developers in Algeria. Evolve your skills."
-    : "Découvrez des formations professionnelles, des ateliers pratiques et une communauté créative de designers et développeurs en Algérie.";
+      ? "Discover professional courses, hands-on workshops, and an active community of creators and developers in Algeria. Evolve your skills."
+      : "Découvrez des formations professionnelles, des ateliers pratiques et une communauté créative de designers et développeurs en Algérie.";
 
   return {
     metadataBase: new URL(baseUrl),

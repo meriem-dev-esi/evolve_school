@@ -17,7 +17,7 @@ export default function DashboardLoading() {
                 <div className="h-4 w-48 rounded bg-gray-100" />
               </div>
             </div>
-            <div className="hidden md:block h-12 w-48 rounded-2xl bg-violet-100" />
+            <div className="hidden md:block h-12 w-48 rounded-2xl bg-lime-500/20" />
           </div>
 
           {/* 4 Metrics cards skeleton */}
@@ -47,7 +47,7 @@ export default function DashboardLoading() {
                 <div className="h-3 w-40 rounded bg-gray-100" />
               </div>
             </div>
-            <div className="h-11 w-40 rounded-2xl bg-violet-100 shrink-0" />
+            <div className="h-11 w-40 rounded-2xl bg-lime-500/20 shrink-0" />
           </div>
 
           {/* Course cards grid skeleton */}

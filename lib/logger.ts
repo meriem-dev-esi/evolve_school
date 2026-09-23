@@ -9,10 +9,19 @@ interface LogPayload {
   timestamp: string;
 }
 
-function sanitize(data?: Record<string, unknown>): Record<string, unknown> | undefined {
+function sanitize(
+  data?: Record<string, unknown>,
+): Record<string, unknown> | undefined {
   if (!data) return undefined;
   const sanitized = { ...data };
-  const sensitiveKeys = ["password", "secret", "token", "apiKey", "anonKey", "authorization"];
+  const sensitiveKeys = [
+    "password",
+    "secret",
+    "token",
+    "apiKey",
+    "anonKey",
+    "authorization",
+  ];
 
   for (const key of Object.keys(sanitized)) {
     if (sensitiveKeys.some((s) => key.toLowerCase().includes(s))) {
@@ -26,9 +35,14 @@ function formatLog(payload: LogPayload): string {
   const meta = {
     ...payload,
     data: sanitize(payload.data),
-    error: payload.error instanceof Error
-      ? { name: payload.error.name, message: payload.error.message, stack: payload.error.stack }
-      : payload.error,
+    error:
+      payload.error instanceof Error
+        ? {
+            name: payload.error.name,
+            message: payload.error.message,
+            stack: payload.error.stack,
+          }
+        : payload.error,
   };
   return JSON.stringify(meta);
 }
@@ -58,7 +72,12 @@ export const logger = {
     );
   },
 
-  error(message: string, error?: Error | unknown, context?: string, data?: Record<string, unknown>) {
+  error(
+    message: string,
+    error?: Error | unknown,
+    context?: string,
+    data?: Record<string, unknown>,
+  ) {
     console.error(
       formatLog({
         level: "error",

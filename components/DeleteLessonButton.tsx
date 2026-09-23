@@ -8,10 +8,7 @@ type Props = {
   courseId: string;
 };
 
-export default function DeleteLessonButton({
-  lessonId,
-  courseId,
-}: Props) {
+export default function DeleteLessonButton({ lessonId, courseId }: Props) {
   const [loading, setLoading] = useState(false);
 
   async function handleDelete() {
@@ -32,7 +29,7 @@ export default function DeleteLessonButton({
       .eq("course_id", courseId);
 
     if (error) {
-      window.alert("Error: " + error.message);
+      window.alert(`Error: ${error.message}`);
       setLoading(false);
       return;
     }

@@ -1,9 +1,9 @@
-import Link from "next/link";
-import AteliersBrowser from "./AteliersBrowser";
-import { createClient } from "@/lib/supabase/server";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { ArrowRight, Zap } from "lucide-react";
+import Link from "next/link";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { createClient } from "@/lib/supabase/server";
+import AteliersBrowser from "./AteliersBrowser";
 
 type Props = {
   params: Promise<{
@@ -22,36 +22,24 @@ type Workshop = {
   price: number;
 };
 
-export default async function AteliersPage({
-  params,
-}: Props) {
+export default async function AteliersPage({ params }: Props) {
   const { locale } = await params;
 
   const supabase = await createClient();
 
-  const {
-    data: workshops,
-    error: workshopsError,
-  } = await supabase
+  const { data: workshops, error: workshopsError } = await supabase
     .from("workshops")
-    .select(
-      "id, title, description, image_url, duration, level, domain, price",
-    )
+    .select("id, title, description, image_url, duration, level, domain, price")
     .eq("is_published", true)
     .order("created_at", {
       ascending: false,
     });
 
   if (workshopsError) {
-    console.error(
-      "[Evolve] Workshops error:",
-      workshopsError,
-    );
+    console.error("[Evolve] Workshops error:", workshopsError);
   }
 
-  const workshopData: Workshop[] = (
-    workshops ?? []
-  ).map((workshop) => ({
+  const workshopData: Workshop[] = (workshops ?? []).map((workshop) => ({
     id: workshop.id,
     title: workshop.title,
     description: workshop.description,
@@ -84,11 +72,16 @@ export default async function AteliersPage({
             </div>
 
             <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
-              Les Ateliers <span className="bg-gradient-to-r from-sky-400 via-white to-brand bg-clip-text text-transparent">Evolve</span>
+              Les Ateliers{" "}
+              <span className="bg-gradient-to-r from-sky-400 via-white to-brand bg-clip-text text-transparent">
+                Evolve
+              </span>
             </h1>
 
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
-              Pratiquez en direct avec des experts du secteur. Des sessions intensives et interactives conçues pour accélérer votre maîtrise des outils du futur.
+              Pratiquez en direct avec des experts du secteur. Des sessions
+              intensives et interactives conçues pour accélérer votre maîtrise
+              des outils du futur.
             </p>
           </div>
         </section>
@@ -96,10 +89,7 @@ export default async function AteliersPage({
         {/* ================================================= */}
         {/* SEARCH + CATEGORIES + WORKSHOPS BROWSER */}
         {/* ================================================= */}
-        <AteliersBrowser
-          workshops={workshopData}
-          locale={locale}
-        />
+        <AteliersBrowser workshops={workshopData} locale={locale} />
 
         {/* ================================================= */}
         {/* COMMUNITY STRIP */}
@@ -117,7 +107,8 @@ export default async function AteliersPage({
             </h2>
 
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60">
-              Vous êtes formateur ou expert ? Rejoignez l'équipe d'animateurs d'ateliers Evolve ou proposez une masterclass à notre communauté.
+              Vous êtes formateur ou expert ? Rejoignez l'équipe d'animateurs
+              d'ateliers Evolve ou proposez une masterclass à notre communauté.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -136,4 +127,4 @@ export default async function AteliersPage({
       <Footer locale={locale} />
     </div>
   );
-}
+}

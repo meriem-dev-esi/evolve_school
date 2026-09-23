@@ -1,18 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
-import { validateUploadFile, compressImage } from "@/lib/imageCompressor";
 import {
-  Upload,
-  Sparkles,
+  AlertCircle,
+  CheckCircle2,
+  FileText,
   Github,
   Globe,
+  Sparkles,
   Tag,
-  CheckCircle2,
-  AlertCircle,
-  FileText,
+  Upload,
 } from "lucide-react";
+import { useState } from "react";
+import { compressImage, validateUploadFile } from "@/lib/imageCompressor";
+import { createClient } from "@/lib/supabase/client";
 
 type Props = {
   locale: string;
@@ -31,7 +31,10 @@ export default function SubmitProjectForm({ locale }: Props) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
+  const [message, setMessage] = useState<{
+    text: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const handleImageChange = (file: File | null) => {
     setImageFile(file);
@@ -57,7 +60,10 @@ export default function SubmitProjectForm({ locale }: Props) {
 
     if (!user) {
       setMessage({
-        text: locale === "ar" ? "يجب تسجيل الدخول لنشر مشروع" : "Vous devez être connecté pour publier un projet.",
+        text:
+          locale === "ar"
+            ? "يجب تسجيل الدخول لنشر مشروع"
+            : "Vous devez être connecté pour publier un projet.",
         type: "error",
       });
       setLoading(false);
@@ -158,11 +164,24 @@ export default function SubmitProjectForm({ locale }: Props) {
     setLoading(false);
   }
 
-  const suggestedTechs = ["React", "Next.js", "Tailwind CSS", "Figma", "Flutter", "Three.js", "Supabase", "Python", "Blender"];
+  const suggestedTechs = [
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "Figma",
+    "Flutter",
+    "Three.js",
+    "Supabase",
+    "Python",
+    "Blender",
+  ];
 
   const addTech = (t: string) => {
     const list = technologies
-      ? technologies.split(",").map((s) => s.trim()).filter(Boolean)
+      ? technologies
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
       : [];
     if (!list.includes(t)) {
       list.push(t);
@@ -178,7 +197,10 @@ export default function SubmitProjectForm({ locale }: Props) {
           Titre du projet <span className="text-brand">*</span>
         </label>
         <div className="relative">
-          <FileText size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
+          <FileText
+            size={15}
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40"
+          />
           <input
             required
             value={title}
@@ -211,7 +233,10 @@ export default function SubmitProjectForm({ locale }: Props) {
             Catégorie / Spécialité
           </label>
           <div className="relative">
-            <Tag size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
+            <Tag
+              size={15}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40"
+            />
             <input
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -256,7 +281,10 @@ export default function SubmitProjectForm({ locale }: Props) {
             Lien Code Source / GitHub
           </label>
           <div className="relative">
-            <Github size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
+            <Github
+              size={15}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40"
+            />
             <input
               type="url"
               value={githubUrl}
@@ -272,7 +300,10 @@ export default function SubmitProjectForm({ locale }: Props) {
             Lien Démo / Prototype
           </label>
           <div className="relative">
-            <Globe size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
+            <Globe
+              size={15}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40"
+            />
             <input
               type="url"
               value={demoUrl}
@@ -300,7 +331,11 @@ export default function SubmitProjectForm({ locale }: Props) {
 
           {previewUrl ? (
             <div className="relative aspect-video w-full max-w-xs overflow-hidden rounded-xl border border-white/20">
-              <img src={previewUrl} alt="Aperçu" className="h-full w-full object-cover" />
+              <img
+                src={previewUrl}
+                alt="Aperçu"
+                className="h-full w-full object-cover"
+              />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition text-xs font-bold text-white">
                 Changer l'image
               </div>
@@ -329,7 +364,11 @@ export default function SubmitProjectForm({ locale }: Props) {
           className="inline-flex items-center gap-2 rounded-full bg-brand px-8 py-3.5 text-xs font-extrabold text-black transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(95,236,107,0.5)] disabled:opacity-50 active:scale-95"
         >
           <Sparkles size={15} />
-          <span>{loading ? "Publication en cours..." : "Publier mon projet sur Evolve"}</span>
+          <span>
+            {loading
+              ? "Publication en cours..."
+              : "Publier mon projet sur Evolve"}
+          </span>
         </button>
       </div>
 
@@ -342,7 +381,11 @@ export default function SubmitProjectForm({ locale }: Props) {
               : "border border-rose-500/30 bg-rose-500/10 text-rose-400"
           }`}
         >
-          {message.type === "success" ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+          {message.type === "success" ? (
+            <CheckCircle2 size={16} />
+          ) : (
+            <AlertCircle size={16} />
+          )}
           <span>{message.text}</span>
         </div>
       )}

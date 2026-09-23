@@ -1,19 +1,20 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
 import {
-  Search,
-  ChevronRight,
-  BookOpen,
-  Clock3,
-  Layers3,
-  X,
-  CheckCircle2,
-  Lock,
   ArrowRight,
   Award,
+  BookOpen,
+  CheckCircle2,
+  ChevronRight,
+  Clock3,
+  Layers3,
+  Lock,
+  Search,
+  X,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useMemo, useState } from "react";
+import { Link } from "@/i18n/navigation";
 
 type Course = {
   id: string;
@@ -61,6 +62,7 @@ export default function FormationsBrowser({
   locale,
   completedFormationIds,
 }: Props) {
+  const t = useTranslations("formations");
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All Formations");
 
@@ -105,23 +107,23 @@ export default function FormationsBrowser({
         <div className="relative glass-panel rounded-2xl p-1 shadow-lg transition-all focus-within:border-brand/40 focus-within:shadow-[0_0_25px_rgba(95,236,107,0.15)]">
           <Search
             size={18}
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/40"
+            className="pointer-events-none absolute start-4 top-1/2 -translate-y-1/2 text-white/40"
           />
 
           <input
             type="search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Rechercher une formation, compétence, mot-clé..."
-            className="h-12 w-full rounded-xl bg-transparent pl-11 pr-11 text-sm text-white outline-none placeholder:text-white/30"
+            placeholder={t("searchPlaceholder")}
+            className="h-12 w-full rounded-xl bg-transparent ps-11 pe-11 text-sm text-white outline-none placeholder:text-white/30"
           />
 
           {search && (
             <button
               type="button"
               onClick={() => setSearch("")}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 transition hover:text-white"
-              aria-label="Effacer la recherche"
+              className="absolute end-3.5 top-1/2 -translate-y-1/2 text-white/40 transition hover:text-white"
+              aria-label={t("clearSearch")}
             >
               <X size={16} />
             </button>
@@ -130,7 +132,7 @@ export default function FormationsBrowser({
 
         {search.trim() && (
           <p className="mt-3 text-xs text-white/40">
-            Résultats pour{" "}
+            {t("resultsFor")}{" "}
             <span className="font-semibold text-brand">"{search}"</span>
           </p>
         )}
@@ -142,7 +144,7 @@ export default function FormationsBrowser({
         <aside className="hidden w-64 shrink-0 lg:block">
           <div className="sticky top-28 glass-panel rounded-3xl p-5 shadow-xl border border-white/10">
             <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-white/40 px-2">
-              Spécialités
+              {t("specialties")}
             </h2>
 
             <nav className="space-y-1">
@@ -154,14 +156,21 @@ export default function FormationsBrowser({
                     key={item}
                     type="button"
                     onClick={() => setCategory(item)}
-                    className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-xs font-medium transition-all ${
+                    className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-start text-xs font-medium transition-all ${
                       active
                         ? "bg-brand/15 text-brand font-bold border border-brand/20 shadow-[0_0_12px_rgba(95,236,107,0.15)]"
                         : "text-white/60 hover:bg-white/5 hover:text-white"
                     }`}
                   >
-                    <span>{item === "All Formations" ? "Toutes les formations" : item}</span>
-                    {active && <ChevronRight size={14} className="text-brand" />}
+                    <span>
+                      {item === "All Formations" ? t("allFormations") : item}
+                    </span>
+                    {active && (
+                      <ChevronRight
+                        size={14}
+                        className="text-brand rtl:rotate-180"
+                      />
+                    )}
                   </button>
                 );
               })}
@@ -187,7 +196,7 @@ export default function FormationsBrowser({
                       : "border-white/10 bg-white/5 text-white/60"
                   }`}
                 >
-                  {item === "All Formations" ? "Toutes" : item}
+                  {item === "All Formations" ? t("allFormations") : item}
                 </button>
               );
             })}
@@ -197,12 +206,16 @@ export default function FormationsBrowser({
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
-                {category === "All Formations" ? "Parcours Disponibles" : category}
+                {category === "All Formations"
+                  ? "Parcours Disponibles"
+                  : category}
               </h2>
 
               <p className="mt-1 text-xs text-white/50">
                 {filteredFormations.length}{" "}
-                {filteredFormations.length === 1 ? "parcours certifiant" : "parcours certifiants"}
+                {filteredFormations.length === 1
+                  ? "parcours certifiant"
+                  : "parcours certifiants"}
               </p>
             </div>
 
@@ -227,7 +240,8 @@ export default function FormationsBrowser({
               </h3>
 
               <p className="mx-auto mt-2 max-w-sm text-xs leading-5 text-white/40">
-                Nous n'avons trouvé aucun parcours correspondant à vos critères. Essayez un autre mot-clé ou catégorie.
+                Nous n'avons trouvé aucun parcours correspondant à vos critères.
+                Essayez un autre mot-clé ou catégorie.
               </p>
 
               <button
@@ -257,7 +271,8 @@ export default function FormationsBrowser({
                   formation.courses.every((course) => course.completed);
 
                 const isFormationCompleted =
-                  completedFormationIds.includes(formation.id) || formationCompleted;
+                  completedFormationIds.includes(formation.id) ||
+                  formationCompleted;
 
                 const nextCourse =
                   formation.courses.find((course) => !course.completed) ?? null;
@@ -286,7 +301,7 @@ export default function FormationsBrowser({
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                         {/* Top Badges */}
-                        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                        <div className="absolute top-3 start-3 flex flex-wrap gap-1.5">
                           {formation.domain && (
                             <span className="rounded-full border border-white/15 bg-black/70 px-2.5 py-0.5 text-[10px] font-semibold text-white/90 backdrop-blur-md">
                               {formation.domain}
@@ -309,7 +324,11 @@ export default function FormationsBrowser({
                             {isFormationCompleted && (
                               <span className="inline-flex items-center gap-1 rounded-full bg-brand/15 border border-brand/30 px-2.5 py-0.5 text-[10px] font-bold text-brand">
                                 <CheckCircle2 size={12} />
-                                Complétée 🎓
+                                {locale === "ar"
+                                  ? "مكتمل 🎓"
+                                  : locale === "en"
+                                    ? "Completed 🎓"
+                                    : "Complétée 🎓"}
                               </span>
                             )}
                           </div>
@@ -328,12 +347,20 @@ export default function FormationsBrowser({
                             <span className="flex items-center gap-1.5">
                               <BookOpen size={14} className="text-brand" />
                               {formation.courses.length}{" "}
-                              {formation.courses.length === 1 ? "cours" : "cours"}
+                              {locale === "ar"
+                                ? "دورات"
+                                : locale === "en"
+                                  ? "courses"
+                                  : "cours"}
                             </span>
 
                             <span className="flex items-center gap-1.5">
                               <Clock3 size={14} className="text-sky-400" />
-                              Parcours complet
+                              {locale === "ar"
+                                ? "مسار كامل"
+                                : locale === "en"
+                                  ? "Full track"
+                                  : "Parcours complet"}
                             </span>
                           </div>
                         </div>
@@ -341,8 +368,16 @@ export default function FormationsBrowser({
                         {/* FORMATION PROGRESS & ACTION */}
                         <div className="mt-6 border-t border-white/10 pt-5">
                           <div className="flex items-center justify-between text-xs">
-                            <span className="text-white/60 font-medium">Progression du parcours</span>
-                            <span className="font-extrabold text-brand">{formationProgress}%</span>
+                            <span className="text-white/60 font-medium">
+                              {locale === "ar"
+                                ? "تقدم المسار"
+                                : locale === "en"
+                                  ? "Track progress"
+                                  : "Progression du parcours"}
+                            </span>
+                            <span className="font-extrabold text-brand">
+                              {formationProgress}%
+                            </span>
                           </div>
 
                           <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
@@ -355,20 +390,44 @@ export default function FormationsBrowser({
                           {/* ACTION BUTTON */}
                           <div className="mt-4 flex items-center justify-between">
                             <span className="text-xs text-white/40">
-                              {formation.courses.filter((c) => c.completed).length} / {formation.courses.length} modules validés
+                              {
+                                formation.courses.filter((c) => c.completed)
+                                  .length
+                              }{" "}
+                              / {formation.courses.length}{" "}
+                              {locale === "ar"
+                                ? "وحدات مكتملة"
+                                : locale === "en"
+                                  ? "completed modules"
+                                  : "modules validés"}
                             </span>
 
                             {nextCourse && !isFormationCompleted && (
                               <Link
                                 href={
                                   nextCourse.nextLessonId
-                                    ? `/${locale}/courses/${nextCourse.id}/lessons/${nextCourse.nextLessonId}`
-                                    : `/${locale}/courses/${nextCourse.id}`
+                                    ? `/courses/${nextCourse.id}/lessons/${nextCourse.nextLessonId}`
+                                    : `/courses/${nextCourse.id}`
                                 }
                                 className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2 text-xs font-bold text-black transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(95,236,107,0.5)]"
                               >
-                                <span>{nextCourse.progress > 0 ? "Continuer" : "Commencer"}</span>
-                                <ArrowRight size={14} />
+                                <span>
+                                  {nextCourse.progress > 0
+                                    ? locale === "ar"
+                                      ? "متابعة"
+                                      : locale === "en"
+                                        ? "Continue"
+                                        : "Continuer"
+                                    : locale === "ar"
+                                      ? "بدء"
+                                      : locale === "en"
+                                        ? "Start"
+                                        : "Commencer"}
+                                </span>
+                                <ArrowRight
+                                  size={14}
+                                  className="rtl:rotate-180"
+                                />
                               </Link>
                             )}
                           </div>
@@ -381,20 +440,35 @@ export default function FormationsBrowser({
                       <div className="px-7 py-4 flex items-center justify-between border-b border-white/5">
                         <div>
                           <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-                            Programme du parcours
+                            {locale === "ar"
+                              ? "برنامج المسار"
+                              : locale === "en"
+                                ? "Track curriculum"
+                                : "Programme du parcours"}
                           </h4>
                           <p className="text-[11px] text-white/40">
-                            Suivez les cours dans l'ordre recommandé pour valider votre certification
+                            {locale === "ar"
+                              ? "اتبع الدورات بالترتيب الموصى به للحصول على الشهادة"
+                              : locale === "en"
+                                ? "Follow the courses in recommended order to earn your certification"
+                                : "Suivez les cours dans l'ordre recommandé pour valider votre certification"}
                           </p>
                         </div>
                         <span className="text-xs font-semibold text-white/50">
-                          {formation.courses.length} Modules
+                          {formation.courses.length}{" "}
+                          {locale === "ar"
+                            ? "وحدات"
+                            : locale === "en"
+                              ? "Modules"
+                              : "Modules"}
                         </span>
                       </div>
 
                       <div className="divide-y divide-white/5">
                         {formation.courses.map((course, index) => {
-                          const locked = index > 0 && !formation.courses[index - 1]?.completed;
+                          const locked =
+                            index > 0 &&
+                            !formation.courses[index - 1]?.completed;
 
                           return (
                             <div
@@ -429,7 +503,8 @@ export default function FormationsBrowser({
                                 </h5>
 
                                 <p className="mt-0.5 truncate text-xs text-white/40">
-                                  {course.description || "Module d'apprentissage pratique."}
+                                  {course.description ||
+                                    "Module d'apprentissage pratique."}
                                 </p>
 
                                 <div className="mt-2 flex items-center gap-3">
@@ -449,14 +524,20 @@ export default function FormationsBrowser({
                               {locked ? (
                                 <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/30">
                                   <Lock size={12} />
-                                  <span>Verrouillé</span>
+                                  <span>
+                                    {locale === "ar"
+                                      ? "مغلق"
+                                      : locale === "en"
+                                        ? "Locked"
+                                        : "Verrouillé"}
+                                  </span>
                                 </span>
                               ) : (
                                 <Link
                                   href={
                                     course.nextLessonId
-                                      ? `/${locale}/courses/${course.id}/lessons/${course.nextLessonId}`
-                                      : `/${locale}/courses/${course.id}`
+                                      ? `/courses/${course.id}/lessons/${course.nextLessonId}`
+                                      : `/courses/${course.id}`
                                   }
                                   className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-bold transition ${
                                     course.completed
@@ -465,10 +546,22 @@ export default function FormationsBrowser({
                                   }`}
                                 >
                                   {course.completed
-                                    ? "Revoir ✓"
+                                    ? locale === "ar"
+                                      ? "مراجعة ✓"
+                                      : locale === "en"
+                                        ? "Review ✓"
+                                        : "Revoir ✓"
                                     : course.progress > 0
-                                      ? "Continuer →"
-                                      : "Commencer →"}
+                                      ? locale === "ar"
+                                        ? "متابعة ←"
+                                        : locale === "en"
+                                          ? "Continue →"
+                                          : "Continuer →"
+                                      : locale === "ar"
+                                        ? "بدء ←"
+                                        : locale === "en"
+                                          ? "Start →"
+                                          : "Commencer →"}
                                 </Link>
                               )}
                             </div>

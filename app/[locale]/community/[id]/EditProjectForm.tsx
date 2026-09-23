@@ -1,18 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
-import { validateUploadFile, compressImage } from "@/lib/imageCompressor";
 import {
-  Upload,
-  Sparkles,
+  AlertCircle,
   Github,
   Globe,
-  Tag,
-  AlertCircle,
   Loader2,
+  Sparkles,
+  Tag,
+  Upload,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { compressImage, validateUploadFile } from "@/lib/imageCompressor";
+import { createClient } from "@/lib/supabase/client";
 
 type Props = {
   projectId: string;
@@ -105,9 +105,7 @@ export default function EditProjectForm({
       .map((t) => t.trim())
       .filter(Boolean);
     if (!currentTags.includes(tag)) {
-      setTechnologies(
-        currentTags.length > 0 ? `${technologies}, ${tag}` : tag,
-      );
+      setTechnologies(currentTags.length > 0 ? `${technologies}, ${tag}` : tag);
     }
   };
 
@@ -144,7 +142,7 @@ export default function EditProjectForm({
       if (uploadError) {
         console.error("[Image Upload]", uploadError);
         setMessage(
-          "Impossible de télécharger l'image : " + uploadError.message,
+          `Impossible de télécharger l'image : ${uploadError.message}`,
         );
         setLoading(false);
         return;
@@ -176,7 +174,7 @@ export default function EditProjectForm({
 
     if (error) {
       console.error("[Project Update]", error);
-      setMessage("Erreur lors de la mise à jour : " + error.message);
+      setMessage(`Erreur lors de la mise à jour : ${error.message}`);
       setLoading(false);
       return;
     }

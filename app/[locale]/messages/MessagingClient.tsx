@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import type { Conversation, DirectMessage } from "@/lib/data/messages";
 import {
-  Search,
-  Send,
   CheckCheck,
   Clock,
-  Sparkles,
-  Paperclip,
-  Smile,
   Code2,
+  Paperclip,
+  Search,
+  Send,
   ShieldCheck,
+  Smile,
+  Sparkles,
 } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { Conversation, DirectMessage } from "@/lib/data/messages";
 
 interface MessagingClientProps {
   initialConversations: Conversation[];
@@ -49,14 +49,14 @@ export default function MessagingClient({
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto scroll to bottom
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: messages must trigger scroll on new message
   useEffect(() => {
     scrollToBottom();
-  }, [messages, activeConvId]);
-
+  }, [messages, scrollToBottom]);
   // Handle course-linked pre-fill message if recipientId was passed in query param
   useEffect(() => {
     if (courseTitle && recipientId) {
@@ -117,7 +117,8 @@ export default function MessagingClient({
         conversation_id: activeConvId,
         sender_id: activeConversation?.participant.id || "teacher",
         receiver_id: currentUserId,
-        content: `Merci pour votre message ! Je regarde cela avec attention et reviens vers vous rapidement. Bon travail sur vos projets !`,
+        content:
+          "Merci pour votre message ! Je regarde cela avec attention et reviens vers vous rapidement. Bon travail sur vos projets !",
         created_at: new Date().toISOString(),
         is_read: true,
       };
@@ -126,7 +127,7 @@ export default function MessagingClient({
   };
 
   const handleQuickPromptClick = (prompt: string) => {
-    setNewMessageText((prev) => (prev ? `${prev} - ${prompt}` : prompt));
+    setNewMessageText((prev) => (prev ? `${prev} -${prompt}` : prompt));
   };
 
   return (
@@ -349,7 +350,9 @@ export default function MessagingClient({
               type="button"
               title="Insérer du code"
               onClick={() =>
-                setNewMessageText((prev) => prev + "```\n// Votre code\n```")
+                setNewMessageText(
+                  (prev) => `${prev}\`\`\`\n// Votre code\n\`\`\``,
+                )
               }
               className="p-2 text-white/40 hover:text-white transition rounded-xl hover:bg-white/5"
             >
@@ -367,7 +370,7 @@ export default function MessagingClient({
             <button
               type="button"
               title="Emoji"
-              onClick={() => setNewMessageText((prev) => prev + " 💡")}
+              onClick={() => setNewMessageText((prev) => `${prev} 💡`)}
               className="p-2 text-white/40 hover:text-white transition rounded-xl hover:bg-white/5"
             >
               <Smile className="h-4 w-4" />

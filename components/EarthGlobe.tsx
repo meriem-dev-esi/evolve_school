@@ -31,10 +31,5 @@ export default function EarthGlobe() {
     };
   }, []);
 
-  return (
-    <div
-      ref={containerRef}
-      className="h-full w-full"
-    />
-  );
+  return <div ref={containerRef} className="h-full w-full" />;
 }

@@ -1,10 +1,10 @@
+import { Clock, MessageSquare, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import MessagingClient from "./MessagingClient";
-import { getConversations, getConversationMessages } from "@/lib/data/messages";
+import Navbar from "@/components/Navbar";
+import { getConversationMessages, getConversations } from "@/lib/data/messages";
 import { createClient } from "@/lib/supabase/server";
-import { MessageSquare, ShieldCheck, Clock } from "lucide-react";
+import MessagingClient from "./MessagingClient";
 
 export const metadata: Metadata = {
   title: "Messagerie & Mentorat Direct — Evolve Academy",
@@ -64,7 +64,8 @@ export default async function MessagesPage({ params, searchParams }: Props) {
               </h1>
 
               <p className="mt-1 text-xs sm:text-sm text-white/60">
-                Posez vos questions sur vos cours, demandez des revues de code et contactez les formateurs Evolve.
+                Posez vos questions sur vos cours, demandez des revues de code
+                et contactez les formateurs Evolve.
               </p>
             </div>
 

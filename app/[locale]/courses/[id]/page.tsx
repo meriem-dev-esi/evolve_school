@@ -1,19 +1,19 @@
+import {
+  ArrowLeft,
+  BookOpen,
+  CheckCircle2,
+  Clock,
+  Lock,
+  MessageSquare,
+  Play,
+  Sparkles,
+} from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import {
-  BookOpen,
-  CheckCircle2,
-  Lock,
-  ArrowLeft,
-  Play,
-  MessageSquare,
-  Clock,
-  Sparkles,
-} from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 
 type Props = {
   params: Promise<{
@@ -38,10 +38,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${course.title} — Evolve Academy`,
-    description: course.description || `Suivez le cours ${course.title} sur Evolve Academy.`,
+    description:
+      course.description ||
+      `Suivez le cours ${course.title} sur Evolve Academy.`,
     openGraph: {
       title: `${course.title} | Evolve Academy`,
-      description: course.description || `Formation ${course.domain || "créative"} de niveau ${course.level || "tous niveaux"}.`,
+      description:
+        course.description ||
+        `Formation ${course.domain || "créative"} de niveau ${course.level || "tous niveaux"}.`,
       images: course.image_url ? [{ url: course.image_url }] : [],
     },
   };
@@ -79,45 +83,27 @@ export default async function CoursePage({ params }: Props) {
       .from("series_courses")
       .select("course_id")
       .eq("series_id", seriesCourse.series_id)
-      .eq(
-        "order_index",
-        seriesCourse.order_index - 1,
-      )
+      .eq("order_index", seriesCourse.order_index - 1)
       .maybeSingle();
 
     if (previousCourse) {
-      const { data: previousLessons } =
-        await supabase
-          .from("lessons")
-          .select("id")
-          .eq(
-            "course_id",
-            previousCourse.course_id,
-          );
+      const { data: previousLessons } = await supabase
+        .from("lessons")
+        .select("id")
+        .eq("course_id", previousCourse.course_id);
 
-      if (
-        previousLessons &&
-        previousLessons.length > 0
-      ) {
-        const previousLessonIds =
-          previousLessons.map(
-            (lesson) => lesson.id,
-          );
+      if (previousLessons && previousLessons.length > 0) {
+        const previousLessonIds = previousLessons.map((lesson) => lesson.id);
 
-        const { data: completedLessons } =
-          await supabase
-            .from("lesson_progress")
-            .select("lesson_id")
-            .eq("user_id", user.id)
-            .eq("completed", true)
-            .in(
-              "lesson_id",
-              previousLessonIds,
-            );
+        const { data: completedLessons } = await supabase
+          .from("lesson_progress")
+          .select("lesson_id")
+          .eq("user_id", user.id)
+          .eq("completed", true)
+          .in("lesson_id", previousLessonIds);
 
         const previousCompleted =
-          completedLessons?.length ===
-          previousLessons.length;
+          completedLessons?.length === previousLessons.length;
 
         if (!previousCompleted) {
           redirect(`/${locale}/formations`);
@@ -130,12 +116,11 @@ export default async function CoursePage({ params }: Props) {
   // Get course
   // --------------------------------------------------
 
-  const { data: course, error: courseError } =
-    await supabase
-      .from("courses")
-      .select("*")
-      .eq("id", id)
-      .maybeSingle();
+  const { data: course, error: courseError } = await supabase
+    .from("courses")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
 
   if (courseError || !course) {
     notFound();
@@ -145,11 +130,10 @@ export default async function CoursePage({ params }: Props) {
   // Get lessons
   // --------------------------------------------------
 
-  const { data: lessons, error: lessonsError } =
-    await supabase
-      .from("lessons")
-      .select(
-        `
+  const { data: lessons, error: lessonsError } = await supabase
+    .from("lessons")
+    .select(
+      `
           id,
           title,
           description,
@@ -157,11 +141,11 @@ export default async function CoursePage({ params }: Props) {
           order_index,
           is_free
         `,
-      )
-      .eq("course_id", id)
-      .order("order_index", {
-        ascending: true,
-      });
+    )
+    .eq("course_id", id)
+    .order("order_index", {
+      ascending: true,
+    });
 
   if (lessonsError) {
     throw new Error(lessonsError.message);
@@ -173,9 +157,7 @@ export default async function CoursePage({ params }: Props) {
   // Get user's progress
   // --------------------------------------------------
 
-  const lessonIds = lessonList.map(
-    (lesson) => lesson.id,
-  );
+  const lessonIds = lessonList.map((lesson) => lesson.id);
 
   const { data: progress } =
     lessonIds.length > 0
@@ -195,34 +177,25 @@ export default async function CoursePage({ params }: Props) {
 
   const progressList = progress ?? [];
 
-  const completedLessons =
-    progressList.filter(
-      (item) => item.completed,
-    ).length;
+  const completedLessons = progressList.filter((item) => item.completed).length;
 
   const totalLessons = lessonList.length;
 
   const courseProgress =
-    totalLessons > 0
-      ? Math.round(
-          (completedLessons / totalLessons) * 100,
-        )
-      : 0;
+    totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   // --------------------------------------------------
   // Check enrollment
   // --------------------------------------------------
 
-  const { data: enrollment } =
-    await supabase
-      .from("enrollments")
-      .select("id, payment_status")
-      .eq("user_id", user.id)
-      .eq("course_id", id)
-      .maybeSingle();
+  const { data: enrollment } = await supabase
+    .from("enrollments")
+    .select("id, payment_status")
+    .eq("user_id", user.id)
+    .eq("course_id", id)
+    .maybeSingle();
 
-  const isPaid =
-    enrollment?.payment_status === "paid";
+  const isPaid = enrollment?.payment_status === "paid";
 
   // --------------------------------------------------
   // Render
@@ -281,15 +254,22 @@ export default async function CoursePage({ params }: Props) {
                 <div className="flex flex-wrap items-center gap-5 text-xs text-white/60">
                   <span className="flex items-center gap-1.5">
                     <BookOpen className="h-4 w-4 text-brand" />
-                    <span className="text-white font-bold">{totalLessons}</span> leçons
+                    <span className="text-white font-bold">{totalLessons}</span>{" "}
+                    leçons
                   </span>
                   <span className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                    <span className="text-white font-bold">{completedLessons}/{totalLessons}</span> complétées
+                    <span className="text-white font-bold">
+                      {completedLessons}/{totalLessons}
+                    </span>{" "}
+                    complétées
                   </span>
                   <span className="flex items-center gap-1.5">
                     <Clock className="h-4 w-4 text-sky-400" />
-                    <span className="text-brand font-extrabold">{courseProgress}%</span> complété
+                    <span className="text-brand font-extrabold">
+                      {courseProgress}%
+                    </span>{" "}
+                    complété
                   </span>
                 </div>
 
@@ -305,8 +285,12 @@ export default async function CoursePage({ params }: Props) {
               {/* Course Global Progress Bar */}
               <div className="mt-6 rounded-2xl border border-white/5 bg-white/[0.02] p-4">
                 <div className="mb-2 flex justify-between text-xs">
-                  <span className="text-white/60 font-medium">Progression du cours</span>
-                  <span className="font-extrabold text-brand">{courseProgress}%</span>
+                  <span className="text-white/60 font-medium">
+                    Progression du cours
+                  </span>
+                  <span className="font-extrabold text-brand">
+                    {courseProgress}%
+                  </span>
                 </div>
 
                 <div className="h-2 overflow-hidden rounded-full bg-white/10">
@@ -388,7 +372,9 @@ export default async function CoursePage({ params }: Props) {
                           <div className="mt-2 flex flex-wrap items-center gap-3 text-[11px] text-white/50">
                             <span>
                               {lesson.is_free ? (
-                                <span className="text-brand font-semibold">Gratuit</span>
+                                <span className="text-brand font-semibold">
+                                  Gratuit
+                                </span>
                               ) : (
                                 "Formation Complète"
                               )}
@@ -427,7 +413,13 @@ export default async function CoursePage({ params }: Props) {
                                 : "bg-brand text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(95,236,107,0.4)]"
                             }`}
                           >
-                            <span>{completed ? "Revoir" : percentage > 0 ? "Reprendre" : "Commencer"}</span>
+                            <span>
+                              {completed
+                                ? "Revoir"
+                                : percentage > 0
+                                  ? "Reprendre"
+                                  : "Commencer"}
+                            </span>
                             <Play className="h-3 w-3 fill-current ml-0.5" />
                           </Link>
                         ) : (

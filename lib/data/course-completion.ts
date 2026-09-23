@@ -42,10 +42,7 @@ export async function completeLessonAndNavigate({
     );
 
   if (progressError) {
-    console.error(
-      "[Evolve] Completion error:",
-      progressError,
-    );
+    console.error("[Evolve] Completion error:", progressError);
 
     return;
   }
@@ -60,31 +57,23 @@ export async function completeLessonAndNavigate({
     return;
   }
 
-  const lessonIds = courseLessons.map(
-    (lesson) => lesson.id,
-  );
+  const lessonIds = courseLessons.map((lesson) => lesson.id);
 
   // 3️⃣ Check completed lessons
-  const { data: completedLessons } =
-    await supabase
-      .from("lesson_progress")
-      .select("lesson_id")
-      .eq("user_id", user.id)
-      .eq("completed", true)
-      .in("lesson_id", lessonIds);
+  const { data: completedLessons } = await supabase
+    .from("lesson_progress")
+    .select("lesson_id")
+    .eq("user_id", user.id)
+    .eq("completed", true)
+    .in("lesson_id", lessonIds);
 
-  const allCompleted =
-    completedLessons?.length ===
-    courseLessons.length;
+  const allCompleted = completedLessons?.length === courseLessons.length;
 
   if (!allCompleted) {
     return;
   }
 
-  console.log(
-    "[Evolve] Course completed:",
-    courseId,
-  );
+  console.log("[Evolve] Course completed:", courseId);
 
   // 4️⃣ Last course → formation completed
   if (isLastCourse) {
@@ -99,31 +88,27 @@ export async function completeLessonAndNavigate({
 
   // 5️⃣ Move to next course
   if (nextCourseId) {
-    const { data: nextLessons } =
-      await supabase
-        .from("lessons")
-        .select("id, order_index")
-        .eq("course_id", nextCourseId)
-        .order("order_index", {
-          ascending: true,
-        });
+    const { data: nextLessons } = await supabase
+      .from("lessons")
+      .select("id, order_index")
+      .eq("course_id", nextCourseId)
+      .order("order_index", {
+        ascending: true,
+      });
 
     const firstLesson = nextLessons?.[0];
 
     if (firstLesson) {
-      window.location.href =
-        `/${locale}/courses/${nextCourseId}/lessons/${firstLesson.id}`;
+      window.location.href = `/${locale}/courses/${nextCourseId}/lessons/${firstLesson.id}`;
 
       return;
     }
 
-    window.location.href =
-      `/${locale}/courses/${nextCourseId}`;
+    window.location.href = `/${locale}/courses/${nextCourseId}`;
 
     return;
   }
 
   // 6️⃣ No next course
-  window.location.href =
-    `/${locale}/formations`;
+  window.location.href = `/${locale}/formations`;
 }

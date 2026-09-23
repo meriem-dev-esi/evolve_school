@@ -1,10 +1,17 @@
-import type { MetadataRoute } from "next";
 import { createClient } from "@supabase/supabase-js";
+import type { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://evolve-academy.dz";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://evolve-academy.dz";
   const locales = ["fr", "ar", "en"];
-  const staticPaths = ["", "/formations", "/ateliers", "/community", "/disciplines"];
+  const staticPaths = [
+    "",
+    "/formations",
+    "/ateliers",
+    "/community",
+    "/disciplines",
+  ];
 
   const entries: MetadataRoute.Sitemap = [];
 
@@ -47,12 +54,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           for (const locale of locales) {
             const alternates: Record<string, string> = {};
             for (const altLocale of locales) {
-              alternates[altLocale] = `${baseUrl}/${altLocale}/courses/${course.id}`;
+              alternates[altLocale] =
+                `${baseUrl}/${altLocale}/courses/${course.id}`;
             }
 
             entries.push({
               url: `${baseUrl}/${locale}/courses/${course.id}`,
-              lastModified: course.updated_at ? new Date(course.updated_at) : new Date(),
+              lastModified: course.updated_at
+                ? new Date(course.updated_at)
+                : new Date(),
               changeFrequency: "weekly",
               priority: 0.9,
               alternates: {
@@ -74,12 +84,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           for (const locale of locales) {
             const alternates: Record<string, string> = {};
             for (const altLocale of locales) {
-              alternates[altLocale] = `${baseUrl}/${altLocale}/community/${project.id}`;
+              alternates[altLocale] =
+                `${baseUrl}/${altLocale}/community/${project.id}`;
             }
 
             entries.push({
               url: `${baseUrl}/${locale}/community/${project.id}`,
-              lastModified: project.created_at ? new Date(project.created_at) : new Date(),
+              lastModified: project.created_at
+                ? new Date(project.created_at)
+                : new Date(),
               changeFrequency: "monthly",
               priority: 0.7,
               alternates: {

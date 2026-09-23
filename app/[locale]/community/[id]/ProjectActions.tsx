@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Loader2, Pencil, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Pencil, Trash2, Loader2 } from "lucide-react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type Props = {
@@ -10,19 +10,14 @@ type Props = {
   locale: string;
 };
 
-export default function ProjectActions({
-  projectId,
-  locale,
-}: Props) {
+export default function ProjectActions({ projectId, locale }: Props) {
   const supabase = createClient();
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
 
   function handleEdit() {
-    router.push(
-      `/${locale}/community/${projectId}/edit`,
-    );
+    router.push(`/${locale}/community/${projectId}/edit`);
   }
 
   async function handleDelete() {
@@ -51,10 +46,7 @@ export default function ProjectActions({
       .eq("user_id", user.id);
 
     if (error) {
-      console.error(
-        "[Project Delete]",
-        error,
-      );
+      console.error("[Project Delete]", error);
       alert(error.message);
       setLoading(false);
       return;

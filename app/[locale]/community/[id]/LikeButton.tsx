@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { Heart, Loader2 } from "lucide-react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type Props = {
@@ -36,12 +36,9 @@ export default function LikeButton({
       return;
     }
 
-    const { data, error } = await supabase.rpc(
-      "toggle_project_like",
-      {
-        p_project_id: projectId,
-      },
-    );
+    const { data, error } = await supabase.rpc("toggle_project_like", {
+      p_project_id: projectId,
+    });
 
     if (error) {
       console.error("[Like]", error);
@@ -54,9 +51,7 @@ export default function LikeButton({
     setLiked(isNowLiked);
 
     setLikes((current) =>
-      isNowLiked
-        ? current + 1
-        : Math.max(0, current - 1),
+      isNowLiked ? current + 1 : Math.max(0, current - 1),
     );
 
     setLoading(false);

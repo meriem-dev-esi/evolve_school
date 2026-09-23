@@ -1,7 +1,7 @@
 "use client";
 
-import { completeLessonAndNavigate } from "@/lib/data/course-completion";
 import { useEffect, useRef } from "react";
+import { completeLessonAndNavigate } from "@/lib/data/course-completion";
 import { createClient } from "@/lib/supabase/client";
 
 type Props = {
@@ -29,7 +29,6 @@ export default function UploadedLessonVideo({
 
   useEffect(() => {
     const video = videoRef.current;
-
     if (!video) return;
 
     const supabase = createClient();
@@ -49,42 +48,27 @@ export default function UploadedLessonVideo({
         .eq("lesson_id", lessonId)
         .maybeSingle();
 
-      if (
-        !cancelled &&
-        progress?.last_position &&
-        progress.last_position > 0
-      ) {
+      if (!cancelled && progress?.last_position && progress.last_position > 0) {
         video.currentTime = progress.last_position;
       }
     };
 
     const saveProgress = async () => {
-      if (
-        cancelled ||
-        !video.duration ||
-        !Number.isFinite(video.duration)
-      ) {
+      if (cancelled || !video.duration || !Number.isFinite(video.duration)) {
         return;
       }
 
       const currentTime = video.currentTime;
 
-      if (
-        Math.floor(currentTime) -
-          lastSavedRef.current <
-        10
-      ) {
+      if (Math.floor(currentTime) - lastSavedRef.current < 10) {
         return;
       }
 
-      lastSavedRef.current =
-        Math.floor(currentTime);
+      lastSavedRef.current = Math.floor(currentTime);
 
       const percentage = Math.min(
         100,
-        Math.round(
-          (currentTime / video.duration) * 100,
-        ),
+        Math.round((currentTime / video.duration) * 100),
       );
 
       const completed = percentage >= 95;
@@ -103,10 +87,7 @@ export default function UploadedLessonVideo({
           }),
         });
       } catch (error) {
-        console.error(
-          "[Evolve] Progress save error:",
-          error,
-        );
+        console.error("[Evolve] Progress save error:", error);
       }
     };
 
@@ -118,35 +99,27 @@ export default function UploadedLessonVideo({
       completingRef.current = true;
 
       try {
-        // 1. Save 100% completion
-        const response = await fetch(
-          "/api/lesson-progress",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              lessonId,
-              progressPercentage: 100,
-              completed: true,
-              lastPosition: Math.floor(
-                video.duration || video.currentTime,
-              ),
-            }),
+        // 1. Enregistrer la complétion à 100%
+        const response = await fetch("/api/lesson-progress", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            lessonId,
+            progressPercentage: 100,
+            completed: true,
+            lastPosition: Math.floor(video.duration || video.currentTime),
+          }),
+        });
 
         if (!response.ok) {
-          console.error(
-            "[Evolve] Could not save completion",
-          );
-
+          console.error("[Evolve] Could not save completion");
           completingRef.current = false;
           return;
         }
 
-        // 2. Check course completion
+        // 2. Vérifier et traiter la fin du cours / navigation
         await completeLessonAndNavigate({
           lessonId,
           courseId,
@@ -156,49 +129,22 @@ export default function UploadedLessonVideo({
           locale,
         });
       } catch (error) {
-        console.error(
-          "[Evolve] Completion error:",
-          error,
-        );
-
+        console.error("[Evolve] Completion error:", error);
         completingRef.current = false;
       }
     };
 
     void loadProgress();
 
-    video.addEventListener(
-      "timeupdate",
-      saveProgress,
-    );
-
-    video.addEventListener(
-      "ended",
-      handleEnded,
-    );
+    video.addEventListener("timeupdate", saveProgress);
+    video.addEventListener("ended", handleEnded);
 
     return () => {
       cancelled = true;
-
-      video.removeEventListener(
-        "timeupdate",
-        saveProgress,
-      );
-
-      video.removeEventListener(
-        "ended",
-        handleEnded,
-      );
+      video.removeEventListener("timeupdate", saveProgress);
+      video.removeEventListener("ended", handleEnded);
     };
-  }, [
-    lessonId,
-    videoUrl,
-    courseId,
-    nextCourseId,
-    isLastCourse,
-    formationId,
-    locale,
-  ]);
+  }, [lessonId, courseId, nextCourseId, isLastCourse, formationId, locale]);
 
   return (
     <div className="mt-10 overflow-hidden rounded-3xl bg-black">
@@ -209,7 +155,9 @@ export default function UploadedLessonVideo({
         preload="metadata"
         className="aspect-video w-full"
         src={videoUrl}
-      />
+      >
+        <track kind="captions" />
+      </video>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -123,11 +122,9 @@ export default function LessonVideo({
                 return;
               }
 
-              const currentTime =
-                playerRef.current.getCurrentTime();
+              const currentTime = playerRef.current.getCurrentTime();
 
-              const duration =
-                playerRef.current.getDuration();
+              const duration = playerRef.current.getDuration();
 
               if (!duration) {
                 return;
@@ -135,44 +132,33 @@ export default function LessonVideo({
 
               const percentage = Math.min(
                 100,
-                Math.round(
-                  (currentTime / duration) * 100,
-                ),
+                Math.round((currentTime / duration) * 100),
               );
 
               const completed = percentage >= 95;
 
-              const { error } = await supabase
-                .from("lesson_progress")
-                .upsert(
-                  {
-                    user_id: user.id,
-                    lesson_id: lessonId,
-                    progress_percentage: completed
-                      ? 100
-                      : percentage,
-                    completed,
-                    last_position: Math.floor(currentTime),
-                    updated_at:
-                      new Date().toISOString(),
-                  },
-                  {
-                    onConflict:
-                      "user_id,lesson_id",
-                  },
-                );
+              const { error } = await supabase.from("lesson_progress").upsert(
+                {
+                  user_id: user.id,
+                  lesson_id: lessonId,
+                  progress_percentage: completed ? 100 : percentage,
+                  completed,
+                  last_position: Math.floor(currentTime),
+                  updated_at: new Date().toISOString(),
+                },
+                {
+                  onConflict: "user_id,lesson_id",
+                },
+              );
 
               if (error) {
-                console.error(
-                  "[Evolve] Progress save error:",
-                  error,
-                );
+                console.error("[Evolve] Progress save error:", error);
                 return;
               }
 
               console.log(
                 "[Evolve] Progress saved:",
-                percentage + "%",
+                `${percentage}%`,
                 "Position:",
                 Math.floor(currentTime),
               );
@@ -181,43 +167,24 @@ export default function LessonVideo({
                * Lesson completed.
                * Check whether the whole course is completed.
                */
-              if (
-                completed &&
-                !redirectedRef.current
-              ) {
-                const { data: courseLessons } =
-                  await supabase
-                    .from("lessons")
-                    .select("id")
-                    .eq("course_id", courseId);
+              if (completed && !redirectedRef.current) {
+                const { data: courseLessons } = await supabase
+                  .from("lessons")
+                  .select("id")
+                  .eq("course_id", courseId);
 
-                if (
-                  courseLessons &&
-                  courseLessons.length > 0
-                ) {
-                  const lessonIds =
-                    courseLessons.map(
-                      (lesson) => lesson.id,
-                    );
+                if (courseLessons && courseLessons.length > 0) {
+                  const lessonIds = courseLessons.map((lesson) => lesson.id);
 
-                  const {
-                    data: completedLessons,
-                  } = await supabase
+                  const { data: completedLessons } = await supabase
                     .from("lesson_progress")
                     .select("lesson_id")
-                    .eq(
-                      "user_id",
-                      user.id,
-                    )
+                    .eq("user_id", user.id)
                     .eq("completed", true)
-                    .in(
-                      "lesson_id",
-                      lessonIds,
-                    );
+                    .in("lesson_id", lessonIds);
 
                   const allCompleted =
-                    completedLessons?.length ===
-                    courseLessons.length;
+                    completedLessons?.length === courseLessons.length;
 
                   if (!allCompleted) {
                     return;
@@ -225,10 +192,7 @@ export default function LessonVideo({
 
                   redirectedRef.current = true;
 
-                  console.log(
-                    "[Evolve] Course completed:",
-                    courseId,
-                  );
+                  console.log("[Evolve] Course completed:", courseId);
 
                   /*
                    * =====================================
@@ -236,18 +200,13 @@ export default function LessonVideo({
                    * =====================================
                    */
                   if (isLastCourse) {
-                    console.log(
-                      "[Evolve] Formation completed:",
-                      formationId,
-                    );
+                    console.log("[Evolve] Formation completed:", formationId);
 
-                    const completionUrl =
-                      formationId
-                        ? `/${locale}/formations?completed=1&formation=${formationId}`
-                        : `/${locale}/formations?completed=1`;
+                    const completionUrl = formationId
+                      ? `/${locale}/formations?completed=1&formation=${formationId}`
+                      : `/${locale}/formations?completed=1`;
 
-                    window.location.href =
-                      completionUrl;
+                    window.location.href = completionUrl;
 
                     return;
                   }
@@ -263,30 +222,18 @@ export default function LessonVideo({
                       nextCourseId,
                     );
 
-                    const {
-                      data: nextLessons,
-                    } = await supabase
+                    const { data: nextLessons } = await supabase
                       .from("lessons")
-                      .select(
-                        "id, order_index",
-                      )
-                      .eq(
-                        "course_id",
-                        nextCourseId,
-                      )
-                      .order(
-                        "order_index",
-                        {
-                          ascending: true,
-                        },
-                      );
+                      .select("id, order_index")
+                      .eq("course_id", nextCourseId)
+                      .order("order_index", {
+                        ascending: true,
+                      });
 
-                    const firstNextLesson =
-                      nextLessons?.[0];
+                    const firstNextLesson = nextLessons?.[0];
 
                     if (firstNextLesson) {
-                      window.location.href =
-                        `/${locale}/courses/${nextCourseId}/lessons/${firstNextLesson.id}`;
+                      window.location.href = `/${locale}/courses/${nextCourseId}/lessons/${firstNextLesson.id}`;
 
                       return;
                     }
@@ -294,8 +241,7 @@ export default function LessonVideo({
                     /*
                      * Next course has no lessons.
                      */
-                    window.location.href =
-                      `/${locale}/courses/${nextCourseId}`;
+                    window.location.href = `/${locale}/courses/${nextCourseId}`;
 
                     return;
                   }
@@ -303,8 +249,7 @@ export default function LessonVideo({
                   /*
                    * No next course found.
                    */
-                  window.location.href =
-                    `/${locale}/formations`;
+                  window.location.href = `/${locale}/formations`;
 
                   return;
                 }
@@ -320,11 +265,9 @@ export default function LessonVideo({
         void startPlayer();
       };
 
-      const script =
-        document.createElement("script");
+      const script = document.createElement("script");
 
-      script.src =
-        "https://www.youtube.com/iframe_api";
+      script.src = "https://www.youtube.com/iframe_api";
 
       script.async = true;
 
@@ -359,4 +302,3 @@ export default function LessonVideo({
     />
   );
 }
-

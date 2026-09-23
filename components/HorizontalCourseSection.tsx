@@ -1,22 +1,23 @@
 "use client";
 
-import { useRef } from "react";
-import Link from "next/link";
-import CourseCard from "@/components/CourseCard";
-import LockedCourseCard from "@/components/LockedCourseCard";
 import {
-  Sparkles,
-  TrendingUp,
-  Flame,
   Award,
-  Clock,
-  GraduationCap,
+  Bookmark,
   ChevronLeft,
   ChevronRight,
-  Bookmark,
+  Clock,
+  Flame,
+  GraduationCap,
   Layers,
   Search,
+  Sparkles,
+  TrendingUp,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useRef } from "react";
+import CourseCard from "@/components/CourseCard";
+import LockedCourseCard from "@/components/LockedCourseCard";
+import { Link } from "@/i18n/navigation";
 
 type Course = {
   id: string;
@@ -45,25 +46,71 @@ export default function HorizontalCourseSection({
   href,
   locked = false,
 }: Props) {
+  const tCommon = useTranslations("common");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const offset = direction === "left" ? -350 : 350;
-      scrollContainerRef.current.scrollBy({ left: offset, behavior: "smooth" });
+      const isRtl = locale === "ar";
+      const factor = (direction === "left" ? -1 : 1) * (isRtl ? -1 : 1);
+      scrollContainerRef.current.scrollBy({
+        left: factor * 350,
+        behavior: "smooth",
+      });
     }
   };
 
   const getSectionIcon = (heading: string) => {
     const lower = heading.toLowerCase();
-    if (lower.includes("recommended") || lower.includes("pour vous")) return <Sparkles className="h-5 w-5 text-brand" />;
-    if (lower.includes("trending") || lower.includes("tendance")) return <Flame className="h-5 w-5 text-rose-400" />;
-    if (lower.includes("beginner") || lower.includes("débutant")) return <GraduationCap className="h-5 w-5 text-sky-400" />;
-    if (lower.includes("partner") || lower.includes("partenaire")) return <Layers className="h-5 w-5 text-emerald-400" />;
-    if (lower.includes("exclusive") || lower.includes("exclusif")) return <Award className="h-5 w-5 text-amber-400" />;
-    if (lower.includes("soon") || lower.includes("bientôt")) return <Clock className="h-5 w-5 text-purple-400" />;
-    if (lower.includes("watchlist") || lower.includes("favoris")) return <Bookmark className="h-5 w-5 text-brand" />;
-    if (lower.includes("searched") || lower.includes("recherché")) return <Search className="h-5 w-5 text-cyan-400" />;
+    if (
+      lower.includes("recommended") ||
+      lower.includes("pour vous") ||
+      lower.includes("موصى")
+    )
+      return <Sparkles className="h-5 w-5 text-brand" />;
+    if (
+      lower.includes("trending") ||
+      lower.includes("tendance") ||
+      lower.includes("رواج")
+    )
+      return <Flame className="h-5 w-5 text-rose-400" />;
+    if (
+      lower.includes("beginner") ||
+      lower.includes("débutant") ||
+      lower.includes("مبتدئ")
+    )
+      return <GraduationCap className="h-5 w-5 text-sky-400" />;
+    if (
+      lower.includes("partner") ||
+      lower.includes("partenaire") ||
+      lower.includes("شريك") ||
+      lower.includes("شركاء")
+    )
+      return <Layers className="h-5 w-5 text-emerald-400" />;
+    if (
+      lower.includes("exclusive") ||
+      lower.includes("exclusif") ||
+      lower.includes("حصري")
+    )
+      return <Award className="h-5 w-5 text-amber-400" />;
+    if (
+      lower.includes("soon") ||
+      lower.includes("bientôt") ||
+      lower.includes("قريب")
+    )
+      return <Clock className="h-5 w-5 text-lime-400" />;
+    if (
+      lower.includes("watchlist") ||
+      lower.includes("favoris") ||
+      lower.includes("مفضل")
+    )
+      return <Bookmark className="h-5 w-5 text-brand" />;
+    if (
+      lower.includes("searched") ||
+      lower.includes("recherché") ||
+      lower.includes("بحث")
+    )
+      return <Search className="h-5 w-5 text-cyan-400" />;
     return <TrendingUp className="h-5 w-5 text-brand" />;
   };
 
@@ -98,8 +145,10 @@ export default function HorizontalCourseSection({
                 href={href}
                 className="group flex items-center gap-1.5 text-xs font-semibold text-white/60 transition hover:text-brand"
               >
-                <span>Voir tout</span>
-                <span className="transition-transform group-hover:translate-x-1">→</span>
+                <span>{tCommon("viewAll")}</span>
+                <span className="transition-transform rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                  →
+                </span>
               </Link>
             )}
 
@@ -111,7 +160,7 @@ export default function HorizontalCourseSection({
                 aria-label="Scroll left"
                 className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-brand/40 hover:bg-white/10 hover:text-white"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
               </button>
               <button
                 type="button"
@@ -119,7 +168,7 @@ export default function HorizontalCourseSection({
                 aria-label="Scroll right"
                 className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-brand/40 hover:bg-white/10 hover:text-white"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-4 w-4 rtl:rotate-180" />
               </button>
             </div>
           </div>
@@ -139,7 +188,7 @@ export default function HorizontalCourseSection({
             </>
           ) : courses.length === 0 ? (
             <div className="flex h-36 w-full items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02] text-xs text-white/40">
-              Aucune formation disponible pour le moment dans cette section.
+              {tCommon("emptySection")}
             </div>
           ) : (
             courses.map((course) => (

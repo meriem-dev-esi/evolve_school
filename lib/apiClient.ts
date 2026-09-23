@@ -51,8 +51,11 @@ export async function resilientFetch<T = unknown>(
 
       if (!response.ok) {
         // Only retry server errors (5xx) or rate limit backoff (429)
-        if ((response.status >= 500 || response.status === 429) && attempt < retries) {
-          const delay = retryDelayMs * Math.pow(2, attempt);
+        if (
+          (response.status >= 500 || response.status === 429) &&
+          attempt < retries
+        ) {
+          const delay = retryDelayMs * 2 ** attempt;
           await new Promise((resolve) => setTimeout(resolve, delay));
           continue;
         }
@@ -70,7 +73,9 @@ export async function resilientFetch<T = unknown>(
       clearTimeout(timeoutId);
 
       if (err instanceof Error && err.name === "AbortError") {
-        lastError = new ApiTimeoutError(`Délai d'attente de ${timeoutMs}ms dépassé pour ${url}`);
+        lastError = new ApiTimeoutError(
+          `Délai d'attente de ${timeoutMs}ms dépassé pour ${url}`,
+        );
       } else if (err instanceof Error) {
         lastError = err;
       } else {
@@ -78,16 +83,23 @@ export async function resilientFetch<T = unknown>(
       }
 
       // If it's a client error (4xx except 429), do not retry
-      if (err instanceof ApiNetworkError && err.status && err.status < 500 && err.status !== 429) {
+      if (
+        err instanceof ApiNetworkError &&
+        err.status &&
+        err.status < 500 &&
+        err.status !== 429
+      ) {
         throw err;
       }
 
       if (attempt < retries) {
-        const delay = retryDelayMs * Math.pow(2, attempt);
+        const delay = retryDelayMs * 2 ** attempt;
         await new Promise((resolve) => setTimeout(resolve, delay));
       }
     }
   }
 
-  throw lastError || new Error("Échec de la requête après plusieurs tentatives.");
+  throw (
+    lastError || new Error("Échec de la requête après plusieurs tentatives.")
+  );
 }

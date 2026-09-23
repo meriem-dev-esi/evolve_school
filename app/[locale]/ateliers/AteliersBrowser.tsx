@@ -1,17 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
 import {
-  Search,
+  ArrowRight,
+  Award,
   ChevronRight,
   Clock3,
   Layers3,
-  X,
-  ArrowRight,
-  Award,
+  Search,
   Sparkles,
+  X,
 } from "lucide-react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 
 type Workshop = {
   id: string;
@@ -41,10 +41,7 @@ const categories = [
   "Design",
 ];
 
-export default function AteliersBrowser({
-  workshops,
-  locale,
-}: Props) {
+export default function AteliersBrowser({ workshops, locale }: Props) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All Workshops");
 
@@ -135,8 +132,12 @@ export default function AteliersBrowser({
                         : "text-white/60 hover:bg-white/5 hover:text-white"
                     }`}
                   >
-                    <span>{item === "All Workshops" ? "Tous les ateliers" : item}</span>
-                    {active && <ChevronRight size={14} className="text-brand" />}
+                    <span>
+                      {item === "All Workshops" ? "Tous les ateliers" : item}
+                    </span>
+                    {active && (
+                      <ChevronRight size={14} className="text-brand" />
+                    )}
                   </button>
                 );
               })}
@@ -172,12 +173,16 @@ export default function AteliersBrowser({
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
-                {category === "All Workshops" ? "Ateliers Pratiques Disponibles" : category}
+                {category === "All Workshops"
+                  ? "Ateliers Pratiques Disponibles"
+                  : category}
               </h2>
 
               <p className="mt-1 text-xs text-white/50">
                 {filteredWorkshops.length}{" "}
-                {filteredWorkshops.length === 1 ? "atelier intensif" : "ateliers intensifs"}
+                {filteredWorkshops.length === 1
+                  ? "atelier intensif"
+                  : "ateliers intensifs"}
               </p>
             </div>
 
@@ -202,7 +207,8 @@ export default function AteliersBrowser({
               </h3>
 
               <p className="mx-auto mt-2 max-w-sm text-xs leading-5 text-white/40">
-                Nous n'avons trouvé aucun atelier correspondant à votre recherche. Essayez d'autres termes ou une autre catégorie.
+                Nous n'avons trouvé aucun atelier correspondant à votre
+                recherche. Essayez d'autres termes ou une autre catégorie.
               </p>
 
               <button

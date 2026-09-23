@@ -1,3 +1,4 @@
+import "server-only";
 import { createClient } from "@/lib/supabase/server";
 export interface Discipline {
   id: string;
@@ -18,15 +19,17 @@ export async function getDisciplines(): Promise<Discipline[]> {
     throw new Error(`Could not read disciplines: ${error.message}`);
   }
 
-  return (data ?? []).map((category: {
-  id: string;
-  name: string;
-  description: string | null;
-  image_url: string | null;
-}) => ({
-    id: category.id,
-    title: category.name,
-    description: category.description,
-    image_url: category.image_url,
-  }));
+  return (data ?? []).map(
+    (category: {
+      id: string;
+      name: string;
+      description: string | null;
+      image_url: string | null;
+    }) => ({
+      id: category.id,
+      title: category.name,
+      description: category.description,
+      image_url: category.image_url,
+    }),
+  );
 }

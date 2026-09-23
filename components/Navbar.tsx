@@ -1,42 +1,35 @@
 "use client";
 
+import { Globe, LogOut, Menu, User, X } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { useLocale } from "next-intl";
-import { usePathname } from "next/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
-import {
-  Globe,
-  Menu,
-  X,
-  LogOut,
-  User,
-} from "lucide-react";
 
 type Profile = {
   full_name: string | null;
   avatar_url: string | null;
 };
 
+let cachedProfile: Profile | null = null;
+let cachedProfileLoaded = false;
+
 export default function Navbar() {
   const locale = useLocale();
+  const tNav = useTranslations("nav");
   const pathname = usePathname();
+  const router = useRouter();
 
-  const [profile, setProfile] =
-    useState<Profile | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(cachedProfile);
 
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(!cachedProfileLoaded);
 
-  const [mobileMenuOpen, setMobileMenuOpen] =
-    useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const [langDropdownOpen, setLangDropdownOpen] =
-    useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
-  const [scrolled, setScrolled] =
-    useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   /* =====================================================
      SCROLL
@@ -47,16 +40,9 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener(
-      "scroll",
-      handleScroll
-    );
+    window.addEventListener("scroll", handleScroll);
 
-    return () =>
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   /* =====================================================
@@ -64,26 +50,38 @@ export default function Navbar() {
   ===================================================== */
 
   useEffect(() => {
+    if (cachedProfileLoaded) {
+      return;
+    }
+
     const supabase = createClient();
 
     async function loadProfile() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
 
-      if (!user) {
+        if (!user) {
+          cachedProfileLoaded = true;
+          setLoading(false);
+          return;
+        }
+
+        const { data } = await supabase
+          .from("profiles")
+          .select("full_name, avatar_url")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        cachedProfile = data;
+        cachedProfileLoaded = true;
+        setProfile(data);
+      } catch (err) {
+        console.error("[Evolve] Navbar profile load error:", err);
+      } finally {
         setLoading(false);
-        return;
       }
-
-      const { data } = await supabase
-        .from("profiles")
-        .select("full_name, avatar_url")
-        .eq("id", user.id)
-        .maybeSingle();
-
-      setProfile(data);
-      setLoading(false);
     }
 
     void loadProfile();
@@ -94,44 +92,16 @@ export default function Navbar() {
   ===================================================== */
 
   async function handleLogout() {
+    cachedProfile = null;
+    cachedProfileLoaded = false;
     const supabase = createClient();
 
     await supabase.auth.signOut();
 
-    window.location.href =
-      `/${locale}/sign-in`;
+    router.push("/sign-in");
   }
 
-  const displayName =
-    profile?.full_name?.trim() ||
-    "Profile";
-
-  /* =====================================================
-     LANGUAGE PATH
-  ===================================================== */
-
-  const getLocalizedPath = (
-    targetLocale: string
-  ) => {
-    if (!pathname) {
-      return `/${targetLocale}`;
-    }
-
-    const segments =
-      pathname.split("/");
-
-    if (segments.length > 1) {
-      segments[1] =
-        targetLocale;
-
-      return (
-        segments.join("/") ||
-        `/${targetLocale}`
-      );
-    }
-
-    return `/${targetLocale}`;
-  };
+  const displayName = profile?.full_name?.trim() || tNav("profile");
 
   /* =====================================================
      NAVIGATION
@@ -139,63 +109,28 @@ export default function Navbar() {
 
   const navLinks = [
     {
-      href: `/${locale}`,
-      label:
-        locale === "ar"
-          ? "الرئيسية"
-          : locale === "en"
-            ? "Home"
-            : "Accueil",
+      href: "/",
+      label: tNav("home"),
     },
-
     {
-      href: `/${locale}/formations`,
-      label:
-        locale === "ar"
-          ? "التكوينات"
-          : locale === "en"
-            ? "Courses"
-            : "Formations",
+      href: "/formations",
+      label: tNav("formations"),
     },
-
     {
-      href: `/${locale}/ateliers`,
-      label:
-        locale === "ar"
-          ? "الورشات"
-          : locale === "en"
-            ? "Workshops"
-            : "Ateliers",
+      href: "/ateliers",
+      label: tNav("ateliers"),
     },
-
     {
-      href: `/${locale}/community`,
-      label:
-        locale === "ar"
-          ? "المجتمع"
-          : locale === "en"
-            ? "Community"
-            : "Communauté",
+      href: "/community",
+      label: tNav("community"),
     },
-
     {
-      href: `/${locale}/messages`,
-      label:
-        locale === "ar"
-          ? "الرسائل"
-          : locale === "en"
-            ? "Messages"
-            : "Messagerie",
+      href: "/messages",
+      label: tNav("messages"),
     },
-
     {
-      href: `/${locale}/dashboard`,
-      label:
-        locale === "ar"
-          ? "لوحة التحكم"
-          : locale === "en"
-            ? "Dashboard"
-            : "Dashboard",
+      href: "/dashboard",
+      label: tNav("dashboard"),
     },
   ];
 
@@ -203,23 +138,12 @@ export default function Navbar() {
      ACTIVE LINK
   ===================================================== */
 
-  const isActive = (
-    href: string
-  ) => {
-    if (
-      href === `/${locale}` &&
-      (
-        pathname === `/${locale}` ||
-        pathname === "/"
-      )
-    ) {
-      return true;
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/" || pathname === "";
     }
 
-    return (
-      pathname.startsWith(href) &&
-      href !== `/${locale}`
-    );
+    return pathname.startsWith(href);
   };
 
   return (
@@ -275,7 +199,8 @@ export default function Navbar() {
           ================================================= */}
 
           <Link
-            href={`/${locale}`}
+            href="/"
+            prefetch={true}
             className="
               group
               flex
@@ -334,13 +259,13 @@ export default function Navbar() {
               "
             >
               {navLinks.map((link) => {
-                const active =
-                  isActive(link.href);
+                const active = isActive(link.href);
 
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
+                    prefetch={true}
                     className={`
                       relative
                       rounded-full
@@ -408,11 +333,7 @@ export default function Navbar() {
             <div className="relative">
               <button
                 type="button"
-                onClick={() =>
-                  setLangDropdownOpen(
-                    !langDropdownOpen
-                  )
-                }
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 className="
                   flex
                   h-10
@@ -429,7 +350,7 @@ export default function Navbar() {
                   hover:bg-white/[0.06]
                   hover:text-white
                 "
-                aria-label="Changer de langue"
+                aria-label={tNav("changeLanguage")}
               >
                 <Globe
                   className="
@@ -439,13 +360,9 @@ export default function Navbar() {
                   "
                 />
 
-                <span>
-                  {locale}
-                </span>
+                <span>{locale}</span>
 
-                <span className="text-[8px] opacity-40">
-                  ▼
-                </span>
+                <span className="text-[8px] opacity-40">▼</span>
               </button>
 
               {/* Language dropdown */}
@@ -454,7 +371,7 @@ export default function Navbar() {
                 <div
                   className="
                     absolute
-                    right-0
+                    end-0
                     top-12
                     z-50
                     w-32
@@ -474,19 +391,13 @@ export default function Navbar() {
                       ["ar", "العربية"],
                       ["en", "English"],
                     ] as [string, string][]
-                  ).map(
-                    ([code, label]) => (
-                      <Link
-                        key={code}
-                        href={getLocalizedPath(
-                          code
-                        )}
-                        onClick={() =>
-                          setLangDropdownOpen(
-                            false
-                          )
-                        }
-                        className={`
+                  ).map(([code, label]) => (
+                    <Link
+                      key={code}
+                      href={pathname || "/"}
+                      locale={code}
+                      onClick={() => setLangDropdownOpen(false)}
+                      className={`
                           flex
                           items-center
                           justify-between
@@ -510,24 +421,21 @@ export default function Navbar() {
                               `
                           }
                         `}
-                      >
-                        <span>
-                          {label}
-                        </span>
+                    >
+                      <span>{label}</span>
 
-                        {locale === code && (
-                          <span
-                            className="
+                      {locale === code && (
+                        <span
+                          className="
                               h-1.5
                               w-1.5
                               rounded-full
                               bg-lime-400
                             "
-                          />
-                        )}
-                      </Link>
-                    )
-                  )}
+                        />
+                      )}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
@@ -536,19 +444,18 @@ export default function Navbar() {
                 LOGGED-IN USER
             =============================================== */}
 
-            {!loading &&
-              profile && (
-                <div
-                  className="
-                    ml-1
+            {!loading && profile && (
+              <div
+                className="
+                    ms-1
                     flex
                     items-center
                     gap-1
                   "
-                >
-                  <Link
-                    href={`/${locale}/profile`}
-                    className="
+              >
+                <Link
+                  href="/profile"
+                  className="
                       group
                       flex
                       items-center
@@ -558,22 +465,18 @@ export default function Navbar() {
                       border-white/[0.08]
                       bg-white/[0.035]
                       p-1
-                      pr-3
+                      pe-3
                       transition
                       hover:border-lime-400/30
                       hover:bg-lime-400/[0.07]
                     "
-                  >
-                    <div className="relative">
-                      {profile.avatar_url ? (
-                        <img
-                          src={
-                            profile.avatar_url
-                          }
-                          alt={
-                            displayName
-                          }
-                          className="
+                >
+                  <div className="relative">
+                    {profile.avatar_url ? (
+                      <img
+                        src={profile.avatar_url}
+                        alt={displayName}
+                        className="
                             h-7
                             w-7
                             rounded-full
@@ -581,10 +484,10 @@ export default function Navbar() {
                             border-white/10
                             object-cover
                           "
-                        />
-                      ) : (
-                        <div
-                          className="
+                      />
+                    ) : (
+                      <div
+                        className="
                             flex
                             h-7
                             w-7
@@ -596,18 +499,16 @@ export default function Navbar() {
                             font-black
                             text-black
                           "
-                        >
-                          {displayName
-                            .charAt(0)
-                            .toUpperCase()}
-                        </div>
-                      )}
+                      >
+                        {displayName.charAt(0).toUpperCase()}
+                      </div>
+                    )}
 
-                      <span
-                        className="
+                    <span
+                      className="
                           absolute
                           bottom-0
-                          right-0
+                          end-0
                           h-2
                           w-2
                           rounded-full
@@ -615,11 +516,11 @@ export default function Navbar() {
                           border-[#0b0b0b]
                           bg-lime-400
                         "
-                      />
-                    </div>
+                    />
+                  </div>
 
-                    <span
-                      className="
+                  <span
+                    className="
                         hidden
                         max-w-24
                         truncate
@@ -630,22 +531,18 @@ export default function Navbar() {
                         group-hover:text-lime-400
                         xl:block
                       "
-                    >
-                      {displayName}
-                    </span>
-                  </Link>
+                  >
+                    {displayName}
+                  </span>
+                </Link>
 
-                  <button
-                    type="button"
-                    onClick={() => {
-                      void handleLogout();
-                    }}
-                    title={
-                      locale === "ar"
-                        ? "خروج"
-                        : "Déconnexion"
-                    }
-                    className="
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleLogout();
+                  }}
+                  title={tNav("signOut")}
+                  className="
                       flex
                       h-9
                       w-9
@@ -657,27 +554,26 @@ export default function Navbar() {
                       hover:bg-red-400/10
                       hover:text-red-400
                     "
-                  >
-                    <LogOut
-                      className="
+                >
+                  <LogOut
+                    className="
                         h-3.5
                         w-3.5
                       "
-                    />
-                  </button>
-                </div>
-              )}
+                  />
+                </button>
+              </div>
+            )}
 
             {/* ===============================================
                 GUEST
             =============================================== */}
 
-            {!profile &&
-              !loading && (
-                <Link
-                  href={`/${locale}/sign-in`}
-                  className="
-                    ml-1
+            {!profile && !loading && (
+              <Link
+                href="/sign-in"
+                className="
+                    ms-1
                     inline-flex
                     items-center
                     gap-2
@@ -695,23 +591,17 @@ export default function Navbar() {
                     hover:shadow-[0_0_25px_rgba(163,230,53,0.20)]
                     active:scale-[0.98]
                   "
-                >
-                  <User
-                    className="
+              >
+                <User
+                  className="
                       h-3.5
                       w-3.5
                     "
-                  />
+                />
 
-                  <span>
-                    {locale === "ar"
-                      ? "تسجيل الدخول"
-                      : locale === "en"
-                        ? "Sign In"
-                        : "Connexion"}
-                  </span>
-                </Link>
-              )}
+                <span>{tNav("signIn")}</span>
+              </Link>
+            )}
           </div>
         </div>
       </nav>
@@ -748,10 +638,7 @@ export default function Navbar() {
         >
           {/* Mobile logo */}
 
-          <Link
-            href={`/${locale}`}
-            className="px-3"
-          >
+          <Link href="/" className="px-3">
             <Image
               src="/logo.png"
               alt="Evolve"
@@ -766,35 +653,56 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Mobile button */}
+          {/* Mobile Language & Menu Buttons */}
 
-          <button
-            type="button"
-            onClick={() =>
-              setMobileMenuOpen(
-                !mobileMenuOpen
-              )
-            }
-            className="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-full
-              text-white/70
-              transition
-              hover:bg-white/[0.07]
-              hover:text-lime-400
-            "
-            aria-label="Menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
+          <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 text-[11px] font-semibold">
+              {(
+                [
+                  ["fr", "FR"],
+                  ["ar", "ع"],
+                  ["en", "EN"],
+                ] as [string, string][]
+              ).map(([code, label]) => (
+                <Link
+                  key={code}
+                  href={pathname || "/"}
+                  locale={code}
+                  className={`rounded-full px-2 py-0.5 transition ${
+                    locale === code
+                      ? "bg-lime-400 font-bold text-black"
+                      : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                text-white/70
+                transition
+                hover:bg-white/[0.07]
+                hover:text-lime-400
+              "
+              aria-label="Menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* ===================================================
@@ -817,20 +725,14 @@ export default function Navbar() {
           >
             <div className="flex flex-col">
               {navLinks.map((link) => {
-                const active =
-                  isActive(
-                    link.href
-                  );
+                const active = isActive(link.href);
 
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    onClick={() =>
-                      setMobileMenuOpen(
-                        false
-                      )
-                    }
+                    prefetch={true}
+                    onClick={() => setMobileMenuOpen(false)}
                     className={`
                       flex
                       items-center
@@ -856,9 +758,7 @@ export default function Navbar() {
                       }
                     `}
                   >
-                    <span>
-                      {link.label}
-                    </span>
+                    <span>{link.label}</span>
 
                     {active && (
                       <span
@@ -876,7 +776,7 @@ export default function Navbar() {
 
               {/* Mobile user */}
 
-              {profile && (
+              {profile ? (
                 <div
                   className="
                     mt-2
@@ -890,12 +790,8 @@ export default function Navbar() {
                   "
                 >
                   <Link
-                    href={`/${locale}/profile`}
-                    onClick={() =>
-                      setMobileMenuOpen(
-                        false
-                      )
-                    }
+                    href="/profile"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="
                       flex
                       items-center
@@ -913,17 +809,13 @@ export default function Navbar() {
                       "
                     />
 
-                    <span>
-                      {displayName}
-                    </span>
+                    <span>{displayName}</span>
                   </Link>
 
                   <button
                     type="button"
                     onClick={() => {
-                      setMobileMenuOpen(
-                        false
-                      );
+                      setMobileMenuOpen(false);
 
                       void handleLogout();
                     }}
@@ -943,13 +835,22 @@ export default function Navbar() {
                       "
                     />
 
-                    <span>
-                      {locale === "ar"
-                        ? "خروج"
-                        : "Déconnexion"}
-                    </span>
+                    <span>{tNav("signOut")}</span>
                   </button>
                 </div>
+              ) : (
+                !loading && (
+                  <div className="mt-2 border-t border-white/10 px-4 pt-3">
+                    <Link
+                      href="/sign-in"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-lime-400 py-3 text-xs font-bold text-black"
+                    >
+                      <User className="h-4 w-4" />
+                      <span>{tNav("signIn")}</span>
+                    </Link>
+                  </div>
+                )
               )}
             </div>
           </div>

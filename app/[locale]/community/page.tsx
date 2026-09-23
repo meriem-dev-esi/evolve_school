@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SubmitProjectForm from "./SubmitProjectForm";
-import CommunityFilters from "./CommunityFilters";
-import { createClient } from "@/lib/supabase/server";
 import {
-  Sparkles,
-  Heart,
+  ArrowLeft,
+  ArrowRight,
+  Code2,
   ExternalLink,
   Github,
-  ArrowRight,
-  ArrowLeft,
-  Code2,
+  Heart,
+  Sparkles,
 } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { createClient } from "@/lib/supabase/server";
+import CommunityFilters from "./CommunityFilters";
+import SubmitProjectForm from "./SubmitProjectForm";
 
 export const metadata: Metadata = {
   title: "Communauté & Projets Étudiants — Evolve Academy",
@@ -60,10 +60,7 @@ type Profile = {
   role: string | null;
 };
 
-export default async function CommunityPage({
-  params,
-  searchParams,
-}: Props) {
+export default async function CommunityPage({ params, searchParams }: Props) {
   const { locale } = await params;
   const filters = await searchParams;
 
@@ -76,9 +73,7 @@ export default async function CommunityPage({
   const currentPage = Math.max(1, Number.parseInt(filters.page || "1", 10));
   const pageSize = 12;
 
-  const { data, error } = await supabase
-    .from("community_projects")
-    .select(`
+  const { data, error } = await supabase.from("community_projects").select(`
       id,
       user_id,
       title,
@@ -155,9 +150,7 @@ export default async function CommunityPage({
   ).sort();
 
   const technologies = Array.from(
-    new Set(
-      allProjects.flatMap((project) => project.technologies ?? []),
-    ),
+    new Set(allProjects.flatMap((project) => project.technologies ?? [])),
   ).sort();
 
   // Pagination
@@ -191,22 +184,29 @@ export default async function CommunityPage({
             </h1>
 
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/60 sm:text-base">
-              Explorez les réalisations, portfolios, applications et designs créés par les talents de l'académie en Algérie.
+              Explorez les réalisations, portfolios, applications et designs
+              créés par les talents de l'académie en Algérie.
             </p>
 
             {/* Community Stats Strip */}
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 max-w-3xl">
               <div className="glass-panel rounded-2xl p-3.5 border border-white/10">
-                <div className="text-lg font-black text-white">{totalCount}+</div>
+                <div className="text-lg font-black text-white">
+                  {totalCount}+
+                </div>
                 <div className="text-[11px] text-white/50">Projets publiés</div>
               </div>
               <div className="glass-panel rounded-2xl p-3.5 border border-white/10">
                 <div className="text-lg font-black text-brand">+1 200</div>
-                <div className="text-[11px] text-white/50">Retours & feedbacks</div>
+                <div className="text-[11px] text-white/50">
+                  Retours & feedbacks
+                </div>
               </div>
               <div className="glass-panel rounded-2xl p-3.5 border border-white/10">
                 <div className="text-lg font-black text-sky-400">95%</div>
-                <div className="text-[11px] text-white/50">Insertion professionnelle</div>
+                <div className="text-[11px] text-white/50">
+                  Insertion professionnelle
+                </div>
               </div>
               <div className="glass-panel rounded-2xl p-3.5 border border-white/10">
                 <div className="text-lg font-black text-amber-400">Top 10</div>
@@ -238,7 +238,8 @@ export default async function CommunityPage({
               </h2>
 
               <p className="mt-1 max-w-xl text-xs leading-relaxed text-white/60">
-                Gagnez en visibilité, recevez les retours des mentors et connectez-vous avec de futurs recruteurs.
+                Gagnez en visibilité, recevez les retours des mentors et
+                connectez-vous avec de futurs recruteurs.
               </p>
 
               <div className="mt-6 max-w-3xl">
@@ -269,9 +270,12 @@ export default async function CommunityPage({
                 <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 text-2xl border border-white/10">
                   <Code2 className="h-6 w-6 text-brand" />
                 </div>
-                <h3 className="text-lg font-bold text-white">Aucun projet trouvé</h3>
+                <h3 className="text-lg font-bold text-white">
+                  Aucun projet trouvé
+                </h3>
                 <p className="mt-1.5 text-xs text-white/50 max-w-sm mx-auto">
-                  Aucune création ne correspond à vos critères. Essayez d'élargir votre recherche.
+                  Aucune création ne correspond à vos critères. Essayez
+                  d'élargir votre recherche.
                 </p>
                 <Link
                   href={`/${locale}/community`}
@@ -342,7 +346,9 @@ export default async function CommunityPage({
                                   />
                                 ) : (
                                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-brand/20 text-[10px] font-bold text-brand">
-                                    {(profile?.full_name || "M").charAt(0).toUpperCase()}
+                                    {(profile?.full_name || "M")
+                                      .charAt(0)
+                                      .toUpperCase()}
                                   </div>
                                 )}
                               </div>
@@ -350,7 +356,9 @@ export default async function CommunityPage({
                                 {profile?.full_name || "Membre Evolve"}
                               </span>
                               {profile?.role && (
-                                <span className="text-white/40 text-[11px]">· {profile.role}</span>
+                                <span className="text-white/40 text-[11px]">
+                                  · {profile.role}
+                                </span>
                               )}
                             </div>
 
@@ -361,23 +369,26 @@ export default async function CommunityPage({
                             )}
 
                             {/* Technology Chips */}
-                            {project.technologies && project.technologies.length > 0 && (
-                              <div className="mt-4 flex flex-wrap gap-1.5">
-                                {project.technologies.slice(0, 4).map((tech) => (
-                                  <span
-                                    key={tech}
-                                    className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-white/80"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                                {project.technologies.length > 4 && (
-                                  <span className="rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] text-white/40">
-                                    +{project.technologies.length - 4}
-                                  </span>
-                                )}
-                              </div>
-                            )}
+                            {project.technologies &&
+                              project.technologies.length > 0 && (
+                                <div className="mt-4 flex flex-wrap gap-1.5">
+                                  {project.technologies
+                                    .slice(0, 4)
+                                    .map((tech) => (
+                                      <span
+                                        key={tech}
+                                        className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-white/80"
+                                      >
+                                        {tech}
+                                      </span>
+                                    ))}
+                                  {project.technologies.length > 4 && (
+                                    <span className="rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] text-white/40">
+                                      +{project.technologies.length - 4}
+                                    </span>
+                                  )}
+                                </div>
+                              )}
                           </div>
                         </div>
 
@@ -430,25 +441,27 @@ export default async function CommunityPage({
                 {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="mt-12 flex justify-center items-center gap-2">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                      <Link
-                        key={pageNum}
-                        href={`/${locale}/community?${new URLSearchParams({
-                          ...(search ? { q: search } : {}),
-                          ...(category ? { category } : {}),
-                          ...(technology ? { technology } : {}),
-                          ...(sort ? { sort } : {}),
-                          page: pageNum.toString(),
-                        }).toString()}`}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
-                          pageNum === currentPage
-                            ? "bg-brand text-black shadow-[0_0_15px_rgba(95,236,107,0.4)]"
-                            : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white"
-                        }`}
-                      >
-                        {pageNum}
-                      </Link>
-                    ))}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                      (pageNum) => (
+                        <Link
+                          key={pageNum}
+                          href={`/${locale}/community?${new URLSearchParams({
+                            ...(search ? { q: search } : {}),
+                            ...(category ? { category } : {}),
+                            ...(technology ? { technology } : {}),
+                            ...(sort ? { sort } : {}),
+                            page: pageNum.toString(),
+                          }).toString()}`}
+                          className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+                            pageNum === currentPage
+                              ? "bg-brand text-black shadow-[0_0_15px_rgba(95,236,107,0.4)]"
+                              : "bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white"
+                          }`}
+                        >
+                          {pageNum}
+                        </Link>
+                      ),
+                    )}
                   </div>
                 )}
               </>

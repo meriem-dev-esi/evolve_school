@@ -4,7 +4,6 @@
 -- ============================================================================
 
 -- 1. COURSES PERFORMANCE INDEXES
--- Optimizes homepage filtering, category browsing, and course search
 CREATE INDEX IF NOT EXISTS idx_courses_published_created 
   ON public.courses (is_published, created_at DESC);
 
@@ -17,7 +16,6 @@ CREATE INDEX IF NOT EXISTS idx_courses_flags
   WHERE is_published = true;
 
 -- 2. ENROLLMENTS & PAYMENT LOOKUPS
--- Ensures O(1) checks for user enrollment & duplicate payment prevention
 CREATE INDEX IF NOT EXISTS idx_enrollments_user_course_paid 
   ON public.enrollments (user_id, course_id, payment_status);
 
@@ -25,7 +23,6 @@ CREATE INDEX IF NOT EXISTS idx_enrollments_user_enrolled
   ON public.enrollments (user_id, enrolled_at DESC);
 
 -- 3. COMMUNITY PROJECTS & SHOWCASE
--- Accelerates community pagination, filtering by category and popularity sorting
 CREATE INDEX IF NOT EXISTS idx_community_projects_user_created 
   ON public.community_projects (user_id, created_at DESC);
 
@@ -52,16 +49,19 @@ CREATE INDEX IF NOT EXISTS idx_lesson_progress_user_completed
 CREATE INDEX IF NOT EXISTS idx_lessons_course_order 
   ON public.lessons (course_id, order_index ASC);
 
--- 6. DIRECT MESSAGING & CHAT SCHEMA (Native Supabase Support)
+-- 6. DIRECT MESSAGING & CHAT SCHEMA
 CREATE TABLE IF NOT EXISTS public.conversations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Active le RLS sur les conversations
+ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
+
 CREATE TABLE IF NOT EXISTS public.direct_messages (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  conversation_id TEXT NOT NULL,
+  conversation_id UUID NOT NULL REFERENCES public.conversations(id) ON DELETE CASCADE, -- Type corrigé + FK
   sender_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   receiver_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   content TEXT NOT NULL CHECK (char_length(trim(content)) > 0),
@@ -75,7 +75,7 @@ CREATE INDEX IF NOT EXISTS idx_direct_messages_conversation
 CREATE INDEX IF NOT EXISTS idx_direct_messages_receiver_read 
   ON public.direct_messages (receiver_id, is_read);
 
--- Row Level Security for Direct Messages
+-- Row Level Security pour Direct Messages
 ALTER TABLE public.direct_messages ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Users can read messages they sent or received"
@@ -87,3 +87,15 @@ CREATE POLICY "Users can insert messages where they are the sender"
   ON public.direct_messages
   FOR INSERT
   WITH CHECK (auth.uid() = sender_id);
+
+-- RLS pour Conversations : Seuls les participants aux messages de la conversation peuvent la lire
+CREATE POLICY "Users can read conversations they belong to"
+  ON public.conversations
+  FOR SELECT
+  USING (
+    EXISTS (
+      SELECT 1 FROM public.direct_messages
+      WHERE conversation_id = public.conversations.id
+      AND (sender_id = auth.uid() OR receiver_id = auth.uid())
+    )
+  );

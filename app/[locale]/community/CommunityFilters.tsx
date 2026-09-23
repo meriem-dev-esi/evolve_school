@@ -1,17 +1,14 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type Props = {
   categories: string[];
   technologies: string[];
 };
 
-export default function CommunityFilters({
-  categories,
-  technologies,
-}: Props) {
+export default function CommunityFilters({ categories, technologies }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -30,9 +27,9 @@ export default function CommunityFilters({
 
   const hasActiveFilters = Boolean(
     searchParams.get("q") ||
-    searchParams.get("category") ||
-    searchParams.get("technology") ||
-    (searchParams.get("sort") && searchParams.get("sort") !== "newest")
+      searchParams.get("category") ||
+      searchParams.get("technology") ||
+      (searchParams.get("sort") && searchParams.get("sort") !== "newest"),
   );
 
   const resetAll = () => {
@@ -63,7 +60,9 @@ export default function CommunityFilters({
             onChange={(e) => updateFilter("category", e.target.value)}
             className="w-full rounded-2xl border border-white/10 bg-zinc-900/90 px-3.5 py-2.5 text-xs text-white/90 outline-none transition focus:border-brand/50 cursor-pointer appearance-none"
           >
-            <option value="" className="bg-zinc-950 text-white">Toutes les spécialités</option>
+            <option value="" className="bg-zinc-950 text-white">
+              Toutes les spécialités
+            </option>
             {categories.map((cat) => (
               <option key={cat} value={cat} className="bg-zinc-950 text-white">
                 {cat}
@@ -82,9 +81,15 @@ export default function CommunityFilters({
             onChange={(e) => updateFilter("technology", e.target.value)}
             className="w-full rounded-2xl border border-white/10 bg-zinc-900/90 px-3.5 py-2.5 text-xs text-white/90 outline-none transition focus:border-brand/50 cursor-pointer appearance-none"
           >
-            <option value="" className="bg-zinc-950 text-white">Toutes les technologies</option>
+            <option value="" className="bg-zinc-950 text-white">
+              Toutes les technologies
+            </option>
             {technologies.map((tech) => (
-              <option key={tech} value={tech} className="bg-zinc-950 text-white">
+              <option
+                key={tech}
+                value={tech}
+                className="bg-zinc-950 text-white"
+              >
                 {tech}
               </option>
             ))}
@@ -101,8 +106,12 @@ export default function CommunityFilters({
             onChange={(e) => updateFilter("sort", e.target.value)}
             className="w-full rounded-2xl border border-white/10 bg-zinc-900/90 px-3.5 py-2.5 text-xs text-white/90 outline-none transition focus:border-brand/50 cursor-pointer appearance-none"
           >
-            <option value="newest" className="bg-zinc-950 text-white">Plus récents</option>
-            <option value="likes" className="bg-zinc-950 text-white">Plus populaires ❤️</option>
+            <option value="newest" className="bg-zinc-950 text-white">
+              Plus récents
+            </option>
+            <option value="likes" className="bg-zinc-950 text-white">
+              Plus populaires ❤️
+            </option>
           </select>
           <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[10px] text-white/40">
             ▼
@@ -117,7 +126,11 @@ export default function CommunityFilters({
           {searchParams.get("q") && (
             <span className="inline-flex items-center gap-1 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] font-semibold text-brand">
               <span>"{searchParams.get("q")}"</span>
-              <button type="button" onClick={() => updateFilter("q", "")} className="hover:opacity-75">
+              <button
+                type="button"
+                onClick={() => updateFilter("q", "")}
+                className="hover:opacity-75"
+              >
                 <X size={12} />
               </button>
             </span>
@@ -125,7 +138,11 @@ export default function CommunityFilters({
           {searchParams.get("category") && (
             <span className="inline-flex items-center gap-1 rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-[11px] font-semibold text-sky-400">
               <span>{searchParams.get("category")}</span>
-              <button type="button" onClick={() => updateFilter("category", "")} className="hover:opacity-75">
+              <button
+                type="button"
+                onClick={() => updateFilter("category", "")}
+                className="hover:opacity-75"
+              >
                 <X size={12} />
               </button>
             </span>
@@ -133,7 +150,11 @@ export default function CommunityFilters({
           {searchParams.get("technology") && (
             <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-[11px] font-semibold text-amber-400">
               <span>{searchParams.get("technology")}</span>
-              <button type="button" onClick={() => updateFilter("technology", "")} className="hover:opacity-75">
+              <button
+                type="button"
+                onClick={() => updateFilter("technology", "")}
+                className="hover:opacity-75"
+              >
                 <X size={12} />
               </button>
             </span>

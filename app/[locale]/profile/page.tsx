@@ -1,6 +1,6 @@
 import Link from "next/link";
-import ProfileForm from "@/components/ProfileForm";
 import LearningPreferencesForm from "@/components/LearningPreferencesForm";
+import ProfileForm from "@/components/ProfileForm";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function ProfilePage({
@@ -24,7 +24,7 @@ export default async function ProfilePage({
     return (
       <main className="flex min-h-dvh items-center justify-center bg-canvas px-6 text-ink">
         <div className="w-full max-w-md text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-50 border border-violet-100">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-lime-500/10 border border-lime-500/20">
             <span className="text-2xl">👤</span>
           </div>
 
@@ -38,7 +38,7 @@ export default async function ProfilePage({
 
           <Link
             href={`/${locale}/sign-in`}
-            className="mt-8 inline-flex rounded-full bg-violet-600 px-7 py-3 font-semibold text-white transition hover:bg-violet-700 hover:shadow-lg hover:shadow-violet-200"
+            className="mt-8 inline-flex rounded-full bg-lime-400 px-7 py-3 font-semibold text-black transition hover:bg-lime-300 hover:shadow-lg hover:shadow-lime-400/20"
           >
             Sign In
           </Link>
@@ -64,10 +64,9 @@ export default async function ProfilePage({
   return (
     <main className="min-h-dvh bg-canvas px-5 py-20 text-ink sm:px-6 lg:px-10">
       <div className="mx-auto max-w-5xl">
-
         {/* Header */}
         <header className="mb-12">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-violet-700">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-lime-600 dark:text-lime-400">
             Evolve
           </p>
 
@@ -76,15 +75,14 @@ export default async function ProfilePage({
           </h1>
 
           <p className="mt-4 max-w-2xl text-base leading-7 text-gray-500">
-            Manage your account, personal information, and learning
-            preferences in one place.
+            Manage your account, personal information, and learning preferences
+            in one place.
           </p>
         </header>
 
         {/* Profile overview */}
         <section className="mb-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-
             <div className="flex items-center gap-5">
               {profile?.avatar_url ? (
                 <img
@@ -93,7 +91,7 @@ export default async function ProfilePage({
                   className="h-20 w-20 rounded-full border border-gray-200 object-cover shadow-sm"
                 />
               ) : (
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-tr from-violet-600 to-purple-400 text-2xl font-bold text-white shadow-sm">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-tr from-lime-400 to-emerald-500 text-2xl font-bold text-black shadow-sm">
                   {displayName.charAt(0).toUpperCase()}
                 </div>
               )}
@@ -103,9 +101,7 @@ export default async function ProfilePage({
                   {displayName}
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-500">
-                  {email}
-                </p>
+                <p className="mt-1 text-sm text-gray-500">{email}</p>
               </div>
             </div>
 
@@ -138,7 +134,7 @@ export default async function ProfilePage({
         {/* Learning preferences */}
         <section className="mt-14 border-t border-gray-200 pt-14">
           <div className="mb-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-700">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-lime-600 dark:text-lime-400">
               Personalization
             </p>
 
@@ -147,14 +143,13 @@ export default async function ProfilePage({
             </h2>
 
             <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-500">
-              Tell Evolve what you want to learn so we can personalize
-              your course recommendations.
+              Tell Evolve what you want to learn so we can personalize your
+              course recommendations.
             </p>
           </div>
 
           <LearningPreferencesForm />
         </section>
-
       </div>
     </main>
   );

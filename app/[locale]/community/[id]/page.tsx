@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import Comments from "./Comments";
-import LikeButton from "./LikeButton";
-import ProjectActions from "./ProjectActions";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { createClient } from "@/lib/supabase/server";
 import {
   ArrowLeft,
+  Calendar,
+  Code2,
   ExternalLink,
   Github,
   MessageSquare,
-  Calendar,
   Sparkles,
-  Code2,
 } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { createClient } from "@/lib/supabase/server";
+import Comments from "./Comments";
+import LikeButton from "./LikeButton";
+import ProjectActions from "./ProjectActions";
 
 type Props = {
   params: Promise<{

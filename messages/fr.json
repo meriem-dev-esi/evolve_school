@@ -1,22 +1,132 @@
 {
   "nav": {
     "home": "Accueil",
+    "formations": "Formations",
+    "ateliers": "Ateliers",
+    "community": "Communauté",
+    "messages": "Messagerie",
+    "dashboard": "Tableau de bord",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "profile": "Profil",
+    "signOut": "Déconnexion",
+    "changeLanguage": "Changer de langue",
     "disciplines": "Disciplines",
-    "packs": "Formules",
-    "signIn": "Se connecter"
+    "packs": "Formules"
+  },
+  "footer": {
+    "tagline": "L'académie d'élite pour les métiers du numérique et du design en Algérie.",
+    "navigation": "Navigation",
+    "home": "Accueil",
+    "formations": "Formations",
+    "workshops": "Ateliers",
+    "community": "Communauté",
+    "messages": "Messagerie",
+    "dashboard": "Tableau de bord",
+    "contact": "Contact",
+    "statusOperational": "Plateforme Opérationnelle 24/7",
+    "location": "Alger, Algérie · contact@evolve-academy.dz",
+    "rights": "Tous droits réservés. Evolve Academy © 2026"
+  },
+  "hero": {
+    "certifiedBadge": "✦ FORMATION CERTIFIANTE",
+    "defaultDescription": "Apprenez directement auprès d'experts du domaine avec des projets concrets, du mentorat en direct et une certification reconnue.",
+    "startNow": "Commencer maintenant",
+    "viewCatalog": "Voir le catalogue",
+    "learnersCount": "+5 000 Apprenants",
+    "rating": "4.9 / 5",
+    "reviewsCount": "(1,200+ avis vérifiés)",
+    "practicalNotice": "100% Pratique & Ateliers",
+    "free": "Gratuit"
   },
   "home": {
     "title": "Evolve Academy",
     "tagline": "Formations créatives, en présentiel et en ligne.",
-    "browseDisciplines": "Découvrir les disciplines"
+    "browseDisciplines": "Découvrir les disciplines",
+    "recommendedForYou": "Recommandé pour vous",
+    "yourEnrollmentPath": "Votre parcours d'inscription",
+    "continueLearning": "Continuer l'apprentissage",
+    "becauseYouCompleted": "Parce que vous avez terminé",
+    "beginnerStarterPack": "Pack débutant",
+    "partnerCoursesZone": "Formations partenaires",
+    "watchlist": "Favoris",
+    "mostSearchedThisWeek": "Les plus recherchés cette semaine",
+    "exclusiveToEvolve": "Exclusif à Evolve",
+    "trending": "Tendances",
+    "comingSoon": "Bientôt disponible",
+    "inProgress": "En cours",
+    "progress": "Progression",
+    "continueButton": "Continuer →"
+  },
+  "common": {
+    "viewAll": "Voir tout",
+    "emptySection": "Aucune formation disponible pour le moment dans cette section.",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "free": "Gratuit"
+  },
+  "courseCard": {
+    "priceLabel": "Tarif",
+    "free": "Gratuit",
+    "practice": "Pratique"
+  },
+  "seriesCard": {
+    "learningPath": "Parcours d'Apprentissage",
+    "guidedPath": "Parcours Guidé",
+    "coursesCount": "{count, plural, =0 {0 formation} one {1 formation} other {# formations}}",
+    "viewSteps": "Voir les étapes",
+    "continue": "Continuer"
+  },
+  "lockedCourseCard": {
+    "memberSpace": "Espace Membre",
+    "personalizedContent": "Contenu Personnalisé",
+    "description": "Connectez-vous pour accéder à vos recommandations, votre progression et vos cours sauvegardés.",
+    "exclusiveAccess": "Accès exclusif",
+    "signIn": "Connexion"
+  },
+  "auth": {
+    "badge": "Evolve Academy Auth",
+    "welcomeBack": "Bon retour parmi nous",
+    "joinAcademy": "Rejoignez l'académie",
+    "signInSubtitle": "Accédez à vos cours, attestations et projets en temps réel.",
+    "signUpSubtitle": "Créez votre compte apprenant relié à votre base de données Supabase.",
+    "tabSignIn": "Se connecter",
+    "tabSignUp": "Créer un compte",
+    "fullNameLabel": "Nom complet",
+    "fullNamePlaceholder": "Ex : Sarah Benali",
+    "emailLabel": "Email professionnel ou personnel",
+    "emailPlaceholder": "prenom.nom@gmail.com",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "submitSignIn": "Se connecter à mon compte",
+    "submitSignUp": "Créer mon compte apprenant",
+    "errorEmptyName": "Veuillez saisir votre nom complet.",
+    "errorEmptyPassword": "Le mot de passe doit comporter au moins 6 caractères.",
+    "successSignIn": "Connexion réussie ! Redirection...",
+    "successSignUp": "Compte créé avec succès ! Bienvenue.",
+    "errorSignInPrefix": "Erreur de connexion : ",
+    "errorSignUpPrefix": "Erreur d'inscription : "
+  },
+  "formations": {
+    "badge": "Parcours Certifiants",
+    "title": "Catalogue des",
+    "titleGradient": "Formations",
+    "subtitle": "Des parcours d'apprentissage complets, structurés étape par étape avec des projets pratiques et un mentorat continu.",
+    "globalProgress": "Votre progression globale",
+    "completedCoursesCount": "{completed} sur {total} cours complétés",
+    "completedTitle": "Formation terminée avec succès 🎓",
+    "completedDesc": "Félicitations ! Vous avez validé tous les modules de ce parcours d'apprentissage. Votre certificat est prêt dans votre profil.",
+    "searchPlaceholder": "Rechercher une formation, compétence, mot-clé...",
+    "clearSearch": "Effacer la recherche",
+    "resultsFor": "Résultats pour",
+    "specialties": "Spécialités",
+    "allFormations": "Toutes les formations",
+    "emptySearchResults": "Aucune formation trouvée avec vos critères de recherche."
   },
   "disciplines": {
     "title": "Disciplines créatives",
     "intro": "Chaque discipline regroupe les cours publiés par nos formateurs.",
     "empty": "Aucune discipline n'a encore été publiée.",
     "countLabel": "{count, plural, =0 {aucune discipline} one {# discipline} other {# disciplines}}"
-  },
-  "footer": {
-    "rights": "Tous droits réservés."
   }
 }

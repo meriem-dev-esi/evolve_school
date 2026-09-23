@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
-import Link from "next/link";
-import { useLocale } from "next-intl";
 import {
   ArrowRight,
-  Clock,
   Award,
-  Star,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
+  Clock,
   Play,
-  CheckCircle2,
+  Star,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import EarthGlobe from "@/components/EarthGlobe";
+import { Link } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 type Course = {
   id: string;
@@ -34,6 +34,7 @@ export default function Hero() {
   const [error, setError] = useState<string | null>(null);
 
   const locale = useLocale();
+  const tHero = useTranslations("hero");
 
   // ─────────────────────────────────────────────
   // LOAD COURSES
@@ -50,7 +51,7 @@ export default function Hero() {
         const { data, error } = await supabase
           .from("courses")
           .select(
-            "id, title, description, image_url, price, duration, level, type"
+            "id, title, description, image_url, price, duration, level, type",
           )
           .eq("is_published", true)
           .limit(5);
@@ -66,9 +67,7 @@ export default function Hero() {
         console.error("Unexpected error loading courses:", err);
 
         setError(
-          err instanceof Error
-            ? err.message
-            : "Failed to load courses."
+          err instanceof Error ? err.message : "Failed to load courses.",
         );
       } finally {
         setLoading(false);
@@ -99,9 +98,7 @@ export default function Hero() {
   const handlePrev = () => {
     if (courses.length === 0) return;
 
-    setActive((current) =>
-      current === 0 ? courses.length - 1 : current - 1
-    );
+    setActive((current) => (current === 0 ? courses.length - 1 : current - 1));
   };
 
   const handleNext = () => {
@@ -187,17 +184,15 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14">
-
           {/* LEFT COLUMN */}
 
           <div className="lg:col-span-7">
-
             {/* Category */}
 
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
-                ✦ FORMATION CERTIFIANTE
+                {tHero("certifiedBadge")}
               </span>
 
               {activeCourse.type && (
@@ -216,14 +211,12 @@ export default function Hero() {
             {/* Description */}
 
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/55 sm:text-lg">
-              {activeCourse.description ||
-                "Apprenez directement auprès d'experts du domaine avec des projets concrets, du mentorat en direct et une certification reconnue."}
+              {activeCourse.description || tHero("defaultDescription")}
             </p>
 
             {/* Metadata */}
 
             <div className="mt-6 flex flex-wrap items-center gap-3 text-xs font-medium">
-
               {activeCourse.level && (
                 <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-white/70">
                   <Award className="h-3.5 w-3.5 text-white/70" />
@@ -240,38 +233,36 @@ export default function Hero() {
 
               <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 font-bold text-white">
                 {activeCourse.price && activeCourse.price > 0
-                  ? `${activeCourse.price.toLocaleString("fr-DZ")} DA`
-                  : "Gratuit"}
+                  ? `${activeCourse.price.toLocaleString(locale === "ar" ? "ar-DZ" : locale === "en" ? "en-US" : "fr-DZ")} DA`
+                  : tHero("free")}
               </span>
             </div>
 
             {/* CTA */}
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-
               <Link
-                href={`/${locale}/courses/${activeCourse.id}`}
+                href={`/courses/${activeCourse.id}`}
                 className="group inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-bold text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 hover:shadow-xl hover:shadow-white/10 active:scale-95"
               >
-                <span>Commencer maintenant</span>
+                <span>{tHero("startNow")}</span>
 
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
               </Link>
 
               <Link
-                href={`/${locale}/formations`}
+                href="/formations"
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-4 text-sm font-semibold text-white/80 transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:text-white"
               >
                 <Play className="h-4 w-4 text-white/40" />
 
-                <span>Voir le catalogue</span>
+                <span>{tHero("viewCatalog")}</span>
               </Link>
             </div>
 
             {/* Social proof */}
 
             <div className="mt-10 flex flex-wrap items-center gap-6 border-t border-white/10 pt-6 text-xs text-white/45">
-
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-1.5">
                   <span className="inline-block h-6 w-6 rounded-full border-2 border-[#0b0b0b] bg-white/20 text-center text-[10px] font-bold leading-6 text-white">
@@ -288,7 +279,7 @@ export default function Hero() {
                 </div>
 
                 <span className="font-medium text-white/70">
-                  +5 000 Apprenants
+                  {tHero("learnersCount")}
                 </span>
               </div>
 
@@ -296,16 +287,16 @@ export default function Hero() {
                 <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
 
                 <span className="font-semibold text-white/80">
-                  4.9 / 5
+                  {tHero("rating")}
                 </span>
 
-                <span>(1,200+ avis vérifiés)</span>
+                <span>{tHero("reviewsCount")}</span>
               </div>
 
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4 text-white/80" />
 
-                <span>100% Pratique &amp; Ateliers</span>
+                <span>{tHero("practicalNotice")}</span>
               </div>
             </div>
           </div>
@@ -323,7 +314,6 @@ export default function Hero() {
 
         {courses.length > 1 && (
           <div className="mt-14 flex items-center justify-between border-t border-white/10 pt-6">
-
             {/* Indicators */}
 
             <div className="flex items-center gap-2.5">
@@ -351,7 +341,7 @@ export default function Hero() {
                 aria-label="Previous slide"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/60 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-5 w-5 rtl:rotate-180" />
               </button>
 
               <button
@@ -360,7 +350,7 @@ export default function Hero() {
                 aria-label="Next slide"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white/60 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-5 w-5 rtl:rotate-180" />
               </button>
             </div>
           </div>

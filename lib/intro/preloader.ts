@@ -1,12 +1,12 @@
-const STEPS = [
-  "Discover",
-  "Diagnose",
-  "Design",
-  "Deliver",
-  "Evolve",
-];
+const STEPS = ["Discover", "Diagnose", "Design", "Deliver", "Evolve"] as const;
 
 const DURATION = 3000;
+
+declare global {
+  interface Window {
+    __introDone?: boolean;
+  }
+}
 
 const CSS = `
 .pl {
@@ -80,8 +80,13 @@ const CSS = `
 }
 `;
 
+function finish(): void {
+  window.__introDone = true;
+  window.dispatchEvent(new Event("intro:done"));
+}
+
 export function initPreloader(): void {
-  if (typeof document === "undefined") {
+  if (typeof document === "undefined" || window.__introDone) {
     return;
   }
 
@@ -109,7 +114,7 @@ export function initPreloader(): void {
             <i></i>
             <span>${step}</span>
           </li>
-        `
+        `,
       ).join("")}
     </ul>
   `;
@@ -120,33 +125,26 @@ export function initPreloader(): void {
   document.body.style.overflow = "hidden";
 
   const num = overlay.querySelector<HTMLElement>(".pl-num");
-  const steps =
-    overlay.querySelectorAll<HTMLElement>(".pl-steps li");
+  const steps = overlay.querySelectorAll<HTMLElement>(".pl-steps li");
 
   if (!num) {
     overlay.remove();
     style.remove();
     document.body.style.overflow = previousOverflow;
+    finish();
     return;
   }
 
   const start = performance.now();
 
   const tick = (now: number): void => {
-    const progress = Math.min(
-      (now - start) / DURATION,
-      1
-    );
-
+    const progress = Math.min((now - start) / DURATION, 1);
     const value = Math.round(progress * 100);
 
     num.textContent = String(value).padStart(3, "0");
 
     steps.forEach((step, index) => {
-      step.classList.toggle(
-        "on",
-        value >= index * 25
-      );
+      step.classList.toggle("on", value >= index * 25);
     });
 
     if (progress < 1) {
@@ -161,6 +159,7 @@ export function initPreloader(): void {
         overlay.remove();
         style.remove();
         document.body.style.overflow = previousOverflow;
+        finish();
       }, 600);
     }, 400);
   };

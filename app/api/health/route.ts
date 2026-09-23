@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -45,7 +45,8 @@ export async function GET() {
     },
   };
 
-  const isHealthy = dbStatus === "connected" || dbStatus === "missing_credentials";
+  const isHealthy =
+    dbStatus === "connected" || dbStatus === "missing_credentials";
   return NextResponse.json(healthData, {
     status: isHealthy ? 200 : 503,
     headers: {

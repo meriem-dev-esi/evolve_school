@@ -18,23 +18,19 @@ export async function saveLessonProgress(
     throw new Error("User not authenticated");
   }
 
-  const { error } = await supabase
-    .from("lesson_progress")
-    .upsert(
-      {
-        user_id: user.id,
-        lesson_id: lessonId,
-        progress_percentage: completed
-          ? 100
-          : progressPercentage,
-        completed,
-        last_position: Math.floor(lastPosition),
-        updated_at: new Date().toISOString(),
-      },
-      {
-        onConflict: "user_id,lesson_id",
-      },
-    );
+  const { error } = await supabase.from("lesson_progress").upsert(
+    {
+      user_id: user.id,
+      lesson_id: lessonId,
+      progress_percentage: completed ? 100 : progressPercentage,
+      completed,
+      last_position: Math.floor(lastPosition),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      onConflict: "user_id,lesson_id",
+    },
+  );
 
   if (error) {
     throw new Error(error.message);

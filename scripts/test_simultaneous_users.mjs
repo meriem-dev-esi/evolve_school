@@ -44,7 +44,7 @@ async function runLoadTest() {
     } catch (err) {
       const duration = Date.now() - reqStart;
       latencies.push(duration);
-      statusCounts["ERROR"] = (statusCounts["ERROR"] || 0) + 1;
+      statusCounts.ERROR = (statusCounts.ERROR || 0) + 1;
       return { ok: false, error: err.message, duration };
     }
   });
@@ -60,11 +60,13 @@ async function runLoadTest() {
   const p90 = latencies[Math.floor(latencies.length * 0.9)] || 0;
   const p95 = latencies[Math.floor(latencies.length * 0.95)] || 0;
   const p99 = latencies[Math.floor(latencies.length * 0.99)] || 0;
-  const avg = Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length);
+  const avg = Math.round(
+    latencies.reduce((a, b) => a + b, 0) / latencies.length,
+  );
 
   const successful = results.filter((r) => r.ok).length;
   const failed = results.length - successful;
-  const reqPerSec = ((CONCURRENCY / (totalDurationMs / 1000)) || 0).toFixed(1);
+  const reqPerSec = (CONCURRENCY / (totalDurationMs / 1000) || 0).toFixed(1);
 
   console.log("\nResults Summary:");
   console.log(`  Total Requests:     ${results.length}`);
@@ -74,7 +76,9 @@ async function runLoadTest() {
   console.log(`  Failed / Errors:    ${failed}`);
   console.log("\nHTTP Status Breakdown:");
   for (const [status, count] of Object.entries(statusCounts)) {
-    console.log(`  HTTP ${status}: ${count} (${((count / CONCURRENCY) * 100).toFixed(1)}%)`);
+    console.log(
+      `  HTTP ${status}: ${count} (${((count / CONCURRENCY) * 100).toFixed(1)}%)`,
+    );
   }
 
   console.log("\nLatency Distribution:");

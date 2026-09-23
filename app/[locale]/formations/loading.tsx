@@ -9,7 +9,10 @@ export default function FormationsLoading() {
         {/* Filter bars skeleton */}
         <div className="mt-8 flex gap-3 overflow-x-auto pb-2">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-9 w-28 shrink-0 rounded-full bg-white/10" />
+            <div
+              key={i}
+              className="h-9 w-28 shrink-0 rounded-full bg-white/10"
+            />
           ))}
         </div>
 

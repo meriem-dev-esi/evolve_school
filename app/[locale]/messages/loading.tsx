@@ -10,7 +10,10 @@ export default function MessagesLoading() {
             <div className="h-9 w-full rounded-xl bg-white/10" />
             <div className="space-y-3 pt-2">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="flex gap-3 items-center p-2 rounded-xl bg-white/5">
+                <div
+                  key={i}
+                  className="flex gap-3 items-center p-2 rounded-xl bg-white/5"
+                >
                   <div className="h-10 w-10 rounded-full bg-white/10 shrink-0" />
                   <div className="flex-1 space-y-1.5">
                     <div className="h-4 w-24 rounded bg-white/10" />

@@ -18,6 +18,26 @@ export async function updateSession(
   request: NextRequest,
   response: NextResponse,
 ): Promise<NextResponse> {
+  // 1. Skip Supabase auth calls on prefetch requests to make route prefetching instantaneous
+  const isPrefetch =
+    request.headers.get("next-router-prefetch") ||
+    request.headers.get("purpose") === "prefetch" ||
+    request.headers.get("sec-purpose") === "prefetch";
+
+  if (isPrefetch) {
+    return response;
+  }
+
+  // 2. If the user does not have any Supabase auth cookies, skip remote network validation.
+  // This eliminates 200-500ms of latency on every page transition for guests and public routes.
+  const hasAuthCookie = request.cookies
+    .getAll()
+    .some((c) => c.name.startsWith("sb-") && c.name.includes("auth-token"));
+
+  if (!hasAuthCookie) {
+    return response;
+  }
+
   const supabase = createServerClient(env.supabaseUrl, env.supabaseAnonKey, {
     cookies: {
       getAll() {
@@ -34,7 +54,11 @@ export async function updateSession(
   // Must be `getUser()`, not `getSession()`. `getSession()` reads the cookie
   // and trusts it; `getUser()` revalidates the token with the auth server. A
   // forged cookie passes the first and fails the second.
-  await supabase.auth.getUser();
+  try {
+    await supabase.auth.getUser();
+  } catch (error) {
+    console.error("[Evolve] Supabase auth refresh error:", error);
+  }
 
   return response;
 }

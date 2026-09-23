@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
 import { checkRateLimit, RATE_LIMIT_TIERS } from "@/lib/rateLimiter";
+import { createClient } from "@/lib/supabase/server";
 
 // Spending safety cap
 const MAX_TRANSACTION_AMOUNT_DZD = 50_000;
@@ -30,7 +30,10 @@ export async function POST(request: Request) {
 
     if (!rateLimit.allowed) {
       return NextResponse.json(
-        { error: "Trop de tentatives de paiement. Veuillez patienter avant de réessayer." },
+        {
+          error:
+            "Trop de tentatives de paiement. Veuillez patienter avant de réessayer.",
+        },
         {
           status: 429,
           headers: {
@@ -232,7 +235,10 @@ export async function POST(request: Request) {
   } catch (error: unknown) {
     if (error instanceof Error && error.name === "AbortError") {
       return NextResponse.json(
-        { error: "Délai d'attente dépassé vers le système de paiement (Timeout 10s)." },
+        {
+          error:
+            "Délai d'attente dépassé vers le système de paiement (Timeout 10s).",
+        },
         { status: 504 },
       );
     }

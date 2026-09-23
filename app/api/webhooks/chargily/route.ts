@@ -1,5 +1,5 @@
+import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import crypto from "crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(request: Request) {
@@ -18,10 +18,7 @@ export async function POST(request: Request) {
     const signature = request.headers.get("signature");
 
     if (!signature) {
-      return NextResponse.json(
-        { error: "Missing signature" },
-        { status: 401 },
-      );
+      return NextResponse.json({ error: "Missing signature" }, { status: 401 });
     }
 
     const expectedSignature = crypto
@@ -35,10 +32,7 @@ export async function POST(request: Request) {
         Buffer.from(expectedSignature),
       )
     ) {
-      return NextResponse.json(
-        { error: "Invalid signature" },
-        { status: 401 },
-      );
+      return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 
     const payload = JSON.parse(body);
@@ -61,7 +55,7 @@ export async function POST(request: Request) {
       );
     }
 
-  const supabase = createAdminClient();
+    const supabase = createAdminClient();
 
     const { error } = await supabase
       .from("enrollments")

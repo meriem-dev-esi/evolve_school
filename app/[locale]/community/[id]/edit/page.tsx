@@ -1,10 +1,10 @@
-import { redirect, notFound } from "next/navigation";
+import { ArrowLeft, Pencil } from "lucide-react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import { notFound, redirect } from "next/navigation";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { createClient } from "@/lib/supabase/server";
 import EditProjectForm from "../EditProjectForm";
-import { ArrowLeft, Pencil } from "lucide-react";
 
 type Props = {
   params: Promise<{
@@ -85,7 +85,8 @@ export default async function EditProjectPage({ params }: Props) {
             </h1>
 
             <p className="mt-2 text-sm text-white/50">
-              Mettez à jour les informations, liens de démonstration et technologies de votre projet.
+              Mettez à jour les informations, liens de démonstration et
+              technologies de votre projet.
             </p>
           </div>
 

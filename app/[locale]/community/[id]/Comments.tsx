@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
-  MessageSquare,
-  Send,
-  Trash2,
-  Pencil,
   Clock,
-  Sparkles,
   Loader2,
+  MessageSquare,
+  Pencil,
+  Send,
+  Sparkles,
+  Trash2,
   X,
 } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type Comment = {
@@ -40,7 +40,7 @@ export default function Comments({ projectId }: Props) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingContent, setEditingContent] = useState("");
 
-  async function loadComments() {
+  const loadComments = useCallback(async () => {
     const { data, error } = await supabase
       .from("community_project_comments")
       .select("id, user_id, content, created_at")
@@ -81,19 +81,19 @@ export default function Comments({ projectId }: Props) {
 
     setComments(commentsWithProfiles);
     setLoading(false);
-  }
+  }, [projectId, supabase]);
 
-  async function loadUser() {
+  const loadUser = useCallback(async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     setCurrentUserId(user?.id ?? null);
-  }
+  }, [supabase]);
 
   useEffect(() => {
     loadComments();
     loadUser();
-  }, [projectId]);
+  }, [loadUser, loadComments]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -303,7 +303,9 @@ export default function Comments({ projectId }: Props) {
                           />
                         ) : (
                           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/15 text-xs font-bold text-brand border border-brand/30">
-                            {(comment.profile?.full_name || "E").charAt(0).toUpperCase()}
+                            {(comment.profile?.full_name || "E")
+                              .charAt(0)
+                              .toUpperCase()}
                           </div>
                         )}
 
@@ -321,12 +323,15 @@ export default function Comments({ projectId }: Props) {
                           <div className="flex items-center gap-1.5 text-[10px] text-white/40 mt-0.5">
                             <Clock className="h-3 w-3" />
                             <span>
-                              {new Date(comment.created_at).toLocaleDateString("fr-FR", {
-                                day: "numeric",
-                                month: "short",
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              })}
+                              {new Date(comment.created_at).toLocaleDateString(
+                                "fr-FR",
+                                {
+                                  day: "numeric",
+                                  month: "short",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                },
+                              )}
                             </span>
                           </div>
                         </div>

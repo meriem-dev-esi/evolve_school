@@ -1,15 +1,25 @@
 "use client";
 
+import {
+  ArrowRight,
+  CheckCircle2,
+  Loader2,
+  Lock,
+  Mail,
+  Sparkles,
+  User,
+} from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { useLocale } from "next-intl";
-import Link from "next/link";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { Link, useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Lock, User, Mail, ArrowRight, Loader2, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function SignInPage() {
-  const locale = useLocale();
+  const tAuth = useTranslations("auth");
+  const tCommon = useTranslations("common");
+  const router = useRouter();
 
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [fullName, setFullName] = useState("");
@@ -35,21 +45,21 @@ export default function SignInPage() {
 
       if (error) {
         setLoading(false);
-        setMessage("Erreur de connexion : " + error.message);
+        setMessage(tAuth("errorSignInPrefix") + error.message);
         return;
       }
 
       setLoading(false);
       setIsSuccess(true);
-      setMessage("Connexion réussie ! Redirection...");
+      setMessage(tAuth("successSignIn"));
       setTimeout(() => {
-        window.location.href = `/${locale}/dashboard`;
+        router.push("/dashboard");
       }, 700);
     } else {
       // Sign Up
       if (!fullName.trim()) {
         setLoading(false);
-        setMessage("Veuillez saisir votre nom complet.");
+        setMessage(tAuth("errorEmptyName"));
         return;
       }
 
@@ -65,12 +75,11 @@ export default function SignInPage() {
 
       if (error) {
         setLoading(false);
-        setMessage("Erreur d'inscription : " + error.message);
+        setMessage(tAuth("errorSignUpPrefix") + error.message);
         return;
       }
 
       if (data.user) {
-        // Upsert into profiles table
         await supabase.from("profiles").upsert({
           id: data.user.id,
           full_name: fullName.trim(),
@@ -81,9 +90,9 @@ export default function SignInPage() {
 
       setLoading(false);
       setIsSuccess(true);
-      setMessage("Compte créé avec succès ! Redirection vers votre tableau de bord...");
+      setMessage(tAuth("successSignUp"));
       setTimeout(() => {
-        window.location.href = `/${locale}/dashboard`;
+        router.push("/dashboard");
       }, 900);
     }
   }
@@ -94,8 +103,8 @@ export default function SignInPage() {
 
       <main className="flex-1 px-4 pt-32 pb-20 sm:px-6 relative overflow-hidden flex items-center justify-center">
         {/* Background blobs */}
-        <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[550px] w-[550px] rounded-full bg-violet-100 blur-[130px] opacity-60" />
-        <div className="pointer-events-none absolute bottom-10 right-10 h-[400px] w-[400px] rounded-full bg-purple-100 blur-[120px] opacity-50" />
+        <div className="pointer-events-none absolute -top-40 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 h-[550px] w-[550px] rounded-full bg-lime-200 blur-[130px] opacity-35" />
+        <div className="pointer-events-none absolute bottom-10 end-10 h-[400px] w-[400px] rounded-full bg-emerald-200 blur-[120px] opacity-30" />
         <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-50" />
 
         <div className="relative z-10 w-full max-w-md">
@@ -103,19 +112,21 @@ export default function SignInPage() {
           <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-xl">
             {/* Header */}
             <div className="text-center">
-              <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-3.5 py-1 text-xs font-bold text-violet-700 uppercase tracking-wider">
-                <Sparkles className="h-3.5 w-3.5" />
-                Evolve Academy Auth
+              <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-lime-200 bg-lime-50 px-3.5 py-1 text-xs font-bold text-lime-800 uppercase tracking-wider">
+                <Sparkles className="h-3.5 w-3.5 text-lime-600" />
+                {tAuth("badge")}
               </div>
 
               <h1 className="mt-4 text-3xl font-black tracking-tight text-gray-900">
-                {mode === "signin" ? "Bon retour parmi nous" : "Rejoignez l'académie"}
+                {mode === "signin"
+                  ? tAuth("welcomeBack")
+                  : tAuth("joinAcademy")}
               </h1>
 
               <p className="mt-2 text-xs sm:text-sm text-gray-500">
                 {mode === "signin"
-                  ? "Accédez à vos cours, attestations et projets en temps réel."
-                  : "Créez votre compte apprenant relié à votre base de données Supabase."}
+                  ? tAuth("signInSubtitle")
+                  : tAuth("signUpSubtitle")}
               </p>
             </div>
 
@@ -129,11 +140,11 @@ export default function SignInPage() {
                 }}
                 className={`flex-1 rounded-xl py-2.5 text-xs font-bold transition ${
                   mode === "signin"
-                    ? "bg-violet-600 text-white shadow-md shadow-violet-200"
+                    ? "bg-lime-400 text-black shadow-md shadow-lime-400/30"
                     : "text-gray-500 hover:text-gray-800"
                 }`}
               >
-                Se connecter
+                {tAuth("tabSignIn")}
               </button>
               <button
                 type="button"
@@ -143,11 +154,11 @@ export default function SignInPage() {
                 }}
                 className={`flex-1 rounded-xl py-2.5 text-xs font-bold transition ${
                   mode === "signup"
-                    ? "bg-violet-600 text-white shadow-md shadow-violet-200"
+                    ? "bg-lime-400 text-black shadow-md shadow-lime-400/30"
                     : "text-gray-500 hover:text-gray-800"
                 }`}
               >
-                Créer un compte
+                {tAuth("tabSignUp")}
               </button>
             </div>
 
@@ -159,19 +170,19 @@ export default function SignInPage() {
                     htmlFor="fullName"
                     className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-600"
                   >
-                    Nom &amp; Prénom
+                    {tAuth("fullNameLabel")}
                   </label>
                   <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <User className="absolute start-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                     <input
                       id="fullName"
                       type="text"
                       required
-                      placeholder="ex: Yacine Benali"
+                      placeholder={tAuth("fullNamePlaceholder")}
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       disabled={loading}
-                      className="w-full rounded-2xl border border-gray-200 bg-gray-50 pl-11 pr-4 py-3.5 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 focus:outline-none transition disabled:opacity-50"
+                      className="w-full rounded-2xl border border-gray-200 bg-gray-50 ps-11 pe-4 py-3.5 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-lime-400 focus:ring-2 focus:ring-lime-100 focus:outline-none transition disabled:opacity-50"
                     />
                   </div>
                 </div>
@@ -182,19 +193,19 @@ export default function SignInPage() {
                   htmlFor="email"
                   className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-600"
                 >
-                  Adresse Email
+                  {tAuth("emailLabel")}
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute start-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <input
                     id="email"
                     type="email"
                     required
-                    placeholder="etudiant@evolve.dz"
+                    placeholder={tAuth("emailPlaceholder")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={loading}
-                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 pl-11 pr-4 py-3.5 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 focus:outline-none transition disabled:opacity-50"
+                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 ps-11 pe-4 py-3.5 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-lime-400 focus:ring-2 focus:ring-lime-100 focus:outline-none transition disabled:opacity-50"
                   />
                 </div>
               </div>
@@ -204,19 +215,19 @@ export default function SignInPage() {
                   htmlFor="password"
                   className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-600"
                 >
-                  Mot de passe
+                  {tAuth("passwordLabel")}
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute start-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <input
                     id="password"
                     type="password"
                     required
-                    placeholder="••••••••••••"
+                    placeholder={tAuth("passwordPlaceholder")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={loading}
-                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 pl-11 pr-4 py-3.5 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 focus:outline-none transition disabled:opacity-50"
+                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 ps-11 pe-4 py-3.5 text-xs sm:text-sm text-gray-900 placeholder-gray-400 focus:border-lime-400 focus:ring-2 focus:ring-lime-100 focus:outline-none transition disabled:opacity-50"
                   />
                 </div>
               </div>
@@ -241,17 +252,21 @@ export default function SignInPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-violet-600 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition hover:bg-violet-700 active:scale-95 disabled:opacity-50"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-lime-400 py-3.5 text-xs sm:text-sm font-bold text-black shadow-lg shadow-lime-400/30 transition hover:bg-lime-300 active:scale-95 disabled:opacity-50"
               >
                 {loading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    <span>Chargement...</span>
+                    <span>{tCommon("loading")}</span>
                   </>
                 ) : (
                   <>
-                    <span>{mode === "signin" ? "Accéder à mon espace" : "Créer mon compte"}</span>
-                    <ArrowRight className="h-4 w-4" />
+                    <span>
+                      {mode === "signin"
+                        ? tAuth("submitSignIn")
+                        : tAuth("submitSignUp")}
+                    </span>
+                    <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                   </>
                 )}
               </button>
@@ -260,17 +275,17 @@ export default function SignInPage() {
             {/* Footer helper */}
             <div className="mt-6 border-t border-gray-100 pt-4 text-center">
               <Link
-                href={`/${locale}/formations`}
-                className="text-xs text-gray-400 hover:text-violet-700 transition"
+                href="/formations"
+                className="text-xs text-gray-400 hover:text-lime-600 transition"
               >
-                ← Continuer sans compte pour explorer le catalogue
+                {tCommon("viewAll")}
               </Link>
             </div>
           </div>
         </div>
       </main>
 
-      <Footer locale={locale} />
+      <Footer />
     </div>
   );
 }

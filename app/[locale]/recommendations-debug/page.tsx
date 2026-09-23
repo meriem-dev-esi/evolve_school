@@ -1,15 +1,12 @@
 import { getRecommendedCourses } from "@/lib/data/recommendations";
 
 export default async function RecommendationsDebugPage() {
-  const recommendations =
-    await getRecommendedCourses(20);
+  const recommendations = await getRecommendedCourses(20);
 
   return (
     <main className="min-h-dvh bg-canvas px-6 py-20 text-white">
       <div className="mx-auto max-w-5xl">
-        <h1 className="text-4xl font-bold">
-          Recommendation Debug
-        </h1>
+        <h1 className="text-4xl font-bold">Recommendation Debug</h1>
 
         <p className="mt-3 text-white/50">
           Temporary page for testing the recommendation engine.
@@ -23,9 +20,7 @@ export default async function RecommendationsDebugPage() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-xl font-semibold">
-                    {course.title}
-                  </h2>
+                  <h2 className="text-xl font-semibold">{course.title}</h2>
 
                   <p className="mt-1 text-sm text-white/40">
                     {course.domain} · {course.level}
@@ -44,10 +39,7 @@ export default async function RecommendationsDebugPage() {
 
                 <ul className="space-y-2">
                   {course.reasons.map((reason) => (
-                    <li
-                      key={reason}
-                      className="text-sm text-brand"
-                    >
+                    <li key={reason} className="text-sm text-brand">
                       ✓ {reason}
                     </li>
                   ))}
