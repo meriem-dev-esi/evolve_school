@@ -16,7 +16,7 @@ export default function ProfileForm({
   initialName,
   initialAvatar,
 }: ProfileFormProps) {
-const _router = useRouter();
+
   const [fullName, setFullName] = useState(initialName);
   const [avatarUrl, setAvatarUrl] = useState(initialAvatar);
   const [selectedFile, setSelectedFile] =
