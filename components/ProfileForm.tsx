@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -16,17 +16,15 @@ export default function ProfileForm({
   initialName,
   initialAvatar,
 }: ProfileFormProps) {
-
   const [fullName, setFullName] = useState(initialName);
   const [avatarUrl, setAvatarUrl] = useState(initialAvatar);
-  const [selectedFile, setSelectedFile] =
-    useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState<
-    "success" | "error"
-  >("success");
+  const [messageType, setMessageType] = useState<"success" | "error">(
+    "success",
+  );
 
   useEffect(() => {
     setFullName(initialName);
@@ -56,17 +54,13 @@ export default function ProfileForm({
 
       // Make sure this is the correct profile
       if (user.id !== userId) {
-        throw new Error(
-          "Your session does not match this profile.",
-        );
+        throw new Error("Your session does not match this profile.");
       }
 
       const cleanName = fullName.trim();
 
       if (!cleanName) {
-        throw new Error(
-          "Please enter your full name.",
-        );
+        throw new Error("Please enter your full name.");
       }
 
       let finalAvatarUrl = avatarUrl;
@@ -74,9 +68,7 @@ export default function ProfileForm({
       // Upload new avatar
       if (selectedFile) {
         if (selectedFile.size > 5 * 1024 * 1024) {
-          throw new Error(
-            "Profile picture must be smaller than 5 MB.",
-          );
+          throw new Error("Profile picture must be smaller than 5 MB.");
         }
 
         const allowedTypes = [
@@ -86,85 +78,61 @@ export default function ProfileForm({
         ];
 
         if (!allowedTypes.includes(selectedFile.type)) {
-          throw new Error(
-            "Only JPG, PNG, and WebP images are allowed.",
-          );
+          throw new Error("Only JPG, PNG, and WebP images are allowed.");
         }
 
         const extension =
-          selectedFile.name
-            .split(".")
-            .pop()
-            ?.toLowerCase() || "jpg";
+          selectedFile.name.split(".").pop()?.toLowerCase() || "jpg";
 
-        const filePath =
-          `${user.id}/avatar.${extension}`;
+        const filePath = `${user.id}/avatar.${extension}`;
 
-        const { error: uploadError } =
-          await supabase.storage
-            .from("avatars")
-            .upload(filePath, selectedFile, {
-              upsert: true,
-              contentType: selectedFile.type,
-            });
+        const { error: uploadError } = await supabase.storage
+          .from("avatars")
+          .upload(filePath, selectedFile, {
+            upsert: true,
+            contentType: selectedFile.type,
+          });
 
         if (uploadError) {
-          throw new Error(
-            `Avatar upload failed: ${uploadError.message}`,
-          );
+          throw new Error(`Avatar upload failed: ${uploadError.message}`);
         }
 
         const {
           data: { publicUrl },
-        } = supabase.storage
-          .from("avatars")
-          .getPublicUrl(filePath);
+        } = supabase.storage.from("avatars").getPublicUrl(filePath);
 
         finalAvatarUrl = publicUrl;
       }
 
-      // Update profile and immediately return
-      // the updated row.
-      const { data: savedProfile, error: updateError } =
-        await supabase
-          .from("profiles")
-          .update({
-            full_name: cleanName,
-            avatar_url: finalAvatarUrl || null,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", user.id)
-          .select("id, full_name, avatar_url")
-          .single();
+      // Update profile and immediately return the updated row.
+      const { data: savedProfile, error: updateError } = await supabase
+        .from("profiles")
+        .update({
+          full_name: cleanName,
+          avatar_url: finalAvatarUrl || null,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", user.id)
+        .select("id, full_name, avatar_url")
+        .single();
 
       if (updateError) {
-        throw new Error(
-          `Profile update failed: ${updateError.message}`,
-        );
+        throw new Error(`Profile update failed: ${updateError.message}`);
       }
 
       if (!savedProfile) {
-        throw new Error(
-          "No profile was updated.",
-        );
+        throw new Error("No profile was updated.");
       }
 
       // Update local UI using the actual database result.
       setFullName(savedProfile.full_name ?? "");
-      setAvatarUrl(
-        savedProfile.avatar_url ?? "",
-      );
+      setAvatarUrl(savedProfile.avatar_url ?? "");
       setSelectedFile(null);
 
       setMessageType("success");
-      setMessage(
-        "Your profile has been updated successfully.",
-      );
+      setMessage("Your profile has been updated successfully.");
     } catch (error) {
-      console.error(
-        "[Evolve] Profile save error:",
-        error,
-      );
+      console.error("[Evolve] Profile save error:", error);
 
       setMessageType("error");
 
@@ -182,7 +150,6 @@ export default function ProfileForm({
     <section>
       <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
         <div className="grid gap-8 md:grid-cols-[180px_1fr]">
-
           {/* Avatar */}
           <div className="flex flex-col items-center">
             {avatarUrl ? (
@@ -193,10 +160,7 @@ export default function ProfileForm({
               />
             ) : (
               <div className="flex h-32 w-32 items-center justify-center rounded-full bg-brand text-4xl font-bold text-black">
-                {fullName
-                  .trim()
-                  .charAt(0)
-                  .toUpperCase() || "U"}
+                {fullName.trim().charAt(0).toUpperCase() || "U"}
               </div>
             )}
 
@@ -208,15 +172,13 @@ export default function ProfileForm({
               }`}
             >
               Change photo
-
               <input
                 type="file"
                 accept="image/png,image/jpeg,image/webp"
                 disabled={saving}
                 className="hidden"
                 onChange={(event) => {
-                  const file =
-                    event.target.files?.[0] ?? null;
+                  const file = event.target.files?.[0] ?? null;
 
                   setSelectedFile(file);
                   setMessage("");
@@ -239,7 +201,6 @@ export default function ProfileForm({
 
           {/* Fields */}
           <div className="space-y-6">
-
             {/* Email */}
             <div>
               <label className="mb-2 block text-sm font-medium text-white/70">
@@ -268,9 +229,7 @@ export default function ProfileForm({
                 type="text"
                 value={fullName}
                 disabled={saving}
-                onChange={(event) =>
-                  setFullName(event.target.value)
-                }
+                onChange={(event) => setFullName(event.target.value)}
                 placeholder="Enter your full name"
                 className="w-full rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none placeholder:text-white/25 transition focus:border-brand/60 focus:ring-1 focus:ring-brand/30 disabled:opacity-50"
               />
@@ -285,9 +244,7 @@ export default function ProfileForm({
               disabled={saving}
               className="w-full rounded-2xl bg-brand px-6 py-3.5 font-semibold text-black transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
             >
-              {saving
-                ? "Saving..."
-                : "Save changes"}
+              {saving ? "Saving..." : "Save changes"}
             </button>
 
             {/* Message */}
