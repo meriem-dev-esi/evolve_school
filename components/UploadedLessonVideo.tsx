@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { completeLessonAndNavigate } from "@/lib/data/course-completion";
+import { completeLessonAndNavigate } from "@/lib/course-completion";
 import { createClient } from "@/lib/supabase/client";
 
 type Props = {

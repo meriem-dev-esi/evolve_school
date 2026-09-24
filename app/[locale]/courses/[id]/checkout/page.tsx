@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { notFound, redirect } from "next/navigation";
 import CheckoutButton from "@/components/CheckoutButton";
 import { createClient } from "@/lib/supabase/server";
@@ -48,7 +48,7 @@ export default async function CheckoutPage({ params }: Props) {
     <main className="min-h-screen bg-background px-6 py-10">
       <div className="mx-auto max-w-2xl">
         <Link
-          href={`/${locale}/courses/${id}`}
+          href={`/courses/${id}`}
           className="mb-8 inline-flex text-sm font-medium text-muted-foreground hover:text-foreground"
         >
           ← Back to course

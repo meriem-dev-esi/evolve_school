@@ -1,5 +1,5 @@
 import { ArrowRight, Zap } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { createClient } from "@/lib/supabase/server";
@@ -113,7 +113,7 @@ export default async function AteliersPage({ params }: Props) {
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
-                href={`/${locale}/community`}
+                href="/community"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-brand px-6 py-3.5 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(95,236,107,0.5)]"
               >
                 <span>Rejoindre la communauté</span>

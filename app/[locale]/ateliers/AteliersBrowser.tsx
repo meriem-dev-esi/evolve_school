@@ -10,7 +10,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useMemo, useState } from "react";
 
 type Workshop = {
@@ -316,7 +316,7 @@ export default function AteliersBrowser({ workshops, locale }: Props) {
                         </div>
 
                         <Link
-                          href={`/${locale}/ateliers/${workshop.id}`}
+                          href={`/ateliers/${workshop.id}`}
                           className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2 text-xs font-bold text-black transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(95,236,107,0.5)]"
                         >
                           <span>Participer</span>

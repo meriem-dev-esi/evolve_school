@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
+import { env } from "@/lib/env";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://evolve-academy.dz";
+  const baseUrl = env.siteUrl;
 
   return {
     rules: [

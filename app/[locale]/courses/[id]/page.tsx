@@ -9,10 +9,10 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 type Props = {
@@ -209,7 +209,7 @@ export default async function CoursePage({ params }: Props) {
         <div className="mx-auto max-w-5xl">
           {/* Back Navigation */}
           <Link
-            href={`/${locale}/formations`}
+            href="/formations"
             className="group mb-8 inline-flex items-center gap-2 text-xs font-semibold text-white/60 transition hover:text-brand"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
@@ -274,7 +274,7 @@ export default async function CoursePage({ params }: Props) {
                 </div>
 
                 <Link
-                  href={`/${locale}/messages?recipient=teacher&course=${encodeURIComponent(course.title)}`}
+                  href={`/messages?recipient=teacher&course=${encodeURIComponent(course.title)}`}
                   className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-4 py-2 text-xs font-bold text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_15px_rgba(95,236,107,0.4)]"
                 >
                   <MessageSquare className="h-3.5 w-3.5" />
@@ -406,7 +406,7 @@ export default async function CoursePage({ params }: Props) {
                       <div>
                         {accessible ? (
                           <Link
-                            href={`/${locale}/courses/${id}/lessons/${lesson.id}`}
+                            href={`/courses/${id}/lessons/${lesson.id}`}
                             className={`inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-xs font-bold transition-all ${
                               completed
                                 ? "border border-white/15 bg-white/5 text-white/80 hover:bg-white/10"
@@ -424,7 +424,7 @@ export default async function CoursePage({ params }: Props) {
                           </Link>
                         ) : (
                           <Link
-                            href={`/${locale}/courses/${id}/checkout`}
+                            href={`/courses/${id}/checkout`}
                             className="inline-flex items-center gap-1.5 rounded-full border border-brand/30 bg-brand/10 px-4 py-2 text-xs font-bold text-brand transition-all hover:bg-brand hover:text-black"
                           >
                             <Lock className="h-3 w-3" />

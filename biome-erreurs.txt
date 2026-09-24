@@ -1,0 +1,4263 @@
+﻿node.exe : app\[locale]\ateliers\At
+eliersBrowser.tsx:44:54 lint/correc
+tness/noUnusedFunctionParameters 
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+At C:\Program 
+Files\nodejs\pnpm.ps1:16 char:5
++     & "$basedir/node$exe"  "$base
+dir/node_modules/corepack/dist/pnpm
+. ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+    + CategoryInfo          : NotS 
+   pecified: (app\[locale]\at...Γ  
+  öüΓöüΓöüΓöüΓöü:String) [], Rem   
+ oteException
+    + FullyQualifiedErrorId : Nati 
+   veCommandError
+ 
+
+  ! This parameter locale is 
+unused.
+  
+    42 Γöé ];
+    43 Γöé 
+  > 44 Γöé export default function 
+AteliersBrowser({ workshops, 
+locale }: Props) {
+       Γöé                         
+                             ^^^^^^
+    45 Γöé   const [search, 
+setSearch] = useState("");
+    46 Γöé   const [category, 
+setCategory] = useState("All 
+Workshops");
+  
+  i Unused parameters might be the 
+result of an incomplete 
+refactoring.
+  
+
+app\[locale]\ateliers\AteliersBrows
+er.tsx:3:1 
+assist/source/organizeImports  
+FIXABLE  ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Sort these imports.
+  
+     1 Γöé "use client";
+     2 Γöé 
+   > 3 Γöé import {
+       Γöé ^^^^^^^^
+   > 4 Γöé   ArrowRight,
+        ...
+  > 13 Γöé import { Link } from 
+"@/i18n/navigation";
+  > 14 Γöé import { useMemo, 
+useState } from "react";
+       Γöé ^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
+    15 Γöé 
+    16 Γöé type Workshop = {
+  
+  i Safe fix: Organize imports and 
+exports (Biome)
+  
+     11  11 Γöé     X,ΓÉì
+     12  12 Γöé   } from 
+"lucide-react";ΓÉì
+     13     Γöé - import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+     14     Γöé - import┬╖{┬╖useMem
+o,┬╖useState┬╖}┬╖from┬╖"react";ΓÉì
+         13 Γöé + import┬╖{┬╖useMem
+o,┬╖useState┬╖}┬╖from┬╖"react";ΓÉì
+         14 Γöé + import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+     15  15 Γöé   ΓÉì
+     16  16 Γöé   type Workshop = 
+{ΓÉì
+  
+
+app\[locale]\ateliers\AteliersBrows
+er.tsx format ΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+      1     Γöé - "use┬╖client";ΓÉì
+      2     Γöé - ΓÉì
+      3     Γöé - import┬╖{ΓÉì
+      4     Γöé - 
+┬╖┬╖ArrowRight,ΓÉì
+      5     Γöé - ┬╖┬╖Award,ΓÉì
+      6     Γöé - 
+┬╖┬╖ChevronRight,ΓÉì
+      7     Γöé - ┬╖┬╖Clock3,ΓÉì
+      8     Γöé - ┬╖┬╖Layers3,ΓÉì
+      9     Γöé - ┬╖┬╖Search,ΓÉì
+     10     Γöé - ┬╖┬╖Sparkles,ΓÉì
+     11     Γöé - ┬╖┬╖X,ΓÉì
+     12     Γöé - 
+}┬╖from┬╖"lucide-react";ΓÉì
+     13     Γöé - import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+     14     Γöé - import┬╖{┬╖useMem
+o,┬╖useState┬╖}┬╖from┬╖"react";ΓÉì
+     15     Γöé - ΓÉì
+     16     Γöé - 
+type┬╖Workshop┬╖=┬╖{ΓÉì
+     17     Γöé - 
+┬╖┬╖id:┬╖string;ΓÉì
+     18     Γöé - 
+┬╖┬╖title:┬╖string;ΓÉì
+     19     Γöé - ┬╖┬╖description:┬
+╖string┬╖|┬╖null;ΓÉì
+     20     Γöé - 
+┬╖┬╖image_url:┬╖string┬╖|┬╖null;ΓÉì
+     21     Γöé - 
+┬╖┬╖duration:┬╖string┬╖|┬╖null;ΓÉì
+     22     Γöé - 
+┬╖┬╖level:┬╖string┬╖|┬╖null;ΓÉì
+     23     Γöé - 
+┬╖┬╖domain:┬╖string┬╖|┬╖null;ΓÉì
+     24     Γöé - 
+┬╖┬╖price:┬╖number;ΓÉì
+     25     Γöé - };ΓÉì
+     26     Γöé - ΓÉì
+     27     Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     28     Γöé - 
+┬╖┬╖workshops:┬╖Workshop[];ΓÉì
+     29     Γöé - 
+┬╖┬╖locale:┬╖string;ΓÉì
+     30     Γöé - };ΓÉì
+     31     Γöé - ΓÉì
+     32     Γöé - 
+const┬╖categories┬╖=┬╖[ΓÉì
+     33     Γöé - 
+┬╖┬╖"Business┬╖&┬╖Product",ΓÉì
+     34     Γöé - 
+┬╖┬╖"Cloud┬╖&┬╖DevOps",ΓÉì
+     35     Γöé - 
+┬╖┬╖"Data┬╖&┬╖AI",ΓÉì
+     36     Γöé - 
+┬╖┬╖"Digital┬╖Marketing",ΓÉì
+     37     Γöé - 
+┬╖┬╖"Mobile┬╖Development",ΓÉì
+     38     Γöé - 
+┬╖┬╖"Web┬╖Development",ΓÉì
+     39     Γöé - 
+┬╖┬╖"Career┬╖Skills",ΓÉì
+     40     Γöé - 
+┬╖┬╖"Cybersecurity",ΓÉì
+     41     Γöé - ┬╖┬╖"Design",ΓÉì
+     42     Γöé - ];ΓÉì
+     43     Γöé - ΓÉì
+     44     Γöé - export┬╖default┬╖
+function┬╖AteliersBrowser({┬╖worksh
+ops,┬╖locale┬╖}:┬╖Props)┬╖{ΓÉì
+     45     Γöé - ┬╖┬╖const┬╖[searc
+h,┬╖setSearch]┬╖=┬╖useState("");ΓÉì
+     46     Γöé - ┬╖┬╖const┬╖[categ
+ory,┬╖setCategory]┬╖=┬╖useState("Al
+l┬╖Workshops");ΓÉì
+     47     Γöé - ΓÉì
+     48     Γöé - ┬╖┬╖const┬╖filter
+edWorkshops┬╖=┬╖useMemo(()┬╖=>┬╖{ΓÉ
+ì
+     49     Γöé - ┬╖┬╖┬╖┬╖const┬╖qu
+ery┬╖=┬╖search.trim().toLowerCase()
+;ΓÉì
+     50     Γöé - ΓÉì
+     51     Γöé - ┬╖┬╖┬╖┬╖return┬╖w
+orkshops.filter((workshop)┬╖=>┬╖{ΓÉ
+ì
+     52     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖matchesCategory┬╖=ΓÉì
+     53     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖c
+ategory┬╖===┬╖"All┬╖Workshops"┬╖||┬
+╖workshop.domain┬╖===┬╖category;ΓÉì
+     54     Γöé - ΓÉì
+     55     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖if┬╖(
+!matchesCategory)┬╖return┬╖false;ΓÉ
+ì
+     56     Γöé - ΓÉì
+     57     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖if┬╖(
+!query)┬╖return┬╖true;ΓÉì
+     58     Γöé - ΓÉì
+     59     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return┬╖(ΓÉì
+     60     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖w
+orkshop.title.toLowerCase().include
+s(query)┬╖||ΓÉì
+     61     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖(
+workshop.description┬╖??┬╖"").toLow
+erCase().includes(query)┬╖||ΓÉì
+     62     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖(
+workshop.domain┬╖??┬╖"").toLowerCas
+e().includes(query)┬╖||ΓÉì
+     63     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖(
+workshop.level┬╖??┬╖"").toLowerCase
+().includes(query)ΓÉì
+     64     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖);ΓÉì
+     65     Γöé - ┬╖┬╖┬╖┬╖});ΓÉì
+     66     Γöé - ┬╖┬╖},┬╖[workshop
+s,┬╖search,┬╖category]);ΓÉì
+     67     Γöé - ΓÉì
+     68     Γöé - 
+┬╖┬╖function┬╖resetFilters()┬╖{ΓÉì
+     69     Γöé - 
+┬╖┬╖┬╖┬╖setSearch("");ΓÉì
+     70     Γöé - ┬╖┬╖┬╖┬╖setCatego
+ry("All┬╖Workshops");ΓÉì
+     71     Γöé - ┬╖┬╖}ΓÉì
+     72     Γöé - ΓÉì
+     73     Γöé - ┬╖┬╖return┬╖(ΓÉì
+     74     Γöé - ┬╖┬╖┬╖┬╖<>ΓÉì
+     75     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖{/*┬╖
+SEARCH┬╖BAR┬╖*/}ΓÉì
+     76     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<div┬
+╖className="mx-auto┬╖mt-10┬╖max-w-2
+xl┬╖px-6┬╖lg:px-10">ΓÉì
+     77     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+div┬╖className="relative┬╖glass-pan
+el┬╖rounded-2xl┬╖p-1┬╖shadow-lg┬╖tr
+ansition-all┬╖focus-within:border-b
+rand/40┬╖focus-within:shadow-[0_0_2
+5px_rgba(95,236,107,0.15)]">ΓÉì
+     78     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<SearchΓÉì
+     79     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖size={18}ΓÉì
+     80     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖className="pointer-events-no
+ne┬╖absolute┬╖left-4┬╖top-1/2┬╖-tra
+nslate-y-1/2┬╖text-white/40"ΓÉì
+     81     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖/>ΓÉì
+     82     Γöé - ΓÉì
+     83     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<inputΓÉì
+     84     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖type="search"ΓÉì
+     85     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖value={search}ΓÉì
+     86     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖onChange={(event)┬╖=>┬╖setSe
+arch(event.target.value)}ΓÉì
+     87     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖placeholder="Rechercher┬╖un┬
+╖atelier,┬╖sujet,┬╖technologie..."Γ
+Éì
+     88     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖className="h-12┬╖w-full┬╖rou
+nded-xl┬╖bg-transparent┬╖pl-11┬╖pr-
+11┬╖text-sm┬╖text-white┬╖outline-no
+ne┬╖placeholder:text-white/30"ΓÉì
+     89     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖/>ΓÉì
+     90     Γöé - ΓÉì
+     91     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖{search┬╖&&┬╖(ΓÉì
+     92     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<buttonΓÉì
+     93     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖type="button"ΓÉì
+     94     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖onClick={()┬╖=>┬╖setSear
+ch("")}ΓÉì
+     95     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖className="absolute┬╖rig
+ht-3.5┬╖top-1/2┬╖-translate-y-1/2┬╖
+text-white/40┬╖transition┬╖hover:te
+xt-white"ΓÉì
+     96     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖aria-label="Effacer"ΓÉì
+     97     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+     98     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖<X┬╖size={16}┬╖/>ΓÉì
+     99     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖</button>ΓÉì
+    100     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖)}ΓÉì
+    101     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    102     Γöé - ΓÉì
+    103     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+search.trim()┬╖&&┬╖(ΓÉì
+    104     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<p┬╖className="mt-3┬╖text-xs┬╖te
+xt-white/40">ΓÉì
+    105     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖R├⌐sultats┬╖pour{"┬╖"}ΓÉì
+    106     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<span┬╖className="font-semib
+old┬╖text-brand">"{search}"</span>Γ
+Éì
+    107     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</p>ΓÉì
+    108     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖)}ΓÉì
+    109     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    110     Γöé - ΓÉì
+    111     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖{/*┬╖CONTENT┬╖*/}ΓÉì
+    112     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<sect
+ion┬╖className="mx-auto┬╖flex┬╖max-
+w-7xl┬╖gap-8┬╖px-6┬╖py-12┬╖lg:px-10
+">ΓÉì
+    113     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖DESKTOP┬╖SIDEBAR┬╖*/}ΓÉì
+    114     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+aside┬╖className="hidden┬╖w-64┬╖shr
+ink-0┬╖lg:block">ΓÉì
+    115     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="sticky┬╖top-28┬
+╖glass-panel┬╖rounded-3xl┬╖p-5┬╖sha
+dow-xl┬╖border┬╖border-white/10">ΓÉ
+ì
+    116     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<h2┬╖className="mb-4┬╖text-x
+s┬╖font-bold┬╖uppercase┬╖tracking-w
+ider┬╖text-white/40┬╖px-2">ΓÉì
+    117     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Sp├⌐cialit├⌐sΓÉì
+    118     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</h2>ΓÉì
+    119     Γöé - ΓÉì
+    120     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<nav┬╖className="space-y-1">
+ΓÉì
+    121     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖{["All┬╖Workshops",┬╖...
+categories].map((item)┬╖=>┬╖{ΓÉì
+    122     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖const┬╖active┬╖=┬╖ca
+tegory┬╖===┬╖item;ΓÉì
+    123     Γöé - ΓÉì
+    124     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖return┬╖(ΓÉì
+    125     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<buttonΓÉì
+    126     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖key={item}ΓÉ
+ì
+    127     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖type="button
+"ΓÉì
+    128     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖onClick={()┬
+╖=>┬╖setCategory(item)}ΓÉì
+    129     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖className={`
+flex┬╖w-full┬╖items-center┬╖justify
+-between┬╖rounded-xl┬╖px-3.5┬╖py-2.
+5┬╖text-left┬╖text-xs┬╖font-medium┬
+╖transition-all┬╖${ΓÉì
+    130     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖activeΓÉ
+ì
+    131     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖?┬╖"
+bg-brand/15┬╖text-brand┬╖font-bold┬
+╖border┬╖border-brand/20┬╖shadow-[0
+_0_12px_rgba(95,236,107,0.15)]"ΓÉì
+    132     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖:┬╖"
+text-white/60┬╖hover:bg-white/5┬╖ho
+ver:text-white"ΓÉì
+    133     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖}`}ΓÉì
+    134     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+    135     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<span>ΓÉì
+    136     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{item┬╖=
+==┬╖"All┬╖Workshops"┬╖?┬╖"Tous┬╖les
+┬╖ateliers"┬╖:┬╖item}ΓÉì
+    137     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</span>ΓÉì
+    138     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{active┬╖&&┬
+╖(ΓÉì
+    139     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<Chevron
+Right┬╖size={14}┬╖className="text-b
+rand"┬╖/>ΓÉì
+    140     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖)}ΓÉì
+    141     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</button>ΓÉì
+    142     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖);ΓÉì
+    143     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖})}ΓÉì
+    144     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</nav>ΓÉì
+    145     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    146     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</aside>ΓÉì
+    147     Γöé - ΓÉì
+    148     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖MAIN┬╖LIST┬╖*/}ΓÉì
+    149     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+div┬╖className="min-w-0┬╖flex-1">ΓÉ
+ì
+    150     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖{/*┬╖MOBILE┬╖CATEGORIES┬╖*/}ΓÉì
+  523 more lines truncated
+  
+
+app\[locale]\ateliers\loading.tsx 
+format ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - export┬╖default┬╖fu
+nction┬╖AteliersLoading()┬╖{ΓÉì
+     2    Γöé - ┬╖┬╖return┬╖(ΓÉì
+     3    Γöé - ┬╖┬╖┬╖┬╖<div┬╖class
+Name="min-h-screen┬╖bg-black┬╖text-
+white┬╖px-6┬╖pt-32┬╖pb-16">ΓÉì
+     4    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖c
+lassName="mx-auto┬╖max-w-7xl┬╖anima
+te-pulse┬╖space-y-8">ΓÉì
+     5    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-10┬╖w-64┬╖rounded-x
+l┬╖bg-white/10"┬╖/>ΓÉì
+     6    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-5┬╖w-96┬╖rounded-lg
+┬╖bg-white/5"┬╖/>ΓÉì
+     7    Γöé - ΓÉì
+     8    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="grid┬╖gap-6┬╖sm:grid-
+cols-2┬╖lg:grid-cols-3┬╖pt-6">ΓÉì
+     9    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖{Array.from({┬╖length:┬╖6┬╖}).map(
+(_,┬╖i)┬╖=>┬╖(ΓÉì
+    10    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<divΓÉì
+    11    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖key={i}ΓÉì
+    12    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖className="h-72┬╖rounded-2
+xl┬╖border┬╖border-white/10┬╖bg-zin
+c-950/60┬╖p-6┬╖space-y-4"ΓÉì
+    13    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+    14    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-36┬╖rou
+nded-xl┬╖bg-white/10"┬╖/>ΓÉì
+    15    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-6┬╖w-3/
+4┬╖rounded┬╖bg-white/10"┬╖/>ΓÉì
+    16    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-4┬╖w-1/
+2┬╖rounded┬╖bg-white/5"┬╖/>ΓÉì
+    17    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    18    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖))}ΓÉì
+    19    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    20    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    21    Γöé - ┬╖┬╖┬╖┬╖</div>ΓÉì
+    22    Γöé - ┬╖┬╖);ΓÉì
+    23    Γöé - }ΓÉì
+        1 Γöé + export┬╖default┬╖fu
+nction┬╖AteliersLoading()┬╖{
+        2 Γöé + ┬╖┬╖return┬╖(
+        3 Γöé + ┬╖┬╖┬╖┬╖<div┬╖class
+Name="min-h-screen┬╖bg-black┬╖text-
+white┬╖px-6┬╖pt-32┬╖pb-16">
+        4 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖c
+lassName="mx-auto┬╖max-w-7xl┬╖anima
+te-pulse┬╖space-y-8">
+        5 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-10┬╖w-64┬╖rounded-x
+l┬╖bg-white/10"┬╖/>
+        6 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-5┬╖w-96┬╖rounded-lg
+┬╖bg-white/5"┬╖/>
+        7 Γöé + 
+        8 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="grid┬╖gap-6┬╖sm:grid-
+cols-2┬╖lg:grid-cols-3┬╖pt-6">
+        9 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖{Array.from({┬╖length:┬╖6┬╖}).map(
+(_,┬╖i)┬╖=>┬╖(
+       10 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<div
+       11 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖key={i}
+       12 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖className="h-72┬╖rounded-2
+xl┬╖border┬╖border-white/10┬╖bg-zin
+c-950/60┬╖p-6┬╖space-y-4"
+       13 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>
+       14 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-36┬╖rou
+nded-xl┬╖bg-white/10"┬╖/>
+       15 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-6┬╖w-3/
+4┬╖rounded┬╖bg-white/10"┬╖/>
+       16 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-4┬╖w-1/
+2┬╖rounded┬╖bg-white/5"┬╖/>
+       17 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       18 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖))}
+       19 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       20 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       21 Γöé + ┬╖┬╖┬╖┬╖</div>
+       22 Γöé + ┬╖┬╖);
+       23 Γöé + }
+    24 24 Γöé   
+  
+
+app\[locale]\ateliers\page.tsx:1:1 
+assist/source/organizeImports  
+FIXABLE  ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöü
+
+  ├ù Sort these imports.
+  
+  > 1 Γöé import { ArrowRight, Zap 
+} from "lucide-react";
+      Γöé ^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+  > 2 Γöé import { Link } from 
+"@/i18n/navigation";
+  > 3 Γöé import Footer from 
+"@/components/Footer";
+  > 4 Γöé import Navbar from 
+"@/components/Navbar";
+      Γöé ^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
+    5 Γöé import { createClient } 
+from "@/lib/supabase/server";
+    6 Γöé import AteliersBrowser 
+from "./AteliersBrowser";
+  
+  i Safe fix: Organize imports and 
+exports (Biome)
+  
+      1   1 Γöé   import { 
+ArrowRight, Zap } from 
+"lucide-react";ΓÉì
+      2     Γöé - import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+      3     Γöé - import┬╖Footer┬╖f
+rom┬╖"@/components/Footer";ΓÉì
+      4     Γöé - import┬╖Navbar┬╖f
+rom┬╖"@/components/Navbar";ΓÉì
+          2 Γöé + import┬╖Footer┬╖f
+rom┬╖"@/components/Footer";ΓÉì
+          3 Γöé + import┬╖Navbar┬╖f
+rom┬╖"@/components/Navbar";ΓÉì
+          4 Γöé + import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+      5   5 Γöé   import { 
+createClient } from 
+"@/lib/supabase/server";ΓÉì
+      6   6 Γöé   import 
+AteliersBrowser from 
+"./AteliersBrowser";ΓÉì
+  
+
+app\[locale]\ateliers\page.tsx 
+format ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+      1     Γöé - import┬╖{┬╖ArrowR
+ight,┬╖Zap┬╖}┬╖from┬╖"lucide-react"
+;ΓÉì
+      2     Γöé - import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+      3     Γöé - import┬╖Footer┬╖f
+rom┬╖"@/components/Footer";ΓÉì
+      4     Γöé - import┬╖Navbar┬╖f
+rom┬╖"@/components/Navbar";ΓÉì
+      5     Γöé - import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/se
+rver";ΓÉì
+      6     Γöé - import┬╖AteliersB
+rowser┬╖from┬╖"./AteliersBrowser";Γ
+Éì
+      7     Γöé - ΓÉì
+      8     Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+      9     Γöé - 
+┬╖┬╖params:┬╖Promise<{ΓÉì
+     10     Γöé - 
+┬╖┬╖┬╖┬╖locale:┬╖string;ΓÉì
+     11     Γöé - ┬╖┬╖}>;ΓÉì
+     12     Γöé - };ΓÉì
+     13     Γöé - ΓÉì
+     14     Γöé - 
+type┬╖Workshop┬╖=┬╖{ΓÉì
+     15     Γöé - 
+┬╖┬╖id:┬╖string;ΓÉì
+     16     Γöé - 
+┬╖┬╖title:┬╖string;ΓÉì
+     17     Γöé - ┬╖┬╖description:┬
+╖string┬╖|┬╖null;ΓÉì
+     18     Γöé - 
+┬╖┬╖image_url:┬╖string┬╖|┬╖null;ΓÉì
+     19     Γöé - 
+┬╖┬╖duration:┬╖string┬╖|┬╖null;ΓÉì
+     20     Γöé - 
+┬╖┬╖level:┬╖string┬╖|┬╖null;ΓÉì
+     21     Γöé - 
+┬╖┬╖domain:┬╖string┬╖|┬╖null;ΓÉì
+     22     Γöé - 
+┬╖┬╖price:┬╖number;ΓÉì
+     23     Γöé - };ΓÉì
+     24     Γöé - ΓÉì
+     25     Γöé - export┬╖default┬╖
+async┬╖function┬╖AteliersPage({┬╖pa
+rams┬╖}:┬╖Props)┬╖{ΓÉì
+     26     Γöé - ┬╖┬╖const┬╖{┬╖loc
+ale┬╖}┬╖=┬╖await┬╖params;ΓÉì
+     27     Γöé - ΓÉì
+     28     Γöé - ┬╖┬╖const┬╖supaba
+se┬╖=┬╖await┬╖createClient();ΓÉì
+     29     Γöé - ΓÉì
+     30     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a:┬╖workshops,┬╖error:┬╖workshopsEr
+ror┬╖}┬╖=┬╖await┬╖supabaseΓÉì
+     31     Γöé - 
+┬╖┬╖┬╖┬╖.from("workshops")ΓÉì
+     32     Γöé - ┬╖┬╖┬╖┬╖.select("
+id,┬╖title,┬╖description,┬╖image_ur
+l,┬╖duration,┬╖level,┬╖domain,┬╖pri
+ce")ΓÉì
+     33     Γöé - ┬╖┬╖┬╖┬╖.eq("is_p
+ublished",┬╖true)ΓÉì
+     34     Γöé - 
+┬╖┬╖┬╖┬╖.order("created_at",┬╖{ΓÉì
+     35     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖ascending:┬╖false,ΓÉì
+     36     Γöé - ┬╖┬╖┬╖┬╖});ΓÉì
+     37     Γöé - ΓÉì
+     38     Γöé - 
+┬╖┬╖if┬╖(workshopsError)┬╖{ΓÉì
+     39     Γöé - ┬╖┬╖┬╖┬╖console.e
+rror("[Evolve]┬╖Workshops┬╖error:",
+┬╖workshopsError);ΓÉì
+     40     Γöé - ┬╖┬╖}ΓÉì
+     41     Γöé - ΓÉì
+     42     Γöé - ┬╖┬╖const┬╖worksh
+opData:┬╖Workshop[]┬╖=┬╖(workshops┬
+╖??┬╖[]).map((workshop)┬╖=>┬╖({ΓÉì
+     43     Γöé - 
+┬╖┬╖┬╖┬╖id:┬╖workshop.id,ΓÉì
+     44     Γöé - 
+┬╖┬╖┬╖┬╖title:┬╖workshop.title,ΓÉì
+     45     Γöé - ┬╖┬╖┬╖┬╖descripti
+on:┬╖workshop.description,ΓÉì
+     46     Γöé - ┬╖┬╖┬╖┬╖image_url
+:┬╖workshop.image_url,ΓÉì
+     47     Γöé - ┬╖┬╖┬╖┬╖duration:
+┬╖workshop.duration,ΓÉì
+     48     Γöé - 
+┬╖┬╖┬╖┬╖level:┬╖workshop.level,ΓÉì
+     49     Γöé - ┬╖┬╖┬╖┬╖domain:┬╖
+workshop.domain,ΓÉì
+     50     Γöé - ┬╖┬╖┬╖┬╖price:┬╖N
+umber(workshop.price┬╖??┬╖0),ΓÉì
+     51     Γöé - ┬╖┬╖}));ΓÉì
+     52     Γöé - ΓÉì
+     53     Γöé - ┬╖┬╖return┬╖(ΓÉì
+     54     Γöé - ┬╖┬╖┬╖┬╖<div┬╖cla
+ssName="min-h-dvh┬╖bg-canvas┬╖text-
+ink┬╖flex┬╖flex-col">ΓÉì
+     55     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖<Navbar┬╖/>ΓÉì
+     56     Γöé - ΓÉì
+     57     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<main
+┬╖className="flex-1┬╖pt-24">ΓÉì
+     58     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖===============================
+==================┬╖*/}ΓÉì
+     59     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖HERO┬╖HEADER┬╖*/}ΓÉì
+     60     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖===============================
+==================┬╖*/}ΓÉì
+     61     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+section┬╖className="relative┬╖overf
+low-hidden┬╖border-b┬╖border-white/
+10┬╖px-6┬╖py-16┬╖lg:px-10">ΓÉì
+     62     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖{/*┬╖Ambient┬╖Lighting┬╖Glow┬╖*/
+}ΓÉì
+     63     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="pointer-events-
+none┬╖absolute┬╖-top-24┬╖left-1/2┬╖
+-translate-x-1/2┬╖h-80┬╖w-[600px]┬╖
+rounded-full┬╖bg-sky-500/10┬╖blur-[
+120px]"┬╖/>ΓÉì
+     64     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="pointer-events-
+none┬╖absolute┬╖inset-0┬╖bg-grid-pa
+ttern┬╖opacity-30"┬╖/>ΓÉì
+     65     Γöé - ΓÉì
+     66     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="relative┬╖mx-au
+to┬╖max-w-7xl">ΓÉì
+     67     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<div┬╖className="flex┬╖items
+-center┬╖gap-2">ΓÉì
+     68     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖<span┬╖className="inline
+-flex┬╖items-center┬╖gap-1.5┬╖round
+ed-full┬╖border┬╖border-sky-500/30┬
+╖bg-sky-500/10┬╖px-3.5┬╖py-1┬╖text-
+xs┬╖font-bold┬╖uppercase┬╖tracking-
+wider┬╖text-sky-400">ΓÉì
+     69     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<Zap┬╖className="h-3
+.5┬╖w-3.5"┬╖/>ΓÉì
+     70     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖Ateliers┬╖Pratiques┬
+╖&┬╖MasterclassesΓÉì
+     71     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖</span>ΓÉì
+     72     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+     73     Γöé - ΓÉì
+     74     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<h1┬╖className="mt-4┬╖text-4
+xl┬╖font-extrabold┬╖tracking-tight┬
+╖text-white┬╖sm:text-5xl┬╖md:text-6
+xl">ΓÉì
+     75     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Les┬╖Ateliers{"┬╖"}ΓÉì
+     76     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖<span┬╖className="bg-gra
+dient-to-r┬╖from-sky-400┬╖via-white
+┬╖to-brand┬╖bg-clip-text┬╖text-tran
+sparent">ΓÉì
+     77     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖EvolveΓÉì
+     78     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖</span>ΓÉì
+     79     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</h1>ΓÉì
+     80     Γöé - ΓÉì
+     81     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<p┬╖className="mt-4┬╖max-w-2
+xl┬╖text-base┬╖leading-relaxed┬╖tex
+t-white/60┬╖sm:text-lg">ΓÉì
+     82     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Pratiquez┬╖en┬╖direct┬╖a
+vec┬╖des┬╖experts┬╖du┬╖secteur.┬╖De
+s┬╖sessionsΓÉì
+     83     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖intensives┬╖et┬╖interact
+ives┬╖con├ºues┬╖pour┬╖acc├⌐l├⌐rer┬╖
+votre┬╖ma├«triseΓÉì
+     84     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖des┬╖outils┬╖du┬╖futur.Γ
+Éì
+     85     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</p>ΓÉì
+     86     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+     87     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</section>ΓÉì
+     88     Γöé - ΓÉì
+     89     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖===============================
+==================┬╖*/}ΓÉì
+     90     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖SEARCH┬╖+┬╖CATEGORIES┬╖+┬╖WORKS
+HOPS┬╖BROWSER┬╖*/}ΓÉì
+     91     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖===============================
+==================┬╖*/}ΓÉì
+     92     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+AteliersBrowser┬╖workshops={worksho
+pData}┬╖locale={locale}┬╖/>ΓÉì
+     93     Γöé - ΓÉì
+     94     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖===============================
+==================┬╖*/}ΓÉì
+     95     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖COMMUNITY┬╖STRIP┬╖*/}ΓÉì
+     96     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖===============================
+==================┬╖*/}ΓÉì
+     97     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+section┬╖className="border-t┬╖borde
+r-white/10┬╖px-6┬╖py-20┬╖lg:px-10┬╖
+relative┬╖overflow-hidden">ΓÉì
+     98     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="pointer-events-
+none┬╖absolute┬╖-bottom-10┬╖left-10
+┬╖h-72┬╖w-72┬╖rounded-full┬╖bg-sky-
+500/5┬╖blur-[90px]"┬╖/>ΓÉì
+     99     Γöé - ΓÉì
+    100     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="relative┬╖mx-au
+to┬╖max-w-7xl">ΓÉì
+    101     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<span┬╖className="text-xs┬╖f
+ont-bold┬╖uppercase┬╖tracking-wides
+t┬╖text-brand">ΓÉì
+    102     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Rejoignez┬╖le┬╖r├⌐seauΓÉ
+ì
+    103     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</span>ΓÉì
+    104     Γöé - ΓÉì
+    105     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<h2┬╖className="mt-3┬╖text-3
+xl┬╖font-extrabold┬╖text-white┬╖md:
+text-4xl">ΓÉì
+    106     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Proposez┬╖un┬╖Atelier┬╖o
+u┬╖Partagez┬╖vos┬╖TravauxΓÉì
+    107     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</h2>ΓÉì
+    108     Γöé - ΓÉì
+    109     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<p┬╖className="mt-3┬╖max-w-2
+xl┬╖text-sm┬╖leading-relaxed┬╖text-
+white/60">ΓÉì
+    110     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Vous┬╖├¬tes┬╖formateur┬╖
+ou┬╖expert┬╖?┬╖Rejoignez┬╖l'├⌐quipe
+┬╖d'animateursΓÉì
+    111     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖d'ateliers┬╖Evolve┬╖ou┬╖
+proposez┬╖une┬╖masterclass┬╖├á┬╖not
+re┬╖communaut├⌐.ΓÉì
+    112     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</p>ΓÉì
+    113     Γöé - ΓÉì
+    114     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<div┬╖className="mt-8┬╖flex┬
+╖flex-wrap┬╖items-center┬╖gap-4">ΓÉ
+ì
+    115     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖<LinkΓÉì
+    116     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖href="/community"ΓÉì
+    117     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖className="group┬╖in
+line-flex┬╖items-center┬╖gap-2.5┬╖r
+ounded-full┬╖bg-brand┬╖px-6┬╖py-3.5
+┬╖text-sm┬╖font-bold┬╖text-black┬╖t
+ransition-all┬╖hover:scale-105┬╖hov
+er:shadow-[0_0_25px_rgba(95,236,107
+,0.5)]"ΓÉì
+    118     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+    119     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<span>Rejoindre┬╖la┬
+╖communaut├⌐</span>ΓÉì
+    120     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<ArrowRight┬╖classNa
+me="h-4┬╖w-4┬╖transition-transform┬
+╖group-hover:translate-x-1"┬╖/>ΓÉì
+    121     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖</Link>ΓÉì
+    122     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    123     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    124     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</section>ΓÉì
+    125     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</main>ΓÉì
+    126     Γöé - ΓÉì
+    127     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<Foot
+er┬╖locale={locale}┬╖/>ΓÉì
+    128     Γöé - ┬╖┬╖┬╖┬╖</div>ΓÉì
+    129     Γöé - ┬╖┬╖);ΓÉì
+    130     Γöé - }ΓÉì
+          1 Γöé + import┬╖{┬╖ArrowR
+ight,┬╖Zap┬╖}┬╖from┬╖"lucide-react"
+;
+          2 Γöé + import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";
+          3 Γöé + import┬╖Footer┬╖f
+rom┬╖"@/components/Footer";
+          4 Γöé + import┬╖Navbar┬╖f
+rom┬╖"@/components/Navbar";
+          5 Γöé + import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/se
+rver";
+          6 Γöé + import┬╖AteliersB
+rowser┬╖from┬╖"./AteliersBrowser";
+          7 Γöé + 
+          8 Γöé + type┬╖Props┬╖=┬╖{
+          9 Γöé + 
+┬╖┬╖params:┬╖Promise<{
+         10 Γöé + 
+┬╖┬╖┬╖┬╖locale:┬╖string;
+         11 Γöé + ┬╖┬╖}>;
+         12 Γöé + };
+         13 Γöé + 
+         14 Γöé + 
+type┬╖Workshop┬╖=┬╖{
+         15 Γöé + ┬╖┬╖id:┬╖string;
+         16 Γöé + 
+┬╖┬╖title:┬╖string;
+         17 Γöé + 
+┬╖┬╖description:┬╖string┬╖|┬╖null;
+         18 Γöé + 
+┬╖┬╖image_url:┬╖string┬╖|┬╖null;
+         19 Γöé + 
+┬╖┬╖duration:┬╖string┬╖|┬╖null;
+         20 Γöé + 
+┬╖┬╖level:┬╖string┬╖|┬╖null;
+  111 more lines truncated
+  
+
+app\[locale]\community\SubmitProjec
+tForm.tsx format ΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+      1     Γöé - "use┬╖client";ΓÉì
+      2     Γöé - ΓÉì
+      3     Γöé - import┬╖{ΓÉì
+      4     Γöé - 
+┬╖┬╖AlertCircle,ΓÉì
+      5     Γöé - 
+┬╖┬╖CheckCircle2,ΓÉì
+      6     Γöé - ┬╖┬╖FileText,ΓÉì
+      7     Γöé - ┬╖┬╖Github,ΓÉì
+      8     Γöé - ┬╖┬╖Globe,ΓÉì
+      9     Γöé - ┬╖┬╖Sparkles,ΓÉì
+     10     Γöé - ┬╖┬╖Tag,ΓÉì
+     11     Γöé - ┬╖┬╖Upload,ΓÉì
+     12     Γöé - 
+}┬╖from┬╖"lucide-react";ΓÉì
+     13     Γöé - import┬╖{┬╖useSta
+te┬╖}┬╖from┬╖"react";ΓÉì
+     14     Γöé - import┬╖{┬╖compre
+ssImage,┬╖validateUploadFile┬╖}┬╖fr
+om┬╖"@/lib/imageCompressor";ΓÉì
+     15     Γöé - import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/cl
+ient";ΓÉì
+     16     Γöé - ΓÉì
+     17     Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     18     Γöé - 
+┬╖┬╖locale:┬╖string;ΓÉì
+     19     Γöé - };ΓÉì
+     20     Γöé - ΓÉì
+     21     Γöé - export┬╖default┬╖
+function┬╖SubmitProjectForm({┬╖loca
+le┬╖}:┬╖Props)┬╖{ΓÉì
+     22     Γöé - ┬╖┬╖const┬╖supaba
+se┬╖=┬╖createClient();ΓÉì
+     23     Γöé - ΓÉì
+     24     Γöé - ┬╖┬╖const┬╖[title
+,┬╖setTitle]┬╖=┬╖useState("");ΓÉì
+     25     Γöé - ┬╖┬╖const┬╖[descr
+iption,┬╖setDescription]┬╖=┬╖useSta
+te("");ΓÉì
+     26     Γöé - ┬╖┬╖const┬╖[categ
+ory,┬╖setCategory]┬╖=┬╖useState("")
+;ΓÉì
+     27     Γöé - ┬╖┬╖const┬╖[techn
+ologies,┬╖setTechnologies]┬╖=┬╖useS
+tate("");ΓÉì
+     28     Γöé - ┬╖┬╖const┬╖[githu
+bUrl,┬╖setGithubUrl]┬╖=┬╖useState("
+");ΓÉì
+     29     Γöé - ┬╖┬╖const┬╖[demoU
+rl,┬╖setDemoUrl]┬╖=┬╖useState("");Γ
+Éì
+     30     Γöé - ┬╖┬╖const┬╖[image
+File,┬╖setImageFile]┬╖=┬╖useState<F
+ile┬╖|┬╖null>(null);ΓÉì
+     31     Γöé - ┬╖┬╖const┬╖[previ
+ewUrl,┬╖setPreviewUrl]┬╖=┬╖useState
+<string┬╖|┬╖null>(null);ΓÉì
+     32     Γöé - ΓÉì
+     33     Γöé - ┬╖┬╖const┬╖[loadi
+ng,┬╖setLoading]┬╖=┬╖useState(false
+);ΓÉì
+     34     Γöé - ┬╖┬╖const┬╖[messa
+ge,┬╖setMessage]┬╖=┬╖useState<{ΓÉì
+     35     Γöé - 
+┬╖┬╖┬╖┬╖text:┬╖string;ΓÉì
+     36     Γöé - ┬╖┬╖┬╖┬╖type:┬╖"s
+uccess"┬╖|┬╖"error";ΓÉì
+     37     Γöé - 
+┬╖┬╖}┬╖|┬╖null>(null);ΓÉì
+     38     Γöé - ΓÉì
+     39     Γöé - ┬╖┬╖const┬╖handle
+ImageChange┬╖=┬╖(file:┬╖File┬╖|┬╖nu
+ll)┬╖=>┬╖{ΓÉì
+     40     Γöé - 
+┬╖┬╖┬╖┬╖setImageFile(file);ΓÉì
+     41     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(file)┬╖{ΓÉì
+     42     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖url┬╖=┬╖URL.createObjectURL(file)
+;ΓÉì
+     43     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setPreviewUrl(url);ΓÉì
+     44     Γöé - 
+┬╖┬╖┬╖┬╖}┬╖else┬╖{ΓÉì
+     45     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setPreviewUrl(null);ΓÉì
+     46     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+     47     Γöé - ┬╖┬╖};ΓÉì
+     48     Γöé - ΓÉì
+     49     Γöé - ┬╖┬╖async┬╖functi
+on┬╖handleSubmit(e:┬╖React.FormEven
+t)┬╖{ΓÉì
+     50     Γöé - 
+┬╖┬╖┬╖┬╖e.preventDefault();ΓÉì
+     51     Γöé - ΓÉì
+     52     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(loading)┬╖return;ΓÉì
+     53     Γöé - ΓÉì
+     54     Γöé - 
+┬╖┬╖┬╖┬╖setLoading(true);ΓÉì
+     55     Γöé - 
+┬╖┬╖┬╖┬╖setMessage(null);ΓÉì
+     56     Γöé - ΓÉì
+     57     Γöé - 
+┬╖┬╖┬╖┬╖const┬╖{ΓÉì
+     58     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},ΓÉì
+     59     Γöé - ┬╖┬╖┬╖┬╖}┬╖=┬╖awa
+it┬╖supabase.auth.getUser();ΓÉì
+     60     Γöé - ΓÉì
+     61     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(!user)┬╖{ΓÉì
+     62     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setMessage({ΓÉì
+     63     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖text:ΓÉì
+     64     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖locale┬╖===┬╖"ar"ΓÉì
+     65     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖?┬╖"┘è╪¼╪¿┬╖╪¬╪│╪¼┘è┘ä┬╖╪º┘ä
+╪»╪«┘ê┘ä┬╖┘ä┘å╪┤╪▒┬╖┘à╪┤╪▒┘ê╪╣"ΓÉì
+     66     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖:┬╖"Vous┬╖devez┬╖├¬tre┬╖conn
+ect├⌐┬╖pour┬╖publier┬╖un┬╖projet.",
+ΓÉì
+     67     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖type:┬╖"error",ΓÉì
+     68     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖});ΓÉì
+     69     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+     70     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+     71     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+     72     Γöé - ΓÉì
+     73     Γöé - 
+┬╖┬╖┬╖┬╖//┬╖Check┬╖duplicateΓÉì
+     74     Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬
+╖data:┬╖duplicate┬╖}┬╖=┬╖await┬╖sup
+abaseΓÉì
+     75     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.from
+("community_projects")ΓÉì
+     76     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.select("id")ΓÉì
+     77     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+user_id",┬╖user.id)ΓÉì
+     78     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+title",┬╖title.trim())ΓÉì
+     79     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+     80     Γöé - ΓÉì
+     81     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(duplicate)┬╖{ΓÉì
+     82     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setMessage({ΓÉì
+     83     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖t
+ext:┬╖"Vous┬╖avez┬╖d├⌐j├á┬╖publi├⌐┬
+╖un┬╖projet┬╖avec┬╖ce┬╖titre.",ΓÉì
+     84     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖type:┬╖"error",ΓÉì
+     85     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖});ΓÉì
+     86     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+     87     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+     88     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+     89     Γöé - ΓÉì
+     90     Γöé - ┬╖┬╖┬╖┬╖let┬╖imag
+eUrl:┬╖string┬╖|┬╖null┬╖=┬╖null;ΓÉì
+     91     Γöé - ΓÉì
+     92     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(imageFile)┬╖{ΓÉì
+     93     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖validation┬╖=┬╖validateUploadFile
+(imageFile);ΓÉì
+     94     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖if┬╖(
+!validation.valid)┬╖{ΓÉì
+     95     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖setMessage({ΓÉì
+     96     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖text:┬╖validation.error┬╖||┬╖"Fi
+chier┬╖image┬╖invalide.",ΓÉì
+     97     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖type:┬╖"error",ΓÉì
+     98     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖});ΓÉì
+     99     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖s
+etLoading(false);ΓÉì
+    100     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    101     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖}ΓÉì
+    102     Γöé - ΓÉì
+    103     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖fileToUpload┬╖=┬╖await┬╖compressI
+mage(imageFile);ΓÉì
+    104     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖fileName┬╖=┬╖`${crypto.randomUUID
+()}.webp`;ΓÉì
+    105     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖filePath┬╖=┬╖`${user.id}/${fileNa
+me}`;ΓÉì
+    106     Γöé - ΓÉì
+    107     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖{┬╖error:┬╖uploadError┬╖}┬╖=┬╖awa
+it┬╖supabase.storageΓÉì
+    108     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+from("community-projects")ΓÉì
+    109     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+upload(filePath,┬╖fileToUpload,┬╖{Γ
+Éì
+    110     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖cacheControl:┬╖"3600",ΓÉì
+    111     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖upsert:┬╖false,ΓÉì
+    112     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖contentType:┬╖"image/webp",ΓÉì
+    113     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖});ΓÉì
+    114     Γöé - ΓÉì
+    115     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖if┬╖(uploadError)┬╖{ΓÉì
+    116     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖c
+onsole.error("[Image┬╖Upload]",┬╖up
+loadError);ΓÉì
+    117     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖s
+etMessage({┬╖text:┬╖uploadError.mes
+sage,┬╖type:┬╖"error"┬╖});ΓÉì
+    118     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖s
+etLoading(false);ΓÉì
+    119     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    120     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖}ΓÉì
+    121     Γöé - ΓÉì
+    122     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖{┬╖data:┬╖publicUrlData┬╖}┬╖=┬╖su
+pabase.storageΓÉì
+    123     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+from("community-projects")ΓÉì
+    124     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+getPublicUrl(filePath);ΓÉì
+    125     Γöé - ΓÉì
+    126     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖image
+Url┬╖=┬╖publicUrlData.publicUrl;ΓÉì
+    127     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    128     Γöé - ΓÉì
+    129     Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬
+╖error┬╖}┬╖=┬╖await┬╖supabase.from(
+"community_projects").insert({ΓÉì
+    130     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖user_id:┬╖user.id,ΓÉì
+    131     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖title,ΓÉì
+    132     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖description,ΓÉì
+    133     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖categ
+ory:┬╖category┬╖||┬╖null,ΓÉì
+    134     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖techn
+ologies:┬╖technologiesΓÉì
+    135     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.split(",")ΓÉì
+    136     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+map((item)┬╖=>┬╖item.trim())ΓÉì
+    137     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+filter(Boolean),ΓÉì
+    138     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖githu
+b_url:┬╖githubUrl┬╖||┬╖null,ΓÉì
+    139     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖demo_
+url:┬╖demoUrl┬╖||┬╖null,ΓÉì
+    140     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖image
+_url:┬╖imageUrl,ΓÉì
+    141     Γöé - ┬╖┬╖┬╖┬╖});ΓÉì
+    142     Γöé - ΓÉì
+    143     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(error)┬╖{ΓÉì
+    144     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖conso
+le.error("[Project┬╖Create]",┬╖erro
+r);ΓÉì
+    145     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖setMe
+ssage({┬╖text:┬╖error.message,┬╖typ
+e:┬╖"error"┬╖});ΓÉì
+    146     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+    147     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    148     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    149     Γöé - ΓÉì
+    150     Γöé - 
+┬╖┬╖┬╖┬╖setTitle("");ΓÉì
+  639 more lines truncated
+  
+
+app\[locale]\community\[id]\EditPro
+jectForm.tsx format ΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+      1     Γöé - "use┬╖client";ΓÉì
+      2     Γöé - ΓÉì
+      3     Γöé - import┬╖{ΓÉì
+      4     Γöé - 
+┬╖┬╖AlertCircle,ΓÉì
+      5     Γöé - ┬╖┬╖Github,ΓÉì
+      6     Γöé - ┬╖┬╖Globe,ΓÉì
+      7     Γöé - ┬╖┬╖Loader2,ΓÉì
+      8     Γöé - ┬╖┬╖Sparkles,ΓÉì
+      9     Γöé - ┬╖┬╖Tag,ΓÉì
+     10     Γöé - ┬╖┬╖Upload,ΓÉì
+     11     Γöé - 
+}┬╖from┬╖"lucide-react";ΓÉì
+     12     Γöé - import┬╖{┬╖useRou
+ter┬╖}┬╖from┬╖"next/navigation";ΓÉì
+     13     Γöé - import┬╖{┬╖useSta
+te┬╖}┬╖from┬╖"react";ΓÉì
+     14     Γöé - import┬╖{┬╖compre
+ssImage,┬╖validateUploadFile┬╖}┬╖fr
+om┬╖"@/lib/imageCompressor";ΓÉì
+     15     Γöé - import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/cl
+ient";ΓÉì
+     16     Γöé - ΓÉì
+     17     Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     18     Γöé - 
+┬╖┬╖projectId:┬╖string;ΓÉì
+     19     Γöé - 
+┬╖┬╖locale:┬╖string;ΓÉì
+     20     Γöé - 
+┬╖┬╖initialTitle:┬╖string;ΓÉì
+     21     Γöé - 
+┬╖┬╖initialDescription:┬╖string;ΓÉì
+     22     Γöé - 
+┬╖┬╖initialCategory:┬╖string;ΓÉì
+     23     Γöé - ┬╖┬╖initialTechno
+logies:┬╖string;ΓÉì
+     24     Γöé - 
+┬╖┬╖initialGithubUrl:┬╖string;ΓÉì
+     25     Γöé - 
+┬╖┬╖initialDemoUrl:┬╖string;ΓÉì
+     26     Γöé - 
+┬╖┬╖initialImageUrl:┬╖string;ΓÉì
+     27     Γöé - };ΓÉì
+     28     Γöé - ΓÉì
+     29     Γöé - 
+const┬╖SUGGESTED_TAGS┬╖=┬╖[ΓÉì
+     30     Γöé - ┬╖┬╖"Next.js",ΓÉì
+     31     Γöé - ┬╖┬╖"React",ΓÉì
+     32     Γöé - 
+┬╖┬╖"Tailwind┬╖CSS",ΓÉì
+     33     Γöé - 
+┬╖┬╖"TypeScript",ΓÉì
+     34     Γöé - 
+┬╖┬╖"Supabase",ΓÉì
+     35     Γöé - ┬╖┬╖"Python",ΓÉì
+     36     Γöé - ┬╖┬╖"Figma",ΓÉì
+     37     Γöé - ┬╖┬╖"Node.js",ΓÉì
+     38     Γöé - 
+┬╖┬╖"AI┬╖/┬╖LLM",ΓÉì
+     39     Γöé - ┬╖┬╖"Mobile",ΓÉì
+     40     Γöé - ];ΓÉì
+     41     Γöé - ΓÉì
+     42     Γöé - 
+const┬╖CATEGORIES┬╖=┬╖[ΓÉì
+     43     Γöé - 
+┬╖┬╖"Web┬╖App",ΓÉì
+     44     Γöé - 
+┬╖┬╖"Mobile┬╖App",ΓÉì
+     45     Γöé - 
+┬╖┬╖"UI/UX┬╖Design",ΓÉì
+     46     Γöé - ┬╖┬╖"Intelligence
+┬╖Artificielle",ΓÉì
+     47     Γöé - 
+┬╖┬╖"Portfolio",ΓÉì
+     48     Γöé - 
+┬╖┬╖"Outil┬╖Open┬╖Source",ΓÉì
+     49     Γöé - 
+┬╖┬╖"E-Commerce",ΓÉì
+     50     Γöé - ];ΓÉì
+     51     Γöé - ΓÉì
+     52     Γöé - export┬╖default┬╖
+function┬╖EditProjectForm({ΓÉì
+     53     Γöé - ┬╖┬╖projectId,ΓÉì
+     54     Γöé - ┬╖┬╖locale,ΓÉì
+     55     Γöé - 
+┬╖┬╖initialTitle,ΓÉì
+     56     Γöé - 
+┬╖┬╖initialDescription,ΓÉì
+     57     Γöé - 
+┬╖┬╖initialCategory,ΓÉì
+     58     Γöé - 
+┬╖┬╖initialTechnologies,ΓÉì
+     59     Γöé - 
+┬╖┬╖initialGithubUrl,ΓÉì
+     60     Γöé - 
+┬╖┬╖initialDemoUrl,ΓÉì
+     61     Γöé - 
+┬╖┬╖initialImageUrl,ΓÉì
+     62     Γöé - }:┬╖Props)┬╖{ΓÉì
+     63     Γöé - ┬╖┬╖const┬╖supaba
+se┬╖=┬╖createClient();ΓÉì
+     64     Γöé - ┬╖┬╖const┬╖router
+┬╖=┬╖useRouter();ΓÉì
+     65     Γöé - ΓÉì
+     66     Γöé - ┬╖┬╖const┬╖[title
+,┬╖setTitle]┬╖=┬╖useState(initialTi
+tle);ΓÉì
+     67     Γöé - ┬╖┬╖const┬╖[descr
+iption,┬╖setDescription]┬╖=┬╖useSta
+te(initialDescription);ΓÉì
+     68     Γöé - ┬╖┬╖const┬╖[categ
+ory,┬╖setCategory]┬╖=┬╖useState(ini
+tialCategory);ΓÉì
+     69     Γöé - ┬╖┬╖const┬╖[techn
+ologies,┬╖setTechnologies]┬╖=┬╖useS
+tate(initialTechnologies);ΓÉì
+     70     Γöé - ┬╖┬╖const┬╖[githu
+bUrl,┬╖setGithubUrl]┬╖=┬╖useState(i
+nitialGithubUrl);ΓÉì
+     71     Γöé - ┬╖┬╖const┬╖[demoU
+rl,┬╖setDemoUrl]┬╖=┬╖useState(initi
+alDemoUrl);ΓÉì
+     72     Γöé - ┬╖┬╖const┬╖[image
+File,┬╖setImageFile]┬╖=┬╖useState<F
+ile┬╖|┬╖null>(null);ΓÉì
+     73     Γöé - ┬╖┬╖const┬╖[image
+Preview,┬╖setImagePreview]┬╖=┬╖useS
+tate<string┬╖|┬╖null>(ΓÉì
+     74     Γöé - ┬╖┬╖┬╖┬╖initialIm
+ageUrl┬╖||┬╖null,ΓÉì
+     75     Γöé - ┬╖┬╖);ΓÉì
+     76     Γöé - ΓÉì
+     77     Γöé - ┬╖┬╖const┬╖[loadi
+ng,┬╖setLoading]┬╖=┬╖useState(false
+);ΓÉì
+     78     Γöé - ┬╖┬╖const┬╖[messa
+ge,┬╖setMessage]┬╖=┬╖useState("");Γ
+Éì
+     79     Γöé - ΓÉì
+     80     Γöé - ┬╖┬╖const┬╖handle
+ImageChange┬╖=┬╖async┬╖(e:┬╖React.C
+hangeEvent<HTMLInputElement>)┬╖=>┬╖
+{ΓÉì
+     81     Γöé - ┬╖┬╖┬╖┬╖const┬╖fi
+le┬╖=┬╖e.target.files?.[0];ΓÉì
+     82     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(!file)┬╖return;ΓÉì
+     83     Γöé - ΓÉì
+     84     Γöé - ┬╖┬╖┬╖┬╖const┬╖va
+lidation┬╖=┬╖validateUploadFile(fil
+e);ΓÉì
+     85     Γöé - ΓÉì
+     86     Γöé - ┬╖┬╖┬╖┬╖if┬╖(!val
+idation.valid)┬╖{ΓÉì
+     87     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖setMe
+ssage(validation.error┬╖||┬╖"Fichie
+r┬╖image┬╖invalide.");ΓÉì
+     88     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+     89     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+     90     Γöé - ΓÉì
+     91     Γöé - ┬╖┬╖┬╖┬╖try┬╖{ΓÉì
+     92     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖compressed┬╖=┬╖await┬╖compressIma
+ge(file,┬╖1600,┬╖0.85);ΓÉì
+     93     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖setIm
+ageFile(compressed);ΓÉì
+     94     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖setIm
+agePreview(URL.createObjectURL(comp
+ressed));ΓÉì
+     95     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setMessage("");ΓÉì
+     96     Γöé - 
+┬╖┬╖┬╖┬╖}┬╖catch┬╖{ΓÉì
+     97     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setImageFile(file);ΓÉì
+     98     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖setIm
+agePreview(URL.createObjectURL(file
+));ΓÉì
+     99     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    100     Γöé - ┬╖┬╖};ΓÉì
+    101     Γöé - ΓÉì
+    102     Γöé - ┬╖┬╖const┬╖addTec
+hnologyTag┬╖=┬╖(tag:┬╖string)┬╖=>┬╖
+{ΓÉì
+    103     Γöé - ┬╖┬╖┬╖┬╖const┬╖cu
+rrentTags┬╖=┬╖technologiesΓÉì
+    104     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.split(",")ΓÉì
+    105     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.map(
+(t)┬╖=>┬╖t.trim())ΓÉì
+    106     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.filter(Boolean);ΓÉì
+    107     Γöé - ┬╖┬╖┬╖┬╖if┬╖(!cur
+rentTags.includes(tag))┬╖{ΓÉì
+    108     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖setTe
+chnologies(currentTags.length┬╖>┬╖0
+┬╖?┬╖`${technologies},┬╖${tag}`┬╖:┬
+╖tag);ΓÉì
+    109     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    110     Γöé - ┬╖┬╖};ΓÉì
+    111     Γöé - ΓÉì
+    112     Γöé - ┬╖┬╖async┬╖functi
+on┬╖handleSubmit(e:┬╖React.FormEven
+t)┬╖{ΓÉì
+    113     Γöé - 
+┬╖┬╖┬╖┬╖e.preventDefault();ΓÉì
+    114     Γöé - ΓÉì
+    115     Γöé - 
+┬╖┬╖┬╖┬╖setLoading(true);ΓÉì
+    116     Γöé - 
+┬╖┬╖┬╖┬╖setMessage("");ΓÉì
+    117     Γöé - ΓÉì
+    118     Γöé - 
+┬╖┬╖┬╖┬╖const┬╖{ΓÉì
+    119     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},ΓÉì
+    120     Γöé - ┬╖┬╖┬╖┬╖}┬╖=┬╖awa
+it┬╖supabase.auth.getUser();ΓÉì
+    121     Γöé - ΓÉì
+    122     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(!user)┬╖{ΓÉì
+    123     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖setMe
+ssage("Vous┬╖devez┬╖├¬tre┬╖connect├
+⌐.");ΓÉì
+    124     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+    125     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    126     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    127     Γöé - ΓÉì
+    128     Γöé - ┬╖┬╖┬╖┬╖let┬╖fina
+lImageUrl┬╖=┬╖initialImageUrl┬╖||┬╖
+null;ΓÉì
+    129     Γöé - ΓÉì
+    130     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(imageFile)┬╖{ΓÉì
+    131     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖fileExt┬╖=┬╖imageFile.name.split(
+".").pop();ΓÉì
+    132     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖fileName┬╖=┬╖`${crypto.randomUUID
+()}.${fileExt}`;ΓÉì
+    133     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖filePath┬╖=┬╖`${user.id}/${fileNa
+me}`;ΓÉì
+    134     Γöé - ΓÉì
+    135     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖{┬╖error:┬╖uploadError┬╖}┬╖=┬╖awa
+it┬╖supabase.storageΓÉì
+    136     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+from("community-projects")ΓÉì
+    137     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+upload(filePath,┬╖imageFile,┬╖{ΓÉì
+    138     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖cacheControl:┬╖"3600",ΓÉì
+    139     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖upsert:┬╖false,ΓÉì
+    140     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖});ΓÉì
+    141     Γöé - ΓÉì
+    142     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖if┬╖(uploadError)┬╖{ΓÉì
+    143     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖c
+onsole.error("[Image┬╖Upload]",┬╖up
+loadError);ΓÉì
+    144     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖setMessage(ΓÉì
+    145     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖`Impossible┬╖de┬╖t├⌐l├⌐charger┬╖
+l'image┬╖:┬╖${uploadError.message}`
+,ΓÉì
+    146     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖);ΓÉì
+    147     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖s
+etLoading(false);ΓÉì
+    148     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    149     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖}ΓÉì
+    150     Γöé - ΓÉì
+  667 more lines truncated
+  
+
+app\[locale]\community\[id]\LikeBut
+ton.tsx format ΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - "use┬╖client";ΓÉì
+     2    Γöé - ΓÉì
+     3    Γöé - import┬╖{┬╖Heart,┬╖
+Loader2┬╖}┬╖from┬╖"lucide-react";ΓÉ
+ì
+     4    Γöé - import┬╖{┬╖useState
+┬╖}┬╖from┬╖"react";ΓÉì
+     5    Γöé - import┬╖{┬╖createCl
+ient┬╖}┬╖from┬╖"@/lib/supabase/clie
+nt";ΓÉì
+     6    Γöé - ΓÉì
+     7    Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     8    Γöé - 
+┬╖┬╖projectId:┬╖string;ΓÉì
+     9    Γöé - 
+┬╖┬╖initialLikes:┬╖number;ΓÉì
+    10    Γöé - 
+┬╖┬╖initiallyLiked:┬╖boolean;ΓÉì
+    11    Γöé - };ΓÉì
+    12    Γöé - ΓÉì
+    13    Γöé - export┬╖default┬╖fu
+nction┬╖LikeButton({ΓÉì
+    14    Γöé - ┬╖┬╖projectId,ΓÉì
+    15    Γöé - 
+┬╖┬╖initialLikes,ΓÉì
+    16    Γöé - 
+┬╖┬╖initiallyLiked,ΓÉì
+    17    Γöé - }:┬╖Props)┬╖{ΓÉì
+    18    Γöé - ┬╖┬╖const┬╖supabase
+┬╖=┬╖createClient();ΓÉì
+    19    Γöé - ΓÉì
+    20    Γöé - ┬╖┬╖const┬╖[likes,┬
+╖setLikes]┬╖=┬╖useState(initialLike
+s);ΓÉì
+    21    Γöé - ┬╖┬╖const┬╖[liked,┬
+╖setLiked]┬╖=┬╖useState(initiallyLi
+ked);ΓÉì
+    22    Γöé - ┬╖┬╖const┬╖[loading
+,┬╖setLoading]┬╖=┬╖useState(false);
+ΓÉì
+    23    Γöé - ΓÉì
+    24    Γöé - ┬╖┬╖async┬╖function
+┬╖handleLike()┬╖{ΓÉì
+    25    Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(loading)┬╖return;ΓÉì
+    26    Γöé - ΓÉì
+    27    Γöé - 
+┬╖┬╖┬╖┬╖setLoading(true);ΓÉì
+    28    Γöé - ΓÉì
+    29    Γöé - ┬╖┬╖┬╖┬╖const┬╖{ΓÉì
+    30    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},ΓÉì
+    31    Γöé - ┬╖┬╖┬╖┬╖}┬╖=┬╖await
+┬╖supabase.auth.getUser();ΓÉì
+    32    Γöé - ΓÉì
+    33    Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(!user)┬╖{ΓÉì
+    34    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖alert("
+Connectez-vous┬╖pour┬╖aimer┬╖ce┬╖pr
+ojet.");ΓÉì
+    35    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+    36    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    37    Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    38    Γöé - ΓÉì
+    39    Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬╖d
+ata,┬╖error┬╖}┬╖=┬╖await┬╖supabase.
+rpc("toggle_project_like",┬╖{ΓÉì
+    40    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖p_proje
+ct_id:┬╖projectId,ΓÉì
+    41    Γöé - ┬╖┬╖┬╖┬╖});ΓÉì
+    42    Γöé - ΓÉì
+    43    Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(error)┬╖{ΓÉì
+    44    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖console
+.error("[Like]",┬╖error);ΓÉì
+    45    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+    46    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    47    Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    48    Γöé - ΓÉì
+    49    Γöé - ┬╖┬╖┬╖┬╖const┬╖isNo
+wLiked┬╖=┬╖Boolean(data);ΓÉì
+    50    Γöé - ΓÉì
+    51    Γöé - 
+┬╖┬╖┬╖┬╖setLiked(isNowLiked);ΓÉì
+    52    Γöé - ΓÉì
+    53    Γöé - 
+┬╖┬╖┬╖┬╖setLikes((current)┬╖=>ΓÉì
+    54    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖isNowLi
+ked┬╖?┬╖current┬╖+┬╖1┬╖:┬╖Math.max(
+0,┬╖current┬╖-┬╖1),ΓÉì
+    55    Γöé - ┬╖┬╖┬╖┬╖);ΓÉì
+    56    Γöé - ΓÉì
+    57    Γöé - 
+┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+    58    Γöé - ┬╖┬╖}ΓÉì
+    59    Γöé - ΓÉì
+    60    Γöé - ┬╖┬╖return┬╖(ΓÉì
+    61    Γöé - ┬╖┬╖┬╖┬╖<buttonΓÉì
+    62    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖type="button"ΓÉì
+    63    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖onClick={handleLike}ΓÉì
+    64    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖disabled={loading}ΓÉì
+    65    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖aria-la
+bel={liked┬╖?┬╖"Je┬╖n'aime┬╖plus"┬╖
+:┬╖"J'aime┬╖ce┬╖projet"}ΓÉì
+    66    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖classNa
+me={`group┬╖relative┬╖inline-flex┬╖
+items-center┬╖gap-2┬╖rounded-xl┬╖px
+-4┬╖py-2.5┬╖text-xs┬╖font-semibold┬
+╖backdrop-blur-md┬╖transition-all┬╖
+duration-300┬╖active:scale-95┬╖disa
+bled:cursor-not-allowed┬╖disabled:o
+pacity-60┬╖border┬╖${ΓÉì
+    67    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖likedΓÉì
+    68    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖?┬╖"border-rose-500/40┬╖bg-rose-50
+0/15┬╖text-rose-300┬╖shadow-[0_0_20
+px_rgba(244,63,94,0.25)]┬╖hover:bg-
+rose-500/25"ΓÉì
+    69    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖:┬╖"border-white/10┬╖bg-white/5┬╖t
+ext-white/70┬╖hover:border-white/25
+┬╖hover:bg-white/10┬╖hover:text-whi
+te"ΓÉì
+    70    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖}`}ΓÉì
+    71    Γöé - ┬╖┬╖┬╖┬╖>ΓÉì
+    72    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖{loading┬╖?┬╖(ΓÉì
+    73    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<Lo
+ader2┬╖className="h-4┬╖w-4┬╖animate
+-spin┬╖text-rose-400"┬╖/>ΓÉì
+    74    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖)┬╖:┬╖(ΓÉì
+    75    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<HeartΓÉì
+    76    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖className={`h-4┬╖w-4┬╖transition-a
+ll┬╖duration-300┬╖${ΓÉì
+    77    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖likedΓÉì
+    78    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖?┬╖"fill-rose-500┬╖text-ro
+se-500┬╖scale-110"ΓÉì
+    79    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖:┬╖"text-white/60┬╖group-h
+over:scale-110┬╖group-hover:text-ro
+se-400"ΓÉì
+    80    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖}`}ΓÉì
+    81    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖/>ΓÉì
+    82    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖)}ΓÉì
+    83    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<span┬╖
+className="tabular-nums┬╖font-mono"
+>{likes}</span>ΓÉì
+    84    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<span┬╖
+className="text-[11px]┬╖font-normal
+┬╖text-white/40┬╖group-hover:text-w
+hite/60┬╖transition-colors">ΓÉì
+    85    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{li
+kes┬╖<=┬╖1┬╖?┬╖"coup┬╖de┬╖c┼ôur"┬╖:
+┬╖"coups┬╖de┬╖c┼ôur"}ΓÉì
+    86    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</span>ΓÉì
+    87    Γöé - 
+┬╖┬╖┬╖┬╖</button>ΓÉì
+    88    Γöé - ┬╖┬╖);ΓÉì
+    89    Γöé - }ΓÉì
+        1 Γöé + "use┬╖client";
+        2 Γöé + 
+        3 Γöé + import┬╖{┬╖Heart,┬╖
+Loader2┬╖}┬╖from┬╖"lucide-react";
+        4 Γöé + import┬╖{┬╖useState
+┬╖}┬╖from┬╖"react";
+        5 Γöé + import┬╖{┬╖createCl
+ient┬╖}┬╖from┬╖"@/lib/supabase/clie
+nt";
+        6 Γöé + 
+        7 Γöé + type┬╖Props┬╖=┬╖{
+        8 Γöé + 
+┬╖┬╖projectId:┬╖string;
+        9 Γöé + 
+┬╖┬╖initialLikes:┬╖number;
+       10 Γöé + 
+┬╖┬╖initiallyLiked:┬╖boolean;
+       11 Γöé + };
+       12 Γöé + 
+       13 Γöé + export┬╖default┬╖fu
+nction┬╖LikeButton({
+       14 Γöé + ┬╖┬╖projectId,
+       15 Γöé + ┬╖┬╖initialLikes,
+       16 Γöé + ┬╖┬╖initiallyLiked,
+       17 Γöé + }:┬╖Props)┬╖{
+       18 Γöé + ┬╖┬╖const┬╖supabase
+┬╖=┬╖createClient();
+       19 Γöé + 
+       20 Γöé + ┬╖┬╖const┬╖[likes,┬
+╖setLikes]┬╖=┬╖useState(initialLike
+s);
+       21 Γöé + ┬╖┬╖const┬╖[liked,┬
+╖setLiked]┬╖=┬╖useState(initiallyLi
+ked);
+       22 Γöé + ┬╖┬╖const┬╖[loading
+,┬╖setLoading]┬╖=┬╖useState(false);
+       23 Γöé + 
+       24 Γöé + ┬╖┬╖async┬╖function
+┬╖handleLike()┬╖{
+       25 Γöé + 
+┬╖┬╖┬╖┬╖if┬╖(loading)┬╖return;
+       26 Γöé + 
+       27 Γöé + 
+┬╖┬╖┬╖┬╖setLoading(true);
+       28 Γöé + 
+       29 Γöé + ┬╖┬╖┬╖┬╖const┬╖{
+       30 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},
+       31 Γöé + ┬╖┬╖┬╖┬╖}┬╖=┬╖await
+┬╖supabase.auth.getUser();
+       32 Γöé + 
+       33 Γöé + 
+┬╖┬╖┬╖┬╖if┬╖(!user)┬╖{
+       34 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖alert("
+Connectez-vous┬╖pour┬╖aimer┬╖ce┬╖pr
+ojet.");
+       35 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);
+       36 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖return;
+       37 Γöé + ┬╖┬╖┬╖┬╖}
+       38 Γöé + 
+       39 Γöé + ┬╖┬╖┬╖┬╖const┬╖{┬╖d
+ata,┬╖error┬╖}┬╖=┬╖await┬╖supabase.
+rpc("toggle_project_like",┬╖{
+       40 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖p_proje
+ct_id:┬╖projectId,
+       41 Γöé + ┬╖┬╖┬╖┬╖});
+       42 Γöé + 
+       43 Γöé + 
+┬╖┬╖┬╖┬╖if┬╖(error)┬╖{
+       44 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖console
+.error("[Like]",┬╖error);
+       45 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);
+       46 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖return;
+       47 Γöé + ┬╖┬╖┬╖┬╖}
+       48 Γöé + 
+       49 Γöé + ┬╖┬╖┬╖┬╖const┬╖isNo
+wLiked┬╖=┬╖Boolean(data);
+       50 Γöé + 
+       51 Γöé + 
+┬╖┬╖┬╖┬╖setLiked(isNowLiked);
+       52 Γöé + 
+       53 Γöé + 
+┬╖┬╖┬╖┬╖setLikes((current)┬╖=>
+       54 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖isNowLi
+ked┬╖?┬╖current┬╖+┬╖1┬╖:┬╖Math.max(
+0,┬╖current┬╖-┬╖1),
+       55 Γöé + ┬╖┬╖┬╖┬╖);
+       56 Γöé + 
+       57 Γöé + 
+┬╖┬╖┬╖┬╖setLoading(false);
+       58 Γöé + ┬╖┬╖}
+       59 Γöé + 
+       60 Γöé + ┬╖┬╖return┬╖(
+       61 Γöé + ┬╖┬╖┬╖┬╖<button
+  29 more lines truncated
+  
+
+app\[locale]\community\[id]\Project
+Actions.tsx format ΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - "use┬╖client";ΓÉì
+     2    Γöé - ΓÉì
+     3    Γöé - import┬╖{┬╖Loader2,
+┬╖Pencil,┬╖Trash2┬╖}┬╖from┬╖"lucide
+-react";ΓÉì
+     4    Γöé - import┬╖{┬╖useRoute
+r┬╖}┬╖from┬╖"next/navigation";ΓÉì
+     5    Γöé - import┬╖{┬╖useState
+┬╖}┬╖from┬╖"react";ΓÉì
+     6    Γöé - import┬╖{┬╖createCl
+ient┬╖}┬╖from┬╖"@/lib/supabase/clie
+nt";ΓÉì
+     7    Γöé - ΓÉì
+     8    Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     9    Γöé - 
+┬╖┬╖projectId:┬╖string;ΓÉì
+    10    Γöé - 
+┬╖┬╖locale:┬╖string;ΓÉì
+    11    Γöé - };ΓÉì
+    12    Γöé - ΓÉì
+    13    Γöé - export┬╖default┬╖fu
+nction┬╖ProjectActions({┬╖projectId
+,┬╖locale┬╖}:┬╖Props)┬╖{ΓÉì
+    14    Γöé - ┬╖┬╖const┬╖supabase
+┬╖=┬╖createClient();ΓÉì
+    15    Γöé - ┬╖┬╖const┬╖router┬╖
+=┬╖useRouter();ΓÉì
+    16    Γöé - ΓÉì
+    17    Γöé - ┬╖┬╖const┬╖[loading
+,┬╖setLoading]┬╖=┬╖useState(false);
+ΓÉì
+    18    Γöé - ΓÉì
+    19    Γöé - 
+┬╖┬╖function┬╖handleEdit()┬╖{ΓÉì
+    20    Γöé - ┬╖┬╖┬╖┬╖router.push
+(`/${locale}/community/${projectId}
+/edit`);ΓÉì
+    21    Γöé - ┬╖┬╖}ΓÉì
+    22    Γöé - ΓÉì
+    23    Γöé - ┬╖┬╖async┬╖function
+┬╖handleDelete()┬╖{ΓÉì
+    24    Γöé - ┬╖┬╖┬╖┬╖const┬╖conf
+irmed┬╖=┬╖window.confirm(ΓÉì
+    25    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖"├ètes-
+vous┬╖s├╗r┬╖de┬╖vouloir┬╖supprimer┬
+╖d├⌐finitivement┬╖ce┬╖projet┬╖?",ΓÉ
+ì
+    26    Γöé - ┬╖┬╖┬╖┬╖);ΓÉì
+    27    Γöé - ΓÉì
+    28    Γöé - ┬╖┬╖┬╖┬╖if┬╖(!confi
+rmed)┬╖return;ΓÉì
+    29    Γöé - ΓÉì
+    30    Γöé - 
+┬╖┬╖┬╖┬╖setLoading(true);ΓÉì
+    31    Γöé - ΓÉì
+    32    Γöé - ┬╖┬╖┬╖┬╖const┬╖{ΓÉì
+    33    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},ΓÉì
+    34    Γöé - ┬╖┬╖┬╖┬╖}┬╖=┬╖await
+┬╖supabase.auth.getUser();ΓÉì
+    35    Γöé - ΓÉì
+    36    Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(!user)┬╖{ΓÉì
+    37    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖alert("
+Vous┬╖devez┬╖├¬tre┬╖connect├⌐.");ΓÉ
+ì
+    38    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+    39    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    40    Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    41    Γöé - ΓÉì
+    42    Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬╖e
+rror┬╖}┬╖=┬╖await┬╖supabaseΓÉì
+    43    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.from("
+community_projects")ΓÉì
+    44    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.delete()ΓÉì
+    45    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("id
+",┬╖projectId)ΓÉì
+    46    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("us
+er_id",┬╖user.id);ΓÉì
+    47    Γöé - ΓÉì
+    48    Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(error)┬╖{ΓÉì
+    49    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖console
+.error("[Project┬╖Delete]",┬╖error)
+;ΓÉì
+    50    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖alert(e
+rror.message);ΓÉì
+    51    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);ΓÉì
+    52    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖return;ΓÉì
+    53    Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    54    Γöé - ΓÉì
+    55    Γöé - ┬╖┬╖┬╖┬╖router.push
+(`/${locale}/community`);ΓÉì
+    56    Γöé - 
+┬╖┬╖┬╖┬╖router.refresh();ΓÉì
+    57    Γöé - ┬╖┬╖}ΓÉì
+    58    Γöé - ΓÉì
+    59    Γöé - ┬╖┬╖return┬╖(ΓÉì
+    60    Γöé - ┬╖┬╖┬╖┬╖<div┬╖class
+Name="flex┬╖flex-wrap┬╖items-center
+┬╖gap-3">ΓÉì
+    61    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖<buttonΓÉì
+    62    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖type="button"ΓÉì
+    63    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖onC
+lick={handleEdit}ΓÉì
+    64    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖cla
+ssName="inline-flex┬╖items-center┬╖
+gap-2┬╖rounded-xl┬╖border┬╖border-w
+hite/15┬╖bg-white/5┬╖px-4┬╖py-2┬╖te
+xt-xs┬╖font-semibold┬╖text-white┬╖h
+over:bg-white/10┬╖hover:border-whit
+e/25┬╖transition"ΓÉì
+    65    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+    66    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<Pe
+ncil┬╖className="h-3.5┬╖w-3.5┬╖text
+-brand"┬╖/>ΓÉì
+    67    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<sp
+an>Modifier┬╖le┬╖projet</span>ΓÉì
+    68    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</button>ΓÉì
+    69    Γöé - ΓÉì
+    70    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖<buttonΓÉì
+    71    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖type="button"ΓÉì
+    72    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖onC
+lick={handleDelete}ΓÉì
+    73    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖dis
+abled={loading}ΓÉì
+    74    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖cla
+ssName="inline-flex┬╖items-center┬╖
+gap-2┬╖rounded-xl┬╖border┬╖border-r
+ose-500/30┬╖bg-rose-500/10┬╖px-4┬╖p
+y-2┬╖text-xs┬╖font-semibold┬╖text-r
+ose-300┬╖hover:bg-rose-500/20┬╖tran
+sition┬╖disabled:opacity-50"ΓÉì
+    75    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+    76    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{loading┬╖?┬╖(ΓÉì
+    77    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<>ΓÉì
+    78    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<Loader2┬╖className="h-3.5┬╖w-
+3.5┬╖animate-spin"┬╖/>ΓÉì
+    79    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<span>Suppression...</span>ΓÉì
+    80    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</>ΓÉì
+    81    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖)┬╖:┬╖(ΓÉì
+    82    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<>ΓÉì
+    83    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<Trash2┬╖className="h-3.5┬╖w-3
+.5"┬╖/>ΓÉì
+    84    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<span>Supprimer</span>ΓÉì
+    85    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</>ΓÉì
+    86    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖)}ΓÉì
+    87    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</button>ΓÉì
+    88    Γöé - ┬╖┬╖┬╖┬╖</div>ΓÉì
+    89    Γöé - ┬╖┬╖);ΓÉì
+    90    Γöé - }ΓÉì
+        1 Γöé + "use┬╖client";
+        2 Γöé + 
+        3 Γöé + import┬╖{┬╖Loader2,
+┬╖Pencil,┬╖Trash2┬╖}┬╖from┬╖"lucide
+-react";
+        4 Γöé + import┬╖{┬╖useRoute
+r┬╖}┬╖from┬╖"next/navigation";
+        5 Γöé + import┬╖{┬╖useState
+┬╖}┬╖from┬╖"react";
+        6 Γöé + import┬╖{┬╖createCl
+ient┬╖}┬╖from┬╖"@/lib/supabase/clie
+nt";
+        7 Γöé + 
+        8 Γöé + type┬╖Props┬╖=┬╖{
+        9 Γöé + 
+┬╖┬╖projectId:┬╖string;
+       10 Γöé + 
+┬╖┬╖locale:┬╖string;
+       11 Γöé + };
+       12 Γöé + 
+       13 Γöé + export┬╖default┬╖fu
+nction┬╖ProjectActions({┬╖projectId
+,┬╖locale┬╖}:┬╖Props)┬╖{
+       14 Γöé + ┬╖┬╖const┬╖supabase
+┬╖=┬╖createClient();
+       15 Γöé + 
+┬╖┬╖const┬╖router┬╖=┬╖useRouter();
+       16 Γöé + 
+       17 Γöé + ┬╖┬╖const┬╖[loading
+,┬╖setLoading]┬╖=┬╖useState(false);
+       18 Γöé + 
+       19 Γöé + 
+┬╖┬╖function┬╖handleEdit()┬╖{
+       20 Γöé + ┬╖┬╖┬╖┬╖router.push
+(`/${locale}/community/${projectId}
+/edit`);
+       21 Γöé + ┬╖┬╖}
+       22 Γöé + 
+       23 Γöé + ┬╖┬╖async┬╖function
+┬╖handleDelete()┬╖{
+       24 Γöé + ┬╖┬╖┬╖┬╖const┬╖conf
+irmed┬╖=┬╖window.confirm(
+       25 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖"├ètes-
+vous┬╖s├╗r┬╖de┬╖vouloir┬╖supprimer┬
+╖d├⌐finitivement┬╖ce┬╖projet┬╖?",
+       26 Γöé + ┬╖┬╖┬╖┬╖);
+       27 Γöé + 
+       28 Γöé + 
+┬╖┬╖┬╖┬╖if┬╖(!confirmed)┬╖return;
+       29 Γöé + 
+       30 Γöé + 
+┬╖┬╖┬╖┬╖setLoading(true);
+       31 Γöé + 
+       32 Γöé + ┬╖┬╖┬╖┬╖const┬╖{
+       33 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},
+       34 Γöé + ┬╖┬╖┬╖┬╖}┬╖=┬╖await
+┬╖supabase.auth.getUser();
+       35 Γöé + 
+       36 Γöé + 
+┬╖┬╖┬╖┬╖if┬╖(!user)┬╖{
+       37 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖alert("
+Vous┬╖devez┬╖├¬tre┬╖connect├⌐.");
+       38 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);
+       39 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖return;
+       40 Γöé + ┬╖┬╖┬╖┬╖}
+       41 Γöé + 
+       42 Γöé + ┬╖┬╖┬╖┬╖const┬╖{┬╖e
+rror┬╖}┬╖=┬╖await┬╖supabase
+       43 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖.from("
+community_projects")
+       44 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖.delete()
+       45 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖.eq("id",┬╖projectId)
+       46 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖.eq("us
+er_id",┬╖user.id);
+       47 Γöé + 
+       48 Γöé + 
+┬╖┬╖┬╖┬╖if┬╖(error)┬╖{
+       49 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖console
+.error("[Project┬╖Delete]",┬╖error)
+;
+       50 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖alert(error.message);
+       51 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖setLoading(false);
+       52 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖return;
+       53 Γöé + ┬╖┬╖┬╖┬╖}
+       54 Γöé + 
+       55 Γöé + ┬╖┬╖┬╖┬╖router.push
+(`/${locale}/community`);
+       56 Γöé + 
+┬╖┬╖┬╖┬╖router.refresh();
+       57 Γöé + ┬╖┬╖}
+       58 Γöé + 
+       59 Γöé + ┬╖┬╖return┬╖(
+       60 Γöé + ┬╖┬╖┬╖┬╖<div┬╖class
+Name="flex┬╖flex-wrap┬╖items-center
+┬╖gap-3">
+  31 more lines truncated
+  
+
+app\[locale]\community\[id]\edit\pa
+ge.tsx format ΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+      1     Γöé - import┬╖{┬╖ArrowL
+eft,┬╖Pencil┬╖}┬╖from┬╖"lucide-reac
+t";ΓÉì
+      2     Γöé - 
+import┬╖Link┬╖from┬╖"next/link";ΓÉì
+      3     Γöé - import┬╖{┬╖notFou
+nd,┬╖redirect┬╖}┬╖from┬╖"next/navig
+ation";ΓÉì
+      4     Γöé - import┬╖Footer┬╖f
+rom┬╖"@/components/Footer";ΓÉì
+      5     Γöé - import┬╖Navbar┬╖f
+rom┬╖"@/components/Navbar";ΓÉì
+      6     Γöé - import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/se
+rver";ΓÉì
+      7     Γöé - import┬╖EditProje
+ctForm┬╖from┬╖"../EditProjectForm";
+ΓÉì
+      8     Γöé - ΓÉì
+      9     Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     10     Γöé - 
+┬╖┬╖params:┬╖Promise<{ΓÉì
+     11     Γöé - 
+┬╖┬╖┬╖┬╖locale:┬╖string;ΓÉì
+     12     Γöé - 
+┬╖┬╖┬╖┬╖id:┬╖string;ΓÉì
+     13     Γöé - ┬╖┬╖}>;ΓÉì
+     14     Γöé - };ΓÉì
+     15     Γöé - ΓÉì
+     16     Γöé - export┬╖default┬╖
+async┬╖function┬╖EditProjectPage({┬
+╖params┬╖}:┬╖Props)┬╖{ΓÉì
+     17     Γöé - ┬╖┬╖const┬╖{┬╖loc
+ale,┬╖id┬╖}┬╖=┬╖await┬╖params;ΓÉì
+     18     Γöé - ΓÉì
+     19     Γöé - ┬╖┬╖const┬╖supaba
+se┬╖=┬╖await┬╖createClient();ΓÉì
+     20     Γöé - ΓÉì
+     21     Γöé - ┬╖┬╖const┬╖{ΓÉì
+     22     Γöé - 
+┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},ΓÉì
+     23     Γöé - ┬╖┬╖}┬╖=┬╖await┬╖
+supabase.auth.getUser();ΓÉì
+     24     Γöé - ΓÉì
+     25     Γöé - 
+┬╖┬╖if┬╖(!user)┬╖{ΓÉì
+     26     Γöé - ┬╖┬╖┬╖┬╖redirect(
+`/${locale}/sign-in`);ΓÉì
+     27     Γöé - ┬╖┬╖}ΓÉì
+     28     Γöé - ΓÉì
+     29     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a:┬╖project,┬╖error┬╖}┬╖=┬╖await┬╖s
+upabaseΓÉì
+     30     Γöé - ┬╖┬╖┬╖┬╖.from("co
+mmunity_projects")ΓÉì
+     31     Γöé - 
+┬╖┬╖┬╖┬╖.select(ΓÉì
+     32     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖`ΓÉì
+     33     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖id,ΓÉì
+     34     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖user_id,ΓÉì
+     35     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖title,ΓÉì
+     36     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖description,ΓÉì
+     37     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖image_url,ΓÉì
+     38     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖github_url,ΓÉì
+     39     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖demo_url,ΓÉì
+     40     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖category,ΓÉì
+     41     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖technologiesΓÉì
+     42     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖`,ΓÉì
+     43     Γöé - ┬╖┬╖┬╖┬╖)ΓÉì
+     44     Γöé - 
+┬╖┬╖┬╖┬╖.eq("id",┬╖id)ΓÉì
+     45     Γöé - 
+┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+     46     Γöé - ΓÉì
+     47     Γöé - 
+┬╖┬╖if┬╖(error)┬╖{ΓÉì
+     48     Γöé - ┬╖┬╖┬╖┬╖console.e
+rror("[Edit┬╖Project]",┬╖error);ΓÉì
+     49     Γöé - ┬╖┬╖}ΓÉì
+     50     Γöé - ΓÉì
+     51     Γöé - 
+┬╖┬╖if┬╖(!project)┬╖{ΓÉì
+     52     Γöé - 
+┬╖┬╖┬╖┬╖notFound();ΓÉì
+     53     Γöé - ┬╖┬╖}ΓÉì
+     54     Γöé - ΓÉì
+     55     Γöé - ┬╖┬╖if┬╖(project.
+user_id┬╖!==┬╖user.id)┬╖{ΓÉì
+     56     Γöé - ┬╖┬╖┬╖┬╖redirect(
+`/${locale}/community/${id}`);ΓÉì
+     57     Γöé - ┬╖┬╖}ΓÉì
+     58     Γöé - ΓÉì
+     59     Γöé - ┬╖┬╖return┬╖(ΓÉì
+     60     Γöé - ┬╖┬╖┬╖┬╖<div┬╖cla
+ssName="min-h-screen┬╖bg-black┬╖tex
+t-white┬╖flex┬╖flex-col┬╖selection:
+bg-brand┬╖selection:text-black">ΓÉì
+     61     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖<Navbar┬╖/>ΓÉì
+     62     Γöé - ΓÉì
+     63     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<main
+┬╖className="flex-1┬╖px-5┬╖pt-28┬╖p
+b-20┬╖sm:px-6┬╖lg:px-8┬╖relative┬╖o
+verflow-hidden">ΓÉì
+     64     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖{
+/*┬╖Ambient┬╖Glows┬╖*/}ΓÉì
+     65     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+div┬╖className="pointer-events-none
+┬╖absolute┬╖-top-40┬╖left-1/3┬╖h-[5
+00px]┬╖w-[500px]┬╖rounded-full┬╖bg-
+brand/10┬╖blur-[140px]"┬╖/>ΓÉì
+     66     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+div┬╖className="pointer-events-none
+┬╖absolute┬╖bottom-0┬╖right-10┬╖h-[
+400px]┬╖w-[400px]┬╖rounded-full┬╖bg
+-cyan-500/10┬╖blur-[130px]"┬╖/>ΓÉì
+     67     Γöé - ΓÉì
+     68     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<
+div┬╖className="mx-auto┬╖max-w-3xl┬
+╖relative┬╖z-10">ΓÉì
+     69     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<LinkΓÉì
+     70     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖href={`/${locale}/community/
+${id}`}ΓÉì
+     71     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖className="inline-flex┬╖item
+s-center┬╖gap-2┬╖text-xs┬╖font-semi
+bold┬╖text-white/60┬╖hover:text-bra
+nd┬╖transition┬╖duration-200"ΓÉì
+     72     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+     73     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<ArrowLeft┬╖className="h-4┬╖
+w-4"┬╖/>ΓÉì
+     74     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<span>Retour┬╖au┬╖projet</sp
+an>ΓÉì
+     75     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</Link>ΓÉì
+     76     Γöé - ΓÉì
+     77     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="mt-6">ΓÉì
+     78     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<div┬╖className="inline-flex
+┬╖items-center┬╖gap-2┬╖rounded-full
+┬╖border┬╖border-brand/30┬╖bg-brand
+/10┬╖px-3.5┬╖py-1┬╖text-xs┬╖font-bo
+ld┬╖text-brand┬╖uppercase┬╖tracking
+-wider">ΓÉì
+     79     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖<Pencil┬╖className="h-3.
+5┬╖w-3.5"┬╖/>ΓÉì
+     80     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖├ëdition┬╖de┬╖projetΓÉì
+     81     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+     82     Γöé - ΓÉì
+     83     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<h1┬╖className="mt-4┬╖text-3
+xl┬╖font-black┬╖tracking-tight┬╖tex
+t-white┬╖sm:text-4xl">ΓÉì
+     84     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Modifier┬╖votre┬╖r├⌐alis
+ationΓÉì
+     85     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</h1>ΓÉì
+     86     Γöé - ΓÉì
+     87     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<p┬╖className="mt-2┬╖text-sm
+┬╖text-white/50">ΓÉì
+     88     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖Mettez┬╖├á┬╖jour┬╖les┬╖i
+nformations,┬╖liens┬╖de┬╖d├⌐monstra
+tion┬╖etΓÉì
+     89     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖technologies┬╖de┬╖votre┬
+╖projet.ΓÉì
+     90     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</p>ΓÉì
+     91     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+     92     Γöé - ΓÉì
+     93     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖<div┬╖className="mt-8┬╖rounded-3
+xl┬╖border┬╖border-white/10┬╖bg-zin
+c-950/80┬╖p-6┬╖sm:p-8┬╖backdrop-blu
+r-xl┬╖shadow-2xl">ΓÉì
+     94     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖<EditProjectFormΓÉì
+     95     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖projectId={project.id}ΓÉ
+ì
+     96     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖locale={locale}ΓÉì
+     97     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖initialTitle={project.ti
+tle}ΓÉì
+     98     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖initialDescription={proj
+ect.description┬╖??┬╖""}ΓÉì
+     99     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖initialCategory={project
+.category┬╖??┬╖""}ΓÉì
+    100     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖initialTechnologies={pro
+ject.technologies?.join(",┬╖")┬╖??┬
+╖""}ΓÉì
+    101     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖initialGithubUrl={projec
+t.github_url┬╖??┬╖""}ΓÉì
+    102     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖initialDemoUrl={project.
+demo_url┬╖??┬╖""}ΓÉì
+    103     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖initialImageUrl={project
+.image_url┬╖??┬╖""}ΓÉì
+    104     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖/>ΓÉì
+    105     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    106     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    107     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</main>ΓÉì
+    108     Γöé - ΓÉì
+    109     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<Foot
+er┬╖locale={locale}┬╖/>ΓÉì
+    110     Γöé - ┬╖┬╖┬╖┬╖</div>ΓÉì
+    111     Γöé - ┬╖┬╖);ΓÉì
+    112     Γöé - }ΓÉì
+          1 Γöé + import┬╖{┬╖ArrowL
+eft,┬╖Pencil┬╖}┬╖from┬╖"lucide-reac
+t";
+          2 Γöé + 
+import┬╖Link┬╖from┬╖"next/link";
+          3 Γöé + import┬╖{┬╖notFou
+nd,┬╖redirect┬╖}┬╖from┬╖"next/navig
+ation";
+          4 Γöé + import┬╖Footer┬╖f
+rom┬╖"@/components/Footer";
+          5 Γöé + import┬╖Navbar┬╖f
+rom┬╖"@/components/Navbar";
+          6 Γöé + import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/se
+rver";
+          7 Γöé + import┬╖EditProje
+ctForm┬╖from┬╖"../EditProjectForm";
+          8 Γöé + 
+          9 Γöé + type┬╖Props┬╖=┬╖{
+         10 Γöé + 
+┬╖┬╖params:┬╖Promise<{
+         11 Γöé + 
+┬╖┬╖┬╖┬╖locale:┬╖string;
+         12 Γöé + 
+┬╖┬╖┬╖┬╖id:┬╖string;
+         13 Γöé + ┬╖┬╖}>;
+         14 Γöé + };
+         15 Γöé + 
+         16 Γöé + export┬╖default┬╖
+async┬╖function┬╖EditProjectPage({┬
+╖params┬╖}:┬╖Props)┬╖{
+         17 Γöé + ┬╖┬╖const┬╖{┬╖loc
+ale,┬╖id┬╖}┬╖=┬╖await┬╖params;
+         18 Γöé + 
+         19 Γöé + ┬╖┬╖const┬╖supaba
+se┬╖=┬╖await┬╖createClient();
+         20 Γöé + 
+         21 Γöé + ┬╖┬╖const┬╖{
+         22 Γöé + 
+┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},
+         23 Γöé + ┬╖┬╖}┬╖=┬╖await┬╖
+supabase.auth.getUser();
+         24 Γöé + 
+         25 Γöé + 
+┬╖┬╖if┬╖(!user)┬╖{
+         26 Γöé + ┬╖┬╖┬╖┬╖redirect(
+`/${locale}/sign-in`);
+         27 Γöé + ┬╖┬╖}
+         28 Γöé + 
+         29 Γöé + ┬╖┬╖const┬╖{┬╖dat
+a:┬╖project,┬╖error┬╖}┬╖=┬╖await┬╖s
+upabase
+         30 Γöé + 
+┬╖┬╖┬╖┬╖.from("community_projects")
+         31 Γöé + ┬╖┬╖┬╖┬╖.select(
+         32 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖`
+         33 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖id,
+         34 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖user_id,
+         35 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖title,
+         36 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖description,
+         37 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖image_url,
+         38 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖github_url,
+  75 more lines truncated
+  
+
+app\[locale]\community\[id]\page.ts
+x format ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+      1     Γöé - import┬╖{ΓÉì
+      2     Γöé - ┬╖┬╖ArrowLeft,ΓÉì
+      3     Γöé - ┬╖┬╖Calendar,ΓÉì
+      4     Γöé - ┬╖┬╖Code2,ΓÉì
+      5     Γöé - 
+┬╖┬╖ExternalLink,ΓÉì
+      6     Γöé - ┬╖┬╖Github,ΓÉì
+      7     Γöé - 
+┬╖┬╖MessageSquare,ΓÉì
+      8     Γöé - ┬╖┬╖Sparkles,ΓÉì
+      9     Γöé - 
+}┬╖from┬╖"lucide-react";ΓÉì
+     10     Γöé - import┬╖type┬╖{┬╖
+Metadata┬╖}┬╖from┬╖"next";ΓÉì
+     11     Γöé - 
+import┬╖Link┬╖from┬╖"next/link";ΓÉì
+     12     Γöé - import┬╖{┬╖notFou
+nd┬╖}┬╖from┬╖"next/navigation";ΓÉì
+     13     Γöé - import┬╖Footer┬╖f
+rom┬╖"@/components/Footer";ΓÉì
+     14     Γöé - import┬╖Navbar┬╖f
+rom┬╖"@/components/Navbar";ΓÉì
+     15     Γöé - import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/se
+rver";ΓÉì
+     16     Γöé - import┬╖Comments┬
+╖from┬╖"./Comments";ΓÉì
+     17     Γöé - import┬╖LikeButto
+n┬╖from┬╖"./LikeButton";ΓÉì
+     18     Γöé - import┬╖ProjectAc
+tions┬╖from┬╖"./ProjectActions";ΓÉì
+     19     Γöé - ΓÉì
+     20     Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     21     Γöé - 
+┬╖┬╖params:┬╖Promise<{ΓÉì
+     22     Γöé - 
+┬╖┬╖┬╖┬╖locale:┬╖string;ΓÉì
+     23     Γöé - 
+┬╖┬╖┬╖┬╖id:┬╖string;ΓÉì
+     24     Γöé - ┬╖┬╖}>;ΓÉì
+     25     Γöé - };ΓÉì
+     26     Γöé - ΓÉì
+     27     Γöé - 
+type┬╖CommunityProject┬╖=┬╖{ΓÉì
+     28     Γöé - 
+┬╖┬╖id:┬╖string;ΓÉì
+     29     Γöé - 
+┬╖┬╖user_id:┬╖string;ΓÉì
+     30     Γöé - 
+┬╖┬╖title:┬╖string;ΓÉì
+     31     Γöé - ┬╖┬╖description:┬
+╖string┬╖|┬╖null;ΓÉì
+     32     Γöé - 
+┬╖┬╖image_url:┬╖string┬╖|┬╖null;ΓÉì
+     33     Γöé - ┬╖┬╖github_url:┬╖
+string┬╖|┬╖null;ΓÉì
+     34     Γöé - 
+┬╖┬╖demo_url:┬╖string┬╖|┬╖null;ΓÉì
+     35     Γöé - 
+┬╖┬╖category:┬╖string┬╖|┬╖null;ΓÉì
+     36     Γöé - ┬╖┬╖technologies:
+┬╖string[]┬╖|┬╖null;ΓÉì
+     37     Γöé - 
+┬╖┬╖likes_count:┬╖number;ΓÉì
+     38     Γöé - 
+┬╖┬╖created_at:┬╖string;ΓÉì
+     39     Γöé - };ΓÉì
+     40     Γöé - ΓÉì
+     41     Γöé - export┬╖async┬╖fu
+nction┬╖generateMetadata({┬╖params┬
+╖}:┬╖Props):┬╖Promise<Metadata>┬╖{Γ
+Éì
+     42     Γöé - ┬╖┬╖const┬╖{┬╖id┬
+╖}┬╖=┬╖await┬╖params;ΓÉì
+     43     Γöé - ┬╖┬╖const┬╖supaba
+se┬╖=┬╖await┬╖createClient();ΓÉì
+     44     Γöé - ΓÉì
+     45     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a:┬╖project┬╖}┬╖=┬╖await┬╖supabaseΓ
+Éì
+     46     Γöé - ┬╖┬╖┬╖┬╖.from("co
+mmunity_projects")ΓÉì
+     47     Γöé - ┬╖┬╖┬╖┬╖.select("
+title,┬╖description,┬╖image_url")ΓÉ
+ì
+     48     Γöé - 
+┬╖┬╖┬╖┬╖.eq("id",┬╖id)ΓÉì
+     49     Γöé - 
+┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+     50     Γöé - ΓÉì
+     51     Γöé - 
+┬╖┬╖if┬╖(!project)┬╖{ΓÉì
+     52     Γöé - 
+┬╖┬╖┬╖┬╖return┬╖{ΓÉì
+     53     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖title
+:┬╖"Projet┬╖non┬╖trouv├⌐┬╖ΓÇö┬╖Evol
+ve┬╖Academy",ΓÉì
+     54     Γöé - ┬╖┬╖┬╖┬╖};ΓÉì
+     55     Γöé - ┬╖┬╖}ΓÉì
+     56     Γöé - ΓÉì
+     57     Γöé - ┬╖┬╖return┬╖{ΓÉì
+     58     Γöé - ┬╖┬╖┬╖┬╖title:┬╖`
+${project.title}┬╖ΓÇö┬╖Communaut├⌐┬
+╖Evolve`,ΓÉì
+     59     Γöé - 
+┬╖┬╖┬╖┬╖description:ΓÉì
+     60     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖proje
+ct.description┬╖||ΓÉì
+     61     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖"D├⌐c
+ouvrez┬╖ce┬╖projet┬╖d├⌐velopp├⌐┬╖pa
+r┬╖la┬╖communaut├⌐┬╖Evolve┬╖Academy
+.",ΓÉì
+     62     Γöé - 
+┬╖┬╖┬╖┬╖openGraph:┬╖{ΓÉì
+     63     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖title
+:┬╖`${project.title}┬╖ΓÇö┬╖Evolve┬╖
+Academy`,ΓÉì
+     64     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖description:ΓÉì
+     65     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖p
+roject.description┬╖||ΓÉì
+     66     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"
+Projet┬╖r├⌐alis├⌐┬╖par┬╖les┬╖├⌐tudi
+ants┬╖d'Evolve┬╖Academy.",ΓÉì
+     67     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖image
+s:┬╖project.image_url┬╖?┬╖[{┬╖url:┬
+╖project.image_url┬╖}]┬╖:┬╖[],ΓÉì
+     68     Γöé - ┬╖┬╖┬╖┬╖},ΓÉì
+     69     Γöé - ┬╖┬╖};ΓÉì
+     70     Γöé - }ΓÉì
+     71     Γöé - ΓÉì
+     72     Γöé - export┬╖default┬╖
+async┬╖function┬╖CommunityProjectPa
+ge({┬╖params┬╖}:┬╖Props)┬╖{ΓÉì
+     73     Γöé - ┬╖┬╖const┬╖{┬╖loc
+ale,┬╖id┬╖}┬╖=┬╖await┬╖params;ΓÉì
+     74     Γöé - ΓÉì
+     75     Γöé - ┬╖┬╖const┬╖supaba
+se┬╖=┬╖await┬╖createClient();ΓÉì
+     76     Γöé - ΓÉì
+     77     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a,┬╖error┬╖}┬╖=┬╖await┬╖supabaseΓÉì
+     78     Γöé - ┬╖┬╖┬╖┬╖.from("co
+mmunity_projects")ΓÉì
+     79     Γöé - 
+┬╖┬╖┬╖┬╖.select(ΓÉì
+     80     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖`ΓÉì
+     81     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖id,ΓÉì
+     82     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖user_id,ΓÉì
+     83     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖title,ΓÉì
+     84     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖description,ΓÉì
+     85     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖image_url,ΓÉì
+     86     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖github_url,ΓÉì
+     87     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖demo_url,ΓÉì
+     88     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖category,ΓÉì
+     89     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖technologies,ΓÉì
+     90     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖likes_count,ΓÉì
+     91     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖created_atΓÉì
+     92     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖`,ΓÉì
+     93     Γöé - ┬╖┬╖┬╖┬╖)ΓÉì
+     94     Γöé - 
+┬╖┬╖┬╖┬╖.eq("id",┬╖id)ΓÉì
+     95     Γöé - 
+┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+     96     Γöé - ΓÉì
+     97     Γöé - 
+┬╖┬╖if┬╖(error)┬╖{ΓÉì
+     98     Γöé - ┬╖┬╖┬╖┬╖console.e
+rror("[Community┬╖Project]",┬╖error
+);ΓÉì
+     99     Γöé - ┬╖┬╖}ΓÉì
+    100     Γöé - ΓÉì
+    101     Γöé - ┬╖┬╖const┬╖projec
+t┬╖=┬╖data┬╖as┬╖CommunityProject┬╖|
+┬╖null;ΓÉì
+    102     Γöé - ΓÉì
+    103     Γöé - 
+┬╖┬╖if┬╖(!project)┬╖{ΓÉì
+    104     Γöé - 
+┬╖┬╖┬╖┬╖notFound();ΓÉì
+    105     Γöé - ┬╖┬╖}ΓÉì
+    106     Γöé - ΓÉì
+    107     Γöé - 
+┬╖┬╖//┬╖Get┬╖current┬╖userΓÉì
+    108     Γöé - ┬╖┬╖const┬╖{ΓÉì
+    109     Γöé - 
+┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},ΓÉì
+    110     Γöé - ┬╖┬╖}┬╖=┬╖await┬╖
+supabase.auth.getUser();ΓÉì
+    111     Γöé - ΓÉì
+    112     Γöé - 
+┬╖┬╖//┬╖Get┬╖author┬╖profileΓÉì
+    113     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a:┬╖authorProfile┬╖}┬╖=┬╖await┬╖sup
+abaseΓÉì
+    114     Γöé - 
+┬╖┬╖┬╖┬╖.from("profiles")ΓÉì
+    115     Γöé - ┬╖┬╖┬╖┬╖.select("
+full_name,┬╖avatar_url,┬╖role")ΓÉì
+    116     Γöé - ┬╖┬╖┬╖┬╖.eq("id",
+┬╖project.user_id)ΓÉì
+    117     Γöé - 
+┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+    118     Γöé - ΓÉì
+    119     Γöé - ┬╖┬╖//┬╖Check┬╖if
+┬╖current┬╖user┬╖has┬╖liked┬╖this┬╖
+projectΓÉì
+    120     Γöé - ┬╖┬╖let┬╖initiall
+yLiked┬╖=┬╖false;ΓÉì
+    121     Γöé - ΓÉì
+    122     Γöé - 
+┬╖┬╖if┬╖(user)┬╖{ΓÉì
+    123     Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬
+╖data:┬╖like┬╖}┬╖=┬╖await┬╖supabase
+ΓÉì
+    124     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.from
+("community_project_likes")ΓÉì
+    125     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.select("id")ΓÉì
+    126     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+project_id",┬╖project.id)ΓÉì
+    127     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+user_id",┬╖user.id)ΓÉì
+    128     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+    129     Γöé - ΓÉì
+    130     Γöé - ┬╖┬╖┬╖┬╖initially
+Liked┬╖=┬╖!!like;ΓÉì
+    131     Γöé - ┬╖┬╖}ΓÉì
+    132     Γöé - ΓÉì
+    133     Γöé - ┬╖┬╖//┬╖Check┬╖if
+┬╖current┬╖user┬╖owns┬╖this┬╖projec
+tΓÉì
+    134     Γöé - ┬╖┬╖const┬╖isOwne
+r┬╖=┬╖user?.id┬╖===┬╖project.user_i
+d;ΓÉì
+    135     Γöé - ΓÉì
+    136     Γöé - ┬╖┬╖const┬╖author
+Name┬╖=┬╖authorProfile?.full_name┬╖
+||┬╖"├ëtudiant┬╖Evolve";ΓÉì
+    137     Γöé - ┬╖┬╖const┬╖format
+tedDate┬╖=┬╖new┬╖Date(project.creat
+ed_at).toLocaleDateString(ΓÉì
+    138     Γöé - ┬╖┬╖┬╖┬╖locale┬╖=
+==┬╖"ar"┬╖?┬╖"ar-DZ"┬╖:┬╖"fr-FR",ΓÉ
+ì
+    139     Γöé - ┬╖┬╖┬╖┬╖{ΓÉì
+    140     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖year:┬╖"numeric",ΓÉì
+    141     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖month:┬╖"long",ΓÉì
+    142     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖day:┬╖"numeric",ΓÉì
+    143     Γöé - ┬╖┬╖┬╖┬╖},ΓÉì
+    144     Γöé - ┬╖┬╖);ΓÉì
+    145     Γöé - ΓÉì
+    146     Γöé - ┬╖┬╖return┬╖(ΓÉì
+    147     Γöé - ┬╖┬╖┬╖┬╖<div┬╖cla
+ssName="min-h-screen┬╖bg-black┬╖tex
+t-white┬╖flex┬╖flex-col┬╖selection:
+bg-brand┬╖selection:text-black">ΓÉì
+    148     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖<Navbar┬╖/>ΓÉì
+    149     Γöé - ΓÉì
+    150     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<main
+┬╖className="flex-1┬╖px-5┬╖pt-28┬╖p
+b-20┬╖sm:px-6┬╖lg:px-8┬╖relative┬╖o
+verflow-hidden">ΓÉì
+  517 more lines truncated
+  
+
+app\[locale]\community\loading.tsx 
+format ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - export┬╖default┬╖fu
+nction┬╖CommunityLoading()┬╖{ΓÉì
+     2    Γöé - ┬╖┬╖return┬╖(ΓÉì
+     3    Γöé - ┬╖┬╖┬╖┬╖<div┬╖class
+Name="min-h-screen┬╖bg-black┬╖text-
+white┬╖px-6┬╖pt-32┬╖pb-16">ΓÉì
+     4    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖c
+lassName="mx-auto┬╖max-w-7xl┬╖anima
+te-pulse">ΓÉì
+     5    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-10┬╖w-72┬╖rounded-x
+l┬╖bg-white/10"┬╖/>ΓÉì
+     6    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="mt-3┬╖h-5┬╖w-80┬╖roun
+ded-lg┬╖bg-white/5"┬╖/>ΓÉì
+     7    Γöé - ΓÉì
+     8    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="mt-12┬╖rounded-2xl┬╖b
+order┬╖border-white/10┬╖bg-white/[0
+.02]┬╖p-8">ΓÉì
+     9    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-6┬╖w-48┬╖rounde
+d┬╖bg-white/10"┬╖/>ΓÉì
+    10    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="mt-4┬╖h-24┬╖w-ful
+l┬╖rounded-xl┬╖bg-white/5"┬╖/>ΓÉì
+    11    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    12    Γöé - ΓÉì
+    13    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="mt-14┬╖grid┬╖gap-6┬╖s
+m:grid-cols-2┬╖lg:grid-cols-3">ΓÉì
+    14    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖{Array.from({┬╖length:┬╖6┬╖}).map(
+(_,┬╖i)┬╖=>┬╖(ΓÉì
+    15    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<divΓÉì
+    16    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖key={i}ΓÉì
+    17    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖className="overflow-hidden
+┬╖rounded-2xl┬╖border┬╖border-white
+/10┬╖bg-zinc-950/60┬╖p-4"ΓÉì
+    18    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+    19    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-44┬╖w-f
+ull┬╖rounded-xl┬╖bg-white/10"┬╖/>ΓÉ
+ì
+    20    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="mt-4┬╖fle
+x┬╖justify-between">ΓÉì
+    21    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-5┬╖
+w-3/5┬╖rounded┬╖bg-white/10"┬╖/>ΓÉì
+    22    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-5┬╖
+w-16┬╖rounded-full┬╖bg-white/5"┬╖/>
+ΓÉì
+    23    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    24    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="mt-3┬╖fle
+x┬╖gap-2">ΓÉì
+    25    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-6┬╖
+w-6┬╖rounded-full┬╖bg-white/10"┬╖/>
+ΓÉì
+    26    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-4┬╖
+w-28┬╖rounded┬╖bg-white/5"┬╖/>ΓÉì
+    27    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    28    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="mt-4┬╖h-1
+0┬╖w-full┬╖rounded┬╖bg-white/5"┬╖/>
+ΓÉì
+    29    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    30    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖))}ΓÉì
+    31    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    32    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    33    Γöé - ┬╖┬╖┬╖┬╖</div>ΓÉì
+    34    Γöé - ┬╖┬╖);ΓÉì
+    35    Γöé - }ΓÉì
+        1 Γöé + export┬╖default┬╖fu
+nction┬╖CommunityLoading()┬╖{
+        2 Γöé + ┬╖┬╖return┬╖(
+        3 Γöé + ┬╖┬╖┬╖┬╖<div┬╖class
+Name="min-h-screen┬╖bg-black┬╖text-
+white┬╖px-6┬╖pt-32┬╖pb-16">
+        4 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖c
+lassName="mx-auto┬╖max-w-7xl┬╖anima
+te-pulse">
+        5 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-10┬╖w-72┬╖rounded-x
+l┬╖bg-white/10"┬╖/>
+        6 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="mt-3┬╖h-5┬╖w-80┬╖roun
+ded-lg┬╖bg-white/5"┬╖/>
+        7 Γöé + 
+        8 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="mt-12┬╖rounded-2xl┬╖b
+order┬╖border-white/10┬╖bg-white/[0
+.02]┬╖p-8">
+        9 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-6┬╖w-48┬╖rounde
+d┬╖bg-white/10"┬╖/>
+       10 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="mt-4┬╖h-24┬╖w-ful
+l┬╖rounded-xl┬╖bg-white/5"┬╖/>
+       11 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       12 Γöé + 
+       13 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="mt-14┬╖grid┬╖gap-6┬╖s
+m:grid-cols-2┬╖lg:grid-cols-3">
+       14 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖{Array.from({┬╖length:┬╖6┬╖}).map(
+(_,┬╖i)┬╖=>┬╖(
+       15 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<div
+       16 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖key={i}
+       17 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖className="overflow-hidden
+┬╖rounded-2xl┬╖border┬╖border-white
+/10┬╖bg-zinc-950/60┬╖p-4"
+       18 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>
+       19 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-44┬╖w-f
+ull┬╖rounded-xl┬╖bg-white/10"┬╖/>
+       20 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="mt-4┬╖fle
+x┬╖justify-between">
+       21 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-5┬╖
+w-3/5┬╖rounded┬╖bg-white/10"┬╖/>
+       22 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-5┬╖
+w-16┬╖rounded-full┬╖bg-white/5"┬╖/>
+       23 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       24 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="mt-3┬╖fle
+x┬╖gap-2">
+       25 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-6┬╖
+w-6┬╖rounded-full┬╖bg-white/10"┬╖/>
+       26 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-4┬╖
+w-28┬╖rounded┬╖bg-white/5"┬╖/>
+       27 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       28 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="mt-4┬╖h-1
+0┬╖w-full┬╖rounded┬╖bg-white/5"┬╖/>
+       29 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       30 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖))}
+       31 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       32 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       33 Γöé + ┬╖┬╖┬╖┬╖</div>
+       34 Γöé + ┬╖┬╖);
+       35 Γöé + }
+    36 36 Γöé   
+  
+
+app\[locale]\courses\[id]\lessons\[
+lessonId]\page.tsx:1:1 
+assist/source/organizeImports  
+FIXABLE  
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Sort these imports.
+  
+  > 1 Γöé import { Link } from 
+"@/i18n/navigation";
+      Γöé ^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
+  > 2 Γöé import { notFound, 
+redirect } from "next/navigation";
+  > 3 Γöé import LessonVideo from 
+"@/components/LessonVideo";
+  > 4 Γöé import 
+MarkLessonComplete from 
+"@/components/MarkLessonComplete";
+  > 5 Γöé import 
+UploadedLessonVideo from 
+"@/components/UploadedLessonVideo";
+      Γöé ^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^
+    6 Γöé import { 
+getLessonVideoUrl } from 
+"@/lib/data/lesson-video";
+    7 Γöé import { createClient } 
+from "@/lib/supabase/server";
+  
+  i Safe fix: Organize imports and 
+exports (Biome)
+  
+      1     Γöé - import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+      2     Γöé - import┬╖{┬╖notFou
+nd,┬╖redirect┬╖}┬╖from┬╖"next/navig
+ation";ΓÉì
+      3     Γöé - import┬╖LessonVid
+eo┬╖from┬╖"@/components/LessonVideo
+";ΓÉì
+      4     Γöé - import┬╖MarkLesso
+nComplete┬╖from┬╖"@/components/Mark
+LessonComplete";ΓÉì
+      5     Γöé - import┬╖UploadedL
+essonVideo┬╖from┬╖"@/components/Upl
+oadedLessonVideo";ΓÉì
+          1 Γöé + import┬╖{┬╖notFou
+nd,┬╖redirect┬╖}┬╖from┬╖"next/navig
+ation";ΓÉì
+          2 Γöé + import┬╖LessonVid
+eo┬╖from┬╖"@/components/LessonVideo
+";ΓÉì
+          3 Γöé + import┬╖MarkLesso
+nComplete┬╖from┬╖"@/components/Mark
+LessonComplete";ΓÉì
+          4 Γöé + import┬╖UploadedL
+essonVideo┬╖from┬╖"@/components/Upl
+oadedLessonVideo";
+          5 Γöé + import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+      6   6 Γöé   import { 
+getLessonVideoUrl } from 
+"@/lib/data/lesson-video";ΓÉì
+      7   7 Γöé   import { 
+createClient } from 
+"@/lib/supabase/server";ΓÉì
+  
+
+app\[locale]\courses\[id]\lessons\[
+lessonId]\page.tsx format ΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+Γöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+      1     Γöé - import┬╖{┬╖Link┬╖
+}┬╖from┬╖"@/i18n/navigation";ΓÉì
+      2     Γöé - import┬╖{┬╖notFou
+nd,┬╖redirect┬╖}┬╖from┬╖"next/navig
+ation";ΓÉì
+      3     Γöé - import┬╖LessonVid
+eo┬╖from┬╖"@/components/LessonVideo
+";ΓÉì
+      4     Γöé - import┬╖MarkLesso
+nComplete┬╖from┬╖"@/components/Mark
+LessonComplete";ΓÉì
+      5     Γöé - import┬╖UploadedL
+essonVideo┬╖from┬╖"@/components/Upl
+oadedLessonVideo";ΓÉì
+      6     Γöé - import┬╖{┬╖getLes
+sonVideoUrl┬╖}┬╖from┬╖"@/lib/data/l
+esson-video";ΓÉì
+      7     Γöé - import┬╖{┬╖create
+Client┬╖}┬╖from┬╖"@/lib/supabase/se
+rver";ΓÉì
+      8     Γöé - ΓÉì
+      9     Γöé - 
+type┬╖Props┬╖=┬╖{ΓÉì
+     10     Γöé - 
+┬╖┬╖params:┬╖Promise<{ΓÉì
+     11     Γöé - 
+┬╖┬╖┬╖┬╖locale:┬╖string;ΓÉì
+     12     Γöé - 
+┬╖┬╖┬╖┬╖id:┬╖string;ΓÉì
+     13     Γöé - 
+┬╖┬╖┬╖┬╖lessonId:┬╖string;ΓÉì
+     14     Γöé - ┬╖┬╖}>;ΓÉì
+     15     Γöé - };ΓÉì
+     16     Γöé - ΓÉì
+     17     Γöé - export┬╖default┬╖
+async┬╖function┬╖LessonPage({┬╖para
+ms┬╖}:┬╖Props)┬╖{ΓÉì
+     18     Γöé - ┬╖┬╖const┬╖{┬╖loc
+ale,┬╖id,┬╖lessonId┬╖}┬╖=┬╖await┬╖p
+arams;ΓÉì
+     19     Γöé - ΓÉì
+     20     Γöé - ┬╖┬╖const┬╖supaba
+se┬╖=┬╖await┬╖createClient();ΓÉì
+     21     Γöé - ΓÉì
+     22     Γöé - ┬╖┬╖const┬╖{ΓÉì
+     23     Γöé - 
+┬╖┬╖┬╖┬╖data:┬╖{┬╖user┬╖},ΓÉì
+     24     Γöé - ┬╖┬╖}┬╖=┬╖await┬╖
+supabase.auth.getUser();ΓÉì
+     25     Γöé - ΓÉì
+     26     Γöé - 
+┬╖┬╖//┬╖≡ƒöÉ┬╖AuthenticationΓÉì
+     27     Γöé - 
+┬╖┬╖if┬╖(!user)┬╖{ΓÉì
+     28     Γöé - ┬╖┬╖┬╖┬╖redirect(
+`/${locale}/sign-in`);ΓÉì
+     29     Γöé - ┬╖┬╖}ΓÉì
+     30     Γöé - ΓÉì
+     31     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+     32     Γöé - 
+┬╖┬╖//┬╖≡ƒöÆ┬╖FORMATION┬╖LOCKINGΓÉì
+     33     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+     34     Γöé - ΓÉì
+     35     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a:┬╖seriesCourse┬╖}┬╖=┬╖await┬╖supa
+baseΓÉì
+     36     Γöé - 
+┬╖┬╖┬╖┬╖.from("series_courses")ΓÉì
+     37     Γöé - ┬╖┬╖┬╖┬╖.select("
+series_id,┬╖order_index")ΓÉì
+     38     Γöé - 
+┬╖┬╖┬╖┬╖.eq("course_id",┬╖id)ΓÉì
+     39     Γöé - 
+┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+     40     Γöé - ΓÉì
+     41     Γöé - ┬╖┬╖if┬╖(seriesCo
+urse┬╖&&┬╖seriesCourse.order_index┬
+╖>┬╖1)┬╖{ΓÉì
+     42     Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬
+╖data:┬╖previousCourse┬╖}┬╖=┬╖await
+┬╖supabaseΓÉì
+     43     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.from
+("series_courses")ΓÉì
+     44     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.select("course_id")ΓÉì
+     45     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+series_id",┬╖seriesCourse.series_id
+)ΓÉì
+     46     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+order_index",┬╖seriesCourse.order_i
+ndex┬╖-┬╖1)ΓÉì
+     47     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+     48     Γöé - ΓÉì
+     49     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(previousCourse)┬╖{ΓÉì
+     50     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖{┬╖data:┬╖previousLessons┬╖}┬╖=┬╖
+await┬╖supabaseΓÉì
+     51     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.from("lessons")ΓÉì
+     52     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.select("id")ΓÉì
+     53     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖.
+eq("course_id",┬╖previousCourse.cou
+rse_id);ΓÉì
+     54     Γöé - ΓÉì
+     55     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const
+┬╖previousLessonIds┬╖=ΓÉì
+     56     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖p
+reviousLessons?.map((lesson)┬╖=>┬╖l
+esson.id)┬╖??┬╖[];ΓÉì
+     57     Γöé - ΓÉì
+     58     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖if┬╖(
+previousLessonIds.length┬╖>┬╖0)┬╖{Γ
+Éì
+     59     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖c
+onst┬╖{┬╖data:┬╖completedLessons┬╖}
+┬╖=┬╖await┬╖supabaseΓÉì
+     60     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖.from("lesson_progress")ΓÉì
+     61     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖.select("lesson_id")ΓÉì
+     62     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖.eq("user_id",┬╖user.id)ΓÉì
+     63     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖.eq("completed",┬╖true)ΓÉì
+     64     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖.in("lesson_id",┬╖previousLesson
+Ids);ΓÉì
+     65     Γöé - ΓÉì
+     66     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖c
+onst┬╖previousCourseCompleted┬╖=ΓÉì
+     67     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖completedLessons?.length┬╖===┬╖p
+reviousLessonIds.length;ΓÉì
+     68     Γöé - ΓÉì
+     69     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖i
+f┬╖(!previousCourseCompleted)┬╖{ΓÉì
+     70     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖redirect(`/${locale}/formations`
+);ΓÉì
+     71     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖}ΓÉì
+     72     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖}ΓÉì
+     73     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+     74     Γöé - ┬╖┬╖}ΓÉì
+     75     Γöé - ΓÉì
+     76     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+     77     Γöé - 
+┬╖┬╖//┬╖≡ƒôÜ┬╖GET┬╖LESSONΓÉì
+     78     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+     79     Γöé - ΓÉì
+     80     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a:┬╖lesson,┬╖error┬╖}┬╖=┬╖await┬╖su
+pabaseΓÉì
+     81     Γöé - 
+┬╖┬╖┬╖┬╖.from("lessons")ΓÉì
+     82     Γöé - 
+┬╖┬╖┬╖┬╖.select(ΓÉì
+     83     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖`┬╖┬╖
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖id,ΓÉì
+     84     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖title,ΓÉì
+     85     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖description,ΓÉì
+     86     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖youtube_url,ΓÉì
+     87     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖video_url,ΓÉì
+     88     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖duration,ΓÉì
+     89     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖order_index,ΓÉì
+     90     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖is_freeΓÉì
+     91     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖`,ΓÉì
+     92     Γöé - ┬╖┬╖┬╖┬╖)ΓÉì
+     93     Γöé - 
+┬╖┬╖┬╖┬╖.eq("id",┬╖lessonId)ΓÉì
+     94     Γöé - 
+┬╖┬╖┬╖┬╖.eq("course_id",┬╖id)ΓÉì
+     95     Γöé - 
+┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+     96     Γöé - ΓÉì
+     97     Γöé - 
+┬╖┬╖if┬╖(error┬╖||┬╖!lesson)┬╖{ΓÉì
+     98     Γöé - 
+┬╖┬╖┬╖┬╖notFound();ΓÉì
+     99     Γöé - ┬╖┬╖}ΓÉì
+    100     Γöé - ┬╖┬╖let┬╖signedVi
+deoUrl:┬╖string┬╖|┬╖null┬╖=┬╖null;Γ
+Éì
+    101     Γöé - ΓÉì
+    102     Γöé - 
+┬╖┬╖if┬╖(lesson.video_url)┬╖{ΓÉì
+    103     Γöé - ┬╖┬╖┬╖┬╖signedVid
+eoUrl┬╖=┬╖await┬╖getLessonVideoUrl(
+lesson.video_url);ΓÉì
+    104     Γöé - ┬╖┬╖}ΓÉì
+    105     Γöé - ΓÉì
+    106     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+    107     Γöé - 
+┬╖┬╖//┬╖≡ƒÆ│┬╖CHECK┬╖ENROLLMENTΓÉì
+    108     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+    109     Γöé - ΓÉì
+    110     Γöé - 
+┬╖┬╖if┬╖(!lesson.is_free)┬╖{ΓÉì
+    111     Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬
+╖data:┬╖enrollment┬╖}┬╖=┬╖await┬╖su
+pabaseΓÉì
+    112     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.from("enrollments")ΓÉì
+    113     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.select("id")ΓÉì
+    114     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+user_id",┬╖user.id)ΓÉì
+    115     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+course_id",┬╖id)ΓÉì
+    116     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+payment_status",┬╖"paid")ΓÉì
+    117     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+    118     Γöé - ΓÉì
+    119     Γöé - 
+┬╖┬╖┬╖┬╖if┬╖(!enrollment)┬╖{ΓÉì
+    120     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖redir
+ect(`/${locale}/courses/${id}`);ΓÉì
+    121     Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    122     Γöé - ┬╖┬╖}ΓÉì
+    123     Γöé - ΓÉì
+    124     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+    125     Γöé - ┬╖┬╖//┬╖Γû╢∩┐╜┬╖F
+IND┬╖NEXT┬╖COURSE┬╖IN┬╖FORMATIONΓÉì
+    126     Γöé - ┬╖┬╖//┬╖=========
+===================================
+=============ΓÉì
+    127     Γöé - ΓÉì
+    128     Γöé - ┬╖┬╖const┬╖{┬╖dat
+a:┬╖currentSeriesCourse┬╖}┬╖=┬╖awai
+t┬╖supabaseΓÉì
+    129     Γöé - 
+┬╖┬╖┬╖┬╖.from("series_courses")ΓÉì
+    130     Γöé - ┬╖┬╖┬╖┬╖.select("
+series_id,┬╖order_index")ΓÉì
+    131     Γöé - 
+┬╖┬╖┬╖┬╖.eq("course_id",┬╖id)ΓÉì
+    132     Γöé - 
+┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+    133     Γöé - ΓÉì
+    134     Γöé - ┬╖┬╖let┬╖nextCour
+seId:┬╖string┬╖|┬╖null┬╖=┬╖null;ΓÉì
+    135     Γöé - 
+┬╖┬╖let┬╖isLastCourse┬╖=┬╖false;ΓÉì
+    136     Γöé - ┬╖┬╖let┬╖formatio
+nId:┬╖string┬╖|┬╖null┬╖=┬╖null;ΓÉì
+    137     Γöé - ΓÉì
+    138     Γöé - 
+┬╖┬╖if┬╖(currentSeriesCourse)┬╖{ΓÉì
+    139     Γöé - ┬╖┬╖┬╖┬╖formation
+Id┬╖=┬╖currentSeriesCourse.series_i
+d;ΓÉì
+    140     Γöé - ΓÉì
+    141     Γöé - ┬╖┬╖┬╖┬╖const┬╖{┬
+╖data:┬╖nextSeriesCourse┬╖}┬╖=┬╖awa
+it┬╖supabaseΓÉì
+    142     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.from
+("series_courses")ΓÉì
+    143     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.select("course_id")ΓÉì
+    144     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.eq("
+series_id",┬╖currentSeriesCourse.se
+ries_id)ΓÉì
+    145     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.gt("
+order_index",┬╖currentSeriesCourse.
+order_index)ΓÉì
+    146     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖.orde
+r("order_index",┬╖{ΓÉì
+    147     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖a
+scending:┬╖true,ΓÉì
+    148     Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖})ΓÉì
+    149     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.limit(1)ΓÉì
+    150     Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖.maybeSingle();ΓÉì
+  351 more lines truncated
+  
+
+app\[locale]\courses\[id]\loading.t
+sx format ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - export┬╖default┬╖fu
+nction┬╖CourseLoading()┬╖{ΓÉì
+     2    Γöé - ┬╖┬╖return┬╖(ΓÉì
+     3    Γöé - ┬╖┬╖┬╖┬╖<div┬╖class
+Name="min-h-screen┬╖bg-black┬╖text-
+white┬╖px-6┬╖pt-32┬╖pb-16">ΓÉì
+     4    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖c
+lassName="mx-auto┬╖max-w-6xl┬╖anima
+te-pulse┬╖space-y-8">ΓÉì
+     5    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-6┬╖w-36┬╖rounded┬╖b
+g-white/10"┬╖/>ΓÉì
+     6    Γöé - ΓÉì
+     7    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="rounded-3xl┬╖border┬╖
+border-white/10┬╖bg-zinc-950/70┬╖p-
+8┬╖space-y-4">ΓÉì
+     8    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-10┬╖w-2/3┬╖roun
+ded-xl┬╖bg-white/10"┬╖/>ΓÉì
+     9    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-5┬╖w-full┬╖roun
+ded┬╖bg-white/5"┬╖/>ΓÉì
+    10    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-5┬╖w-4/5┬╖round
+ed┬╖bg-white/5"┬╖/>ΓÉì
+    11    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="pt-4┬╖flex┬╖gap-6
+">ΓÉì
+    12    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<div┬╖className="h-6┬╖w-28┬╖ro
+unded┬╖bg-white/10"┬╖/>ΓÉì
+    13    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<div┬╖className="h-6┬╖w-36┬╖ro
+unded┬╖bg-white/10"┬╖/>ΓÉì
+    14    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    15    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    16    Γöé - ΓÉì
+    17    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="space-y-4┬╖pt-4">ΓÉì
+    18    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-8┬╖w-44┬╖rounde
+d┬╖bg-white/10"┬╖/>ΓÉì
+    19    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖{Array.from({┬╖length:┬╖4┬╖}).map(
+(_,┬╖i)┬╖=>┬╖(ΓÉì
+    20    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<divΓÉì
+    21    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖key={i}ΓÉì
+    22    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖className="flex┬╖items-cen
+ter┬╖justify-between┬╖rounded-2xl┬╖
+border┬╖border-white/10┬╖bg-zinc-95
+0/40┬╖p-5"ΓÉì
+    23    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>ΓÉì
+    24    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="flex┬╖ite
+ms-center┬╖gap-4">ΓÉì
+    25    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-10┬
+╖w-10┬╖rounded-full┬╖bg-white/10"┬╖
+/>ΓÉì
+    26    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="space
+-y-2">ΓÉì
+    27    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h
+-5┬╖w-48┬╖rounded┬╖bg-white/10"┬╖/>
+ΓÉì
+    28    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h
+-3┬╖w-28┬╖rounded┬╖bg-white/5"┬╖/>Γ
+Éì
+    29    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    30    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    31    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-8┬╖w-24
+┬╖rounded-xl┬╖bg-white/10"┬╖/>ΓÉì
+    32    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    33    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖))}ΓÉì
+    34    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    35    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖</div>ΓÉì
+    36    Γöé - ┬╖┬╖┬╖┬╖</div>ΓÉì
+    37    Γöé - ┬╖┬╖);ΓÉì
+    38    Γöé - }ΓÉì
+        1 Γöé + export┬╖default┬╖fu
+nction┬╖CourseLoading()┬╖{
+        2 Γöé + ┬╖┬╖return┬╖(
+        3 Γöé + ┬╖┬╖┬╖┬╖<div┬╖class
+Name="min-h-screen┬╖bg-black┬╖text-
+white┬╖px-6┬╖pt-32┬╖pb-16">
+        4 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖c
+lassName="mx-auto┬╖max-w-6xl┬╖anima
+te-pulse┬╖space-y-8">
+        5 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="h-6┬╖w-36┬╖rounded┬╖b
+g-white/10"┬╖/>
+        6 Γöé + 
+        7 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="rounded-3xl┬╖border┬╖
+border-white/10┬╖bg-zinc-950/70┬╖p-
+8┬╖space-y-4">
+        8 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-10┬╖w-2/3┬╖roun
+ded-xl┬╖bg-white/10"┬╖/>
+        9 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-5┬╖w-full┬╖roun
+ded┬╖bg-white/5"┬╖/>
+       10 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-5┬╖w-4/5┬╖round
+ed┬╖bg-white/5"┬╖/>
+       11 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="pt-4┬╖flex┬╖gap-6
+">
+       12 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<div┬╖className="h-6┬╖w-28┬╖ro
+unded┬╖bg-white/10"┬╖/>
+       13 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖<div┬╖className="h-6┬╖w-36┬╖ro
+unded┬╖bg-white/10"┬╖/>
+       14 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       15 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       16 Γöé + 
+       17 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<di
+v┬╖className="space-y-4┬╖pt-4">
+       18 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖<div┬╖className="h-8┬╖w-44┬╖rounde
+d┬╖bg-white/10"┬╖/>
+       19 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖{Array.from({┬╖length:┬╖4┬╖}).map(
+(_,┬╖i)┬╖=>┬╖(
+       20 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<div
+       21 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖key={i}
+       22 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖className="flex┬╖items-cen
+ter┬╖justify-between┬╖rounded-2xl┬╖
+border┬╖border-white/10┬╖bg-zinc-95
+0/40┬╖p-5"
+       23 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖>
+       24 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="flex┬╖ite
+ms-center┬╖gap-4">
+       25 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h-10┬
+╖w-10┬╖rounded-full┬╖bg-white/10"┬╖
+/>
+       26 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="space
+-y-2">
+       27 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h
+-5┬╖w-48┬╖rounded┬╖bg-white/10"┬╖/>
+       28 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖<div┬╖className="h
+-3┬╖w-28┬╖rounded┬╖bg-white/5"┬╖/>
+       29 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       30 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       31 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖┬╖┬╖┬╖┬╖<div┬╖className="h-8┬╖w-24
+┬╖rounded-xl┬╖bg-white/10"┬╖/>
+       32 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       33 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖))}
+       34 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       35 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖</div>
+       36 Γöé + ┬╖┬╖┬╖┬╖</div>
+       37 Γöé + ┬╖┬╖);
+       38 Γöé + }
+    39 39 Γöé   
+  
+
+biome.json format ΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - {ΓÉì
+     2    Γöé - ┬╖┬╖"$schema":┬╖"ht
+tps://biomejs.dev/schemas/2.5.12/sc
+hema.json",ΓÉì
+     3    Γöé - ┬╖┬╖"vcs":┬╖{┬╖"ena
+bled":┬╖true,┬╖"clientKind":┬╖"git"
+,┬╖"useIgnoreFile":┬╖true┬╖},ΓÉì
+     4    Γöé - ┬╖┬╖"files":┬╖{ΓÉì
+     5    Γöé - 
+┬╖┬╖┬╖┬╖"includes":┬╖[ΓÉì
+     6    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"**",ΓÉì
+     7    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"!**/node_modules",ΓÉì
+     8    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"!**/.next",ΓÉì
+     9    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖"!**/pn
+pm-lock.yaml",ΓÉì
+    10    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"!docs/handouts"ΓÉì
+    11    Γöé - ┬╖┬╖┬╖┬╖]ΓÉì
+    12    Γöé - ┬╖┬╖},ΓÉì
+    13    Γöé - 
+┬╖┬╖"formatter":┬╖{ΓÉì
+    14    Γöé - 
+┬╖┬╖┬╖┬╖"enabled":┬╖true,ΓÉì
+    15    Γöé - 
+┬╖┬╖┬╖┬╖"indentStyle":┬╖"space",ΓÉì
+    16    Γöé - 
+┬╖┬╖┬╖┬╖"indentWidth":┬╖2,ΓÉì
+    17    Γöé - 
+┬╖┬╖┬╖┬╖"lineWidth":┬╖80ΓÉì
+    18    Γöé - ┬╖┬╖},ΓÉì
+    19    Γöé - ┬╖┬╖"linter":┬╖{ΓÉì
+    20    Γöé - 
+┬╖┬╖┬╖┬╖"enabled":┬╖true,ΓÉì
+    21    Γöé - 
+┬╖┬╖┬╖┬╖"rules":┬╖{ΓÉì
+    22    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖"preset
+":┬╖"recommended",ΓÉì
+    23    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"performance":┬╖{ΓÉì
+    24    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+ImgElement":┬╖"off"ΓÉì
+    25    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖},ΓÉì
+    26    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"suspicious":┬╖{ΓÉì
+    27    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+ExplicitAny":┬╖"error",ΓÉì
+    28    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+ArrayIndexKey":┬╖"off"ΓÉì
+    29    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖},ΓÉì
+    30    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"a11y":┬╖{ΓÉì
+    31    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+LabelWithoutControl":┬╖"off"ΓÉì
+    32    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖},ΓÉì
+    33    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"correctness":┬╖{ΓÉì
+    34    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+UnusedImports":┬╖"error",ΓÉì
+    35    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"us
+eExhaustiveDependencies":┬╖"warn"ΓÉ
+ì
+    36    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖},ΓÉì
+    37    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖"style":┬╖{ΓÉì
+    38    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+NonNullAssertion":┬╖"error",ΓÉì
+    39    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"us
+eConst":┬╖"error"ΓÉì
+    40    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖}ΓÉì
+    41    Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    42    Γöé - ┬╖┬╖},ΓÉì
+    43    Γöé - ┬╖┬╖"assist":┬╖{┬╖"
+actions":┬╖{┬╖"source":┬╖{┬╖"organi
+zeImports":┬╖"on"┬╖}┬╖}┬╖},ΓÉì
+    44    Γöé - 
+┬╖┬╖"javascript":┬╖{ΓÉì
+    45    Γöé - ┬╖┬╖┬╖┬╖"formatter"
+:┬╖{┬╖"quoteStyle":┬╖"double",┬╖"tr
+ailingCommas":┬╖"all"┬╖}ΓÉì
+    46    Γöé - ┬╖┬╖},ΓÉì
+    47    Γöé - ┬╖┬╖"css":┬╖{ΓÉì
+    48    Γöé - 
+┬╖┬╖┬╖┬╖"parser":┬╖{ΓÉì
+    49    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖"cssMod
+ules":┬╖false,ΓÉì
+    50    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖"tailwi
+ndDirectives":┬╖trueΓÉì
+    51    Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    52    Γöé - ┬╖┬╖}ΓÉì
+    53    Γöé - }ΓÉì
+        1 Γöé + {
+        2 Γöé + ┬╖┬╖"$schema":┬╖"ht
+tps://biomejs.dev/schemas/2.5.12/sc
+hema.json",
+        3 Γöé + ┬╖┬╖"vcs":┬╖{┬╖"ena
+bled":┬╖true,┬╖"clientKind":┬╖"git"
+,┬╖"useIgnoreFile":┬╖true┬╖},
+        4 Γöé + ┬╖┬╖"files":┬╖{
+        5 Γöé + 
+┬╖┬╖┬╖┬╖"includes":┬╖[
+        6 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖"**",
+        7 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"!**/node_modules",
+        8 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"!**/.next",
+        9 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"!**/pnpm-lock.yaml",
+       10 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"!docs/handouts"
+       11 Γöé + ┬╖┬╖┬╖┬╖]
+       12 Γöé + ┬╖┬╖},
+       13 Γöé + ┬╖┬╖"formatter":┬╖{
+       14 Γöé + 
+┬╖┬╖┬╖┬╖"enabled":┬╖true,
+       15 Γöé + 
+┬╖┬╖┬╖┬╖"indentStyle":┬╖"space",
+       16 Γöé + 
+┬╖┬╖┬╖┬╖"indentWidth":┬╖2,
+       17 Γöé + 
+┬╖┬╖┬╖┬╖"lineWidth":┬╖80
+       18 Γöé + ┬╖┬╖},
+       19 Γöé + ┬╖┬╖"linter":┬╖{
+       20 Γöé + 
+┬╖┬╖┬╖┬╖"enabled":┬╖true,
+       21 Γöé + ┬╖┬╖┬╖┬╖"rules":┬╖{
+       22 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖"preset
+":┬╖"recommended",
+       23 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"performance":┬╖{
+       24 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+ImgElement":┬╖"off"
+       25 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖},
+       26 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"suspicious":┬╖{
+       27 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+ExplicitAny":┬╖"error",
+       28 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+ArrayIndexKey":┬╖"off"
+       29 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖},
+       30 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"a11y":┬╖{
+       31 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+LabelWithoutControl":┬╖"off"
+       32 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖},
+       33 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"correctness":┬╖{
+       34 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+UnusedImports":┬╖"error",
+       35 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"us
+eExhaustiveDependencies":┬╖"warn"
+       36 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖},
+       37 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"style":┬╖{
+       38 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"no
+NonNullAssertion":┬╖"error",
+       39 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖"us
+eConst":┬╖"error"
+       40 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖}
+       41 Γöé + ┬╖┬╖┬╖┬╖}
+       42 Γöé + ┬╖┬╖},
+       43 Γöé + ┬╖┬╖"assist":┬╖{┬╖"
+actions":┬╖{┬╖"source":┬╖{┬╖"organi
+zeImports":┬╖"on"┬╖}┬╖}┬╖},
+       44 Γöé + 
+┬╖┬╖"javascript":┬╖{
+       45 Γöé + ┬╖┬╖┬╖┬╖"formatter"
+:┬╖{┬╖"quoteStyle":┬╖"double",┬╖"tr
+ailingCommas":┬╖"all"┬╖}
+       46 Γöé + ┬╖┬╖},
+       47 Γöé + ┬╖┬╖"css":┬╖{
+       48 Γöé + 
+┬╖┬╖┬╖┬╖"parser":┬╖{
+       49 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖"cssModules":┬╖false,
+       50 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖"tailwi
+ndDirectives":┬╖true
+       51 Γöé + ┬╖┬╖┬╖┬╖}
+       52 Γöé + ┬╖┬╖}
+       53 Γöé + }
+    54 54 Γöé   
+  
+
+package.json format ΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - {ΓÉì
+     2    Γöé - 
+┬╖┬╖"name":┬╖"evolve-web",ΓÉì
+     3    Γöé - 
+┬╖┬╖"version":┬╖"0.1.0",ΓÉì
+     4    Γöé - 
+┬╖┬╖"private":┬╖true,ΓÉì
+     5    Γöé - ┬╖┬╖"description":┬
+╖"Evolve┬╖Academy┬╖ΓÇö┬╖public┬╖web
+site┬╖and┬╖student┬╖platform.┬╖Read
+s┬╖the┬╖Supabase┬╖content┬╖the┬╖Flu
+tter┬╖dashboard┬╖writes.",ΓÉì
+     6    Γöé - 
+┬╖┬╖"scripts":┬╖{ΓÉì
+     7    Γöé - 
+┬╖┬╖┬╖┬╖"dev":┬╖"next┬╖dev",ΓÉì
+     8    Γöé - 
+┬╖┬╖┬╖┬╖"build":┬╖"next┬╖build",ΓÉì
+     9    Γöé - 
+┬╖┬╖┬╖┬╖"start":┬╖"next┬╖start",ΓÉì
+    10    Γöé - ┬╖┬╖┬╖┬╖"typecheck"
+:┬╖"tsc┬╖--noEmit",ΓÉì
+    11    Γöé - ┬╖┬╖┬╖┬╖"lint":┬╖"b
+iome┬╖check┬╖.",ΓÉì
+    12    Γöé - ┬╖┬╖┬╖┬╖"lint:fix":
+┬╖"biome┬╖check┬╖--write┬╖.",ΓÉì
+    13    Γöé - ┬╖┬╖┬╖┬╖"format":┬╖
+"biome┬╖format┬╖--write┬╖.",ΓÉì
+    14    Γöé - ┬╖┬╖┬╖┬╖"guards":┬╖
+"bash┬╖scripts/local_ci.sh"ΓÉì
+    15    Γöé - ┬╖┬╖},ΓÉì
+    16    Γöé - 
+┬╖┬╖"dependencies":┬╖{ΓÉì
+    17    Γöé - ┬╖┬╖┬╖┬╖"@supabase/
+ssr":┬╖"^0.8.0",ΓÉì
+    18    Γöé - ┬╖┬╖┬╖┬╖"@supabase/
+supabase-js":┬╖"^2.58.0",ΓÉì
+    19    Γöé - 
+┬╖┬╖┬╖┬╖"clsx":┬╖"^2.1.1",ΓÉì
+    20    Γöé - ┬╖┬╖┬╖┬╖"lucide-rea
+ct":┬╖"^0.545.0",ΓÉì
+    21    Γöé - 
+┬╖┬╖┬╖┬╖"next":┬╖"^15.5.4",ΓÉì
+    22    Γöé - 
+┬╖┬╖┬╖┬╖"next-intl":┬╖"^4.3.12",ΓÉì
+    23    Γöé - 
+┬╖┬╖┬╖┬╖"react":┬╖"^19.2.8",ΓÉì
+    24    Γöé - 
+┬╖┬╖┬╖┬╖"react-dom":┬╖"^19.2.8",ΓÉì
+    25    Γöé - ┬╖┬╖┬╖┬╖"server-onl
+y":┬╖"^0.0.1",ΓÉì
+    26    Γöé - ┬╖┬╖┬╖┬╖"tailwind-m
+erge":┬╖"^3.3.1",ΓÉì
+    27    Γöé - 
+┬╖┬╖┬╖┬╖"three":┬╖"^0.186.0"ΓÉì
+    28    Γöé - ┬╖┬╖},ΓÉì
+    29    Γöé - 
+┬╖┬╖"devDependencies":┬╖{ΓÉì
+    30    Γöé - ┬╖┬╖┬╖┬╖"@biomejs/b
+iome":┬╖"^2.2.0",ΓÉì
+    31    Γöé - ┬╖┬╖┬╖┬╖"@tailwindc
+ss/postcss":┬╖"^4.1.13",ΓÉì
+    32    Γöé - ┬╖┬╖┬╖┬╖"@types/nod
+e":┬╖"^22.18.0",ΓÉì
+    33    Γöé - ┬╖┬╖┬╖┬╖"@types/rea
+ct":┬╖"^19.2.18",ΓÉì
+    34    Γöé - ┬╖┬╖┬╖┬╖"@types/rea
+ct-dom":┬╖"^19.2.7",ΓÉì
+    35    Γöé - ┬╖┬╖┬╖┬╖"@types/thr
+ee":┬╖"^0.186.0",ΓÉì
+    36    Γöé - 
+┬╖┬╖┬╖┬╖"supabase":┬╖"^2.117.0",ΓÉì
+    37    Γöé - ┬╖┬╖┬╖┬╖"tailwindcs
+s":┬╖"^4.1.13",ΓÉì
+    38    Γöé - 
+┬╖┬╖┬╖┬╖"typescript":┬╖"^5.9.2"ΓÉì
+    39    Γöé - ┬╖┬╖},ΓÉì
+    40    Γöé - ┬╖┬╖"packageManager
+":┬╖"pnpm@10.0.0"ΓÉì
+    41    Γöé - }ΓÉì
+        1 Γöé + {
+        2 Γöé + 
+┬╖┬╖"name":┬╖"evolve-web",
+        3 Γöé + 
+┬╖┬╖"version":┬╖"0.1.0",
+        4 Γöé + 
+┬╖┬╖"private":┬╖true,
+        5 Γöé + ┬╖┬╖"description":┬
+╖"Evolve┬╖Academy┬╖ΓÇö┬╖public┬╖web
+site┬╖and┬╖student┬╖platform.┬╖Read
+s┬╖the┬╖Supabase┬╖content┬╖the┬╖Flu
+tter┬╖dashboard┬╖writes.",
+        6 Γöé + ┬╖┬╖"scripts":┬╖{
+        7 Γöé + 
+┬╖┬╖┬╖┬╖"dev":┬╖"next┬╖dev",
+        8 Γöé + 
+┬╖┬╖┬╖┬╖"build":┬╖"next┬╖build",
+        9 Γöé + 
+┬╖┬╖┬╖┬╖"start":┬╖"next┬╖start",
+       10 Γöé + ┬╖┬╖┬╖┬╖"typecheck"
+:┬╖"tsc┬╖--noEmit",
+       11 Γöé + 
+┬╖┬╖┬╖┬╖"lint":┬╖"biome┬╖check┬╖.",
+       12 Γöé + ┬╖┬╖┬╖┬╖"lint:fix":
+┬╖"biome┬╖check┬╖--write┬╖.",
+       13 Γöé + ┬╖┬╖┬╖┬╖"format":┬╖
+"biome┬╖format┬╖--write┬╖.",
+       14 Γöé + ┬╖┬╖┬╖┬╖"guards":┬╖
+"bash┬╖scripts/local_ci.sh"
+       15 Γöé + ┬╖┬╖},
+       16 Γöé + 
+┬╖┬╖"dependencies":┬╖{
+       17 Γöé + 
+┬╖┬╖┬╖┬╖"@supabase/ssr":┬╖"^0.8.0",
+       18 Γöé + ┬╖┬╖┬╖┬╖"@supabase/
+supabase-js":┬╖"^2.58.0",
+       19 Γöé + 
+┬╖┬╖┬╖┬╖"clsx":┬╖"^2.1.1",
+       20 Γöé + ┬╖┬╖┬╖┬╖"lucide-rea
+ct":┬╖"^0.545.0",
+       21 Γöé + 
+┬╖┬╖┬╖┬╖"next":┬╖"^15.5.4",
+       22 Γöé + 
+┬╖┬╖┬╖┬╖"next-intl":┬╖"^4.3.12",
+       23 Γöé + 
+┬╖┬╖┬╖┬╖"react":┬╖"^19.2.8",
+       24 Γöé + 
+┬╖┬╖┬╖┬╖"react-dom":┬╖"^19.2.8",
+       25 Γöé + 
+┬╖┬╖┬╖┬╖"server-only":┬╖"^0.0.1",
+       26 Γöé + ┬╖┬╖┬╖┬╖"tailwind-m
+erge":┬╖"^3.3.1",
+       27 Γöé + 
+┬╖┬╖┬╖┬╖"three":┬╖"^0.186.0"
+       28 Γöé + ┬╖┬╖},
+       29 Γöé + 
+┬╖┬╖"devDependencies":┬╖{
+       30 Γöé + ┬╖┬╖┬╖┬╖"@biomejs/b
+iome":┬╖"^2.2.0",
+       31 Γöé + ┬╖┬╖┬╖┬╖"@tailwindc
+ss/postcss":┬╖"^4.1.13",
+       32 Γöé + 
+┬╖┬╖┬╖┬╖"@types/node":┬╖"^22.18.0",
+       33 Γöé + ┬╖┬╖┬╖┬╖"@types/rea
+ct":┬╖"^19.2.18",
+       34 Γöé + ┬╖┬╖┬╖┬╖"@types/rea
+ct-dom":┬╖"^19.2.7",
+       35 Γöé + ┬╖┬╖┬╖┬╖"@types/thr
+ee":┬╖"^0.186.0",
+       36 Γöé + 
+┬╖┬╖┬╖┬╖"supabase":┬╖"^2.117.0",
+       37 Γöé + 
+┬╖┬╖┬╖┬╖"tailwindcss":┬╖"^4.1.13",
+       38 Γöé + 
+┬╖┬╖┬╖┬╖"typescript":┬╖"^5.9.2"
+       39 Γöé + ┬╖┬╖},
+       40 Γöé + ┬╖┬╖"packageManager
+":┬╖"pnpm@10.0.0"
+       41 Γöé + }
+    42 42 Γöé   
+  
+
+scripts\test_simultaneous_users.mjs
+ format ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+     1    Γöé - 
+#!/usr/bin/env┬╖nodeΓÉì
+     2    Γöé - ΓÉì
+     3    Γöé - /**ΓÉì
+     4    Γöé - ┬╖*┬╖Simultaneous┬╖
+Users┬╖&┬╖Concurrency┬╖Load┬╖Test┬╖
+ScriptΓÉì
+     5    Γöé - ┬╖*┬╖Simulates┬╖con
+current┬╖users┬╖accessing┬╖Evolve┬╖
+Academy┬╖endpoints,ΓÉì
+     6    Γöé - ┬╖*┬╖measures┬╖resp
+onse┬╖latencies┬╖(p50,┬╖p95,┬╖p99)┬
+╖and┬╖verifies┬╖rate┬╖limiting.ΓÉì
+     7    Γöé - ┬╖*ΓÉì
+     8    Γöé - ┬╖*┬╖Usage:ΓÉì
+     9    Γöé - ┬╖*┬╖┬╖┬╖node┬╖scri
+pts/test_simultaneous_users.mjs┬╖[b
+aseUrl]┬╖[concurrency]ΓÉì
+    10    Γöé - ┬╖*/ΓÉì
+    11    Γöé - ΓÉì
+    12    Γöé - const┬╖BASE_URL┬╖=┬
+╖process.argv[2]┬╖||┬╖"http://local
+host:3000";ΓÉì
+    13    Γöé - const┬╖CONCURRENCY┬
+╖=┬╖Number.parseInt(process.argv[3]
+┬╖||┬╖"50",┬╖10);ΓÉì
+    14    Γöé - const┬╖TARGET_PATH┬
+╖=┬╖"/api/health";ΓÉì
+    15    Γöé - ΓÉì
+    16    Γöé - console.log("======
+===================================
+========");ΓÉì
+    17    Γöé - console.log("┬╖┬╖EV
+OLVE┬╖ACADEMY┬╖-┬╖SIMULTANEOUS┬╖USE
+RS┬╖LOAD┬╖TEST┬╖┬╖");ΓÉì
+    18    Γöé - console.log("======
+===================================
+========");ΓÉì
+    19    Γöé - console.log(`Target
+┬╖URL:┬╖┬╖┬╖┬╖┬╖┬╖┬╖${BASE_URL}${TA
+RGET_PATH}`);ΓÉì
+    20    Γöé - console.log(`Simult
+aneous:┬╖┬╖┬╖┬╖┬╖${CONCURRENCY}┬╖co
+ncurrent┬╖users`);ΓÉì
+    21    Γöé - console.log("------
+-----------------------------------
+--------");ΓÉì
+    22    Γöé - ΓÉì
+    23    Γöé - async┬╖function┬╖ru
+nLoadTest()┬╖{ΓÉì
+    24    Γöé - 
+┬╖┬╖const┬╖latencies┬╖=┬╖[];ΓÉì
+    25    Γöé - 
+┬╖┬╖const┬╖statusCounts┬╖=┬╖{};ΓÉì
+    26    Γöé - ┬╖┬╖const┬╖startTim
+e┬╖=┬╖Date.now();ΓÉì
+    27    Γöé - ΓÉì
+    28    Γöé - ┬╖┬╖const┬╖requests
+┬╖=┬╖Array.from({┬╖length:┬╖CONCURR
+ENCY┬╖},┬╖async┬╖(_,┬╖index)┬╖=>┬╖{
+ΓÉì
+    29    Γöé - ┬╖┬╖┬╖┬╖const┬╖reqS
+tart┬╖=┬╖Date.now();ΓÉì
+    30    Γöé - ┬╖┬╖┬╖┬╖try┬╖{ΓÉì
+    31    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+res┬╖=┬╖await┬╖fetch(`${BASE_URL}${
+TARGET_PATH}`,┬╖{ΓÉì
+    32    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖headers:┬╖{ΓÉì
+    33    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖"User-Agent":┬╖`EvolveLoadTester/1
+.0┬╖User-${index}`,ΓÉì
+    34    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖"X-Forwarded-For":┬╖`192.168.1.${(
+index┬╖%┬╖10)┬╖+┬╖1}`,ΓÉì
+    35    Γöé - 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖},ΓÉì
+    36    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖});ΓÉì
+    37    Γöé - ΓÉì
+    38    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+duration┬╖=┬╖Date.now()┬╖-┬╖reqStar
+t;ΓÉì
+    39    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖latenci
+es.push(duration);ΓÉì
+    40    Γöé - ΓÉì
+    41    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+status┬╖=┬╖res.status;ΓÉì
+    42    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖statusC
+ounts[status]┬╖=┬╖(statusCounts[sta
+tus]┬╖||┬╖0)┬╖+┬╖1;ΓÉì
+    43    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖return┬
+╖{┬╖ok:┬╖res.ok,┬╖status,┬╖duration
+┬╖};ΓÉì
+    44    Γöé - 
+┬╖┬╖┬╖┬╖}┬╖catch┬╖(err)┬╖{ΓÉì
+    45    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+duration┬╖=┬╖Date.now()┬╖-┬╖reqStar
+t;ΓÉì
+    46    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖latenci
+es.push(duration);ΓÉì
+    47    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖statusC
+ounts.ERROR┬╖=┬╖(statusCounts.ERROR
+┬╖||┬╖0)┬╖+┬╖1;ΓÉì
+    48    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖return┬
+╖{┬╖ok:┬╖false,┬╖error:┬╖err.messag
+e,┬╖duration┬╖};ΓÉì
+    49    Γöé - ┬╖┬╖┬╖┬╖}ΓÉì
+    50    Γöé - ┬╖┬╖});ΓÉì
+    51    Γöé - ΓÉì
+    52    Γöé - ┬╖┬╖const┬╖results┬
+╖=┬╖await┬╖Promise.all(requests);ΓÉ
+ì
+    53    Γöé - ┬╖┬╖const┬╖totalDur
+ationMs┬╖=┬╖Date.now()┬╖-┬╖startTim
+e;ΓÉì
+    54    Γöé - ΓÉì
+    55    Γöé - ┬╖┬╖latencies.sort(
+(a,┬╖b)┬╖=>┬╖a┬╖-┬╖b);ΓÉì
+    56    Γöé - ΓÉì
+    57    Γöé - ┬╖┬╖const┬╖min┬╖=┬╖
+latencies[0]┬╖||┬╖0;ΓÉì
+    58    Γöé - ┬╖┬╖const┬╖max┬╖=┬╖
+latencies[latencies.length┬╖-┬╖1]┬╖
+||┬╖0;ΓÉì
+    59    Γöé - ┬╖┬╖const┬╖p50┬╖=┬╖
+latencies[Math.floor(latencies.leng
+th┬╖*┬╖0.5)]┬╖||┬╖0;ΓÉì
+    60    Γöé - ┬╖┬╖const┬╖p90┬╖=┬╖
+latencies[Math.floor(latencies.leng
+th┬╖*┬╖0.9)]┬╖||┬╖0;ΓÉì
+    61    Γöé - ┬╖┬╖const┬╖p95┬╖=┬╖
+latencies[Math.floor(latencies.leng
+th┬╖*┬╖0.95)]┬╖||┬╖0;ΓÉì
+    62    Γöé - ┬╖┬╖const┬╖p99┬╖=┬╖
+latencies[Math.floor(latencies.leng
+th┬╖*┬╖0.99)]┬╖||┬╖0;ΓÉì
+    63    Γöé - 
+┬╖┬╖const┬╖avg┬╖=┬╖Math.round(ΓÉì
+    64    Γöé - ┬╖┬╖┬╖┬╖latencies.r
+educe((a,┬╖b)┬╖=>┬╖a┬╖+┬╖b,┬╖0)┬╖/┬
+╖latencies.length,ΓÉì
+    65    Γöé - ┬╖┬╖);ΓÉì
+    66    Γöé - ΓÉì
+    67    Γöé - ┬╖┬╖const┬╖successf
+ul┬╖=┬╖results.filter((r)┬╖=>┬╖r.ok
+).length;ΓÉì
+    68    Γöé - ┬╖┬╖const┬╖failed┬╖
+=┬╖results.length┬╖-┬╖successful;ΓÉ
+ì
+    69    Γöé - ┬╖┬╖const┬╖reqPerSe
+c┬╖=┬╖(CONCURRENCY┬╖/┬╖(totalDurati
+onMs┬╖/┬╖1000)┬╖||┬╖0).toFixed(1);Γ
+Éì
+    70    Γöé - ΓÉì
+    71    Γöé - ┬╖┬╖console.log("\n
+Results┬╖Summary:");ΓÉì
+    72    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Total┬╖Requests:┬╖┬╖┬╖┬╖┬╖${resul
+ts.length}`);ΓÉì
+    73    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Total┬╖Duration:┬╖┬╖┬╖┬╖┬╖${total
+DurationMs}┬╖ms`);ΓÉì
+    74    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Throughput:┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖${re
+qPerSec}┬╖req/sec`);ΓÉì
+    75    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Successful:┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖${su
+ccessful}`);ΓÉì
+    76    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Failed┬╖/┬╖Errors:┬╖┬╖┬╖┬╖${faile
+d}`);ΓÉì
+    77    Γöé - ┬╖┬╖console.log("\n
+HTTP┬╖Status┬╖Breakdown:");ΓÉì
+    78    Γöé - ┬╖┬╖for┬╖(const┬╖[s
+tatus,┬╖count]┬╖of┬╖Object.entries(
+statusCounts))┬╖{ΓÉì
+    79    Γöé - 
+┬╖┬╖┬╖┬╖console.log(ΓÉì
+    80    Γöé - ┬╖┬╖┬╖┬╖┬╖┬╖`┬╖┬╖HT
+TP┬╖${status}:┬╖${count}┬╖(${((coun
+t┬╖/┬╖CONCURRENCY)┬╖*┬╖100).toFixed
+(1)}%)`,ΓÉì
+    81    Γöé - ┬╖┬╖┬╖┬╖);ΓÉì
+    82    Γöé - ┬╖┬╖}ΓÉì
+    83    Γöé - ΓÉì
+    84    Γöé - ┬╖┬╖console.log("\n
+Latency┬╖Distribution:");ΓÉì
+    85    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Min:┬╖┬╖${min}┬╖ms`);ΓÉì
+    86    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Avg:┬╖┬╖${avg}┬╖ms`);ΓÉì
+    87    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖p50:┬╖┬╖${p50}┬╖ms`);ΓÉì
+    88    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖p90:┬╖┬╖${p90}┬╖ms`);ΓÉì
+    89    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖p95:┬╖┬╖${p95}┬╖ms`);ΓÉì
+    90    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖p99:┬╖┬╖${p99}┬╖ms`);ΓÉì
+    91    Γöé - ┬╖┬╖console.log(`┬╖
+┬╖Max:┬╖┬╖${max}┬╖ms`);ΓÉì
+    92    Γöé - ┬╖┬╖console.log("==
+===================================
+============\n");ΓÉì
+    93    Γöé - }ΓÉì
+    94    Γöé - ΓÉì
+    95    Γöé - 
+runLoadTest().catch((err)┬╖=>┬╖{ΓÉì
+    96    Γöé - ┬╖┬╖console.error("
+Load┬╖test┬╖failed:",┬╖err);ΓÉì
+    97    Γöé - 
+┬╖┬╖process.exit(1);ΓÉì
+    98    Γöé - });ΓÉì
+        1 Γöé + 
+#!/usr/bin/env┬╖node
+        2 Γöé + 
+        3 Γöé + /**
+        4 Γöé + ┬╖*┬╖Simultaneous┬╖
+Users┬╖&┬╖Concurrency┬╖Load┬╖Test┬╖
+Script
+        5 Γöé + ┬╖*┬╖Simulates┬╖con
+current┬╖users┬╖accessing┬╖Evolve┬╖
+Academy┬╖endpoints,
+        6 Γöé + ┬╖*┬╖measures┬╖resp
+onse┬╖latencies┬╖(p50,┬╖p95,┬╖p99)┬
+╖and┬╖verifies┬╖rate┬╖limiting.
+        7 Γöé + ┬╖*
+        8 Γöé + ┬╖*┬╖Usage:
+        9 Γöé + ┬╖*┬╖┬╖┬╖node┬╖scri
+pts/test_simultaneous_users.mjs┬╖[b
+aseUrl]┬╖[concurrency]
+       10 Γöé + ┬╖*/
+       11 Γöé + 
+       12 Γöé + const┬╖BASE_URL┬╖=┬
+╖process.argv[2]┬╖||┬╖"http://local
+host:3000";
+       13 Γöé + const┬╖CONCURRENCY┬
+╖=┬╖Number.parseInt(process.argv[3]
+┬╖||┬╖"50",┬╖10);
+       14 Γöé + const┬╖TARGET_PATH┬
+╖=┬╖"/api/health";
+       15 Γöé + 
+       16 Γöé + console.log("======
+===================================
+========");
+       17 Γöé + console.log("┬╖┬╖EV
+OLVE┬╖ACADEMY┬╖-┬╖SIMULTANEOUS┬╖USE
+RS┬╖LOAD┬╖TEST┬╖┬╖");
+       18 Γöé + console.log("======
+===================================
+========");
+       19 Γöé + console.log(`Target
+┬╖URL:┬╖┬╖┬╖┬╖┬╖┬╖┬╖${BASE_URL}${TA
+RGET_PATH}`);
+       20 Γöé + console.log(`Simult
+aneous:┬╖┬╖┬╖┬╖┬╖${CONCURRENCY}┬╖co
+ncurrent┬╖users`);
+       21 Γöé + console.log("------
+-----------------------------------
+--------");
+       22 Γöé + 
+       23 Γöé + 
+async┬╖function┬╖runLoadTest()┬╖{
+       24 Γöé + 
+┬╖┬╖const┬╖latencies┬╖=┬╖[];
+       25 Γöé + 
+┬╖┬╖const┬╖statusCounts┬╖=┬╖{};
+       26 Γöé + ┬╖┬╖const┬╖startTim
+e┬╖=┬╖Date.now();
+       27 Γöé + 
+       28 Γöé + ┬╖┬╖const┬╖requests
+┬╖=┬╖Array.from({┬╖length:┬╖CONCURR
+ENCY┬╖},┬╖async┬╖(_,┬╖index)┬╖=>┬╖{
+       29 Γöé + ┬╖┬╖┬╖┬╖const┬╖reqS
+tart┬╖=┬╖Date.now();
+       30 Γöé + ┬╖┬╖┬╖┬╖try┬╖{
+       31 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+res┬╖=┬╖await┬╖fetch(`${BASE_URL}${
+TARGET_PATH}`,┬╖{
+       32 Γöé + 
+┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖headers:┬╖{
+       33 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖"User-Agent":┬╖`EvolveLoadTester/1
+.0┬╖User-${index}`,
+       34 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬
+╖"X-Forwarded-For":┬╖`192.168.1.${(
+index┬╖%┬╖10)┬╖+┬╖1}`,
+       35 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖┬╖┬╖},
+       36 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖});
+       37 Γöé + 
+       38 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+duration┬╖=┬╖Date.now()┬╖-┬╖reqStar
+t;
+       39 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖latenci
+es.push(duration);
+       40 Γöé + 
+       41 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+status┬╖=┬╖res.status;
+       42 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖statusC
+ounts[status]┬╖=┬╖(statusCounts[sta
+tus]┬╖||┬╖0)┬╖+┬╖1;
+       43 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖return┬
+╖{┬╖ok:┬╖res.ok,┬╖status,┬╖duration
+┬╖};
+       44 Γöé + 
+┬╖┬╖┬╖┬╖}┬╖catch┬╖(err)┬╖{
+       45 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖const┬╖
+duration┬╖=┬╖Date.now()┬╖-┬╖reqStar
+t;
+       46 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖latenci
+es.push(duration);
+       47 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖statusC
+ounts.ERROR┬╖=┬╖(statusCounts.ERROR
+┬╖||┬╖0)┬╖+┬╖1;
+       48 Γöé + ┬╖┬╖┬╖┬╖┬╖┬╖return┬
+╖{┬╖ok:┬╖false,┬╖error:┬╖err.messag
+e,┬╖duration┬╖};
+       49 Γöé + ┬╖┬╖┬╖┬╖}
+       50 Γöé + ┬╖┬╖});
+       51 Γöé + 
+       52 Γöé + ┬╖┬╖const┬╖results┬
+╖=┬╖await┬╖Promise.all(requests);
+  47 more lines truncated
+  
+
+supabase\.temp\linked-project.json 
+format ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöü
+
+  ├ù Formatter would have printed 
+the following content:
+  
+    1   Γöé - {ΓÉì
+    2   Γöé - ┬╖┬╖"ref":┬╖"ficrjocg
+rcghxrdpwbbw",ΓÉì
+    3   Γöé - 
+┬╖┬╖"name":┬╖"esi-learning",ΓÉì
+    4   Γöé - ┬╖┬╖"organization_id"
+:┬╖"ybrsjqlyluqlugzjbmrw",ΓÉì
+    5   Γöé - ┬╖┬╖"organization_slu
+g":┬╖"ybrsjqlyluqlugzjbmrw"ΓÉì
+    6   Γöé - }ΓÉì
+      1 Γöé + {
+      2 Γöé + 
+┬╖┬╖"ref":┬╖"ficrjocgrcghxrdpwbbw",
+      3 Γöé + 
+┬╖┬╖"name":┬╖"esi-learning",
+      4 Γöé + ┬╖┬╖"organization_id"
+:┬╖"ybrsjqlyluqlugzjbmrw",
+      5 Γöé + ┬╖┬╖"organization_slu
+g":┬╖"ybrsjqlyluqlugzjbmrw"
+      6 Γöé + }
+    7 7 Γöé   
+The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
+Diagnostics not shown: 82.
+Checked 110 files in 119ms. No fixes applied.
+Found 101 errors.
+Found 1 warning.
+  
+
+check ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü
+ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö
+üΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓ
+öüΓöüΓöü
+
+  ├ù Some errors were emitted 
+while running checks.
+  
+

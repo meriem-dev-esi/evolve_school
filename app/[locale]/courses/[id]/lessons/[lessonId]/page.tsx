@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { notFound, redirect } from "next/navigation";
 import LessonVideo from "@/components/LessonVideo";
 import MarkLessonComplete from "@/components/MarkLessonComplete";
@@ -178,7 +178,7 @@ export default async function LessonPage({ params }: Props) {
       {" "}
       <div className="mx-auto max-w-6xl">
         <Link
-          href={`/${locale}/courses/${id}`}
+          href={`/courses/${id}`}
           className="mb-8 inline-flex text-sm font-medium text-muted-foreground transition hover:text-foreground"
         >
           ← Back to course

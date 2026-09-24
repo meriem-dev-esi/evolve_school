@@ -1,9 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
 import type { MetadataRoute } from "next";
+import { env } from "@/lib/env";
+import { createClient } from "@/lib/supabase/client";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://evolve-academy.dz";
+  const baseUrl = env.siteUrl;
   const locales = ["fr", "ar", "en"];
   const staticPaths = [
     "",
@@ -38,11 +38,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Fetch Published Courses for dynamic sitemap
   try {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (supabaseUrl && supabaseAnonKey) {
-      const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    if (env.supabaseUrl && env.supabaseAnonKey) {
+      const supabase = createClient();
       const { data: courses } = await supabase
         .from("courses")
         .select("id, updated_at")

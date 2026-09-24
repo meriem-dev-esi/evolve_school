@@ -1,5 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { env } from "@/lib/env";
+import { createClient } from "@/lib/supabase/client";
 
 export const dynamic = "force-dynamic";
 
@@ -9,12 +10,9 @@ export async function GET() {
   let dbLatency = 0;
 
   try {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (supabaseUrl && supabaseAnonKey) {
+    if (env.supabaseUrl && env.supabaseAnonKey) {
       const dbStart = Date.now();
-      const supabase = createClient(supabaseUrl, supabaseAnonKey);
+      const supabase = createClient();
       const { error } = await supabase.from("categories").select("id").limit(1);
 
       dbLatency = Date.now() - dbStart;

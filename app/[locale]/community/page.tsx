@@ -8,7 +8,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/i18n/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { createClient } from "@/lib/supabase/server";

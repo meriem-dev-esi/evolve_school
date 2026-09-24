@@ -43,7 +43,6 @@ export async function completeLessonAndNavigate({
 
   if (progressError) {
     console.error("[Evolve] Completion error:", progressError);
-
     return;
   }
 
@@ -82,7 +81,6 @@ export async function completeLessonAndNavigate({
       : `/${locale}/formations?completed=1`;
 
     window.location.href = completionUrl;
-
     return;
   }
 
@@ -100,12 +98,10 @@ export async function completeLessonAndNavigate({
 
     if (firstLesson) {
       window.location.href = `/${locale}/courses/${nextCourseId}/lessons/${firstLesson.id}`;
-
       return;
     }
 
     window.location.href = `/${locale}/courses/${nextCourseId}`;
-
     return;
   }
 
