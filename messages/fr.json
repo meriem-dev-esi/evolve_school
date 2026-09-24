@@ -128,5 +128,51 @@
     "intro": "Chaque discipline regroupe les cours publiés par nos formateurs.",
     "empty": "Aucune discipline n'a encore été publiée.",
     "countLabel": "{count, plural, =0 {aucune discipline} one {# discipline} other {# disciplines}}"
+  },
+  "ateliers": {
+    "search": {
+      "placeholder": "Rechercher un atelier, sujet, technologie...",
+      "label": "Rechercher un atelier",
+      "clear": "Effacer",
+      "resultsFor": "Résultats pour"
+    },
+    "filters": {
+      "title": "Spécialités",
+      "all": "Tous les ateliers",
+      "allShort": "Tous"
+    },
+    "list": {
+      "titleAll": "Ateliers pratiques disponibles",
+      "count": "{count, plural, =0 {Aucun atelier} one {# atelier intensif} other {# ateliers intensifs}}",
+      "reset": "Réinitialiser les filtres"
+    },
+    "empty": {
+      "title": "Aucun atelier trouvé",
+      "text": "Nous n'avons trouvé aucun atelier correspondant à votre recherche. Essayez d'autres termes ou une autre catégorie.",
+      "cta": "Voir tous les ateliers"
+    },
+    "card": {
+      "badge": "Session pratique",
+      "defaultDuration": "Atelier intensif",
+      "projectIncluded": "Projet inclus",
+      "participation": "Participation",
+      "free": "Gratuit",
+      "currency": "DA",
+      "join": "Participer"
+    },
+    "page": {
+      "hero": {
+        "badge": "Ateliers pratiques & masterclasses",
+        "title": "Les Ateliers",
+        "brand": "Evolve",
+        "text": "Pratiquez en direct avec des experts du secteur. Des sessions intensives et interactives conçues pour accélérer votre maîtrise des outils du futur."
+      },
+      "community": {
+        "eyebrow": "Rejoignez le réseau",
+        "title": "Proposez un atelier ou partagez vos travaux",
+        "text": "Vous êtes formateur ou expert ? Rejoignez l'équipe d'animateurs d'ateliers Evolve ou proposez une masterclass à notre communauté.",
+        "cta": "Rejoindre la communauté"
+      }
+    }
   }
 }
