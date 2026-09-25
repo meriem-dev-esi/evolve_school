@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
 import DeleteLessonButton from "@/components/DeleteLessonButton";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function TeacherLessonsPage({
   params,
@@ -46,9 +46,7 @@ export default async function TeacherLessonsPage({
         <div className="text-center">
           <h1 className="text-3xl font-bold">Access denied</h1>
 
-          <p className="mt-3 text-white/50">
-            Teacher access is required.
-          </p>
+          <p className="mt-3 text-white/50">Teacher access is required.</p>
         </div>
       </main>
     );
@@ -109,9 +107,7 @@ export default async function TeacherLessonsPage({
 
         {!error && lessons?.length === 0 && (
           <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-10 text-center">
-            <h2 className="text-2xl font-semibold">
-              No lessons yet
-            </h2>
+            <h2 className="text-2xl font-semibold">No lessons yet</h2>
 
             <p className="mt-3 text-white/50">
               Add your first lesson to this course.
@@ -153,9 +149,7 @@ export default async function TeacherLessonsPage({
                       )}
                     </div>
 
-                    <h2 className="mt-4 text-xl font-bold">
-                      {lesson.title}
-                    </h2>
+                    <h2 className="mt-4 text-xl font-bold">{lesson.title}</h2>
 
                     {lesson.description && (
                       <p className="mt-2 max-w-3xl text-sm text-white/40">
@@ -176,10 +170,7 @@ export default async function TeacherLessonsPage({
                       Edit
                     </Link>
 
-                    <DeleteLessonButton
-                      lessonId={lesson.id}
-                      courseId={id}
-                    />
+                    <DeleteLessonButton lessonId={lesson.id} courseId={id} />
                   </div>
                 </div>
               </article>

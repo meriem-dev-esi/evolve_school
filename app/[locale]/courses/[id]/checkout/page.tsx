@@ -1,6 +1,6 @@
-import CheckoutButton from "@/components/CheckoutButton";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { notFound, redirect } from "next/navigation";
+import CheckoutButton from "@/components/CheckoutButton";
 import { createClient } from "@/lib/supabase/server";
 
 type Props = {
@@ -48,25 +48,19 @@ export default async function CheckoutPage({ params }: Props) {
     <main className="min-h-screen bg-background px-6 py-10">
       <div className="mx-auto max-w-2xl">
         <Link
-          href={`/${locale}/courses/${id}`}
+          href={`/courses/${id}`}
           className="mb-8 inline-flex text-sm font-medium text-muted-foreground hover:text-foreground"
         >
           ← Back to course
         </Link>
 
         <div className="rounded-3xl border bg-card p-8 shadow-sm">
-          <h1 className="text-3xl font-bold">
-            Complete your enrollment
-          </h1>
+          <h1 className="text-3xl font-bold">Complete your enrollment</h1>
 
-          <p className="mt-3 text-muted-foreground">
-            {course.title}
-          </p>
+          <p className="mt-3 text-muted-foreground">{course.title}</p>
 
           <div className="mt-8 rounded-2xl border p-6">
-            <h2 className="text-xl font-semibold">
-              Course access
-            </h2>
+            <h2 className="text-xl font-semibold">Course access</h2>
 
             <p className="mt-2 text-sm text-muted-foreground">
               Payment is required to access all lessons in this course.
@@ -74,18 +68,13 @@ export default async function CheckoutPage({ params }: Props) {
           </div>
 
           <div className="mt-8 rounded-2xl border p-6">
-            <h2 className="text-xl font-semibold">
-              💳 Edahabia payment
-            </h2>
+            <h2 className="text-xl font-semibold">💳 Edahabia payment</h2>
 
             <p className="mt-2 text-sm text-muted-foreground">
               The Edahabia payment system will be connected here.
             </p>
 
-      <CheckoutButton
-  courseId={id}
-  locale={locale}
-/>
+            <CheckoutButton courseId={id} locale={locale} />
           </div>
         </div>
       </div>

@@ -1,0 +1,2 @@
+﻿app/[locale]/ateliers/AteliersBrowser.tsx(44,54): error TS6133: 'locale' is declared but its value is never read.
+app/[locale]/community/page.tsx(11,8): error TS2613: Module '"C:/Users/mohamed/Downloads/Telegram Desktop/evolve_school/i18n/navigation"' has no default export. Did you mean to use 'import { Link } from "C:/Users/mohamed/Downloads/Telegram Desktop/evolve_school/i18n/navigation"' instead?

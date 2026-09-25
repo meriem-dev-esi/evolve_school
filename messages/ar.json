@@ -1,14 +1,127 @@
 {
   "nav": {
     "home": "الرئيسية",
+    "formations": "التكوينات",
+    "ateliers": "الورشات",
+    "community": "المجتمع",
+    "messages": "الرسائل",
+    "dashboard": "لوحة التحكم",
+    "signIn": "تسجيل الدخول",
+    "signUp": "إنشاء حساب",
+    "profile": "الملف الشخصي",
+    "signOut": "تسجيل الخروج",
+    "changeLanguage": "تغيير اللغة",
     "disciplines": "التخصصات",
-    "packs": "الباقات",
-    "signIn": "تسجيل الدخول"
+    "packs": "الباقات"
+  },
+  "footer": {
+    "tagline": "منصة التكوين والورشات الإبداعية الرائدة في الجزائر.",
+    "navigation": "التنقل",
+    "home": "الرئيسية",
+    "formations": "التكوينات",
+    "workshops": "الورشات",
+    "community": "المجتمع",
+    "messages": "الرسائل",
+    "dashboard": "لوحة التحكم",
+    "contact": "اتصل بنا",
+    "statusOperational": "المنصة قيد التشغيل 24/7",
+    "location": "الجزائر العاصمة، الجزائر · contact@evolve-academy.dz",
+    "rights": "جميع الحقوق محفوظة. أكاديمية إيفولف © 2026"
+  },
+  "hero": {
+    "certifiedBadge": "✦ مسار تكويني معتمد",
+    "defaultDescription": "تعلم مباشرة من خبراء المجال من خلال مشاريع حقيقية وتوجيه مباشر وشهادة معترف بها.",
+    "startNow": "ابدأ الآن",
+    "viewCatalog": "تصفح الدليل",
+    "learnersCount": "+5000 متعلم",
+    "rating": "4.9 / 5",
+    "reviewsCount": "(+1200 تقييم موثق)",
+    "practicalNotice": "100% تطبيقي وورشات",
+    "free": "مجاني"
   },
   "home": {
     "title": "أكاديمية إيفولف",
     "tagline": "تكوين إبداعي، حضوريًا وعبر الإنترنت.",
-    "browseDisciplines": "استكشف التخصصات"
+    "browseDisciplines": "استكشف التخصصات",
+    "recommendedForYou": "موصى به لك",
+    "yourEnrollmentPath": "مسار تسجيلك",
+    "continueLearning": "متابعة التعلم",
+    "becauseYouCompleted": "لأنك أكملت",
+    "beginnerStarterPack": "باقة المبتدئين",
+    "partnerCoursesZone": "دورات الشركاء",
+    "watchlist": "قائمتي المفضلة",
+    "mostSearchedThisWeek": "الأكثر بحثاً هذا الأسبوع",
+    "exclusiveToEvolve": "حصرياً لدى إيفولف",
+    "trending": "الأكثر رواجاً",
+    "comingSoon": "قريباً",
+    "inProgress": "قيد التقدم",
+    "progress": "التقدم",
+    "continueButton": "متابعة ←"
+  },
+  "common": {
+    "viewAll": "عرض الكل",
+    "emptySection": "لا تتوفر دورات حالياً في هذا القسم.",
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ ما",
+    "free": "مجاني"
+  },
+  "courseCard": {
+    "priceLabel": "السعر",
+    "free": "مجاني",
+    "practice": "تطبيقي"
+  },
+  "seriesCard": {
+    "learningPath": "مسار تعليمي",
+    "guidedPath": "مسار موجه",
+    "coursesCount": "{count, plural, =0 {0 تكوين} one {تكوين واحد} two {تكوينان} few {# تكوينات} many {# تكويناً} other {# تكوين}}",
+    "viewSteps": "عرض المراحل",
+    "continue": "متابعة"
+  },
+  "lockedCourseCard": {
+    "memberSpace": "فضاء الأعضاء",
+    "personalizedContent": "محتوى مخصص",
+    "description": "سجل الدخول للوصول إلى توصياتك وتقدمك ودوراتك المحفوظة.",
+    "exclusiveAccess": "وصول حصري",
+    "signIn": "تسجيل الدخول"
+  },
+  "auth": {
+    "badge": "مصادقة أكاديمية إيفولف",
+    "welcomeBack": "مرحباً بعودتك",
+    "joinAcademy": "انضم إلى الأكاديمية",
+    "signInSubtitle": "ادخل إلى دوراتك وشهاداتك ومشاريعك في الوقت الفعلي.",
+    "signUpSubtitle": "أنشئ حسابك التعليمي المتصل بالمنصة.",
+    "tabSignIn": "تسجيل الدخول",
+    "tabSignUp": "إنشاء حساب",
+    "fullNameLabel": "الاسم الكامل",
+    "fullNamePlaceholder": "مثال: سارة بن علي",
+    "emailLabel": "البريد الإلكتروني المهني أو الشخصي",
+    "emailPlaceholder": "first.last@gmail.com",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "••••••••",
+    "submitSignIn": "تسجيل الدخول إلى حسابي",
+    "submitSignUp": "إنشاء حسابي التعليمي",
+    "errorEmptyName": "يرجى إدخال اسمك الكامل.",
+    "errorEmptyPassword": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.",
+    "successSignIn": "تم تسجيل الدخول بنجاح! جارٍ التوجيه...",
+    "successSignUp": "تم إنشاء الحساب بنجاح! مرحباً بك.",
+    "errorSignInPrefix": "خطأ في تسجيل الدخول: ",
+    "errorSignUpPrefix": "خطأ في إنشاء الحساب: "
+  },
+  "formations": {
+    "badge": "مسارات معتمدة",
+    "title": "دليل",
+    "titleGradient": "التكوينات",
+    "subtitle": "مسارات تعلم شاملة، مصممة خطوة بخطوة مع مشاريع عملية وتوجيه مستمر.",
+    "globalProgress": "تقدمك الإجمالي",
+    "completedCoursesCount": "تم إكمال {completed} من {total} دورات",
+    "completedTitle": "اكتمل التكوين بنجاح 🎓",
+    "completedDesc": "تهانينا! لقد أتممت جميع وحدات هذا المسار. شهادتك جاهزة في ملفك الشخصي.",
+    "searchPlaceholder": "ابحث عن تكوين، مهارة، كلمة مفتاحية...",
+    "clearSearch": "مسح البحث",
+    "resultsFor": "نتائج البحث عن",
+    "specialties": "التخصصات",
+    "allFormations": "جميع التكوينات",
+    "emptySearchResults": "لم يتم العثور على أي تكوينات مطابقة لمعايير البحث."
   },
   "disciplines": {
     "title": "التخصصات الإبداعية",
@@ -16,7 +129,50 @@
     "empty": "لم يتم نشر أي تخصص بعد.",
     "countLabel": "{count, plural, =0 {لا توجد تخصصات} one {تخصص واحد} two {تخصصان} few {# تخصصات} many {# تخصصًا} other {# تخصص}}"
   },
-  "footer": {
-    "rights": "جميع الحقوق محفوظة."
+  "ateliers": {
+    "search": {
+      "placeholder": "ابحث عن ورشة، موضوع، تقنية...",
+      "label": "البحث في الورش",
+      "clear": "مسح",
+      "resultsFor": "نتائج البحث عن"
+    },
+    "filters": {
+      "title": "التخصصات",
+      "all": "جميع الورش",
+      "allShort": "الكل"
+    },
+    "list": {
+      "titleAll": "الورش التطبيقية المتاحة",
+      "count": "{count, plural, zero {لا توجد ورش} one {ورشة مكثفة واحدة} two {ورشتان مكثفتان} few {# ورش مكثفة} many {# ورشة مكثفة} other {# ورشة مكثفة}}",
+      "reset": "إعادة ضبط الفلاتر"
+    },
+    "empty": {
+      "title": "لم يتم العثور على ورشة",
+      "text": "لم نجد أي ورشة تطابق بحثك. جرّب كلمات أخرى أو فئة مختلفة.",
+      "cta": "عرض جميع الورش"
+    },
+    "card": {
+      "badge": "جلسة تطبيقية",
+      "defaultDuration": "ورشة مكثفة",
+      "projectIncluded": "مشروع مضمّن",
+      "participation": "المشاركة",
+      "free": "مجاني",
+      "currency": "دج",
+      "join": "شارك"
+    },
+    "page": {
+      "hero": {
+        "badge": "ورش تطبيقية وماستر كلاس",
+        "title": "ورش عمل",
+        "brand": "Evolve",
+        "text": "تدرّب مباشرة مع خبراء القطاع. جلسات مكثفة وتفاعلية مصمّمة لتسريع إتقانك لأدوات المستقبل."
+      },
+      "community": {
+        "eyebrow": "انضم إلى الشبكة",
+        "title": "اقترح ورشة أو شارك أعمالك",
+        "text": "هل أنت مدرّب أو خبير؟ انضم إلى فريق مُيسّري ورش Evolve أو اقترح ماستر كلاس على مجتمعنا.",
+        "cta": "انضم إلى المجتمع"
+      }
+    }
   }
 }

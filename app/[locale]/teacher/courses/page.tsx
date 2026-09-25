@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
@@ -18,9 +17,7 @@ export default async function TeacherCoursesPage({
     return (
       <main className="flex min-h-dvh items-center justify-center bg-black px-6 text-white">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">
-            Please sign in
-          </h1>
+          <h1 className="text-3xl font-bold">Please sign in</h1>
 
           <Link
             href={`/${locale}/sign-in`}
@@ -43,13 +40,9 @@ export default async function TeacherCoursesPage({
     return (
       <main className="flex min-h-dvh items-center justify-center bg-black px-6 text-white">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">
-            Access denied
-          </h1>
+          <h1 className="text-3xl font-bold">Access denied</h1>
 
-          <p className="mt-3 text-white/50">
-            Teacher access is required.
-          </p>
+          <p className="mt-3 text-white/50">Teacher access is required.</p>
         </div>
       </main>
     );
@@ -72,9 +65,7 @@ export default async function TeacherCoursesPage({
               Teacher Dashboard
             </p>
 
-            <h1 className="mt-4 text-4xl font-bold md:text-5xl">
-              My Courses
-            </h1>
+            <h1 className="mt-4 text-4xl font-bold md:text-5xl">My Courses</h1>
 
             <p className="mt-3 text-white/50">
               Create and manage your Evolve courses.
@@ -99,13 +90,9 @@ export default async function TeacherCoursesPage({
         {/* Empty */}
         {!error && courses?.length === 0 && (
           <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-10 text-center">
-            <h2 className="text-2xl font-semibold">
-              No courses yet
-            </h2>
+            <h2 className="text-2xl font-semibold">No courses yet</h2>
 
-            <p className="mt-3 text-white/50">
-              Create your first course.
-            </p>
+            <p className="mt-3 text-white/50">Create your first course.</p>
 
             <Link
               href={`/${locale}/teacher/courses/new`}
@@ -133,9 +120,7 @@ export default async function TeacherCoursesPage({
                   />
                 ) : (
                   <div className="flex h-48 items-center justify-center bg-white/5">
-                    <span className="text-white/20">
-                      No image
-                    </span>
+                    <span className="text-white/20">No image</span>
                   </div>
                 )}
 
@@ -159,7 +144,7 @@ export default async function TeacherCoursesPage({
                     )}
 
                     {course.is_partner && (
-                      <span className="rounded-full bg-purple-500/10 px-3 py-1 text-xs text-purple-400">
+                      <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs text-emerald-400">
                         Partner
                       </span>
                     )}
@@ -184,9 +169,7 @@ export default async function TeacherCoursesPage({
                   </div>
 
                   {/* Title */}
-                  <h2 className="mt-4 text-xl font-bold">
-                    {course.title}
-                  </h2>
+                  <h2 className="mt-4 text-xl font-bold">{course.title}</h2>
 
                   {/* Description */}
                   {course.description && (
@@ -198,39 +181,25 @@ export default async function TeacherCoursesPage({
                   {/* Metadata */}
                   <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
                     <div className="rounded-2xl bg-white/5 p-3">
-                      <p className="text-white/30">
-                        Domain
-                      </p>
+                      <p className="text-white/30">Domain</p>
 
-                      <p className="mt-1 font-medium">
-                        {course.domain || "—"}
-                      </p>
+                      <p className="mt-1 font-medium">{course.domain || "—"}</p>
                     </div>
 
                     <div className="rounded-2xl bg-white/5 p-3">
-                      <p className="text-white/30">
-                        Level
-                      </p>
+                      <p className="text-white/30">Level</p>
 
-                      <p className="mt-1 font-medium">
-                        {course.level || "—"}
-                      </p>
+                      <p className="mt-1 font-medium">{course.level || "—"}</p>
                     </div>
 
                     <div className="rounded-2xl bg-white/5 p-3">
-                      <p className="text-white/30">
-                        Type
-                      </p>
+                      <p className="text-white/30">Type</p>
 
-                      <p className="mt-1 font-medium">
-                        {course.type || "—"}
-                      </p>
+                      <p className="mt-1 font-medium">{course.type || "—"}</p>
                     </div>
 
                     <div className="rounded-2xl bg-white/5 p-3">
-                      <p className="text-white/30">
-                        Practice
-                      </p>
+                      <p className="text-white/30">Practice</p>
 
                       <p className="mt-1 font-medium text-brand">
                         {course.practice_percentage ?? 0}%
@@ -239,28 +208,28 @@ export default async function TeacherCoursesPage({
                   </div>
 
                   {/* Action */}
-   <div className="mt-6 grid grid-cols-3 gap-3">
-  <Link
-    href={`/${locale}/courses/${course.id}`}
-    className="rounded-full border border-white/10 px-4 py-3 text-center text-sm font-semibold transition hover:border-brand hover:text-brand"
-  >
-    View
-  </Link>
+                  <div className="mt-6 grid grid-cols-3 gap-3">
+                    <Link
+                      href={`/${locale}/courses/${course.id}`}
+                      className="rounded-full border border-white/10 px-4 py-3 text-center text-sm font-semibold transition hover:border-brand hover:text-brand"
+                    >
+                      View
+                    </Link>
 
-  <Link
-    href={`/${locale}/teacher/courses/${course.id}/edit`}
-    className="rounded-full bg-brand px-4 py-3 text-center text-sm font-semibold text-black transition hover:opacity-90"
-  >
-    Edit
-  </Link>
+                    <Link
+                      href={`/${locale}/teacher/courses/${course.id}/edit`}
+                      className="rounded-full bg-brand px-4 py-3 text-center text-sm font-semibold text-black transition hover:opacity-90"
+                    >
+                      Edit
+                    </Link>
 
-  <Link
-    href={`/${locale}/teacher/courses/${course.id}/lessons`}
-    className="rounded-full border border-white/10 px-4 py-3 text-center text-sm font-semibold transition hover:border-brand hover:text-brand"
-  >
-    Lessons
-  </Link>
-</div>
+                    <Link
+                      href={`/${locale}/teacher/courses/${course.id}/lessons`}
+                      className="rounded-full border border-white/10 px-4 py-3 text-center text-sm font-semibold transition hover:border-brand hover:text-brand"
+                    >
+                      Lessons
+                    </Link>
+                  </div>
                 </div>
               </article>
             ))}
@@ -270,4 +239,3 @@ export default async function TeacherCoursesPage({
     </main>
   );
 }
-

@@ -1,7 +1,7 @@
 import "server-only";
 
-import { createClient } from "@/lib/supabase/server";
 import { getLearningProfile } from "@/lib/data/learning-profile";
+import { createClient } from "@/lib/supabase/server";
 
 type Recommendation = {
   id: string;
@@ -16,9 +16,7 @@ type Recommendation = {
   reasons: string[];
 };
 
-function normalize(
-  value: string | null | undefined,
-) {
+function normalize(value: string | null | undefined) {
   return (value ?? "")
     .toLowerCase()
     .replace(/&/g, "and")
@@ -57,52 +55,18 @@ function domainsMatch(
       "programming",
       "software development",
     ],
-    [
-      "mobile development",
-      "android",
-      "ios",
-      "flutter",
-      "react native",
-    ],
-    [
-      "cloud",
-      "devops",
-      "cloud computing",
-    ],
-    [
-      "cybersecurity",
-      "cyber security",
-      "security",
-      "ethical hacking",
-    ],
-    [
-      "design",
-      "ui ux",
-      "ux",
-      "ui design",
-      "graphic design",
-    ],
-    [
-      "business",
-      "business product",
-      "entrepreneurship",
-      "product management",
-    ],
-    [
-      "marketing",
-      "digital marketing",
-      "social media marketing",
-    ],
+    ["mobile development", "android", "ios", "flutter", "react native"],
+    ["cloud", "devops", "cloud computing"],
+    ["cybersecurity", "cyber security", "security", "ethical hacking"],
+    ["design", "ui ux", "ux", "ui design", "graphic design"],
+    ["business", "business product", "entrepreneurship", "product management"],
+    ["marketing", "digital marketing", "social media marketing"],
   ];
 
   return groups.some((group) => {
-    const firstMatches = group.some((item) =>
-      a.includes(item),
-    );
+    const firstMatches = group.some((item) => a.includes(item));
 
-    const secondMatches = group.some((item) =>
-      b.includes(item),
-    );
+    const secondMatches = group.some((item) => b.includes(item));
 
     return firstMatches && secondMatches;
   });
@@ -112,9 +76,7 @@ function courseRelatedToHistory(
   courseDomain: string | null | undefined,
   historyDomains: string[],
 ) {
-  return historyDomains.some((domain) =>
-    domainsMatch(courseDomain, domain),
-  );
+  return historyDomains.some((domain) => domainsMatch(courseDomain, domain));
 }
 
 function textMatches(
@@ -128,16 +90,10 @@ function textMatches(
     return false;
   }
 
-  const words = b
-    .split(" ")
-    .filter((word) => word.length >= 3);
+  const words = b.split(" ").filter((word) => word.length >= 3);
 
   return (
-    a.includes(b) ||
-    b.includes(a) ||
-    words.some((word) =>
-      a.includes(word),
-    )
+    a.includes(b) || b.includes(a) || words.some((word) => a.includes(word))
   );
 }
 
@@ -154,26 +110,20 @@ function difficultyMatches(
   difficulty: string | null | undefined,
 ) {
   const level = normalize(courseLevel);
-  const difficultyValue =
-    normalize(difficulty);
+  const difficultyValue = normalize(difficulty);
 
   if (!level || !difficultyValue) {
     return false;
   }
 
-  const mapping: Record<
-    string,
-    string[]
-  > = {
+  const mapping: Record<string, string[]> = {
     easy: ["beginner"],
     medium: ["intermediate"],
     hard: ["advanced"],
   };
 
   return (
-    mapping[difficultyValue]?.some(
-      (value) => level.includes(value),
-    ) ?? false
+    mapping[difficultyValue]?.some((value) => level.includes(value)) ?? false
   );
 }
 
@@ -189,55 +139,37 @@ function durationMatches(
   }
 
   // Direct text match
-  if (
-    course.includes(available) ||
-    available.includes(course)
-  ) {
+  if (course.includes(available) || available.includes(course)) {
     return true;
   }
 
-  const courseNumbers =
-    course.match(/\d+/g)?.map(Number) ?? [];
+  const courseNumbers = course.match(/\d+/g)?.map(Number) ?? [];
 
-  const availableNumbers =
-    available.match(/\d+/g)?.map(Number) ?? [];
+  const availableNumbers = available.match(/\d+/g)?.map(Number) ?? [];
 
-  if (
-    courseNumbers.length === 0 ||
-    availableNumbers.length === 0
-  ) {
+  if (courseNumbers.length === 0 || availableNumbers.length === 0) {
     return false;
   }
 
-  const courseValue =
-    courseNumbers[0];
+  const courseValue = courseNumbers[0];
 
-  const availableValue =
-    availableNumbers[0];
+  const availableValue = availableNumbers[0];
 
-  if (
-    courseValue === undefined ||
-    availableValue === undefined
-  ) {
+  if (courseValue === undefined || availableValue === undefined) {
     return false;
   }
 
-  if (
-    courseValue <= availableValue &&
-    available.includes("hour")
-  ) {
+  if (courseValue <= availableValue && available.includes("hour")) {
     return true;
   }
 
-  if (
-    courseValue <= availableValue &&
-    available.includes("minute")
-  ) {
+  if (courseValue <= availableValue && available.includes("minute")) {
     return true;
   }
 
   return false;
 }
+const MAX_SCORE = 137;
 
 export async function getRecommendedCourses(
   limit = 8,
@@ -246,8 +178,7 @@ export async function getRecommendedCourses(
 
   const {
     data: { user },
-  } =
-    await supabase.auth.getUser();
+  } = await supabase.auth.getUser();
 
   if (!user) {
     return [];
@@ -257,9 +188,7 @@ export async function getRecommendedCourses(
   // 1. Get user preferences
   // --------------------------------------------------
 
-  const {
-    data: preferences,
-  } = await supabase
+  const { data: preferences } = await supabase
     .from("user_learning_preferences")
     .select("*")
     .eq("user_id", user.id)
@@ -269,29 +198,23 @@ export async function getRecommendedCourses(
   // 2. Get learning history
   // --------------------------------------------------
 
-  const learningProfile =
-    await getLearningProfile();
+  const learningProfile = await getLearningProfile();
 
   if (!learningProfile) {
     return [];
   }
 
-  const enrolledIds =
-    learningProfile.enrolledCourses.map(
-      (course) => course.id,
-    );
+  const enrolledIds = learningProfile.enrolledCourses.map(
+    (course) => course.id,
+  );
 
-  const completedIds =
-    learningProfile.completedCourses;
+  const completedIds = learningProfile.completedCourses;
 
   // --------------------------------------------------
   // 3. Get published courses
   // --------------------------------------------------
 
-  const {
-    data: courses,
-    error,
-  } = await supabase
+  const { data: courses, error } = await supabase
     .from("courses")
     .select(
       `
@@ -323,333 +246,216 @@ export async function getRecommendedCourses(
   // 4. Build learning-history domains
   // --------------------------------------------------
 
-  const historyDomains =
-    learningProfile.enrolledCourses
-      .map((course) => course.domain)
-      .filter(
-        (
-          domain,
-        ): domain is string =>
-          Boolean(domain),
-      );
+  const historyDomains = learningProfile.enrolledCourses
+    .map((course) => course.domain)
+    .filter((domain): domain is string => Boolean(domain));
 
   // --------------------------------------------------
   // 5. Remove enrolled/completed courses
   // --------------------------------------------------
 
-  const candidates =
-    courses.filter(
-      (course) =>
-        !enrolledIds.includes(
-          course.id,
-        ) &&
-        !completedIds.includes(
-          course.id,
-        ),
-    );
+  const candidates = courses.filter(
+    (course) =>
+      !enrolledIds.includes(course.id) && !completedIds.includes(course.id),
+  );
 
   // --------------------------------------------------
   // 6. Score courses
   // --------------------------------------------------
 
-  const recommendations =
-    candidates.map((course) => {
-      let score = 0;
+  const recommendations = candidates.map((course) => {
+    let score = 0;
 
-      const reasons: string[] = [];
+    const reasons: string[] = [];
 
-      // ----------------------------------------------
-      // Preferred category +30
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Preferred category +30
+    // ----------------------------------------------
 
-      if (
-        domainsMatch(
-          course.domain,
-          preferences?.preferred_category,
-        )
-      ) {
-        score += 30;
+    if (domainsMatch(course.domain, preferences?.preferred_category)) {
+      score += 30;
 
-        reasons.push(
-          "Matches your preferred category",
-        );
-      }
+      reasons.push("Matches your preferred category");
+    }
 
-      // ----------------------------------------------
-      // Interests +10 / +20
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Interests +10 / +20
+    // ----------------------------------------------
 
-      const interests =
-        preferences?.interests ?? [];
+    const interests = preferences?.interests ?? [];
 
-      const matchedInterests =
-        interests.filter(
-          (interest: string) =>
-            domainsMatch(
-              course.domain,
-              interest,
-            ) ||
-            textMatches(
-              course.title,
-              interest,
-            ) ||
-            textMatches(
-              course.description,
-              interest,
-            ),
-        );
+    const matchedInterests = interests.filter(
+      (interest: string) =>
+        domainsMatch(course.domain, interest) ||
+        textMatches(course.title, interest) ||
+        textMatches(course.description, interest),
+    );
 
-      if (
-        matchedInterests.length > 0
-      ) {
-        const interestScore =
-          Math.min(
-            matchedInterests.length * 10,
-            20,
-          );
+    if (matchedInterests.length > 0) {
+      const interestScore = Math.min(matchedInterests.length * 10, 20);
 
-        score += interestScore;
+      score += interestScore;
 
-        reasons.push(
-          `Matches ${matchedInterests.length} of your interests`,
-        );
-      }
+      reasons.push(`Matches ${matchedInterests.length} of your interests`);
+    }
 
-      // ----------------------------------------------
-      // Current level +15
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Current level +15
+    // ----------------------------------------------
 
-      if (
-        textMatches(
-          course.level,
-          preferences?.current_level,
-        )
-      ) {
-        score += 15;
+    if (textMatches(course.level, preferences?.current_level)) {
+      score += 15;
 
-        reasons.push(
-          "Matches your current level",
-        );
-      }
+      reasons.push("Matches your current level");
+    }
 
-      // ----------------------------------------------
-      // Skills +6 / +12 / +18
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Skills +6 / +12 / +18
+    // ----------------------------------------------
 
-      const skills =
-        preferences?.skills ?? [];
+    const skills = preferences?.skills ?? [];
 
-      const matchedSkills =
-        skills.filter(
-          (skill: string) =>
-            textMatches(
-              course.title,
-              skill,
-            ) ||
-            textMatches(
-              course.description,
-              skill,
-            ) ||
-            textMatches(
-              course.domain,
-              skill,
-            ),
-        );
+    const matchedSkills = skills.filter(
+      (skill: string) =>
+        textMatches(course.title, skill) ||
+        textMatches(course.description, skill) ||
+        textMatches(course.domain, skill),
+    );
 
-      if (
-        matchedSkills.length > 0
-      ) {
-        const skillScore =
-          Math.min(
-            matchedSkills.length * 6,
-            18,
-          );
+    if (matchedSkills.length > 0) {
+      const skillScore = Math.min(matchedSkills.length * 6, 18);
 
-        score += skillScore;
+      score += skillScore;
 
-        reasons.push(
-          `Matches ${matchedSkills.length} of your skills`,
-        );
-      }
+      reasons.push(`Matches ${matchedSkills.length} of your skills`);
+    }
 
-      // ----------------------------------------------
-      // Preferred difficulty +10
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Preferred difficulty +10
+    // ----------------------------------------------
 
-      if (
-        difficultyMatches(
-          course.level,
-          preferences?.preferred_difficulty,
-        )
-      ) {
-        score += 10;
+    if (difficultyMatches(course.level, preferences?.preferred_difficulty)) {
+      score += 10;
 
-        reasons.push(
-          "Matches your preferred difficulty",
-        );
-      }
+      reasons.push("Matches your preferred difficulty");
+    }
 
-      // ----------------------------------------------
-      // Learning goal +10
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Learning goal +10
+    // ----------------------------------------------
 
-      if (
-        textMatches(
-          course.domain,
-          preferences?.learning_goal,
-        ) ||
-        textMatches(
-          course.title,
-          preferences?.learning_goal,
-        ) ||
-        textMatches(
-          course.description,
-          preferences?.learning_goal,
-        )
-      ) {
-        score += 10;
+    if (
+      textMatches(course.domain, preferences?.learning_goal) ||
+      textMatches(course.title, preferences?.learning_goal) ||
+      textMatches(course.description, preferences?.learning_goal)
+    ) {
+      score += 10;
 
-        reasons.push(
-          "Relevant to your learning goal",
-        );
-      }
+      reasons.push("Relevant to your learning goal");
+    }
 
-      // ----------------------------------------------
-      // Preferred learning format +8
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Preferred learning format +8
+    // ----------------------------------------------
 
-      if (
-        preferences?.preferred_learning_format &&
-        textMatches(
-          course.type,
-          preferences.preferred_learning_format,
-        )
-      ) {
-        score += 8;
+    if (
+      preferences?.preferred_learning_format &&
+      textMatches(course.type, preferences.preferred_learning_format)
+    ) {
+      score += 8;
 
-        reasons.push(
-          "Matches your preferred learning format",
-        );
-      }
+      reasons.push("Matches your preferred learning format");
+    }
 
-      // ----------------------------------------------
-      // Learning time +5
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Learning time +5
+    // ----------------------------------------------
 
-      if (
-        preferences?.learning_time &&
-        durationMatches(
-          course.duration,
-          preferences.learning_time,
-        )
-      ) {
-        score += 5;
+    if (
+      preferences?.learning_time &&
+      durationMatches(course.duration, preferences.learning_time)
+    ) {
+      score += 5;
 
-        reasons.push(
-          "Fits your available learning time",
-        );
-      }
+      reasons.push("Fits your available learning time");
+    }
 
-      // ----------------------------------------------
-      // Learning history +5
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Learning history +5
+    // ----------------------------------------------
 
-      if (
-        courseRelatedToHistory(
-          course.domain,
-          historyDomains,
-        )
-      ) {
-        score += 5;
+    if (courseRelatedToHistory(course.domain, historyDomains)) {
+      score += 5;
 
-        reasons.push(
-          "Related to your learning history",
-        );
-      }
+      reasons.push("Related to your learning history");
+    }
 
-      // ----------------------------------------------
-      // Beginner +5
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Beginner +5
+    // ----------------------------------------------
 
-      if (
-        preferences?.current_level ===
-          "Beginner" &&
-        course.is_beginner
-      ) {
-        score += 5;
+    if (preferences?.current_level === "Beginner" && course.is_beginner) {
+      score += 5;
 
-        reasons.push(
-          "Suitable for beginners",
-        );
-      }
+      reasons.push("Suitable for beginners");
+    }
 
-      // ----------------------------------------------
-      // Trending +5
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Trending +5
+    // ----------------------------------------------
 
-      if (course.is_trending) {
-        score += 5;
+    if (course.is_trending) {
+      score += 5;
 
-        reasons.push(
-          "Currently trending",
-        );
-      }
+      reasons.push("Currently trending");
+    }
 
-      // ----------------------------------------------
-      // Exclusive +3
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Exclusive +3
+    // ----------------------------------------------
 
-      if (course.is_exclusive) {
-        score += 3;
+    if (course.is_exclusive) {
+      score += 3;
 
-        reasons.push(
-          "Exclusive Evolve course",
-        );
-      }
+      reasons.push("Exclusive Evolve course");
+    }
 
-      // ----------------------------------------------
-      // Partner +3
-      // ----------------------------------------------
+    // ----------------------------------------------
+    // Partner +3
+    // ----------------------------------------------
 
-      if (course.is_partner) {
-        score += 3;
+    if (course.is_partner) {
+      score += 3;
 
-        reasons.push(
-          "Partner course",
-        );
-      }
+      reasons.push("Partner course");
+    }
 
-      return {
-        id: course.id,
-        title: course.title,
-        description:
-          course.description,
-        image_url:
-          course.image_url,
-        level: course.level,
-        domain: course.domain,
-        type: course.type,
-        duration:
-          course.duration,
-        score,
-        reasons,
-      };
-    });
+    return {
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      image_url: course.image_url,
+      level: course.level,
+      domain: course.domain,
+      type: course.type,
+      duration: course.duration,
+      score: Math.round((score / MAX_SCORE) * 100),
+      reasons,
+    };
+  });
 
   // --------------------------------------------------
   // 7. Sort by score
   // --------------------------------------------------
 
-  recommendations.sort(
-    (a, b) => b.score - a.score,
+  recommendations.sort((a, b) => b.score - a.score);
+  const relevantRecommendations = recommendations.filter(
+    (course) => course.score >= 20,
   );
 
   // --------------------------------------------------
   // 8. Return top recommendations
   // --------------------------------------------------
 
-  return recommendations.slice(
-    0,
-    limit,
-  );
+  return relevantRecommendations.slice(0, limit);
 }

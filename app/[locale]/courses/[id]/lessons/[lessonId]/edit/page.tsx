@@ -1,7 +1,6 @@
-
 "use client";
-import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -118,7 +117,7 @@ export default function EditLessonPage({
       .eq("course_id", courseId);
 
     if (error) {
-      setMessage("Error: " + error.message);
+      setMessage(`Error: ${error.message}`);
       setSaving(false);
       return;
     }
@@ -142,9 +141,7 @@ export default function EditLessonPage({
           Teacher Dashboard
         </p>
 
-        <h1 className="mt-4 text-4xl font-bold">
-          Edit Lesson
-        </h1>
+        <h1 className="mt-4 text-4xl font-bold">Edit Lesson</h1>
 
         <p className="mt-3 text-white/50">
           Update lesson information and video settings.
@@ -191,9 +188,7 @@ export default function EditLessonPage({
                   type="number"
                   min="0"
                   value={duration}
-                  onChange={(e) =>
-                    setDuration(Number(e.target.value))
-                  }
+                  onChange={(e) => setDuration(Number(e.target.value))}
                   className="w-full rounded-2xl border border-white/10 bg-black px-5 py-4 outline-none focus:border-brand"
                 />
               </div>
@@ -207,9 +202,7 @@ export default function EditLessonPage({
                   type="number"
                   min="1"
                   value={orderIndex}
-                  onChange={(e) =>
-                    setOrderIndex(Number(e.target.value))
-                  }
+                  onChange={(e) => setOrderIndex(Number(e.target.value))}
                   className="w-full rounded-2xl border border-white/10 bg-black px-5 py-4 outline-none focus:border-brand"
                 />
               </div>
@@ -237,9 +230,7 @@ export default function EditLessonPage({
           <button
             type="button"
             onClick={() =>
-              router.push(
-                `/${locale}/teacher/courses/${courseId}/lessons`,
-              )
+              router.push(`/${locale}/teacher/courses/${courseId}/lessons`)
             }
             className="rounded-full border border-white/10 px-6 py-3 font-semibold"
           >
