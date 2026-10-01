@@ -52,10 +52,26 @@ The schema — `categories`, `courses`, `modules`, `lessons`,
 `approval_events`, `profiles` — lives in the dashboard repository, along with
 the row-level security policies that decide who may read what.
 
-This app holds no service-role key and writes no migrations. Every query runs as
-the caller, so Postgres applies the permission rules and the frontend does not
-restate them. Need a column? Raise it with a maintainer; it goes through the
-dashboard repository.
+This app holds no service-role key. Most schema and row-level security policies
+are maintained in the dashboard repository. The course-messaging tables and
+their participant-only policies are defined in
+[`supabase/migrations/20260930100000_course_messaging.sql`](supabase/migrations/20260930100000_course_messaging.sql);
+apply that migration to the shared Supabase project before enabling messaging
+in either portal. Every query runs as the caller, so Postgres enforces access.
+
+Paid course revenue is recorded in `public.enrollments.payment_amount`, using
+the server-side course price at checkout. The staff portal totals paid
+enrollments with a saved amount and reports older rows without one separately.
+The enrollment schema is managed by the dashboard repository.
+
+The staff portal's administrator invitation action uses the
+[`invite-admin` Edge Function](supabase/functions/invite-admin/index.ts).
+Administrator invitations and platform revenue use the
+[`invite-admin` and `admin-revenue` Edge Functions](supabase/functions/). Deploy
+them to the shared Supabase project before using those staff portal features.
+Both functions check the caller's profile role and use the server-side
+service-role key; never add that key to the Flutter app. Configure Supabase Auth
+email delivery so administrator invitations can be sent.
 
 ## Layout
 

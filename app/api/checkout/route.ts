@@ -121,6 +121,7 @@ console.error("CHARGILY ERROR:", JSON.stringify(checkout, null, 2));
           user_id: user.id,
           course_id: course.id,
           payment_status: "pending",
+          payment_amount: course.price,
           chargily_checkout_id: checkout.id,
         },
         {

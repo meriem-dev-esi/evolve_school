@@ -233,6 +233,12 @@ export default async function DashboardPage({
     Course Completed ✓
   </div>
 )}
+<Link
+  href={`/${locale}/messages?courseId=${course.id}`}
+  className="mt-3 block rounded-full border border-white/15 px-6 py-3 text-center font-semibold text-white hover:border-brand hover:text-brand"
+>
+  Message your teacher
+</Link>
                   </div>
                 </div>
               );
