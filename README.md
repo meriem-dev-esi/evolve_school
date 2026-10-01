@@ -66,10 +66,12 @@ The enrollment schema is managed by the dashboard repository.
 
 The staff portal's administrator invitation action uses the
 [`invite-admin` Edge Function](supabase/functions/invite-admin/index.ts).
-Administrator invitations and platform revenue use the
-[`invite-admin` and `admin-revenue` Edge Functions](supabase/functions/). Deploy
-them to the shared Supabase project before using those staff portal features.
-Both functions check the caller's profile role and use the server-side
+Administrator role changes, invitations, revenue, and the administrator
+overview use the [`admin-dashboard`, `admin-revenue`, `admin-update-user-role`,
+and `invite-admin` Edge Functions](supabase/functions/).
+Deploy them and the profile-role migration to the shared Supabase project before
+using those staff portal features.
+Each function verifies the caller's profile role and uses the server-side
 service-role key; never add that key to the Flutter app. Configure Supabase Auth
 email delivery so administrator invitations can be sent.
 

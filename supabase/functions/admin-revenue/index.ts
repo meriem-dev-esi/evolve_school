@@ -68,6 +68,15 @@ Deno.serve(async (request) => {
     return jsonResponse({ error: "Administrator access required" }, 403);
   }
 
+  const { count: pendingEnrollments, error: pendingError } = await adminClient
+    .from("enrollments")
+    .select("id", { count: "exact", head: true })
+    .eq("payment_status", "pending");
+  if (pendingError) {
+    console.error("Pending enrollment query failed:", pendingError.message);
+    return jsonResponse({ error: "Unable to load pending checkouts" }, 500);
+  }
+
   var totalMinorUnits = 0;
   var paidEnrollments = 0;
   var enrollmentsWithoutAmount = 0;
@@ -124,6 +133,7 @@ Deno.serve(async (request) => {
   return jsonResponse({
     total_minor_units: totalMinorUnits,
     paid_enrollments: paidEnrollments,
+    pending_enrollments: pendingEnrollments ?? 0,
     enrollments_without_amount: enrollmentsWithoutAmount,
   });
 });
