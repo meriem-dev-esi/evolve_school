@@ -79,6 +79,7 @@ Deno.serve(async (request) => {
     adminsResult,
     coursesResult,
     publishedCoursesResult,
+    draftCoursesResult,
     lessonsResult,
     formationsResult,
     pendingPaymentsResult,
@@ -108,6 +109,10 @@ Deno.serve(async (request) => {
       .from("courses")
       .select("id", { count: "exact", head: true })
       .eq("is_published", true),
+    adminClient
+      .from("courses")
+      .select("id", { count: "exact", head: true })
+      .eq("is_published", false),
     adminClient.from("lessons").select("id", { count: "exact", head: true }),
     adminClient
       .from("course_series")
@@ -140,6 +145,7 @@ Deno.serve(async (request) => {
     adminsResult.error,
     coursesResult.error,
     publishedCoursesResult.error,
+    draftCoursesResult.error,
     lessonsResult.error,
     formationsResult.error,
     pendingPaymentsResult.error,
@@ -160,6 +166,7 @@ Deno.serve(async (request) => {
     administrators: adminsResult.count ?? 0,
     courses: coursesResult.count ?? 0,
     published_courses: publishedCoursesResult.count ?? 0,
+    draft_courses: draftCoursesResult.count ?? 0,
     lessons: lessonsResult.count ?? 0,
     formations: formationsResult.count ?? 0,
     pending_payments: pendingPaymentsResult.count ?? 0,

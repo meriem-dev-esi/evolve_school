@@ -60,14 +60,21 @@ apply that migration to the shared Supabase project before enabling messaging
 in either portal. Every query runs as the caller, so Postgres enforces access.
 
 Paid course revenue is recorded in `public.enrollments.payment_amount`, using
-the server-side course price at checkout. The staff portal totals paid
-enrollments with a saved amount and reports older rows without one separately.
-The enrollment schema is managed by the dashboard repository.
+the server-side course price at checkout. The Chargily webhook records the
+first confirmed `paid_at` timestamp; older payments without a timestamp are
+kept out of payment-date monthly totals instead of being assigned an invented
+date. The staff portal records one-time expenses and enrollment-linked refunds
+in the admin-only `admin_financial_entries` ledger and reports net recorded
+cash movement. This excludes processor fees and is not accounting profit.
+The enrollment and financial-ledger schema is managed by the dashboard
+repository's financial reporting migration.
 
 The staff portal's administrator invitation action uses the
 [`invite-admin` Edge Function](supabase/functions/invite-admin/index.ts).
-Administrator role changes, invitations, revenue, and the administrator
-overview use the [`admin-dashboard`, `admin-revenue`, `admin-update-user-role`,
+The staff portal's user list, management analytics, course listing/moderation,
+administrator role changes, invitations, revenue, and overview use the
+[`admin-analytics`, `admin-course-moderation`, `admin-courses`,
+`admin-dashboard`, `admin-financials`, `admin-revenue`, `admin-users`, `admin-update-user-role`,
 and `invite-admin` Edge Functions](supabase/functions/).
 Deploy them and the profile-role migration to the shared Supabase project before
 using those staff portal features.

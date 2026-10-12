@@ -28,3 +28,7 @@ next-env.d.ts
 # Rendered documents. The markdown in docs/ is the source; render a copy when
 # you need to carry one to a meeting.
 *.pdf
+
+# Supabase CLI temp cache
+supabase/.temp/
+
